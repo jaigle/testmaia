@@ -20,8 +20,20 @@ namespace DLMallas.Business
             //ws.AddParameter("IdSociedad", Variables.IdSociedad);
             //Array obj = ws.Invoke() as Array;
             //string json = JsonConvert.SerializeObject(obj);
-            string json = "[{'activo':'1','descripcion':'Esta es una malla creada  coon motivo de probar el desarrollo','fechaCreacion':'2018-07-28 13:49:37.513','id':'2','idSociedad':'1','nombre':'Nueva Malla  para QA','usuarioCreacion':'Administrador DL'}]";
-            lista = JsonConvert.DeserializeObject<List<ObtenerListadoMalla>>(json);
+
+            //string json = "[{'activo':'1','descripcion':'Esta es una malla creada  coon motivo de probar el desarrollo','fechaCreacion':'2018-07-28 13:49:37.513','id':'2','idSociedad':'1','nombre':'Nueva Malla  para QA','usuarioCreacion':'Administrador DL'}]";
+            //Adicionando elementos a la lista;
+            ObtenerListadoMalla elem1 = new ObtenerListadoMalla {
+                Activo = "1",
+                Descripcion = "Esta es una malla creada  coon motivo de probar el desarrollo",
+                FechaCreacion = "2018-07-28 13:49:37.513",
+                Id = "2",
+                IdSociedad = "1",
+                Nombre = "Nueva Malla para QA",
+                UsuarioCreacion = "Adminsitrador"
+            };
+            lista.Add(elem1); 
+            //lista = JsonConvert.DeserializeObject<List<ObtenerListadoMalla>>(json);
             return lista;
         }
 
