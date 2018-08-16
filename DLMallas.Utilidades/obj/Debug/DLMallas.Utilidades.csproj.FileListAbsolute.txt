@@ -34,13 +34,3 @@ c:\Users\Jaguilera\temp\maias 2.0\DLMallas-dev_mallas2.0\DLMallas.Utilidades\obj
 c:\Users\Jaguilera\temp\maias 2.0\DLMallas-dev_mallas2.0\DLMallas.Utilidades\obj\Debug\DLMallas.Utilidades.csproj.CoreCompileInputs.cache
 c:\Users\Jaguilera\temp\maias 2.0\DLMallas-dev_mallas2.0\DLMallas.Utilidades\obj\Debug\DLMallas.Utilidades.dll
 c:\Users\Jaguilera\temp\maias 2.0\DLMallas-dev_mallas2.0\DLMallas.Utilidades\obj\Debug\DLMallas.Utilidades.pdb
-C:\Temp\JM\Proyectos\Mallas\DLMallas.Utilidades\bin\Debug\DLMallas.Utilidades.dll
-C:\Temp\JM\Proyectos\Mallas\DLMallas.Utilidades\bin\Debug\DLMallas.Utilidades.pdb
-C:\Temp\JM\Proyectos\Mallas\DLMallas.Utilidades\bin\Debug\Flurl.dll
-C:\Temp\JM\Proyectos\Mallas\DLMallas.Utilidades\bin\Debug\log4net.dll
-C:\Temp\JM\Proyectos\Mallas\DLMallas.Utilidades\bin\Debug\Flurl.xml
-C:\Temp\JM\Proyectos\Mallas\DLMallas.Utilidades\bin\Debug\log4net.xml
-C:\Temp\JM\Proyectos\Mallas\DLMallas.Utilidades\obj\Debug\DLMallas.Utilidades.csprojResolveAssemblyReference.cache
-C:\Temp\JM\Proyectos\Mallas\DLMallas.Utilidades\obj\Debug\DLMallas.Utilidades.csproj.CoreCompileInputs.cache
-C:\Temp\JM\Proyectos\Mallas\DLMallas.Utilidades\obj\Debug\DLMallas.Utilidades.dll
-C:\Temp\JM\Proyectos\Mallas\DLMallas.Utilidades\obj\Debug\DLMallas.Utilidades.pdb
