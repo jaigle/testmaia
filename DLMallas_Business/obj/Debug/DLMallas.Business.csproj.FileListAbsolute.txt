@@ -74,3 +74,22 @@ c:\Users\Jaguilera\temp\maias 2.0\DLMallas-dev_mallas2.0\DLMallas_Business\obj\D
 c:\Users\Jaguilera\temp\maias 2.0\DLMallas-dev_mallas2.0\DLMallas_Business\obj\Debug\DLMallas.Business.dll
 c:\Users\Jaguilera\temp\maias 2.0\DLMallas-dev_mallas2.0\DLMallas_Business\obj\Debug\DLMallas.Business.pdb
 C:\Users\Jaguilera\temp\maias 2.0\DLMallas-dev_mallas2.0\DLMallas_Business\bin\Debug\WSLib.dll
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\DLMallas.Business.dll.config
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\DLMallas.Business.dll
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\DLMallas.Business.pdb
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\DLMallas.Utilidades.dll
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\EntityFramework.dll
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\EntityFramework.SqlServer.dll
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\Flurl.dll
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\log4net.dll
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\Newtonsoft.Json.dll
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\DLMallas.Utilidades.pdb
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\EntityFramework.xml
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\EntityFramework.SqlServer.xml
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\Flurl.xml
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\log4net.xml
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\bin\Debug\Newtonsoft.Json.xml
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\obj\Debug\DLMallas.Business.csprojResolveAssemblyReference.cache
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\obj\Debug\DLMallas.Business.csproj.CoreCompileInputs.cache
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\obj\Debug\DLMallas.Business.dll
+C:\Temp\JM\Proyectos\Mallas\DLMallas_Business\obj\Debug\DLMallas.Business.pdb
