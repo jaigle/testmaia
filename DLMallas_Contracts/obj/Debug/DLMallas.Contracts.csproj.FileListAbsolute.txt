@@ -1,0 +1,9 @@
+C:\git\DLMallas-dev_mallas2.0\DLMallas_Contracts\bin\Debug\DLMallas.Contracts.dll
+C:\git\DLMallas-dev_mallas2.0\DLMallas_Contracts\bin\Debug\DLMallas.Contracts.pdb
+C:\git\DLMallas-dev_mallas2.0\DLMallas_Contracts\bin\Debug\Flurl.dll
+C:\git\DLMallas-dev_mallas2.0\DLMallas_Contracts\bin\Debug\log4net.dll
+C:\git\DLMallas-dev_mallas2.0\DLMallas_Contracts\bin\Debug\Flurl.xml
+C:\git\DLMallas-dev_mallas2.0\DLMallas_Contracts\bin\Debug\log4net.xml
+C:\git\DLMallas-dev_mallas2.0\DLMallas_Contracts\obj\Debug\DLMallas.Contracts.csprojResolveAssemblyReference.cache
+C:\git\DLMallas-dev_mallas2.0\DLMallas_Contracts\obj\Debug\DLMallas.Contracts.dll
+C:\git\DLMallas-dev_mallas2.0\DLMallas_Contracts\obj\Debug\DLMallas.Contracts.pdb

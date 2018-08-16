@@ -1,0 +1,439 @@
+﻿
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color:#EDEDED;
+    font-family:"Segoe UI",Arial,Helvetica,sans-serif;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    border: 1px solid #d2d2d2;
+    background-color:#FFF;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+input[type="radio"], input[type="checkbox"] {
+      margin: 1px 0 0;
+}
+
+.radio label, .checkbox label {
+    font-weight: bold;
+}
+
+/* Layout barra superior */
+.navbar.navbar-collapse {
+    margin-left: -8px;
+    margin-right: -8px;
+    min-height: 30px;
+    margin-bottom: 0; 
+    border: 0;
+}
+.navbar-top {
+    background-color: #333333;
+    color: #fff;
+    min-height: 30px;
+}
+.soporte, .user-sesion { 
+    padding-top: 7px;
+    padding-bottom: 8px;
+}
+.soporte a{color:#fff;margin-right:10px;  padding-right:10px;border-right:1px solid #5C5C5C}
+.soporte a:last-child { border-right:none;margin-right:0;padding-right: 0;} 
+.user-sesion-image{width:27px; height:24px; float:left; margin:3px 15px; margin-right:0;}
+/* fin layout barra superior*/
+
+/* banner de compañia */
+.company-banner {
+    height: 100px;
+    background-image: url('Imagenes/komatsu-header.jpg');
+}
+/* fin banner de compania*/
+
+/* selectize */
+.selectize-input {
+    min-height: 25px;
+    padding: 3px 10px;
+}
+
+.form-control.selectize-control {
+    height: 25px;
+}
+
+.selectize-control.single .selectize-input:after {
+    right: 8px;
+}
+/* fin selectize */
+
+/* formularios */
+.field-validation-error {
+    font-size: 90%;
+    color: #c47474;
+}
+
+.form-horizontal h4 {
+    margin-top: 25px;
+}
+
+.btn-accion {
+    width: 80px;
+    margin-left: 30px;
+    margin-right: 15px;
+}
+
+.is-required:after {
+     content:" *"; 
+     color: #c47474;
+} 
+/* fin formularios */
+
+/* grid */
+.grid-mvc {
+    padding: 10px;
+}
+
+table.grid-table, table.grid-table > thead > tr > th:not(.action), table.grid-table > tbody > tr > th, table.grid-table > tbody > tr > td {
+    border: 1px solid #dddddd;
+    border-bottom: 2px solid #ddd;
+}
+
+    table.grid-table > thead > tr > th {
+        background-color: #F5F2F2;
+    }
+
+    table.grid-table .grid-header.sortable:after {
+        position: absolute;
+        top: 6px;
+        right: 8px;
+        display: block;
+        font-family: 'Glyphicons Halflings';
+        opacity: 0.3;
+    }
+
+    table.grid-table .grid-header.sortable:not(.sorted):after {
+        content: "\e150";
+    }
+
+    table.grid-table .grid-header.sortable.sorted-asc:after {
+        opacity: 0.6;
+        content: "\e155";
+    }
+
+    table.grid-table .grid-header.sortable.sorted-desc:after {
+        opacity: 0.6;
+        content: "\e156";
+    }
+
+table.grid-table .grid-header .sorted-desc .grid-sort-arrow:after {
+  content: "";
+}
+
+table.grid-table .grid-header .sorted-asc .grid-sort-arrow:after {
+    content: "";
+}
+
+.grid-pager.row {
+    margin-left: 0;
+    margin-right: 0;
+
+}
+
+.grid-pager.row .pager-count {
+    padding-top: 2em;
+    padding-bottom: 2em;    
+}
+/* fin grid */
+
+/* Set width on the form input elements since they're 100% wide by default 
+input,
+select,
+textarea {
+    max-width: 280px;
+*/
+/**********ACTIVO/INACTIVO**************/
+.inactivo
+{
+    color : #9f9f9f;
+}
+.activo{
+    color : black;
+}
+.error
+{
+    color:red;
+    font-weight:bold;
+}
+/**********MANTENEDOR PROGRAMA***********/
+.width100,
+select#Presupuesto
+{
+    width: 100%;
+}
+
+/* sidebar */
+.sidebar
+{
+    height:100%;
+    padding-right: 20px;
+    padding-left:0;
+    margin-left:-8px;
+    background-color:transparent;
+
+}
+
+    .sidebar ul li {
+        border: 1px solid #CCC;
+        border-top: 0;
+        border-left: 0;
+        background-color: #e5e5e5;
+        font-weight: bold;
+    }
+    .sidebar li a {
+        color: #666;
+    }
+    .sidebar li.active a, .sidebar li.active a:hover {
+        background-image: url(../images/itemselect.png);
+        background-repeat: no-repeat;
+        color: #333;
+    }
+    .sidebar .sidebar-nav.navbar-collapse {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .sidebar li.sidebar-heading {
+        background-color: #fff;
+        border-top: 1px solid #e7e7e7;
+        padding: 10px 15px;
+        font-weight: normal;
+        color: #666;
+    }
+/* fin sidebar */
+
+/* menu principal */
+.main-menu.navbar {
+    border-radius: 0px;
+    min-height: 30px;
+    margin-left: -8px;
+    margin-right: -8px;
+}
+.main-menu.navbar-default { background-color: #ff9900;border:none;}
+.main-menu.navbar-default .navbar-nav  > li {border-right: 1px dotted #FFF;}
+.main-menu.navbar-default .navbar-nav  > li.last {border-right:none}
+    .main-menu.navbar-default .navbar-nav > li > a {
+        color: #fff;
+        padding: 5px 15px;
+        line-height: 20px;
+    }
+.main-menu.navbar-default .navbar-nav > li > a:hover,
+.main-menu.navbar-default .navbar-nav > li > a:focus {
+    color:rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+    color: rgba(255, 255, 255, 0.5)
+    ;background-color: transparent;}
+.main-menu.navbar-default .navbar-nav > .active > a,
+.main-menu.navbar-default .navbar-nav > .active > a:hover,
+.main-menu.navbar-default .navbar-nav > .active > a:focus {
+  color:rgb(255, 255, 255); 
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #54B4E2;
+}
+.main-menu.navbar-default .navbar-nav > .disabled > a,
+.main-menu.navbar-default .navbar-nav > .disabled > a:hover,
+.main-menu .navbar-default .navbar-nav > .disabled > a:focus {
+  color:rgb(255, 255, 255); 
+  color: rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+}
+/* fin menu principal */
+
+
+/* dropdown submenu */
+/*nav dropdown menu multi-level*/
+.dropdown-submenu {position: relative;}
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {display: block;}
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {border-left-color: #fff;}
+.dropdown-submenu.pull-left {float: none;}
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+/* fin dropdown*/
+
+.col-md-10.panel.panel-default
+{
+    padding-left:0px;
+    padding-right:0px;
+}
+table.tablaDatos
+{
+    width:95%;
+    text-align: left;
+    margin: 15px;
+}
+.agregarNuevo
+{
+    float:right;
+}
+    .agregarNuevo a
+    {
+        font-size:small;
+    }
+
+.panel-datos .panel-heading
+{
+  background-color: #0099ff;
+  border-color: #0099ff;
+  color: #fff;
+}
+.panel-datos
+{
+  background-color: #f9f9f9;
+  border-color: #0099ff;
+}
+.lista-elementos .panel-heading
+{
+  background-color: #999;
+  border-color: #999;
+  color: #fff;
+}
+.lista-elementos{
+  border-color: #DDD;
+}
+
+.lista-elementos .panel-heading a
+{
+  color: #fff;
+}
+
+
+
+.panel-body {
+    padding: 10px 5px;
+}
+
+/* footer */
+footer {
+    margin-left: -8px;
+    margin-right: -8px;    
+}
+
+.footer {
+    height: 55px;
+    padding-right: 15px;
+    padding-left: 15px;
+    background: url("imagenes/bottom_fd.png") repeat-x scroll 0px 20px #FFF;
+    border-bottom: 1px solid #CCC;
+    border-top: medium none;
+}
+
+.footer-heading {
+    margin-bottom: 15px;
+}
+
+    .footer-heading a {
+        border-right: 1px solid #09F;
+        padding-right: 10px;
+        margin-right: 10px;
+    }
+/* fin footer*/
+
+.panel-footer
+{
+    height: 50px;
+}
+.panel h4
+{
+    padding:0px 5px;
+}
+
+.links-panel{
+    margin:0px 5px;
+}
+
+.panel .row.form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.lista-elementos table .glyphicon
+{
+    color:#0099ff;
+}
+
+/***BTN***/
+.btn-primary{
+background-color :  #428BCA;
+}
+.tabla-datos-resumen 
+{  max-width: 100%;
+  background-color: transparent;
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin:15px;
+
+}
+
+.tabla-datos-resumen td { padding: 0 10px 10px 0;}
+
+
+
+
+/*Arreglos Lista de elementos*/
+
+.grid-table .grid-cell
+{
+    border: 1px solid #ddd;
+}
+.grid-table .grid-header 
+{
+  color: #767676;
+  background-color: #F5F2F2;
+  font-weight: normal;
+  white-space: nowrap;
+  border-top: 1px  solid #ddd;
+  border-left: 1px  solid #ddd;
+  border-right: 1px  solid #ddd;
+  border-bottom: 2px  solid #ddd;
+}
+    .grid-table .grid-header a
+    {
+        color: #767676;
+    }
+/*.panel .row
+{
+    padding: 5px 5px;
+}*/
+
+/***************Tabla Busqueda Estudiantes*******************/
+

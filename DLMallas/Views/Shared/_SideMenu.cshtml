@@ -1,0 +1,43 @@
+﻿@using System.Configuration
+@using DLMallas.Business
+@using DLMallas.App_Start
+@using Microsoft.AspNet.Identity
+@using DLMallas.Business.Dto
+@{
+    if (User.Identity.IsAuthenticated)
+    {
+        var menus = new Menu().getSideMenu(User.Identity.GetIdSociedad(), User.Identity.GetUserId(), Request.Url.ToString());
+        @SideMenu(menus)
+    }}
+
+@helper SideMenu(List<DtoPagina> paginas)
+{
+    if (paginas.Count > 0)
+    {
+        <div class="col-md-2 navbar-default sidebar">
+            <div class="sidebar-nav navbar-collapse " aria-expanded="true" style="">
+                <ul id="side-menu" class="nav ">
+                    @foreach (var pagina in paginas)
+                    {
+                        if (pagina.Pagina == Request.Url.ToString())
+                        {
+                            <li class="active"><a href="@pagina.Pagina">@pagina.Nombre</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@pagina.Pagina">@pagina.Nombre</a></li>
+                        }
+                    <!--<li class="sidebar-heading">Instituciones</li>-->
+
+
+
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+
+}
+
+
+

@@ -1,0 +1,268 @@
+﻿@charset "utf-8";
+/*@font-face {font-family: 'Segoe UI';src: url(../fonts/segoeui.ttf)}*/
+
+/*nav*/
+.navbar-top {background-color:#333333; color:#fff;}
+.soporte, .user-sesion { padding-top:7px}
+.soporte a{color:#fff;margin-right:10px;  padding-right:10px;border-right:1px solid #5C5C5C}
+.soporte a.last { border-right:none; padding-right:0; margin-right:0}
+.soporte a.no-link {cursor: text} 
+.user-sesion-image{width:27; height:24; float:left; margin:3px 15px; margin-right:0;}
+
+/*nav dropdown menu multi-level*/
+.dropdown-submenu {position: relative;}
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {display: block;}
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {border-left-color: #fff;}
+.dropdown-submenu.pull-left {float: none;}
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+/*nav sidebar*/
+.sidebar {
+    background-color: transparent;
+    height: 100%;
+    /*margin-left: -8px;*/
+    padding-left: 0 !important;
+    padding-right: 15px;
+}
+
+.sidebar ul li {border: 1px solid #CCC;border-top:0; border-left:0; background-color: #e5e5e5; font-weight:bold; }
+.sidebar li a{color:#666}
+.sidebar li.active a, .sidebar li.active a:hover {background-image: url(../../Content/images/itemselect.png);background-repeat: no-repeat; color:#333;}
+.sidebar .sidebar-nav.navbar-collapse {padding-left: 0;padding-right: 0;}
+.sidebar li.sidebar-heading{background-color:#fff;  border-top: 1px solid #e7e7e7; padding:10px 15px; font-weight:normal; color:#666;}
+
+/*content*/
+.brand { padding:0 15px;}
+.brand-bg{padding:15px;min-height:90px;}
+.footer {height:55px;padding-right:15px; padding-left:15px; background: url("../../Content/images/bottom_fd.png") repeat-x scroll 0 20px #fff;border-bottom:solid 1px #ccc; border-top: none; clear:both}
+.footer-heading { margin-bottom:15px}
+.footer-heading a {border-right: 1px solid #0099ff; padding-right:10px; margin-right:10px}
+.main {min-height:280px;margin-right:30px; margin-left:30px}
+.main.no-margin .main-heading { padding: 0 15px}
+.container-buscador { margin-bottom:10px}
+#page-wrapper {
+   /* border-left: 1px solid #e7e7e7;*/
+    /*margin: 0 0 0 160px;*/
+    padding-right:30px;
+	padding-left:15px;
+    position: inherit;
+	min-height:200px;
+}
+.panel-primary .panel-heading {	background-color:#0099ff;border-color: #0099ff;	color:#fff}
+.panel-info-resumen { background-color:#f9f9f9;border-color: #0099ff;}
+.panel-info-resumen .tabla-datos-resumen td { padding: 0 10px 5px 0; vertical-align:top}
+.panel-resultados-busqueda .panel-heading {background-color:#999; color:#fff;}
+.panel-page-content .panel-footer, .modal-content .panel-footer {text-align:right}
+
+.botones-panel { margin-bottom:20px; overflow:auto}
+.simbologia{ margin-bottom:5px}
+.simbologia a{color:#666}
+.simbologia a:hover{color:#444}
+.simbologia .estado-rectangulo { float:left; margin-right:5px}
+
+/*form*/
+.table-form {width:100%}
+.table-form th{width:170px;color:#333; background:#f5f5f5;font-size:12px;border-bottom:1px dotted #CCC;vertical-align:middle;font-weight:normal;text-align:left; white-space:nowrap; padding:5px 10px;border-collapse:separate}
+.table-form input[type="text"]{border:1px solid #ccc;font-size:12px;color:#0099FF; padding:3px; margin:0px 3px; }
+.table-form label { font-weight:normal}
+
+/*mallas */
+.head-mallas { margin-bottom:20px; clear:both}
+.head-mallas .progress { margin-bottom:0}
+.head-mallas .head-col {border-right: 1px solid #ccc;}
+.head-mallas .head-col.last { border-right:none; padding-right:0}
+
+.mallas .seccion {height: auto; padding-top:0; margin-bottom:20px;vertical-align:middle;}
+.mallas .seccion.col-sm-2 {width:15%; }
+.mallas .carousel.slide { margin-bottom:20px}
+
+.seccion1 {background-color:#FFD994}
+.seccion2 {background-color:#ED7D31}
+.seccion3 {background-color:#E1DCB5}
+.seccion4 {background-color:#B1D2A2}
+
+.admin.seccion { width:20px; height:20px; border:1px solid #fff}
+
+.tit-seccion-mallas { padding-top:20px; width:15.5%}
+.seccion-content {width:84.5%; background-color: #fff;padding-left: 5px !important;}
+.seccion-content table.dataTable {margin:0 !important; margin-left:100px; background-color: #fff;}
+.seccion-content .carousel.slide { margin-bottom:0}
+.seccion-content .carousel-inner { padding-left:28px;}
+
+/*mallas modulo miniaturas*/
+.modulo-curso.col-sm-2 { width:149px/*157px*/; padding-left:8px}
+.modulo-curso .panel { margin-bottom:0}
+.modulo-curso .panel-title { font-size:13px}
+.modulo-curso-imagen { height:90px; background-image: url(../Content/images/imagen-cursodefault-modulo.png)}
+.modulo-curso-imagen img{ width:140px; }
+.modulo-curso .panel-heading {padding:8px 10px}
+.modulo-curso .panel-body {padding: 0}
+.modulo-curso .play {position: absolute;margin:25px 20px 20px 50px}
+.modulo-curso .play:hover {opacity: 0.5}
+.modulo-curso .panel-footer { overflow:auto;padding: 4px 8px;min-height: 31px;}
+.modulo-curso .panel-footer ul {padding-left: 0; margin-bottom:0}
+.modulo-curso .panel-footer li {float: left;/*margin-right:3px;*/list-style-type: none;}
+.modulo-curso .estado-circulo, .modulo-curso .fa-laptop  { margin-top: 6px; margin-right:3px;}
+.modulo-curso .icon-book-open {margin-right:2px;}
+.modulo-curso .col-sm-3{width:26%}
+.modulo-curso .col-sm-5{width:40%}
+.modulo-curso .panel-heading.estado-rojo {background-color:#FC4525}
+.modulo-curso .panel-heading.estado-verde {background-color:#339900;}
+
+
+/*mallas tablas diagrama*/
+.table-mallas-diagrama{width:100%;border-spacing:5px; border-collapse:separate}
+.table-mallas-diagrama th,.table-mallas-diagrama td {text-align:center;}
+.table-mallas-diagrama th {font-weight: bold;height: 30px;line-height: 16px;padding: 0;vertical-align: middle;}
+.table-mallas-diagrama .caja-mallas-diagrama {padding:10px;background-color:#fff;color:#333}
+
+/*estados*/
+.estado-circulo {height:10px; width:10px; border-radius:10px; display:inline-block;text-indent:20px; overflow:hidden }
+.estado-verde { background-color:#339900; color:#fff}
+.estado-amarillo { background-color:#FF9900; color:#fff}
+.estado-rojo { background-color:#FC4525; color:#fff}
+.estado-azul { background-color:#003AEA; color:#fff}
+.estado-gris{ background-color:#999; color:#fff}
+.estado-rectangulo  {height:10px; width:20px; display:inline-block;text-indent:20px; overflow:hidden }
+.estado-blanco { background-color:#fff; color:#333}
+.estado-circulo.estado-blanco { border:1px solid #999}
+
+
+/*datatables*/
+table.dataTable thead th.no-sort { padding-right:2px}
+.tabla-resultados-no-registros-buscar .dataTables_length, .tabla-resultados-no-registros-buscar .dataTables_filter, .tabla-resultados-no-registros-buscar .dataTables_info, .tabla-resultados-no-registros-buscar .pagination{ display:none}
+
+/*buscadores*/
+.container-buscador .col-md-2, .container-buscador .col-md-8{ padding-left:8px; padding-right:8px}
+
+/*formularios*/
+.is-required::after {
+    color: #c47474;
+    content: " *";
+}
+
+/*control formulario*/
+.examinar { margin-bottom:20px }
+.examinar .col-sm-2 { width:13%}
+.examinar-resultado ul { margin-bottom:0}
+.examinar-resultado li { padding-right:0}
+.examinar-resultado.panel{ margin-bottom:0}
+.contenedor-filtros { margin-bottom:10px }
+
+/*certificados*/
+.certificado.malla-curricular h1, .certificado.malla-curricular .cuerpo, .certificado.malla-curricular .listado-unidades-curriculares .help-block{ text-align:center}
+.certificado.malla-curricular h1 { font-size:36px}
+.certificado.malla-curricular .form-group { margin-bottom:20px}
+.certificado.malla-curricular .cuerpo { font-size:14px}
+.certificado.malla-curricular .control-label { font-weight:normal}
+.certificado.malla-curricular .form-control-static { font-weight:bold}
+.certificado.malla-curricular .listado-unidades-curriculares { margin-top:15px}
+.certificado.malla-curricular .listado-unidades-curriculares .help-block { margin-bottom:5px; font-size:14px}
+.certificado.malla-curricular .firma { max-width:150px}
+
+/*modal*/
+.modal-header {
+    background-color: #428bca;
+    color: #fff;
+    padding: 10px 15px 5px;
+}
+
+.modal-header .btn-link { color: #fff;}
+
+.modal-dialog-xl {
+    position:relative;
+    width: 98%;
+}
+
+.modal-body-xl {
+    height: 100%;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+.modal-content {overflow:auto;}
+
+
+
+/*iconos*/
+.glyphicon.disabled, .fa.disabled{ color:#aaaaaa !important}
+
+
+/*iconos custom*/
+.dataTable .glyphicon {/*font-size:13px*/}
+.dataTable .fa, .dataTable .icon { font-size:14px}
+.panel-heading .icon, .modulo-curso .icon{ font-size:14px}
+.modulo-curso .fa, .modulo-curso .glyphicon{font-size:14px}
+
+.dataTable .fa, .dataTable .glyphicon, .dataTable .icon, 
+.modulo-curso .fa, .modulo-curso .glyphicon, .modulo-curso .icon{color:#aaa}
+.dataTable a .fa, .dataTable a .glyphicon, .dataTable a .icon,
+.modulo-curso a .fa, .modulo-curso a .glyphicon, .modulo-curso a .icon
+{color:#0099ff}
+
+.btn-primary .fa, .btn-primary .glyphicon{color:#fff !important}
+
+.dataTable .icon-diagram::before, .dataTable .icon-certificate::before  {font-size: 16px;}
+.modulo-curso .icon-graduation-cap[class^="icon-"]:before, .modulo-curso .icon-graduation-cap[class*=" icon-"]:before,
+.modulo-curso .icon-user[class^="icon-"]:before, .modulo-curso .icon-user[class*=" icon-"]:before
+{ margin-left:0}
+
+.modulo-curso .icon-user{ font-size:14px}
+.modulo-curso .fa-info-circle {margin-top: 6px;}
+.modulo-curso .icon-graduation-cap[class^="icon-"]:before, .modulo-curso .icon-graduation-cap[class*=" icon-"]:before { margin-right:0}
+.modulo-curso .icon-certificate { margin-right:3px }
+
+
+/*multiselect filtros*/
+.head-filtros .tags {
+    padding-top: 5px;
+}
+.head-filtros .tags .label {
+    background-color: rgba(255, 255, 255, 1);
+    color: #333;
+}
+.head-filtros .tags .label-lista {
+    background-color: transparent;
+    border: 1px solid #ccc;
+}
+.head-filtros .tags .label-lista::before {
+    content: "> ";
+}
+
+.tags .label {
+    color: #fff;
+    display: inline-block;
+    font-size: 85%;
+    font-weight: normal;
+    margin: 5px 5px 0 0;
+    white-space: nowrap;
+}

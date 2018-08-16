@@ -1,0 +1,54 @@
+div {
+    color: #333;
+    font-family: "Segoe UI",Arial,Helvetica,sans-serif;
+    font-size: 12px;
+}
+
+.no-padding-right {
+    padding-right: 0 !important;
+}
+.col-sm-2 {
+    width: 16.6667%;
+}
+
+/*mallas tablas diagrama*/
+.table-mallas-diagrama{max-width: 100%; width:100%;border-spacing:5px; border-collapse:separate}
+.table-mallas-diagrama th,.table-mallas-diagrama td {text-align:center;}
+.table-mallas-diagrama th {padding:0;line-height:16px;vertical-align:middle; font-weight:normal;height:30px}
+.table-mallas-diagrama .caja-mallas-diagrama {font-weight:bold; padding:10px;background-color:#666;color:#fff}
+
+.modal-header {
+  min-height: 16.42857143px;
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+@media (min-width: 992px) {
+  .modal-lg {
+    width: 900px;
+  }
+}
+
+.modal-header {
+    background-color: #428bca;
+    color: #fff;
+    padding: 10px 15px 5px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: inherit;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+h4, .h4 {
+    font-size: 18px;
+}
+
+.modal-body-xl {
+    height: 100%;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}

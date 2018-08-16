@@ -1,0 +1,103 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Simbología de Capacitación</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="simbologia table-responsive">
+                        <table class="table table-condensed">
+                            <tr>
+                                <th width="60">Símbolo</th>
+                                <th width="150">&nbsp;</th>
+                                <th>Que significa</th>
+                            </tr>
+                            <tr>
+                                <td><span title="Reprobada" class="estado-rectangulo estado-rojo"></span> <span title="Reprobada" class="estado-circulo estado-rojo"></span></td>
+                                <td>Reprobada</td>
+                                <td>Situación final reprobada. No cumple con los requisitos para aprobar la capacitación</td>
+                            </tr>
+                            <tr>
+                                <td><span title="Aprobada" class="estado-rectangulo estado-verde"></span> <span title="Completada" class="estado-circulo estado-verde"></span></td>
+                                <td>Aprobada</td>
+                                <td>Situación final aprobada. Cumplió con los requisitos para aprobar la capacitación</td>
+                            </tr>
+                            <tr>
+                                <td><span title="No disponible" class="estado-rectangulo estado-gris"></span><span title="No disponible" class="estado-circulo estado-gris"></span></td>
+                                <td>No disponible</td>
+                                <td>No tiene disponible una situación final</td>
+                            </tr>
+                            <tr>
+                                <td>N/D</td>
+                                <td>No disponible</td>
+                                <td>No ha iniciado o no tiene disponible una capacitación </td>
+                            </tr>
+                            <tr>
+                                <td><span title="Completada" class="estado-circulo estado-azul"></span></td>
+                                <td>Completada</td>
+                                <td>Se completo una capacitación</td>
+                            </tr>
+                            <tr>
+                                <td><span title="En progreso" class="estado-circulo estado-amarillo"></span></td>
+                                <td>En progreso</td>
+                                <td>Evento e-learning comenzado y en periodo vigente</td>
+                            </tr>
+                            <tr>
+                                <td><span title="No iniciado" class="estado-circulo estado-blanco"></span></td>
+                                <td>No iniciado</td>
+                                <td>Evento disponible no iniciado</td>
+                            </tr>
+                            <tr>
+                                <td><i title="Evento presencial" class="icon icon-user icon-read"></i></td>
+                                <td>Evento presencial</td>
+                                <td>Actividad de capacitación que se realiza en un  lugar físico definido. Se requiere la asistencia del alumno tanto a las lecciones  como a las evaluaciones</td>
+                            </tr>
+                            <tr>
+                                <td><i title="Evento e-learning" class="fa fa-laptop" style="color:#aaa"></i></td>
+                                <td>Evento e-learning</td>
+                                <td><p>Actividad de capacitación a la  que se accede a través de plataforma web. Tanto las lecciones como evaluaciones  se realizan a través de la plataforma, por lo que no requiere la presencia  física del alumno</p></td>
+                            </tr>
+                            <tr>
+                                <td><i title="Evento a distancia" class="icon icon-book-open icon-read"></i></td>
+                                <td>Evento a distancia</td>
+                                <td><p>Actividad de capacitación&nbsp;que no requiere asistencia presencial ni interacción con la plataforma e-learning, sino que las lecciones y evaluaciones son realizadas por medio de la entrega de un  CD-ROM, documento físico u otro medio que no considere uso de Internet. </p></td>
+                            </tr>
+                            <tr>
+                                <td><i title="Nota" class="icon icon-nota icon-read"></i>&nbsp;</td>
+                                <td>Nota de la capacitación</td>
+                                <td>Resultado. N/D corresponde a nota no disponible, que no tiene nota, o, en evento e-learning, que el contenido no es evaluable.</td>
+                            </tr>
+                            <tr>
+                                <td><i title="Diploma" class="icon icon-certificate icon-link"></i></td>
+                                <td>Diploma del evento</td>
+                                <td>Documento que certifica la aprobación del evento</td>
+                            </tr>
+                            <tr>
+                                <td><i title="Detalle" class="icon icon-info" style="color:#0099ff"></i></td>
+                                <td>Detalle</td>
+                                <td>Especificaciones de unidad curricular o del evento</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

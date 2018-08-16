@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=301880
+  -->
+<configuration>
+  <configSections>
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+  </configSections>
+  <connectionStrings>
+    <add name="HCMEntities" connectionString="metadata=res://*/HCM.csdl|res://*/HCM.ssdl|res://*/HCM.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=192.168.0.30;initial catalog=HCMDEVDATA;persist security info=True;user id=sa;password=00hcmdev00;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+    <add name="HCMClientesEntities" connectionString="metadata=res://*/ClientesModel.csdl|res://*/ClientesModel.ssdl|res://*/ClientesModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=192.168.0.30;initial catalog=HCMClientes;user id=sa;password=00hcmdev00;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+    <add name="Excel03ConString" connectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Extended Properties='Excel 8.0;HDR={1}'" />
+    <add name="Excel07ConString" connectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 8.0;HDR={1}'" />
+  </connectionStrings>
+  <appSettings>
+    <add key="webpages:Version" value="3.0.0.0" />
+    <add key="webpages:Enabled" value="false" />
+    <add key="ClientValidationEnabled" value="true" />
+    <add key="UnobtrusiveJavaScriptEnabled" value="true" />
+    <add key="dl:hcmUrl" value="http://hcmkomatsudev2.dl.cl" />
+
+    <!-- Configuracion de Correo -->
+    <add key="dl:mailgun:uri" value="https://api.mailgun.net/v2" />
+    <add key="dl:mailgun:apiKey" value="key-ce9b4f92299a0a3ff3f33e5b525d23a8" />
+    <add key="dl:mailgun:domain" value="sandbox5944db33e9394a0eb7dcdbfebee0e290.mailgun.org" />
+    <add key="dl:mailgun:from" value="Mailgun Sandbox &lt;postmaster@sandbox5944db33e9394a0eb7dcdbfebee0e290.mailgun.org&gt;" />
+  </appSettings>
+  <system.web>
+    <machineKey validationKey="F1DB234E7FA608366BE751A4415E45A8F41D01E4CBE634C2BDB7D6ECC248770C384B284BDB0A94BD1F0BF0A0BA5CA424433614B7F08281D97CEBC137FED9329A" decryptionKey="25E8EB323033AD5805E1AE0B998DD772E66822E7974739BFFE56AC6AD7E34818" validation="SHA1" decryption="AES" compatibilityMode="Framework20SP2" />
+    <compilation debug="true" targetFramework="4.5" />
+    <httpRuntime targetFramework="4.5" />
+  </system.web>
+  <system.webServer>
+    <security>
+      <requestFiltering>
+        <requestLimits maxAllowedContentLength="1073741824" />
+      </requestFiltering>
+    </security>
+  </system.webServer>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" culture="neutral" publicKeyToken="30ad4fe6b2a6aeed" />
+        <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Helpers" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-5.2.0.0" newVersion="5.2.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Optimization" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-1.1.0.0" newVersion="1.1.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.WebPages" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="WebGrease" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-1.5.2.14234" newVersion="1.5.2.14234" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework" />
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+  <system.serviceModel>
+<<<<<<< HEAD
+    <bindings>
+      <basicHttpBinding>
+        <binding name="BasicHttpBinding_IServicioMalla" />
+      </basicHttpBinding>
+    </bindings>
+    <client>
+      <endpoint address="http://hcmmallaservicesdev.dl.cl/ServicioMalla.svc" binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IServicioMalla" contract="wcfserviceMalla.IServicioMalla" name="BasicHttpBinding_IServicioMalla" />
+    </client>
+  </system.serviceModel>
+</configuration>

@@ -1,0 +1,143 @@
+﻿@charset "utf-8";
+
+.no-wrap { white-space:nowrap}
+.no-margin { margin:0 !important}
+.no-padding { padding:0 !important}
+.no-margin-left{ margin-left:0 !important} 
+.no-margin-right { margin-right:0 !important}
+.no-padding-left { padding-left:0 !important}
+.no-padding-right { padding-right:0 !important}
+.no-border { border:none}
+
+/*bootstrap*/
+a {color:#0099FF;}
+a:hover { text-decoration:none}
+h1 {font-size:18px; clear:both; font-weight:normal}
+h2 {font-size:16px;font-weight: normal;}
+body {font-size:12px; color:#333; background-color:#EDEDED; font-family:"Segoe UI",Arial,Helvetica,sans-serif;padding-bottom: 20px;padding-top: 20px;}
+.container {padding-left:0; padding-right:0; margin-top:0;max-width:1000px;background-color:#fff;border:solid 1px #ccc; border-top:none; border-bottom:none;}
+.header.container{ margin-bottom:0}
+.header .navbar {border:0px;border-radius:0; margin-bottom:0; min-height:20px}
+.main-menu.navbar {border-radius:0px; min-height:30px}
+.main-menu.navbar-default { background-color: #25a0da;border:none;}
+.main-menu.navbar-default .navbar-nav  > li {border-right: 1px dotted #FFF;}
+.main-menu.navbar-default .navbar-nav  > li.last {border-right:none}
+.main-menu.navbar-default .navbar-nav > li > a {color: #fff; padding:5px 15px}
+.main-menu.navbar-default .navbar-nav > li > a:hover,
+.main-menu.navbar-default .navbar-nav > li > a:focus {
+	color:rgb(255, 255, 255); /* Fall-back for browsers that don't support rgba */
+    color: rgba(255, 255, 255, 0.5)
+	;background-color: transparent;}
+.main-menu.navbar-default .navbar-nav > .active > a,
+.main-menu.navbar-default .navbar-nav > .active > a:hover,
+.main-menu.navbar-default .navbar-nav > .active > a:focus {
+  color:rgb(255, 255, 255); 
+  color: rgba(255, 255, 255, 0.5);
+  background-color: #54B4E2;
+}
+.main-menu.navbar-default .navbar-nav > .disabled > a,
+.main-menu.navbar-default .navbar-nav > .disabled > a:hover,
+.main-menu .navbar-default .navbar-nav > .disabled > a:focus {
+  color:rgb(255, 255, 255); 
+  color: rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+}
+.footer .madeIn.text-muted a{color: #999}
+#page-wrapper .page-header { margin:20px 5px}
+.breadcrumb {background-color:#fff; padding:0;}
+.btn-primary {background-color:#0099ff; border-color:#0099ff}
+.btn-primary.disabled, .btn-primary[disabled] {background-color:#80CCFF; border-color:#80CCFF}
+.btn img {margin-right:5px}
+.btn-lg {background-color:#FF5A19; color:#fff}
+.btn-lg:hover{ background-color:#FF2905; color:#fff}
+.dropdown { border:1px solid ccc }
+.nav-tabs {clear:both}
+.table th {color:#767676; background-color:#F5F2F2; font-weight:normal; white-space:nowrap}
+
+.panel-default > .panel-heading {background-color:#999;color:#fff}
+.panel-default > .panel-heading .btn-link { color:#fff}
+.panel-default > .panel-heading .btn-link { padding-top:0; padding-bottom:0}
+.panel-default > .panel-heading .btn-link:hover { text-decoration:none}
+
+.panel-info > .panel-heading {
+    background-color: #f5f5f5;
+    color: #333;
+    border-color: #ddd;
+}
+
+.panel-info {
+    border-color: #ddd;
+}
+
+.panel-info .panel-heading .btn-link {color:#333; padding-top:2px;}
+
+.form-horizontal .control-label {text-align:left}
+.form-horizontal .form-control-static,
+.form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline
+ { padding-top:0}
+ .form-horizontal .form-control-static { padding-bottom:5px}
+ .input-group-btn .btn{padding:9px}
+ 
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus { background-color:transparent; border-color:#999; color:#666}
+
+.carousel-control.left, .carousel-control.right{ background-image:none;}
+.carousel-control.left, .carousel-control.right { background-color:#CCC}
+.carousel-control {width: 15px}
+.carousel-control .icon-next, .carousel-control .glyphicon-chevron-right { right:auto}
+.carousel-inner {padding-left: 12px}
+
+.mark, mark {
+    background-color: #fcf8e3;
+    padding: 0.2em;
+}
+
+.progress-bar { color:#333; font-size:11px}
+
+/*datatables*/
+table.dataTable thead > tr > th { padding-right: 20px;}
+
+/*multiselect*/
+/*jquery multiselect menuitem a bootstrap*/
+.ui-state-default { background-image: none; background-color: #fff; font-weight:normal}
+.ui-state-active{
+    border-color: #66afe9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
+}
+.ui-state-default .ui-icon { background-image: url("images/ui-icons.png");}
+.ui-multiselect-menu { box-shadow:0 6px 12px rgba(0, 0, 0, 0.176)}
+.ui-multiselect.ui-state-default, .ui-multiselect.ui-state-hover {
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    font-weight:normal;
+}
+.ui-state-hover,.ui-state-active,.ui-widget-content .ui-state-hover{color:#428bca}
+.ui-state-focus,.ui-widget-content .ui-state-focus{color:#428bca}
+.ui-multiselect { font-size: 12px; height: 30px; padding: 5px 10px;}
+.ui-multiselect-close {display:none}
+.ui-multiselect-checkboxes label { border:none}
+.ui-multiselect-checkboxes label.ui-state-hover {background-color:#eee;  background-image:none;font-weight:normal; box-shadow: none; border:none}
+.ui-multiselect-checkboxes input[type="checkbox"] { margin-right:4px}
+.ui-widget {font-weight:normal; font-size:1em}
+.ui-widget-content{ background-image:none; background-color:#fff}
+.ui-widget-header{ background-color:#428bca; background-image: none; font-weight:normal; border:none}
+.ui-widget-header a:hover {color:#fff; color:rgba(255,255,255,0.8); text-decoration:none}
+.ui-multiselect-filter input{ border:none; color:#333; width:140px}
+.ui-multiselect-filter{float:right}
+
+/*modal*/
+.modal-backdrop {
+    z-index: 0 !important;
+}
+.modal{background-color: rgba(0, 0, 0, 0.5)}
+
+
+/*color picker*/
+.minicolors-input {height: 30px !important;}
+
+/*font icon*/
+.dataTable .icon[class^="icon-"]:before, .dataTable .icon[class*=" icon-"]:before,
+.btn .icon[class^="icon-"]:before, .btn .icon[class*=" icon-"]:before,
+.carousel-control [class^="icon-"]:before, .carousel-control [class*=" icon-"]:before
+{ margin-left:0; margin-right:0}

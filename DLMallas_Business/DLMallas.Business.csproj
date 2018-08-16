@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC271F2D-FBEF-48A7-87F9-527DF7A8F6D6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DLMallas.Business</RootNamespace>
+    <AssemblyName>DLMallas.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl">
+      <HintPath>..\packages\Flurl.1.0.10\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+MonoTouch10\Flurl.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WSLib">
+      <HintPath>J:\clienteDLSE\wslib45\wslibHTTP\WSLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Certificado.cs" />
+    <Compile Include="Componente.cs" />
+    <Compile Include="Dto\Certificado\GuardarArchivo.cs" />
+    <Compile Include="Dto\Componente\ActualizarComponente.cs" />
+    <Compile Include="Dto\Componente\GuardarComponente.cs" />
+    <Compile Include="Dto\Componente\GuardarPrerrequisito.cs" />
+    <Compile Include="Dto\Componente\ObtenerComponente.cs" />
+    <Compile Include="Dto\Componente\ObtenerComponentePrerrequisito.cs" />
+    <Compile Include="Dto\Componente\ObtenerListadoCatalogoCurso.cs" />
+    <Compile Include="Dto\Componente\ObtenerListadoComponente.cs" />
+    <Compile Include="Dto\Componente\ObtenerListadoModalidadComponente.cs" />
+    <Compile Include="Dto\DtoGenerico.cs" />
+    <Compile Include="Dto\DtoPagina.cs" />
+    <Compile Include="Dto\DtoPersona.cs" />
+    <Compile Include="Dto\DtoValor.cs" />
+    <Compile Include="Dto\Malla\ActualizarMalla.cs" />
+    <Compile Include="Dto\Malla\DtoMallaOld.cs" />
+    <Compile Include="Dto\Malla\GuardarMalla.cs" />
+    <Compile Include="Dto\Malla\ObtenerListadoMalla.cs" />
+    <Compile Include="Dto\Malla\ObtenerMalla.cs" />
+    <Compile Include="Dto\Seccion\ActualizarSeccion.cs" />
+    <Compile Include="Dto\Seccion\GuardarSeccion.cs" />
+    <Compile Include="Dto\Seccion\ObtenerListadoSeccion.cs" />
+    <Compile Include="Dto\Seccion\ObtenerSeccion.cs" />
+    <Compile Include="Dto\Version\ActualizarVersion.cs" />
+    <Compile Include="Dto\Version\DtoVersionOld.cs" />
+    <Compile Include="Dto\Version\GuardarVersion.cs" />
+    <Compile Include="Dto\Version\ObtenerListadoVersion.cs" />
+    <Compile Include="Dto\Version\ObtenerVersion.cs" />
+    <Compile Include="jQueryDataTableParamModel.cs" />
+    <Compile Include="Malla.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="Persona.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seccion.cs" />
+    <Compile Include="Seguridad.cs" />
+    <Compile Include="Version.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DLMallas.Utilidades\DLMallas.Utilidades.csproj">
+      <Project>{97588af8-23fa-446a-8fbb-a038aeaf43b9}</Project>
+      <Name>DLMallas.Utilidades</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="HelperFunctions.ttinclude" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="log4net.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,188 @@
+﻿@model DLMallas.Models.CertificadoViewModels
+@{
+    ViewBag.Title = "Certificado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main">
+    <div role="navigation" class="col-md-2 navbar-default sidebar">
+        <div class="sidebar-nav navbar-collapse " aria-expanded="true" style="">
+            <ul id="side-menu" class="nav ">
+                <li><a href="@Url.Action("EditarMalla", "Malla", new { id = @Model.ObtenerMalla[0].Id })">Datos Generales</a></li>
+                <li><a href="@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })">Versiones</a></li>
+                <li class="active"><a href="@Url.Action("Index", "Certificado", new { id = @Model.ObtenerMalla[0].Id })">Certificados</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="page-wrapper" class="col-sm-12 col-md-10">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        Información de la Malla
+                    </div>
+                    <div class="panel-body">
+                        <table style="width: 100%">
+                            <tr>
+                                <td width="15%">Nombre:</td>
+                                <td width="35%">@Html.DisplayFor(model => model.ObtenerMalla[0].Nombre)</td>
+                                <td width="15%">Fecha Creación:</td>
+                                <td width="35%">@Html.DisplayFor(model => model.ObtenerMalla[0].FechaCreacion)</td>
+                            </tr>
+                            <tr>
+                                <td width="15%">Usuario Creación:</td>
+                                <td width="35%">@Html.DisplayFor(model => model.ObtenerMalla[0].UsuarioCreacion)</td>
+                                <td width="15%">Estado:</td>
+                                <td width="35%">@(Model.ObtenerMalla[0].Activo == "1" ? "Activa" : "Inactiva")</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default panel-page-content">
+                <div class="panel-heading">
+                    <table style="width: 100%">
+                        <tr>
+                            <td class="text-left">Versiones</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel-body">
+                    <table>
+                        <form id="ajaxUploadLogo" action="@Url.Action("guardarLogo", "Certificado")" method="post" enctype="multipart/form-data">
+                            <tr>
+                                <th>Logo</th>
+                                <td>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-picture"></span></span>
+                                    <input type="hidden" id="idmalla" name="idmalla" value="@Model.ObtenerMalla[0].Id" />
+                                    <input class="form-control input-sm" id="filelogo" type="file" name="filelogo" accept="image/*"/>
+                                    Ancho máximo de imagen 220px
+                                </td>
+                                <td><button id="ajaxUploadButtonLogo" type="submit" class="btn btn-default" disabled="disabled">Adjuntar</button></td>
+                            </tr>
+                        </form>
+                        <form id="ajaxUploadImg" action="@Url.Action("guardarImg", "Certificado")" method="post" enctype="multipart/form-data">
+                            <tr>
+                                <th>Imagen Predeterminada</th>
+                                <td>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-picture"></span></span>
+                                    <input type="hidden" id="idmalla" name="idmalla" value="@Model.ObtenerMalla[0].Id" />
+                                    <input class="form-control input-sm" id="fileimg" type="file" name="fileimg" accept="image/*"/>
+                                    Ancho máximo de imagen 220px
+                                </td>
+                                <td><button id="ajaxUploadButtonImg" type="submit" class="btn btn-default" disabled="disabled">Adjuntar</button></td>
+                            </tr>
+                        </form>
+                        <form id="ajaxUploadFirma" action="@Url.Action("guardarFirma", "Certificado")" method="post" enctype="multipart/form-data">
+                            <tr>
+                                <th>Firma</th>
+                                <td>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-picture"></span></span>
+                                    <input type="hidden" id="idmalla" name="idmalla" value="@Model.ObtenerMalla[0].Id" />
+                                    <input class="form-control input-sm" id="filefirma" type="file" name="filefirma" accept="image/*"/>
+                                    Ancho máximo de imagen 220px
+                                </td>
+                                <td><button id="ajaxUploadButtonFirma" type="submit" class="btn btn-default" disabled="disabled">Adjuntar</button></td>
+                            </tr>
+                        </form>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-primary" a href="#" data-toggle="modal" title="Vista Previa" id="btnVistaPrevia">Vista Previa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ajaxUploadLogo").change(function (event) {
+                $("#ajaxUploadButtonLogo").prop("disabled", false);
+            });
+
+            $("#ajaxUploadImg").change(function (event) {
+                $("#ajaxUploadButtonImg").prop("disabled", false);
+            });
+
+            $("#ajaxUploadFirma").change(function (event) {
+                $("#ajaxUploadButtonFirma").prop("disabled", false);
+            });
+
+            $("#ajaxUploadLogo").ajaxForm({
+                iframe: true,
+                type: "json",
+                cache: false,
+                data: $(this).serialize(),
+                success: function (resultado) {
+                    $("#ajaxUploadLogo").resetForm();
+                    if (resultado) {
+                        //$("#bodyAlert").html("Imagen actualizada satisfactoriamente");
+                        //$("#alertModal").modal("show");
+                        alert("Imagen actualizada satisfactoriamente");
+                    }
+                    else {
+                        //$("#bodyAlert").html("Error al subir archivo: " + data.mensaje);
+                        //$("#alertModal").modal("show");
+                        alert("Error al subir archivo");
+                    }
+                },
+                error: function (resultado) {
+                    $("#ajaxUploadLogo").resetForm();
+                    alert("Error al subir archivo");
+                }
+            });
+
+            $("#ajaxUploadImg").ajaxForm({
+                iframe: true,
+                type: "json",
+                cache: false,
+                data: $(this).serialize(),
+                success: function (resultado) {
+                    $("#ajaxUploadImg").resetForm();
+                    if (resultado) {
+                        //$("#bodyAlert").html("Imagen actualizada satisfactoriamente");
+                        //$("#alertModal").modal("show");
+                        alert("Imagen actualizada satisfactoriamente");
+                    }
+                    else {
+                        //$("#bodyAlert").html("Error al subir archivo: " + data.mensaje);
+                        //$("#alertModal").modal("show");
+                        alert("Error al subir archivo");
+                    }
+                },
+                error: function (resultado) {
+                    $("#ajaxUploadImg").resetForm();
+                    alert("Error al subir archivo");
+                }
+            });
+
+            $("#ajaxUploadFirma").ajaxForm({
+                iframe: true,
+                type: "json",
+                cache: false,
+                data: $(this).serialize(),
+                success: function (resultado) {
+                    $("#ajaxUploadFirma").resetForm();
+                    if (resultado) {
+                        //$("#bodyAlert").html("Imagen actualizada satisfactoriamente");
+                        //$("#alertModal").modal("show");
+                        alert("Imagen actualizada satisfactoriamente");
+                    }
+                    else {
+                        //$("#bodyAlert").html("Error al subir archivo: " + data.mensaje);
+                        //$("#alertModal").modal("show");
+                        alert("Error al subir archivo");
+                    }
+                },
+                error: function (resultado) {
+                    $("#ajaxUploadFirma").resetForm();
+                    alert("Error al subir archivo");
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,4 @@
+/* Personalización wallmart*/
+.brand-bg  {  background-image: url('header-clogo.jpg');}
+.main-menu.navbar-default {  background-color: #1A75CF;}
+.breadcrumb li.active {color:#3761ce;}

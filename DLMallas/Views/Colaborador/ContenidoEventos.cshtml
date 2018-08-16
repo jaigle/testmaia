@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Contenido de Eventos";
+}
+<script>var gNominaEventoId = @TempData["idNominaEvento"];</script>
+<script src="/Scripts/modalCurso.js"></script>
+
+<script src="~/Scripts/Controllers/Colaborador/ContenidoEventos.js"></script>
+
+<div class="cursoModal"></div>
+
+<div class="main no-margin">
+    @*Html.Partial("_SideMenu")
+    @*<div role="navigation" class="col-md-2 navbar-default sidebar">
+            <div class="sidebar-nav navbar-collapse " aria-expanded="true" style="">
+                <ul id="side-menu" class="nav ">
+                    <li class="sidebar-heading">Mallas</li>
+                    <li class="active"><a>Secciones</a></li>
+                    <li><a href="javascript:void(0)" onclick="mostrarURL('/UnidadCurricular'); return false;">Unidades Curriculares</a></li>
+                    <li><a href="javascript:void(0)" onclick="mostrarURL('/Mallas/AudienciaMalla'); return false;">Audiencias</a></li>
+                    <li><a href="javascript:void(0)" onclick="mostrarURL('/Versiones'); return false;">Versiones</a></li>
+                    <li><a href="javascript:void(0)" onclick="mostrarURL('/Mallas/CertificadoMalla'); return false;">Certificados</a></li>
+                    <li><a href="javascript:void(0)" onclick="mostrarURL('/Mallas/NotificacionesMalla'); return false;">Notificaciones</a></li>
+                    <li><a href="javascript:void(0)" onclick="getAbrirReporte(); return false;">Informes</a></li>
+                </ul>
+            </div>
+        </div>*@
+    <div id="page-wrapper" class="col-sm-12 col-md-10">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default panel-page-content">
+                    <div class="panel-heading">Mis Mallas </div>
+                    <div class="panel-body">
+                        <!--datatable-->
+                        <div class="tabla-resultados-no-registros-buscar">
+                            <table id="tblResultados" class="table table-striped table-bordered table-hover tabla-resultados">
+                                <thead>
+                                    <tr>
+                                        <th>Contenido</th>
+                                        <th>Tipo</th>
+                                        <th>Ponderacion</th>
+                                        <th>Avance</th>
+                                        <th>Estado</th>
+                                        <th>Resultado</th>
+                                        <th>Situacion Final</th>
+                                        <th>Intentos</th>
+                                        <th class="no-sort"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="contenidoEventos"></tbody>
+                            </table>
+                        </div>
+                        <!--/datatable-->
+                    </div>
+                    <!--panel-footer-->
+                    <!--/panel-footer-->
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+</div>

@@ -1,0 +1,80 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Listado de Mallas del Colaborador";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>var gColaboradorId = @TempData["idColaborador"];</script>
+<script src="~/Scripts/Controllers/Colaborador/ListadoMallaColaborador.js"></script>
+<div class="main no-margin">
+    @*Html.Partial("_SideMenu")*@
+    <div id="page-wrapper" class="col-sm-14 col-md-12">
+        <div class="row">
+            <div class="col-sm-14">
+                <div class="panel panel-default panel-page-content">
+                    <div class="panel-heading">Mis Mallas </div>
+                    <div class="panel-body">
+                        <!--datatable-->
+                        <div class="tabla-resultados-no-registros-buscar">
+                            <table id="tblResultados" class="table table-striped table-bordered table-hover tabla-resultados">
+                                <thead>
+                                <tr>
+                                    <th class="no-sort"></th>
+                                    <th class="no-sort"></th>
+                                    <th class="no-sort"></th>
+                                    <th>Nombre</th>
+                                    <th>% Avance</th>
+                                    <th>Cant.UC</th>
+                                    <th>Completas</th>
+                                    <th>NoCompletas</th>
+                                    <th>Asignación</th>
+                                </tr>
+                                </thead>
+                                <tbody id="contenidoMallasColaborador"></tbody>
+                            </table>
+                        </div>
+                        <!--/datatable-->
+                    </div>
+                    <!--panel-footer-->
+                    <!--/panel-footer-->
+                </div>
+
+                <div class="botones-panel">
+                    <div class="pull-right">
+                        <a class="btn btn-primary" href="#" id="btnHistorial" name="btnHistorial">Ver Historial de Mallas</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+</div>
+
+<div class="modal fade" id="myModalEstructura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button title="Acciones" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-navicon"></i></button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            @*<li><a href="#" id="exportIMG">Exportar a imagen</a></li>*@
+                            <li><a href="#" id="exportPDF">Exportar a PDF</a></li>
+                        </ul>
+                        <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+                    </div>
+                </div>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body modal-body-xl mallas-diagrama" id="EstructuraMalla">
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button id="btnCerrarModal" type="button" class="btn btn-default">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

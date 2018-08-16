@@ -1,0 +1,25 @@
+/* Personalización dl*/
+.brand {min-height: 100px;}
+.brand-bg 
+{background-image: url('header.jpg'); }
+
+.main-menu.navbar-default {
+  background-color: #FF591B;
+}
+
+.btn-primary {
+  color: #ffffff;
+  background-color: #FF591B;
+  border-color: #c24415;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #c24415;
+  border-color: #c24415;
+}

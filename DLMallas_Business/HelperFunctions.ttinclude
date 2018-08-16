@@ -1,0 +1,63 @@
+﻿<#+
+private static string Camelize(string value, bool upper)
+{
+    if (string.IsNullOrEmpty(value))
+        return value;
+    bool soloMayusculas = true;
+    for (var index = 0; index < value.Length; index++)
+    {
+        int c = value[index];
+        if (c < 65 || c > 90)
+        {
+            soloMayusculas = false;
+        }
+    }
+    if (soloMayusculas)
+    {
+        value = value.ToLowerInvariant();
+    }
+    if (value.IndexOf("_") != -1)
+    {
+        value = value.ToLowerInvariant();
+    }
+    var output = new StringBuilder();
+    var length = 0;
+    for (var index = 0; index < value.Length; index++)
+    {
+        var c = value[index];
+        if (c >= 'a' && c <= 'z')
+        {
+            if (length == 0 && (upper || output.Length > 0))
+                c = (char)(c - 32);
+            length++;
+        }
+        else if (c >= 'A' && c <= 'Z')
+        {
+            if (length == 0 && (!upper && output.Length == 0))
+                c = (char)(c + 32);
+            length++;
+        }
+        else if ((c >= '0' && c <= '9'))
+        {
+            length++;
+        }
+        else
+            length = 0;
+
+        if (length > 0)
+            output.Append(c);
+    }
+    return output.ToString();
+}
+
+public static string Camelize(string value)
+{
+    return Camelize(value, false);
+}
+
+public static string Camelize(EntityType value)
+{
+    return Camelize(value.Name, true);
+}  
+    
+#>

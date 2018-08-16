@@ -1,0 +1,95 @@
+﻿@model DLMallas.Models.MallaViewModels
+@{
+    ViewBag.Title = "Editar Malla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main no-margin">
+    <div role="navigation" class="col-md-2 navbar-default sidebar">
+        <div class="sidebar-nav navbar-collapse " aria-expanded="true" style="">
+            <ul id="side-menu" class="nav ">
+                <li class="active"><a href="@Url.Action("EditarMalla", new { id = @Model.ObtenerMalla[0].Id })">Datos Generales</a></li>
+                <li><a href="@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })">Versiones</a></li>
+                <li><a href="@Url.Action("Index", "Certificado", new { id = @Model.ObtenerMalla[0].Id })">Certificados</a></li>
+            </ul>
+        </div>
+    </div>
+    <input type="hidden" id="txtId" value="@Model.ObtenerMalla[0].Id" />
+    <div id="page-wrapper" class="col-sm-12 col-md-10">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default panel-page-content">
+                    <div class="panel-heading">Datos Generales</div>
+                    <div class="panel-body">
+                        <div class="tabla-resultados-no-registros-buscar">
+                            <table class="table-condensed">
+                                <tr>
+                                    <th>Usuario Creación:</th>
+                                    <td>@Html.DisplayFor(model => model.ObtenerMalla[0].UsuarioCreacion)</td>
+                                    <th>Fecha:</th>
+                                    <td>@Html.DisplayFor(model => model.ObtenerMalla[0].FechaCreacion)</td>
+                                </tr>
+                                <tr>
+                                    <th>Nombre:</th>
+                                    <td colspan="3">
+                                        <input id="txtNombre" class="form-control input-sm" type="text"
+                                               placeholder="Ingrese Nombre" value="@Model.ObtenerMalla[0].Nombre">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Descripción:</th>
+                                    <td colspan="3">
+                                        <textarea id="txtDescripcion" class="form-control" cols="75"
+                                                  placeholder="Ingrese descripción">
+                                            @Model.ObtenerMalla[0].Descripcion
+                                        </textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Activa:</th>
+                                    <td colspan="3">
+                                        <input type="checkbox" name="chkActiva" id="chkActiva" @(Model.ObtenerMalla[0].Activo == "1" ? "checked = \"checked\" " : "") />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="@Url.Action("Index", "Malla")" class="btn btn-default">Volver a Lista</a>
+                        <button class="btn btn_primary" id="btnActualizaMalla">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnActualizaMalla").click(function () {
+                var id = $('#txtId').val();
+                var nombre = $('#txtNombre').val();
+                var desc = $('#txtDescripcion').val();
+                var activo = ($('#chkActiva').is(":checked")) ? "1" : "0";
+
+                if (nombre == "" || desc == "") {
+                    alert("Ingrese todos los campos!");
+                } else {
+                    var actionData = "{'id':'" + id + "','nombre': '" + nombre + "','desc': '" + desc + "', 'activo': '" + activo + "'}";
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Malla/ActualizarMalla",
+                        contentType: "application/json; charset=utf-8",
+                        data: actionData,
+                        dataType: "json",
+                        complete: function (result) {
+                            alert("Registro Guardado Correctamente");
+                            window.location.href = "/Malla";
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

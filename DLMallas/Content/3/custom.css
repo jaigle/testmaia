@@ -1,0 +1,4 @@
+/* Personalización bech*/
+.brand-bg {background-image: url('header-bech.jpg');}
+.main-menu.navbar-default {background-color:#FF591B}
+.breadcrumb li.active {color:#3761ce;}

@@ -1,0 +1,156 @@
+﻿@model DLMallas.Models.MallaViewModels
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/plugins/Sesion/jquery.session.js"></script>
+<script src="~/Scripts/jquery.json.js"></script>
+<div class="main">
+    <!--contenido central-->
+    <!--Creador malla-->
+    <div class="row container-buscador no-margin-left no-margin-right">
+        <div class="col-sm-2 no-padding-right pull-right">
+            <a class="btn btn-primary btn-sm pull-right " href="#" id="btnCrearMalla"><span class="fa fa-plus"></span> Crear Nuevo</a>
+        </div>
+    </div>
+
+    <!--/.tabla-resultados-->
+    <div class="panel panel-default panel-resultados-busqueda">
+        <div class="panel-heading">Malla</div>
+        <div class="panel-body">
+            <!--datatable-->
+            <div id="divListado">
+                <div>
+                    <table id="tblListado" class="table table-condensed table-bordered table-hover tabla-resultados">
+                        <thead>
+                            <tr>
+                                <th class="no-sort" colspan="2"></th>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Fecha Creación</th>
+                                <th>Usuario Creación</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in @Model.ObtenerListadoMalla)
+                            {
+                                <tr>
+                                    <td><a href="@Url.Action("EditarMalla", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                    <td><a href="#" onclick="eliminaMalla('@item.Id')"><span class="glyphicon glyphicon-remove"></span></a></td>
+                                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.UsuarioCreacion)</td>
+                                    <td>@(item.Activo == "1" ? "Activa" : "Inactiva")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Crear Malla -->
+    <div class="modal fade" id="modCrearMalla" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Crear Malla</h4>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td>Usuario Creación:</td>
+                            <td>@Html.DisplayFor(x => x.NombrePersonaLogin)</td>
+                            <td>Fecha:</td>
+                            <td>@Html.DisplayFor(x => x.FechaHoy)</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre:</td>
+                            <td colspan="3"><input id="txtNombre" class="form-control input-sm" type="text" placeholder="Ingrese Nombre"></td>
+                        </tr>
+                        <tr>
+                            <td>Descripción:</td>
+                            <td colspan="3"><textarea id="txtDescripcion" class="form-control" cols="75" placeholder="Ingrese descripción"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Activa:</td>
+                            <td><input type="checkbox" id="chkActiva" class="checkbox" checked="checked" /></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn_primary" id="btnGuardarNuevaMalla">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!--main-->
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /* diseño tabla */
+            $('#tblListado').dataTable({
+                responsive: true,
+                "language": {
+                    "url": "/Content/DataTables/plugins/spanish.js"
+                }
+            });
+
+            /* popup crea malla */
+            $("#btnCrearMalla").click(function () {
+                $("#modCrearMalla").modal('show');
+            });
+
+            /* guarda ajax formulario crea malla */
+            $("#btnGuardarNuevaMalla").click(function () {
+
+                var nombre = $('#txtNombre').val();
+                var desc = $('#txtDescripcion').val();
+                var activo = ($('#chkActiva').is(":checked")) ? "1" : "0";
+
+                if (nombre == "" || desc == "") {
+                    alert("Debe Ingresar un Nombre y Descripción");
+                }
+                else {
+                    var actionData = "{'nombre': '" + nombre + "','desc': '" + desc + "', 'activo': '" + activo + "'}";
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Malla/GuardarMalla",
+                        contentType: "application/json; charset=utf-8",
+                        data: actionData,
+                        dataType: "json",
+                        complete: function (result) {
+                            alert("Registro Guardado Correctamente");
+                            window.location.href = "/Malla";
+                        }
+                    });
+                }
+            });
+        });
+
+        function eliminaMalla(id) {
+            if (confirm("Está seguro de elimina el registro?")) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Malla/EliminarMalla",
+                    contentType: "application/json; charset=utf-8",
+                    data: "{'id':'" + id + "'}",
+                    dataType: "json",
+                    complete: function (result) {
+                        alert("Registro Eliminado Correctamente");
+                        window.location.href = "/Malla";
+                    }
+                });
+            }
+        }
+    </script>
+}

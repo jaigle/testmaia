@@ -1,0 +1,199 @@
+﻿/*Modifica framework nativo*/
+body {font-family: 'Open Sans', sans-serif; background-color:#fff}
+a {color:#0099ff}
+label { font-weight:100}
+.navbar-header{ width:100%}
+.nav > li > a:hover, .nav > li > a:focus { background-color: transparent}
+.navbar-top-links li a { min-height:10px; padding:0}
+.navbar-nav > li > a { padding:10px}
+.breadcrumb { background-color:#fff; margin-top:20px}
+.btn-primary{ background-color:#0099FF; border-color:#0099FF}
+ 
+.breadcrumb { font-size: 12px; padding-left:10px; margin-bottom:10px}
+.breadcrumb li.active {color:#0099ff;}
+.navbar-brand { height:auto; margin-right:30px}
+.header .navbar{ border: 0 none; border-radius: 0; margin-bottom: 0; min-height: 20px;border-bottom:3px solid}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus { background-color:rgba(255,255,255,0)}
+
+#page-wrapper{background: /*url('images/fondo-pagewraper.png')*/ no-repeat top center #F9F7F7; margin-top:73px;/*.navbar-top-links margin-bottom:50px;*/ }
+.panel-default > .panel-heading {background-color:#868686; color:#fff}
+.panel-default > .panel-heading a.accordion  {color: #fff }
+.input-daterange { margin-bottom:0 !important}
+
+
+.table th {
+    background-color: #f5f2f2 !important;
+    color: #767676;
+    font-weight: normal !important;
+    white-space: nowrap;
+    font-size:12px
+}
+
+.modal-header {background-color: #428bca; color:#fff; padding:10px 15px 5px 15px}
+.modal-header .btn-link {color:#fff}
+
+/*datatables*/
+table.dataTable thead th, table.dataTable thead td { border-bottom:2px solid #ddd}
+div.dataTables_paginate{margin-top:5px}
+.dataTables_paginate .ui-state-default{border:none}
+.pagination > li > a, .pagination > li > span { float:none}
+table.dataTable td.dataTables_empty { text-align:left}
+
+/*jquery multiselect menuitem a bootstrap*/
+.ui-state-default { background-image: none; background-color: #fff; font-weight:normal}
+.ui-state-active{
+    border-color: #66afe9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
+}
+.ui-state-default .ui-icon { background-image: url("images/ui-icons.png");}
+.ui-multiselect-menu { box-shadow:0 6px 12px rgba(0, 0, 0, 0.176)}
+.ui-multiselect.ui-state-default, .ui-multiselect.ui-state-hover {
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    font-weight:normal;
+}
+.ui-state-hover,.ui-state-active,.ui-widget-content .ui-state-hover{color:#428bca}
+.ui-state-focus,.ui-widget-content .ui-state-focus{color:#428bca}
+.ui-multiselect { font-size: 12px; height: 30px; padding: 5px 10px;}
+.ui-multiselect-close {display:none}
+.ui-multiselect-checkboxes label { border:none}
+.ui-multiselect-checkboxes label.ui-state-hover {background-color:#eee;  background-image:none;font-weight:normal; box-shadow: none; border:none}
+.ui-multiselect-checkboxes input[type="checkbox"] { margin-right:4px}
+.ui-widget {font-weight:normal; font-size:1em}
+.ui-widget-content{ background-image:none; background-color:#fff}
+.ui-widget-header{ background-color:#428bca; background-image: none; font-weight:normal; border:none}
+.ui-widget-header a:hover {color:#fff; color:rgba(255,255,255,0.8); text-decoration:none}
+.ui-multiselect-filter input{ border:none; color:#333; width:140px}
+.ui-multiselect-filter{float:right}
+/**/
+
+.no-padding-left {padding-left:0}
+.no-padding-right{padding-right:0}
+
+.header .navbar-brand { padding:10px; font-size:13px}
+.header .navbar-brand, .header .navbar-inverse .navbar-brand{ color:#fff}
+.header .navbar-brand img {max-height:30px}
+
+.main-menu { min-height:30px}
+.main-menu-bloque {min-height: 30px;padding: 20px; float:right}
+.main-menu-bloque li{border-right: 1px solid rgba(255,255,255,0.2)}
+.main-menu-bloque li.last{border-right: none}
+.navbar-inverse .main-menu-bloque li a { color:#fff}
+.main-menu-bloque li a { padding-right:40px; padding-left:40px}
+.main-menu-bloque li:hover { background-color: rgba( 255,255,255,0.2)}
+
+.sidebar { margin-top:90px;/*margin-top:103px**.navbar-top-links*/} 
+.sidebar { background-color: transparent}
+.sidebar ul li { border:none;}
+.sidebar a {color:#333; margin: 0 10px;}
+
+.navbar-top {background-color: #333333; color: #fff;}
+.soporte a {border-right: 1px solid #5c5c5c;color: #fff;margin-right: 10px;padding-right: 10px !important;}
+
+.soporte a.last { border-right: 0;}
+.soporte, .user-sesion {padding-top: 7px; font-size:11px;padding-left:15px}
+.user-sesion-image {float: left; margin: 3px 0 3px 15px;}
+
+.sidebar .glyphicon, #side-menu .fa {margin-right:10px}
+.well.descripcion-seccion h4 { margin-top:0; color:#333}
+.well.descripcion-seccion {font-size:12px; margin-top:20px; padding:0; color:#777; border:none; box-shadow:none; background-color:transparent}
+
+.descripcion-seccion .banner{ min-height:150px; margin-bottom:20px; border-bottom:5px solid #ccc; background:url(/Content/images/banner-reportes-home.jpg) no-repeat; max-width:1038px}
+
+.col-teaser-servicios { font-size:13px}
+.col-teaser-servicios .img-teaser{max-height:80px;}
+
+.calugas-color, .calugas-color .h4{color:#fff}
+.calugas-color .h4 { margin-bottom:0px}
+.calugas-color .huge { font-size:22px}
+.calugas-color.presupuesto .col-lg-3 {width:23%} /*4 columnas*/
+.calugas-color.becas .col-lg-3 { width: 19%;}/*5 columnas*/
+
+
+.panel-green-1 { background-color:#59B200}
+.panel-green-2 { background-color:#00D96D;}
+.panel-green-3 { background-color:#20B255;}
+.panel-green-4 { background-color:#40AE24;}
+.panel-green-5 { background-color:#00B285;}
+
+
+.panel-blue-1 { background-color:#0080FF}
+.panel-blue-2 { background-color:#33B0FB;}
+.panel-blue-3 { background-color:#0379C0;}
+.panel-blue-4 { background-color:#035EC0;}
+.panel-blue-5 { background-color:#345BFA;}
+
+.head-filtros { margin-bottom:20px; padding:10px; background-color:#ededed; border-radius:3px }
+.head-filtros .col-lg-5 { width:39.9%}
+.row.head-filtros{ margin-left:0; margin-right:0}
+.input-daterange { margin-bottom:20px}
+.input-daterange .col-md-3 { width:20%}
+.input-daterange .col-lg-4 { width:32.6%}
+
+.tags{clear:both}
+.tags .label {
+    color: #fff;
+    display: inline-block;
+    font-weight: normal;
+    margin: 5px 5px 0 0;
+    white-space: nowrap;
+    font-size:85%
+}
+.head-filtros .tags { padding-top:5px}
+.head-filtros .tags .label { background-color:rgb(255, 255, 255); background-color: rgba(255, 255, 255, 1) ;color:#333}
+.head-filtros .tags .label-lista { background-color: transparent; border:1px solid #ccc}
+.head-filtros .tags .label-lista:before {  content: "> ";}
+
+.alert .btn { margin-right:10px; cursor:auto}
+.alert .btn-info:hover { background-color:#5bc0de; border:#46b8da}
+
+/*glyfont*/
+.btn-circle.btn-xl .fa-2x {font-size: 1.5em;}
+.gly-2x {font-size: 2em;}
+.gly-3x {font-size: 3em;}
+.gly-4x, .fa-4x{font-size: 3.6em;}
+.gly-5x {font-size: 5em;}
+
+
+.dataTables_info, .pagination { font-size:11px}
+.table.dataTable.no-footer{ border-bottom-color:#ddd}
+.panel-heading .btn{ padding:0; padding-left:20px}
+.panel-heading .btn-link {color:#fff}
+.panel-heading .btn-group > .btn + .dropdown-toggle{padding-left:10px; padding-right:0; }
+.footer { padding-left: 15px; padding-right: 15px; font-size:12px;color:#777; padding-top:20px; border:1px solid #e7e7e7}
+.footer a { color:#424141}
+
+
+
+/*extrasmall*/
+@media (max-width: 768px) {
+    .navbar-header { background-image:none !important} 
+    .sidebar { background-color:#fff;margin-top:0;}
+    .user-sesion-image, .descripcion-seccion{ display:none}
+    .head-filtros { margin-top:20px}
+    .calugas-color { min-height:30px}
+   .select-default { width:260px}
+    .select-default select { width:278px}
+
+}
+/*small*/
+@media (max-width: 974px) {
+}
+
+/*medium*/
+@media (min-width: 992px)
+{
+
+}
+
+/*large*/
+@media (min-width: 1199px)
+{ .select-default { width:410px}
+  .select-default select { width:438px}
+}
+
+@media (min-width: 1119px) { .calugas-color.col-5x .col-lg-2 { width: 20%; }}
+
+.navbar-top-links { margin-right: 0px; display: none;}

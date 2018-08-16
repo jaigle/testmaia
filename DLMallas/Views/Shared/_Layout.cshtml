@@ -1,0 +1,118 @@
+﻿@using System.Security.Claims
+@using DLMallas.Business
+@using DLMallas.App_Start
+@using Microsoft.AspNet.Identity
+@using DLMallas.Utilidades
+<!DOCTYPE html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Digital Learning</title>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        var identity = (ClaimsIdentity)User.Identity;
+        String[] result = identity.Name.Split('|');
+        var idUsuario = result[1];
+        var seguridadSvc = new Seguridad();
+        seguridadSvc.ActualizarVariablesSistema(User.Identity.GetIdSociedad().ToString(), User.Identity.GetUserId().ToString(), idUsuario.ToString());
+    }
+
+    @*@Styles.Render("~/Content/combocss")*@
+    
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/common")
+    @Scripts.Render("~/bundles/dataTables")
+    @Scripts.Render("~/bundles/combomultiselect")
+    <script src="~/Scripts/alertModal.js"></script>
+    @RenderSection("scripts", required: false)
+    @*@Styles.Render("~/Content/css")*@
+    @*<script src="~/Scripts/plugins/multiselect/jquery-ui.min.js"></script>*@
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+
+    <!-- Custom Fonts -->
+    <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/font-academia365/css/font-academia365.css" rel="stylesheet" type="text/css">
+
+    <!-- DataTables CSS -->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/DataTables-1.10.11/media/css/dataTables.bootstrap.css" />
+
+    <!-- DataTables Responsive CSS -->
+    <link rel="stylesheet" type="text/css" href="~/Content/DataTables-1.10.11/extensions/Responsive/css/responsive.dataTables.css" />
+
+    <link href="~/Content/jquery.multiselect.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/jquery.multiselect.filter.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <!-- Custom styles for this template -->
+    <link href="~/Content/plugins/jquery.minicolors.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/reset.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/base.css" rel="stylesheet" type="text/css" />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <link rel="stylesheet" href="~/Content/@Variables.IdSociedad/custom.css" />
+    }
+</head>
+<body>
+    <!--contenido superior-->
+    <div class="header container ">
+        <div class="navbar navbar-collapse collapse" role="navigation">
+            <div class=" row navbar-top">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="#" class="user-sesion-image"><img src="~/Content/imagenes/user1.png" /></a>
+                    <div class="col-md-5 user-sesion"> <span class="welcome">Hola</span> <span class="user"></span>@Variables.NombrePersona <span class="user_perfil">@Variables.Usuario</span> </div>
+
+                    <div class=" col-md-6 soporte text-right pull-right">
+                        <a href="mailto:@Variables.MailSoporte">@Variables.MailSoporte</a> <a>@Variables.FonoSoporte</a> <a href="@Url.Action("CerrarSesion","Home", new {direccion= @Variables.UrlHcm} )"><img src="~/Content/Imagenes/ico_cerrar_sesion.png" />Cerrar Sesión</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-5 user-sesion"> <span class="welcome">Hola</span> <span class="user">Usuario Anónimo</span> <span class="user_perfil"></span> </div>
+                }
+            </div>
+        </div>
+        <!--/.navbar-collapse-->
+        <div class="brand row">
+            <div class="col-md-12 brand-bg"></div>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="row main-menu"></div>
+        <!--.main-menu-->
+        @Html.Partial("_Menu")
+
+        @RenderBody()
+
+        <!--contenido inferior-->
+        <div class="footer">
+            <div class="navbar" role="navigation">
+                <div class="row footer-heading pull-right">
+                    <div class="col-md-12"> <a href="mailto:@Variables.MailSoporte" class="navbar-link">@Variables.MailSoporte</a> <span>@Variables.FonoSoporte</span> </div>
+                </div>
+                <div class="footer-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="text-muted"> <span>Ac@demia365 </span> <span>Versión  1.1.20</span> </div>
+                        </div>
+                        <div class="col-md-2 madeIn text-muted text-right"> <a href="http://www.dl.cl" target="_blank">© 2013 Digital Learning</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.footer-->
+    </div>
+    <!--/.container-->
+
+    <div class="bottom"></div>
+    <!--/contenido inferior-->
+
+</body>
+</html>

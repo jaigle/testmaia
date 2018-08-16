@@ -1,0 +1,274 @@
+﻿
+@{
+    ViewBag.Title = "EventosColaborador";
+}
+<script>var gColaboradorId = @TempData["pIdColaborador"];</script>
+<script>var gVersionId = @TempData["pIdVersion"];</script>
+<script src="/Scripts/modalCurso.js"></script>
+
+<script src="~/Scripts/Controllers/Colaborador/EventosColaborador.js"></script>
+
+<style>
+    .modal-backdrop {
+        z-index: 7100;
+    }
+
+    .modal {
+        z-index: 7200 !important;
+    }
+
+    .modal-dialog-expanded {
+        position: fixed;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        display:;
+    }
+
+    .modal-content {
+        padding: 0px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal-body-extended {
+        position: relative;
+        padding: 0px;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<div hidden="hidden"><table id="contenidoEstadoMallaColaborador"></table></div>
+<div class="cursoModal"></div>
+
+<div class="main no-margin">
+    @*Html.Partial("_SideMenu")*@
+    <!-- Modal Simbologia-->
+    @Html.Partial("SimbologiaCapacitacion")
+    <!--/modal-->
+    <div id="page-wrapper" class="col-sm-12 col-md-10">
+        <div class="row mallas">
+            <div class="col-sm-12">
+                <div class="panel panel-default panel-page-content">
+                    <div class="panel-heading" >
+                        <a style="color: #ffffff" id="encabNombre">Malla : </a>
+                        <div class="pull-right">
+                            @*<a class="btn btn-link btn-xs"><span class="glyphicon glyphicon-print"></span> Exportar a PDF</a>*@
+                            <a class="btn btn-link  btn-xs viewstruct" href="#" id="viewstruct"><span class="icon-diagram "></span>Diagrama</a>
+                            <a class="btn btn-link btn-xs" data-toggle="modal" disabled><span class="glyphicon glyphicon-th-list"></span> Listado</a>
+                            <a class="btn btn-link btn-xs" href="/Colaborador/EventosColaboradorMiniaturas"><span class="glyphicon glyphicon-th "></span> Miniaturas</a>
+
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-12 head-mallas">
+                            <div class="col-md-3 no-padding-left head-col">
+                                <div class="row">
+                                    <div class="col-sm-3">Estado</div>
+                                    <div class="col-sm-8" id="encabEstado"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">Avance</div>
+                                    <div class="col-sm-8">
+                                        <div class="progress">
+                                            <div id="encabAvance" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 head-col">
+                                <div class="row">
+                                    <div class="col-sm-9 ">Nº de Secciones</div>
+                                    <div class="col-sm-3" id="encabSecciones">0</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-9 no-padding-right">Nº de Unidades Curriculares</div>
+                                    <div class="col-sm-3" id="encabUC">0</div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 head-col last">
+                                <form class="form-inline pull-right" role="form">
+                                    <select class="form-control input-sm" size="1" name="txtdrop2" id="seleccioneMalla">
+                                        
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="simbologia">
+                            <a href="#" data-toggle="modal" data-target="#myModal"><span><i class="fa fa-question-circle"></i> Simbología</span></a>
+                            
+                            </div>
+
+                        <div id="listadoeventos"></div>
+                        <!--/mallas mallas-listado-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+
+
+<div class="modal fade" id="myModalEstructura" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button title="Acciones" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-navicon"></i></button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            @*<li><a href="#" id="exportIMG">Exportar a imagen</a></li>*@
+                            <li><a href="#" id="exportPDF">Exportar a PDF</a></li>
+                        </ul>
+                        <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+                    </div>
+                </div>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body modal-body-xl mallas-diagrama" id="EstructuraMalla">
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button id="btnCerrarModal" type="button" class="btn btn-default">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalInfoEvento" tabindex="-1" role="dialog" aria-labelledby="myModalLabelEvento">
+    <div class="modal-dialog modal-dialog-sd " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabelEvento">Información del evento</h4>
+            </div>
+            <div class="modal-body" id="infoEVento">
+                <div class="contenedor_pop">
+                    <table class="tbl_form1">
+                        <tr>
+                            <th>
+                                Nota Aprobaci&oacute;n
+                            </th>
+                            <td>
+                                <span id="txtNotaAprobacion">
+                                </span>
+                            </td>
+                            <th>
+                                Horas Estimadas
+                            </th>
+                            <td>
+                                <span id="txthorasEstimadas">
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Modalidad
+                            </th>
+                            <td>
+                                <span id="txtModalidad">
+                                </span>
+                            </td>
+                            <th>
+                                Cantidad Contenidos
+                            </th>
+                            <td>
+                                <span id="txtContenidos">
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Condiciones de Aprobaci&oacute;n
+                            </th>
+                            <td>
+                                <span id="txtCondiciones">
+                                </span>
+                            </td>
+                            <th>
+                                Unidad Curricular Asociada
+                            </th>
+                            <td>
+                                <span id="txtUC">
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Competencia Asociada
+                            </th>
+                            <td>
+                                <span id="txtCompetenciaAsociada">
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button id="btnCerrarModalEvento" type="button" class="btn btn-default">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalInfoUnidad" tabindex="-1" role="dialog" aria-labelledby="myModalLabelUnidad">
+    <div class="modal-dialog modal-dialog-sd " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabelEvento">Información de la unidad curricular</h4>
+            </div>
+            <div class="modal-body" id="infoUnidad">
+                <div class="contenedor_pop">
+                    <table class="tbl_form1">
+                        <tr>
+                            <th>
+                                Unidad Curricular
+                            </th>
+                            <td>
+                                <span id="txtNombre">
+                                </span>
+                            </td>
+                          </tr>
+                        <tr>
+                            <th>
+                                Descripción
+                            </th>
+                            <td>
+                                <span id="txtDescripcion">
+                                </span>
+                            </td>
+                        </tr>
+                       </table>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button id="btnCerrarModalUnidad" type="button" class="btn btn-default">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModalInfoSimbologia" tabindex="-1" role="dialog" aria-labelledby="myModalLabelSimbologia">
+    <div class="modal-dialog modal-dialog-sd " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabelSimbologia">Simbologia</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button id="btnCerrarModalsimbologia" type="button" class="btn btn-default">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
