@@ -4,3 +4,4 @@
 *.dll
 *.suo
 obj
+.vs
