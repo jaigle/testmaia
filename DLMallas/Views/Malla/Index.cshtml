@@ -28,8 +28,12 @@
                                 <th class="no-sort" colspan="2"></th>
                                 <th>Id</th>
                                 <th>Nombre</th>
+                                <th>Escuela</th>
                                 <th>Fecha Creación</th>
                                 <th>Usuario Creación</th>
+                                <th>Itinerarios</th>
+                                <th>Itinerarios Activos</th>
+                                @*<th>Itinerarios Inactivos</th>*@
                                 <th>Estado</th>
                             </tr>
                         </thead>
@@ -41,8 +45,12 @@
                                     <td><a href="#" onclick="eliminaMalla('@item.Id')"><span class="glyphicon glyphicon-remove"></span></a></td>
                                     <td>@Html.DisplayFor(modelItem => item.Id)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Escuela)</td>
                                     <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
                                     <td>@Html.DisplayFor(modelItem => item.UsuarioCreacion)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ItinerariosTotal)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ItinerariosActivos)</td>
+                                    @*<td>@Html.DisplayFor(modelItem => (Convert.ToInt32(item.ItinerariosTotal)  - Convert.ToInt32(item.ItinerariosActivos)).ToString())</td>*@
                                     <td>@(item.Activo == "1" ? "Activa" : "Inactiva")</td>
                                 </tr>
                             }

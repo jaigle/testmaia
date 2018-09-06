@@ -39,7 +39,6 @@ namespace DLMallas.Business
             //ItinerariosActivos
 
             var userType = new[] { "Adminsitrador", "Profesor", "Estudiante"};
-            var status = new[] {"Inactivo", "Activo", };
             var users = new[] {"jim","jaigle","ldtoro"};
 
             for (int i = 0; i < 100; i++)
@@ -53,7 +52,7 @@ namespace DLMallas.Business
                     .RuleFor(r => r.FechaCreacion, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
                     .RuleFor(r => r.Nombre, f => f.Name.JobArea())
                     .RuleFor(r => r.Descripcion, f => f.Name.JobDescriptor())
-                    .RuleFor(r => r.Activo, f => f.PickRandom(status))
+                    .RuleFor(r => r.Activo, f => f.Random.Number(0, 1).ToString())
                     .RuleFor(r => r.UsuarioCreacion, f => f.PickRandom(users))
                     .RuleFor(r => r.CantVersiones, f => f.Random.Number(1, 10).ToString())
                     .RuleFor(r => r.ItinerariosTotal, f => f.Random.Number(0, 50).ToString())
