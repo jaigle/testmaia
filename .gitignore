@@ -5,3 +5,5 @@
 *.suo
 obj
 .vs
+/DLMallas/bin/Bogus.xml
+/DLMallas_Business/bin/Debug/Bogus.xml

@@ -4,9 +4,11 @@ using DLMallas.Utilidades;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bogus;
 using WSLib;
 
 namespace DLMallas.Business
@@ -15,7 +17,7 @@ namespace DLMallas.Business
     {
         public List<ObtenerListadoMalla> obtenerListadoMalla()
         {
-            List<ObtenerListadoMalla> lista = new List<ObtenerListadoMalla>();
+            List<ObtenerListadoMalla> result = new List<ObtenerListadoMalla>();
             //WebService ws = new WebService("GestionMalla", "obtenerListadoMalla");
             //ws.AddParameter("IdSociedad", Variables.IdSociedad);
             //Array obj = ws.Invoke() as Array;
@@ -23,18 +25,43 @@ namespace DLMallas.Business
 
             //string json = "[{'activo':'1','descripcion':'Esta es una malla creada  coon motivo de probar el desarrollo','fechaCreacion':'2018-07-28 13:49:37.513','id':'2','idSociedad':'1','nombre':'Nueva Malla  para QA','usuarioCreacion':'Administrador DL'}]";
             //Adicionando elementos a la lista;
-            ObtenerListadoMalla elem1 = new ObtenerListadoMalla {
-                Activo = "1",
-                Descripcion = "Esta es una malla creada  coon motivo de probar el desarrollo",
-                FechaCreacion = "2018-07-28 13:49:37.513",
-                Id = "2",
-                IdSociedad = "1",
-                Nombre = "Nueva Malla para QA",
-                UsuarioCreacion = "Adminsitrador"
-            };
-            lista.Add(elem1); 
-            //lista = JsonConvert.DeserializeObject<List<ObtenerListadoMalla>>(json);
-            return lista;
+
+            //Id,
+            //IdSociedad,
+            //Escuela,
+            //FechaCreacion,
+            //Nombre,
+            //Descripcion,
+            //Activo,
+            //UsuarioCreacion,
+            //CantVersiones,
+            //ItinerariosTotal,
+            //ItinerariosActivos
+
+            var userType = new[] { "Adminsitrador", "Profesor", "Estudiante"};
+            var status = new[] {"Inactivo", "Activo", };
+            var users = new[] {"jim","jaigle","ldtoro"};
+
+            for (int i = 0; i < 100; i++)
+            {
+                var id = i;
+                result.Add(new Faker<ObtenerListadoMalla>("es")
+                    .StrictMode(true)
+                    .RuleFor(r => r.Id, f => (id + 1).ToString())
+                    .RuleFor(r => r.IdSociedad, f => f.Random.Number(1, 30).ToString())
+                    .RuleFor(r => r.Escuela, f => f.Company.CompanyName())
+                    .RuleFor(r => r.FechaCreacion, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
+                    .RuleFor(r => r.Nombre, f => f.Name.JobArea())
+                    .RuleFor(r => r.Descripcion, f => f.Name.JobDescriptor())
+                    .RuleFor(r => r.Activo, f => f.PickRandom(status))
+                    .RuleFor(r => r.UsuarioCreacion, f => f.PickRandom(users))
+                    .RuleFor(r => r.CantVersiones, f => f.Random.Number(1, 10).ToString())
+                    .RuleFor(r => r.ItinerariosTotal, f => f.Random.Number(0, 50).ToString())
+                    .RuleFor(r => r.ItinerariosActivos, f => f.Random.Number(0, 50).ToString())
+                );
+            }
+
+            return result;
         }
 
         public List<ObtenerMalla> obtenerMalla(string Id)
