@@ -3,9 +3,10 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@Scripts.Render("~/bundles/dataTables")
 <script src="~/Scripts/plugins/Sesion/jquery.session.js"></script>
 <script src="~/Scripts/jquery.json.js"></script>
+<script src="~/Scripts/core/malla.js"></script>
 <div class="main">
     <!--contenido central-->
     <!--Creador malla-->
@@ -25,7 +26,7 @@
                     <table id="tblListado" class="table table-condensed table-bordered table-hover tabla-resultados">
                         <thead>
                             <tr>
-                                <th class="no-sort" colspan="2"></th>
+                                <th class="no-sort"></th>
                                 <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Escuela</th>
@@ -33,16 +34,23 @@
                                 <th>Usuario Creación</th>
                                 <th>Itinerarios</th>
                                 <th>Itinerarios Activos</th>
-                                @*<th>Itinerarios Inactivos</th>*@
                                 <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in @Model.ObtenerListadoMalla)
                             {
-                                <tr>
-                                    <td><a href="@Url.Action("EditarMalla", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                                    <td><a href="#" onclick="eliminaMalla('@item.Id')"><span class="glyphicon glyphicon-remove"></span></a></td>
+                                <tr role="row">
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                                <a href="@Url.Action("EditarMalla", new {id = item.Id})"><span class="glyphicon glyphicon-pencil"></span></a>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                                <a href="#" onclick="eliminaMalla('@item.Id')"><span class="glyphicon glyphicon-remove"></span></a>
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>@Html.DisplayFor(modelItem => item.Id)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Escuela)</td>
@@ -50,7 +58,6 @@
                                     <td>@Html.DisplayFor(modelItem => item.UsuarioCreacion)</td>
                                     <td>@Html.DisplayFor(modelItem => item.ItinerariosTotal)</td>
                                     <td>@Html.DisplayFor(modelItem => item.ItinerariosActivos)</td>
-                                    @*<td>@Html.DisplayFor(modelItem => (Convert.ToInt32(item.ItinerariosTotal)  - Convert.ToInt32(item.ItinerariosActivos)).ToString())</td>*@
                                     <td>@(item.Activo == "1" ? "Activa" : "Inactiva")</td>
                                 </tr>
                             }
@@ -100,65 +107,3 @@
     </div>
 
 </div><!--main-->
-@section Scripts
-{
-    <script type="text/javascript">
-        $(document).ready(function () {
-            /* diseño tabla */
-            $('#tblListado').dataTable({
-                responsive: true,
-                "language": {
-                    "url": "/Content/DataTables/plugins/spanish.js"
-                }
-            });
-
-            /* popup crea malla */
-            $("#btnCrearMalla").click(function () {
-                $("#modCrearMalla").modal('show');
-            });
-
-            /* guarda ajax formulario crea malla */
-            $("#btnGuardarNuevaMalla").click(function () {
-
-                var nombre = $('#txtNombre').val();
-                var desc = $('#txtDescripcion').val();
-                var activo = ($('#chkActiva').is(":checked")) ? "1" : "0";
-
-                if (nombre == "" || desc == "") {
-                    alert("Debe Ingresar un Nombre y Descripción");
-                }
-                else {
-                    var actionData = "{'nombre': '" + nombre + "','desc': '" + desc + "', 'activo': '" + activo + "'}";
-
-                    $.ajax({
-                        type: "POST",
-                        url: "/Malla/GuardarMalla",
-                        contentType: "application/json; charset=utf-8",
-                        data: actionData,
-                        dataType: "json",
-                        complete: function (result) {
-                            alert("Registro Guardado Correctamente");
-                            window.location.href = "/Malla";
-                        }
-                    });
-                }
-            });
-        });
-
-        function eliminaMalla(id) {
-            if (confirm("Está seguro de elimina el registro?")) {
-                $.ajax({
-                    type: "POST",
-                    url: "/Malla/EliminarMalla",
-                    contentType: "application/json; charset=utf-8",
-                    data: "{'id':'" + id + "'}",
-                    dataType: "json",
-                    complete: function (result) {
-                        alert("Registro Eliminado Correctamente");
-                        window.location.href = "/Malla";
-                    }
-                });
-            }
-        }
-    </script>
-}
