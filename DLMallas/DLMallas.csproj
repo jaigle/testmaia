@@ -334,6 +334,7 @@
     <Content Include="Content\3169\custom.css" />
     <Content Include="Content\3169\header-clogo.jpg" />
     <Content Include="Content\3169\images\logo.png" />
+    <Content Include="Content\custom\crear_malla.css" />
     <Content Include="Content\DataTables-1.10.11\examples\advanced_init\column_render.html" />
     <Content Include="Content\DataTables-1.10.11\examples\advanced_init\complex_header.html" />
     <Content Include="Content\DataTables-1.10.11\examples\advanced_init\defaults.html" />
@@ -2313,7 +2314,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_LocalResources\" />
-    <Folder Include="Content\custom\" />
     <Folder Include="Temp\" />
     <Folder Include="uploads\" />
     <Folder Include="Views\Seccion\" />

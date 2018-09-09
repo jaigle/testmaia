@@ -1,5 +1,6 @@
 ﻿@model DLMallas.Models.MallaViewModels
- <!-- Modal Crear Malla -->
+<link href="@Url.Content("~/Content/custom/crear_malla.css")" rel="stylesheet">
+<!-- Modal Crear Malla -->
 <div class="modal fade" id="modCrearMalla" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -8,26 +9,32 @@
                 <h4 class="modal-title" id="myModalLabel">Crear Malla</h4>
             </div>
             <div class="modal-body">
-                <table>
-                    <tr>
-                        <td>Usuario Creación:</td>
-                        <td>@Html.DisplayFor(x => x.NombrePersonaLogin)</td>
-                        <td>Fecha:</td>
-                        <td>@Html.DisplayFor(x => x.FechaHoy)</td>
-                    </tr>
-                    <tr>
-                        <td>Nombre:</td>
-                        <td colspan="3"><input id="txtNombre" class="form-control input-sm" type="text" placeholder="Ingrese Nombre"></td>
-                    </tr>
-                    <tr>
-                        <td>Descripción:</td>
-                        <td colspan="3"><textarea id="txtDescripcion" class="form-control" cols="75" placeholder="Ingrese descripción"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Activa:</td>
-                        <td><input type="checkbox" id="chkActiva" class="checkbox" checked="checked" /></td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Usuario Creación:</div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        @Html.DisplayFor(x => x.NombrePersonaLogin)
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">Fecha:</div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">@Html.DisplayFor(x => x.FechaHoy)</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Nombre:</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <input id="txtNombre" class="form-control input-sm" type="text" placeholder="Ingrese Nombre">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Descripción:</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <textarea id="txtDescripcion" class="form-control" cols="75" placeholder="Ingrese descripción"></textarea>
+                    </div>
+                </div>            
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Activa:</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <input type="checkbox" id="chkActiva" class="checkbox" checked="checked"/>
+                    </div>
+                </div>               
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
