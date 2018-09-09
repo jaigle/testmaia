@@ -28,6 +28,7 @@ namespace DLMallas.Controllers
         {
             var model = new MallaViewModels();
             model.ObtenerMalla = _malla.obtenerMalla(id);
+            ViewBag.Escuelas = _malla.ObtenerEsceulas().Select(s => new EscuelaViewModels { Id = s.Id, Nombre = s.Nombre }).ToList();
             return View(model);
         }
 

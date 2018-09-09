@@ -27,6 +27,7 @@
 
         $("#btnCrearMalla").click(self.crear_malla_click);
         $("#btnGuardarNuevaMalla").click(self.guardar_malla_click);
+        $("#btnActualizaMalla").click(self.actualizar_malla_click);
     };
 
     // Funciones privadas  ======================================================
@@ -41,8 +42,31 @@
                 $('#modCrearMalla').modal('show');
             }
         });
+    }
 
-        
+    p.actualizar_malla_click = function () {
+        var id = $('#txtId').val();
+        var nombre = $('#txtNombre').val();
+        var desc = $('#txtDescripcion').val();
+        var activo = ($('#chkActiva').is(":checked")) ? "1" : "0";
+
+        if (nombre === "" || desc === "") {
+            alert("Ingrese todos los campos!");
+        } else {
+            var actionData = "{'id':'" + id + "','nombre': '" + nombre + "','desc': '" + desc + "', 'activo': '" + activo + "'}";
+
+            $.ajax({
+                type: "POST",
+                url: "/Malla/ActualizarMalla",
+                contentType: "application/json; charset=utf-8",
+                data: actionData,
+                dataType: "json",
+                complete: function (result) {
+                    alert("Registro Guardado Correctamente");
+                    window.location.href = "/Malla";
+                }
+            });
+        }
     }
 
     p.guardar_malla_click = function () {
