@@ -26,9 +26,8 @@ namespace DLMallas.Controllers
 
         public ActionResult EditarMalla(string id)
         {
-            MallaViewModels model = new MallaViewModels();
-            Malla malla = new Malla();
-            model.ObtenerMalla = malla.obtenerMalla(id);
+            var model = new MallaViewModels();
+            model.ObtenerMalla = _malla.obtenerMalla(id);
             return View(model);
         }
 
