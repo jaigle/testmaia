@@ -1,30 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net;
 using System.Web.Mvc;
 using DLMallas.Business;
 using DLMallas.Business.Dto.Malla;
 using DLMallas.Utilidades;
 using DLMallas.Models;
+using WebGrease.Css.Ast.Selectors;
+
 
 namespace DLMallas.Controllers
 {
     [Authorize]
-    public class MallaController : Controller
+    public class MallaController : BaseController
     {
         [Authorize]
         public ActionResult Index()
         {
             MallaViewModels model = new MallaViewModels();
-            Malla malla = new Malla();
-            model.ObtenerListadoMalla = malla.obtenerListadoMalla();
+            model.ObtenerListadoMalla = _malla.obtenerListadoMalla();
             model.NombrePersonaLogin = Variables.NombrePersona;
             model.FechaHoy = DateTime.Now.ToString("dd/MM/yyyy");
             return View(model);
         }
 
-        public ActionResult EditarMalla(string id) 
+        public ActionResult EditarMalla(string id)
         {
             MallaViewModels model = new MallaViewModels();
             Malla malla = new Malla();
@@ -33,21 +33,23 @@ namespace DLMallas.Controllers
         }
 
         //[HttpPost]
-        public bool GuardarMalla(string nombre, string desc, string activo)
+        public HttpStatusCodeResult GuardarMalla(string nombre, string escuela, string desc, string activo)
         {
-            Malla malla = new Malla();
-            GuardarMalla model = new GuardarMalla();
-            model.Nombre = nombre;
-            model.Descripcion = desc;
-            model.Activo = activo;
-            var resp = malla.guardarMalla(model);
+            var model = new GuardarMalla
+            {
+                Nombre = nombre,
+                Escuela = escuela,
+                Descripcion = desc,
+                Activo = activo
+            };
+            var resp = _malla.guardarMalla(model);
             if (resp)
-                return true;
-            else
-                return false;
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar malla");
         }
 
-        public bool ActualizarMalla(string id, string nombre, string desc, string activo) 
+        public bool ActualizarMalla(string id, string nombre, string desc, string activo)
         {
             Malla malla = new Malla();
             ActualizarMalla model = new ActualizarMalla();
@@ -62,9 +64,9 @@ namespace DLMallas.Controllers
                 return false;
         }
 
-        public ActionResult EliminarMalla(string id) 
+        public ActionResult EliminarMalla(string id)
         {
-            try 
+            try
             {
                 Malla malla = new Malla();
                 malla.eliminarMalla(id);
@@ -75,6 +77,12 @@ namespace DLMallas.Controllers
                 ModelState.AddModelError("Error", ex.Message);
                 return RedirectToAction("Index");
             }
+        }
+
+        public PartialViewResult CargarEscuelas()
+        {
+            var model = _malla.ObtenerEsceulas().Select(s => new EscuelaViewModels { Id = s.Id, Nombre = s.Nombre }).ToList();
+            return PartialView("_Options", model);
         }
     }
 }

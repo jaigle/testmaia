@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bogus;
+using DLMallas.Business.Dto;
 using WSLib;
 
 namespace DLMallas.Business
@@ -63,6 +64,22 @@ namespace DLMallas.Business
             return result;
         }
 
+        public List<Escuela> ObtenerEsceulas()
+        {
+            List<Escuela> result = new List<Escuela>();
+            
+            for (int i = 0; i < 10; i++)
+            {
+                var id = i;
+                result.Add(new Faker<Escuela>("es")
+                    .RuleFor(r => r.Id, f => (id + 1))
+                    .RuleFor(r => r.Nombre, f => f.Company.CompanyName())
+                );
+            }
+
+            return result;
+        }
+
         public List<ObtenerMalla> obtenerMalla(string Id)
         {
             List<ObtenerMalla> list = new List<ObtenerMalla>();
@@ -80,13 +97,14 @@ namespace DLMallas.Business
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "guardarMalla");
-                ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                ws.AddParameter("Nombre", model.Nombre);
-                ws.AddParameter("Descripcion", model.Descripcion);
-                ws.AddParameter("Activo", model.Activo);
-                ws.AddParameter("UsuarioCreacion", Variables.IdPersona);
-                ws.Invoke();
+                //WebService ws = new WebService("GestionMalla", "guardarMalla");
+                //ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                //ws.AddParameter("Nombre", model.Nombre);
+                //ws.AddParameter("Escuela", model.Escuela);
+                //ws.AddParameter("Descripcion", model.Descripcion);
+                //ws.AddParameter("Activo", model.Activo);
+                //ws.AddParameter("UsuarioCreacion", Variables.IdPersona);
+                //ws.Invoke();
                 return true;
 
             }

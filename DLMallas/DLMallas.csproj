@@ -213,6 +213,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CertificadoController.cs" />
     <Compile Include="Controllers\ComponenteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Models\CertificadoViewModels.cs" />
     <Compile Include="Models\ComponenteViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\EscuelaViewModels.cs" />
     <Compile Include="Models\MallaViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SeccionViewModels.cs" />
@@ -2310,12 +2312,14 @@
     <Content Include="Views\Version\DetalleVersion.cshtml" />
     <Content Include="Views\Certificado\Index.cshtml" />
     <Content Include="Views\Malla\_CrearMalla.cshtml" />
+    <Content Include="Views\Malla\_Options.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_LocalResources\" />
     <Folder Include="Temp\" />
     <Folder Include="uploads\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Seccion\" />
   </ItemGroup>
   <ItemGroup>

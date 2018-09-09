@@ -88,6 +88,7 @@
     <Compile Include="Dto\DtoPersona.cs" />
     <Compile Include="Dto\DtoValor.cs" />
     <Compile Include="Dto\Malla\ActualizarMalla.cs" />
+    <Compile Include="Dto\Malla\Escuela.cs" />
     <Compile Include="Dto\Malla\DtoMallaOld.cs" />
     <Compile Include="Dto\Malla\GuardarMalla.cs" />
     <Compile Include="Dto\Malla\ObtenerListadoMalla.cs" />
