@@ -39,8 +39,8 @@ namespace DLMallas.Business
             //ItinerariosTotal,
             //ItinerariosActivos
 
-            var userType = new[] { "Adminsitrador", "Profesor", "Estudiante"};
-            var users = new[] {"jim","jaigle","ldtoro"};
+            var userType = new[] { "Adminsitrador", "Profesor", "Estudiante" };
+            var users = new[] { "jim", "jaigle", "ldtoro" };
 
             for (int i = 0; i < 100; i++)
             {
@@ -67,7 +67,7 @@ namespace DLMallas.Business
         public List<Escuela> ObtenerEsceulas()
         {
             List<Escuela> result = new List<Escuela>();
-            
+
             for (int i = 0; i < 10; i++)
             {
                 var id = i;
@@ -83,13 +83,25 @@ namespace DLMallas.Business
         public List<ObtenerMalla> obtenerMalla(string Id)
         {
             List<ObtenerMalla> list = new List<ObtenerMalla>();
-            WebService ws = new WebService("GestionMalla", "obtenerMalla");
-            ws.AddParameter("Id", Id);
-            ws.AddParameter("IdSociedad", Variables.IdSociedad);
-            Array obj = ws.Invoke() as Array;
+            //WebService ws = new WebService("GestionMalla", "obtenerMalla");
+            //ws.AddParameter("Id", Id);
+            //ws.AddParameter("IdSociedad", Variables.IdSociedad);
+            //Array obj = ws.Invoke() as Array;
 
-            string json = JsonConvert.SerializeObject(obj);
-            list = JsonConvert.DeserializeObject<List<ObtenerMalla>>(json);
+            //string json = JsonConvert.SerializeObject(obj);
+            //list = JsonConvert.DeserializeObject<List<ObtenerMalla>>(json);
+
+            var item = new Faker<ObtenerMalla>("es")
+                    .StrictMode(true)
+                    .RuleFor(r => r.Id, f => Id.ToString())
+                    .RuleFor(r => r.IdSociedad, f => f.Random.Number(1, 30).ToString())
+                    .RuleFor(r => r.FechaCreacion, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
+                    .RuleFor(r => r.Nombre, f => f.Name.JobArea())
+                    .RuleFor(r => r.IdEscuela, f => f.Random.Number(1, 30).ToString())
+                    .RuleFor(r => r.Descripcion, f => f.Name.JobDescriptor())
+                    .RuleFor(r => r.Activo, f => f.Random.Number(0, 1).ToString())
+                    .RuleFor(r => r.UsuarioCreacion, "jim");
+            list.Add(item);
             return list;
         }
 
