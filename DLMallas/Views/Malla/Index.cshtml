@@ -25,85 +25,47 @@
                 <div>
                     <table id="tblListado" class="table table-condensed table-bordered table-hover tabla-resultados">
                         <thead>
-                            <tr>
-                                <th class="no-sort"></th>
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Escuela</th>
-                                <th>Fecha Creación</th>
-                                <th>Usuario Creación</th>
-                                <th>Itinerarios</th>
-                                <th>Itinerarios Activos</th>
-                                <th>Estado</th>
-                            </tr>
+                        <tr>
+                            <th class="no-sort"></th>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Escuela</th>
+                            <th>Fecha Creación</th>
+                            <th>Usuario Creación</th>
+                            <th>Itinerarios</th>
+                            <th>Itinerarios Activos</th>
+                            <th>Estado</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in @Model.ObtenerListadoMalla)
-                            {
-                                <tr role="row">
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                                <a href="@Url.Action("EditarMalla", new {id = item.Id})"><span class="glyphicon glyphicon-pencil"></span></a>
-                                            </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                                <a href="#" onclick="eliminaMalla('@item.Id')"><span class="glyphicon glyphicon-remove"></span></a>
-                                            </div>
+                        @foreach (var item in @Model.ObtenerListadoMalla)
+                        {
+                            <tr role="row">
+                                <td>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <a href="@Url.Action("EditarMalla", new {id = item.Id})"><span class="glyphicon glyphicon-pencil"></span></a>
                                         </div>
-                                    </td>
-                                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Escuela)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.UsuarioCreacion)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.ItinerariosTotal)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.ItinerariosActivos)</td>
-                                    <td>@(item.Activo == "1" ? "Activa" : "Inactiva")</td>
-                                </tr>
-                            }
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <a href="#" onclick="eliminaMalla('@item.Id')"><span class="glyphicon glyphicon-remove"></span></a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Escuela)</td>
+                                <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
+                                <td>@Html.DisplayFor(modelItem => item.UsuarioCreacion)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ItinerariosTotal)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ItinerariosActivos)</td>
+                                <td>@(item.Activo == "1" ? "Activa" : "Inactiva")</td>
+                            </tr>
+                        }
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Modal Crear Malla -->
-    <div class="modal fade" id="modCrearMalla" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Crear Malla</h4>
-                </div>
-                <div class="modal-body">
-                    <table>
-                        <tr>
-                            <td>Usuario Creación:</td>
-                            <td>@Html.DisplayFor(x => x.NombrePersonaLogin)</td>
-                            <td>Fecha:</td>
-                            <td>@Html.DisplayFor(x => x.FechaHoy)</td>
-                        </tr>
-                        <tr>
-                            <td>Nombre:</td>
-                            <td colspan="3"><input id="txtNombre" class="form-control input-sm" type="text" placeholder="Ingrese Nombre"></td>
-                        </tr>
-                        <tr>
-                            <td>Descripción:</td>
-                            <td colspan="3"><textarea id="txtDescripcion" class="form-control" cols="75" placeholder="Ingrese descripción"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td>Activa:</td>
-                            <td><input type="checkbox" id="chkActiva" class="checkbox" checked="checked" /></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button class="btn btn_primary" id="btnGuardarNuevaMalla">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div><!--main-->
+</div>
+@Html.Partial("_CrearMalla", Model);

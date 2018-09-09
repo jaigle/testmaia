@@ -2308,6 +2308,7 @@
     <Content Include="Views\Malla\EditarMalla.cshtml" />
     <Content Include="Views\Version\DetalleVersion.cshtml" />
     <Content Include="Views\Certificado\Index.cshtml" />
+    <Content Include="Views\Malla\_CrearMalla.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,38 @@
+﻿@model DLMallas.Models.MallaViewModels
+ <!-- Modal Crear Malla -->
+<div class="modal fade" id="modCrearMalla" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Crear Malla</h4>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <tr>
+                        <td>Usuario Creación:</td>
+                        <td>@Html.DisplayFor(x => x.NombrePersonaLogin)</td>
+                        <td>Fecha:</td>
+                        <td>@Html.DisplayFor(x => x.FechaHoy)</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre:</td>
+                        <td colspan="3"><input id="txtNombre" class="form-control input-sm" type="text" placeholder="Ingrese Nombre"></td>
+                    </tr>
+                    <tr>
+                        <td>Descripción:</td>
+                        <td colspan="3"><textarea id="txtDescripcion" class="form-control" cols="75" placeholder="Ingrese descripción"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>Activa:</td>
+                        <td><input type="checkbox" id="chkActiva" class="checkbox" checked="checked" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn_primary" id="btnGuardarNuevaMalla">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
