@@ -110,12 +110,12 @@
                 dataType: "json",
                 complete: function (result) {
                     alert("Registro Eliminado Correctamente");
-                    window.location.href = "/Malla";
+                    //window.location.href = "/Malla";
                 }
             });
         }
     }
 
     // =========================================================================
-    window.Malla = new Malla();
+    window.malla = new Malla();
 }(jQuery));

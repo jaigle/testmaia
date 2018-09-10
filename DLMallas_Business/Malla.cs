@@ -149,12 +149,12 @@ namespace DLMallas.Business
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "eliminarMalla");
-                ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                ws.AddParameter("Id", Id);
-                Array obj = ws.Invoke() as Array;
+                //WebService ws = new WebService("GestionMalla", "eliminarMalla");
+                //ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                //ws.AddParameter("Id", Id);
+                //Array obj = ws.Invoke() as Array;
 
-                string json = JsonConvert.SerializeObject(obj);
+                //string json = JsonConvert.SerializeObject(obj);
 
                 return true;
             }

@@ -67,12 +67,11 @@ namespace DLMallas.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar malla");
         }
 
-        public ActionResult EliminarMalla(string id)
+        public RedirectToRouteResult EliminarMalla(string id)
         {
             try
             {
-                Malla malla = new Malla();
-                malla.eliminarMalla(id);
+                _malla.eliminarMalla(id);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
