@@ -47,23 +47,26 @@
     p.actualizar_malla_click = function () {
         var id = $('#txtId').val();
         var nombre = $('#txtNombre').val();
+        var escuela = $('#slEscuela').val();
         var desc = $('#txtDescripcion').val();
         var activo = ($('#chkActiva').is(":checked")) ? "1" : "0";
 
         if (nombre === "" || desc === "") {
             alert("Ingrese todos los campos!");
         } else {
-            var actionData = "{'id':'" + id + "','nombre': '" + nombre + "','desc': '" + desc + "', 'activo': '" + activo + "'}";
+            var actionData = {nombre: nombre, escuela: escuela, desc: desc, activo: activo};
 
             $.ajax({
                 type: "POST",
                 url: "/Malla/ActualizarMalla",
-                contentType: "application/json; charset=utf-8",
+                traditional: true,
                 data: actionData,
-                dataType: "json",
                 complete: function (result) {
                     alert("Registro Guardado Correctamente");
                     window.location.href = "/Malla";
+                },
+                error: function(xhr, status, error) {
+                    alert("Ha ocurrido un error al intentar guardar el registro.");
                 }
             });
         }
