@@ -20,6 +20,7 @@ namespace DLMallas.Controllers
             
             model.ObtenerListadoVersion = _version.obtenerListadoVersion(id);
             model.ObtenerMalla = _malla.obtenerMalla(id);
+            ViewBag.ActiveLink = "Versiones";
             return View(model);
         }
 

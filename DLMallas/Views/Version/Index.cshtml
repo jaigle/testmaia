@@ -5,7 +5,7 @@
 }
 
 <div class="main no-margin">
-    @Html.Partial("~/Views/Shared/Partials/SubMenu.cshtml", Model.ObtenerMalla[0].Id);
+    @Html.Partial("~/Views/Shared/Partials/SubMenu.cshtml", Model.ObtenerMalla[0].Id)
 
     <div id="page-wrapper" class="col-sm-12 col-md-10">
         <div class="row">
@@ -36,16 +36,16 @@
             <div class="col-sm-12">
                 <div class="panel panel-default panel-page-content">
                     <div class="panel-heading">
-                        <table style="width: 100%">
-                            <tr>
-                                <td class="text-left">Versiones</td>
-                                <td class="text-right">
-                                    <a class="btn btn-primary btn-sm pull-right " href="#" id="btnCrearVersion">
-                                        <span class="fa fa-plus"></span> Crear Nueva Versión
-                                    </a>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 pull-left text-left">
+                                Versiones
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 pull-right text-right">
+                                <a class="btn btn-primary btn-sm pull-right " href="#" id="btnCrearVersion">
+                                    <span class="fa fa-plus"></span> Crear Nueva Versión
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <table id="tblListado" class="table table-condensed table-bordered table-hover tabla-resultados">
