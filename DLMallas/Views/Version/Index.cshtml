@@ -23,20 +23,18 @@
                         Información de la Malla
                     </div>
                     <div class="panel-body">
-                        <table style="width: 100%">
-                            <tr>
-                                <td width="15%">Nombre:</td>
-                                <td width="35%">@Html.DisplayFor(model => model.ObtenerMalla[0].Nombre)</td>
-                                <td width="15%">Fecha Creación:</td>
-                                <td width="35%">@Html.DisplayFor(model => model.ObtenerMalla[0].FechaCreacion)</td>
-                            </tr>
-                            <tr>
-                                <td width="15%">Usuario Creación:</td>
-                                <td width="35%">@Html.DisplayFor(model => model.ObtenerMalla[0].UsuarioCreacion)</td>
-                                <td width="15%">Estado:</td>
-                                <td width="35%">@(Model.ObtenerMalla[0].Activo == "1" ? "Activa" : "Inactiva")</td>
-                            </tr>
-                        </table>
+                        <div class="row margin-bottom10">
+                            <div class="col-lg-2 col-md-2 col-sm-2">Nombre:</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">@Html.DisplayFor(model => model.ObtenerMalla[0].Nombre)</div>
+                            <div class="col-lg-2 col-md-2 col-sm-2">Fecha Creación:</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">@Html.DisplayFor(model => model.ObtenerMalla[0].FechaCreacion)</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2">Usuario Creación:</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">@Html.DisplayFor(model => model.ObtenerMalla[0].UsuarioCreacion)</div>
+                            <div class="col-lg-2 col-md-2 col-sm-2">Estado:</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4">@(Model.ObtenerMalla[0].Activo == "1" ? "Activa" : "Inactiva")</div>
+                        </div>
                     </div>
                 </div>
             </div>

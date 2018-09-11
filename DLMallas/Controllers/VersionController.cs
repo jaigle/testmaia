@@ -11,16 +11,15 @@ using DLMallas.Utilidades;
 namespace DLMallas.Controllers
 {
     [Authorize]
-    public class VersionController : Controller
+    public class VersionController : BaseController
     {
         [Authorize]
         public ActionResult Index(string id)
         {
-            VersionViewModels model = new VersionViewModels();
-            Malla malla = new Malla();
-            _Version version = new _Version();
-            model.ObtenerListadoVersion = version.obtenerListadoVersion(id);
-            model.ObtenerMalla = malla.obtenerMalla(id);
+            var model = new VersionViewModels();
+            
+            model.ObtenerListadoVersion = _version.obtenerListadoVersion(id);
+            model.ObtenerMalla = _malla.obtenerMalla(id);
             return View(model);
         }
 

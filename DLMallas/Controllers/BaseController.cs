@@ -9,10 +9,13 @@ namespace DLMallas.Controllers
 {
     public class BaseController : Controller
     {
-        public Malla _malla;
+        public Malla _malla { get; set; }
+        public _Version _version { get; set; }
+
         public BaseController()
         {
             _malla = new Malla();
+            _version = new _Version();
         }
     }
 }

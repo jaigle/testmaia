@@ -3,9 +3,11 @@ using DLMallas.Utilidades;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bogus;
 using WSLib;
 
 namespace DLMallas.Business
@@ -14,14 +16,39 @@ namespace DLMallas.Business
     {
         public List<ObtenerListadoVersion> obtenerListadoVersion(string IdMalla)
         {
-            List<ObtenerListadoVersion> list = new List<ObtenerListadoVersion>();
-            WebService ws = new WebService("GestionMalla", "obtenerListadoVersion");
-            ws.AddParameter("IdSociedad", Variables.IdSociedad);
-            ws.AddParameter("IdMalla", IdMalla);
-            Array obj = ws.Invoke() as Array;
+            var list = new List<ObtenerListadoVersion>();
+            //WebService ws = new WebService("GestionMalla", "obtenerListadoVersion");
+            //ws.AddParameter("IdSociedad", Variables.IdSociedad);
+            //ws.AddParameter("IdMalla", IdMalla);
+            //Array obj = ws.Invoke() as Array;
 
-            string json = JsonConvert.SerializeObject(obj);
-            list = JsonConvert.DeserializeObject<List<ObtenerListadoVersion>>(json);
+            //string json = JsonConvert.SerializeObject(obj);
+            //list = JsonConvert.DeserializeObject<List<ObtenerListadoVersion>>(json);
+
+            /*
+             *  public string Id;
+	    public string IdSociedad;
+	    public string IdMalla;
+	    public string Version;
+	    public string FechaInicio;
+	    public string FechaTermino;
+        public string TotalComponente;
+             */
+
+
+            for (int i = 0; i < 50; i++)
+            {
+                var id = i;
+                list.Add(new Faker<ObtenerListadoVersion>("es")
+                    .StrictMode(true)
+                    .RuleFor(r => r.Id, f => (id + 1).ToString())
+                    .RuleFor(r => r.IdSociedad, f => f.Random.Number(1, 30).ToString())
+                    .RuleFor(r => r.IdMalla, f => f.Random.Number(1, 100).ToString())
+                    .RuleFor(r => r.Version, f => f.Random.Number(1, 40).ToString())
+                    .RuleFor(r => r.FechaInicio, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
+                    .RuleFor(r => r.FechaTermino, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
+                    .RuleFor(r => r.TotalComponente, f => f.Random.Number(1, 200).ToString()));
+            }
             return list;
         }
 
