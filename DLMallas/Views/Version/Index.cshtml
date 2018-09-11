@@ -51,7 +51,7 @@
                         <table id="tblListado" class="table table-condensed table-bordered table-hover tabla-resultados">
                             <thead>
                                 <tr>
-                                    <th class="no-sort" colspan="4"></th>
+                                    <th class="no-sort"></th>
                                     <th>Versión</th>
                                     <th>Vigencia</th>
                                     <th>UC</th>
@@ -62,25 +62,29 @@
                                 @foreach (var item in @Model.ObtenerListadoVersion)
                                 {
                                     <tr>
-                                        <td class="text-center">
-                                            <a href="#" onclick="editarVersion('@item.Id', '@item.FechaInicio')" title="Editar Versión">
-                                                <span class="glyphicon glyphicon-pencil"></span>
-                                            </a>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="#" onclick="eliminarVersion('@item.Id')" title="Eliminar Versión">
-                                                <span class="glyphicon glyphicon-remove"></span>
-                                            </a>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="#" onclick="detalleVersion('@item.Id', '@item.IdMalla')" title="Ver Detalle Versión">
-                                                <span class="glyphicon glyphicon-list"></span>
-                                            </a>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="#" title="Ver Diagrama Estructural">
-                                                <span class="icon icon-diagram viewstruct"></span>
-                                            </a>
+                                        <td>
+                                            <div class="row text-center">
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    <a href="#" onclick="editarVersion('@item.Id', '@item.FechaInicio')" title="Editar Versión">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    <a href="#" onclick="eliminarVersion('@item.Id')" title="Eliminar Versión">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    <a href="#" onclick="detalleVersion('@item.Id', '@item.IdMalla')" title="Ver Detalle Versión">
+                                                        <span class="glyphicon glyphicon-list"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    <a href="#" title="Ver Diagrama Estructural">
+                                                        <span class="icon icon-diagram viewstruct"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.Id)</td>
                                         <td>@Html.DisplayFor(modelItem => item.FechaInicio) - @Html.DisplayFor(modelItem => item.FechaTermino)</td>
