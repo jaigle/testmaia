@@ -46,6 +46,8 @@
     // Funciones privadas  ======================================================
 
     p.crear_version_click = function () {
+        $("#div_nombre_malla").html($("#malla_hidden").val());
+        $("#div_numero_version").html("10");
         $("#modCrearVersion").modal('show');
     }
 

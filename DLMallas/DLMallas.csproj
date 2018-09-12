@@ -2315,6 +2315,7 @@
     <Content Include="Views\Malla\_CrearMalla.cshtml" />
     <Content Include="Views\Malla\_Options.cshtml" />
     <Content Include="Views\Shared\Partials\SubMenu.cshtml" />
+    <Content Include="Views\Version\_CrearVersion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

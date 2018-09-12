@@ -3,10 +3,12 @@
     ViewBag.Title = "Versiones";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="@Url.Content("~/Content/custom/malla.css")" rel="stylesheet">
 <script src="~/Scripts/core/version.js"></script>
 <div class="main no-margin">
     @Html.Partial("~/Views/Shared/Partials/SubMenu.cshtml", Model.ObtenerMalla[0].Id)
-
+    <input type="hidden" id="id_malla_hidden" value="@Model.ObtenerMalla[0].Id"/>
+    <input type="hidden" id="malla_hidden" value="@Model.ObtenerMalla[0].Nombre"/>
     <div id="page-wrapper" class="col-sm-12 col-md-10">
         <div class="row">
             <div class="col-sm-12">
@@ -99,38 +101,7 @@
             </div>
         </div>
 
-        <!-- Modal Crear version -->
-        <div class="modal fade" id="modCrearVersion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">Crear Versión</h4>
-                    </div>
-                    <div class="modal-body">
-                        <table>
-                            <tr>
-                                <th>Fecha de Inicio de Vigencia de Versión:&nbsp;&nbsp;</th>
-                                <td>
-                                    <div class="input-group date">
-                                        <input type="text" id="txtFechainicio" class="form-control" placeholder="Ingrese Fecha" />
-                                        <div class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn_primary" id="btnGuardarNuevaVersion">Guardar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+@Html.Partial("_CrearVersion")
 
         <!-- Modal editar version -->
         <div class="modal fade" id="modEditarVersion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
