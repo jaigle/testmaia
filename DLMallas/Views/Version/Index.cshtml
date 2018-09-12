@@ -3,7 +3,7 @@
     ViewBag.Title = "Versiones";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/Scripts/core/version.js"></script>
 <div class="main no-margin">
     @Html.Partial("~/Views/Shared/Partials/SubMenu.cshtml", Model.ObtenerMalla[0].Id)
 
@@ -65,17 +65,17 @@
                                         <td>
                                             <div class="row text-center">
                                                 <div class="col-lg-3 col-md-3 col-sm-3 text-center">
-                                                    <a href="#" onclick="editarVersion('@item.Id', '@item.FechaInicio')" title="Editar Versión">
+                                                    <a href="#" onclick="version.editarVersion('@item.Id', '@item.FechaInicio')" title="Editar Versión">
                                                         <span class="glyphicon glyphicon-pencil"></span>
                                                     </a>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3 text-center">
-                                                    <a href="#" onclick="eliminarVersion('@item.Id')" title="Eliminar Versión">
+                                                    <a href="#" onclick="version.eliminarVersion('@item.Id')" title="Eliminar Versión">
                                                         <span class="glyphicon glyphicon-remove"></span>
                                                     </a>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3 text-center">
-                                                    <a href="#" onclick="detalleVersion('@item.Id', '@item.IdMalla')" title="Ver Detalle Versión">
+                                                    <a href="#" onclick="version.detalleVersion('@item.Id', '@item.IdMalla')" title="Ver Detalle Versión">
                                                         <span class="glyphicon glyphicon-list"></span>
                                                     </a>
                                                 </div>
@@ -168,107 +168,3 @@
 
     </div>
 </div>
-@section Scripts
-{
-<script type="text/javascript">
-    $(document).ready(function () {
-        /* diseño tabla */
-        $('#tblListado').dataTable({
-            responsive: true,
-            "language": {
-                "url": "/Content/DataTables/plugins/spanish.js"
-            }
-        });
-
-        /* datepicker version */
-        $('.date').datepicker({
-            format: "yyyy/mm/dd",
-            weekStart: 1,
-            //startDate: "now",
-            language: "es",
-            autoclose: true
-        });
-
-        /* popup crea version */
-        $("#btnCrearVersion").click(function () {
-            $("#modCrearVersion").modal('show');
-        });
-
-        /* guarda ajax formulario*/
-        $("#btnGuardarNuevaVersion").click(function () {
-
-            var fecha = $('#txtFechainicio').val();
-            var actionData = "{'fechainicio': '" + fecha + "','idmalla': '" + @Model.ObtenerMalla[0].Id + "'}";
-
-            if (fecha == "") {
-                alert("Debe Ingresar una Fecha");
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: "/Version/GuardarVersion",
-                    contentType: "application/json; charset=utf-8",
-                    data: actionData,
-                    dataType: "json",
-                    complete: function (result) {
-                        alert("Registro Guardado Correctamente");
-                        window.location.href = "@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })";
-                    }
-                });
-            }
-        });
-
-        /* actualiza ajax formulario */
-        $("#btnActualizarVersion").click(function () {
-            var id = $('#txtIdVersion').val();
-            var fecha = $('#txtFechainicioActualiza').val();
-            var actionData = "{'id':'" + id + "' ,'fechainicio': '" + fecha + "'}";
-
-            if (fecha == "") {
-                alert("Debe Ingresar una Fecha");
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: "/Version/ActualizarVersion",
-                    contentType: "application/json; charset=utf-8",
-                    data: actionData,
-                    dataType: "json",
-                    complete: function (result) {
-                        alert("Registro Guardado Correctamente");
-                        window.location.href = "@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })";
-                    }
-                });
-            }
-        });
-    });
-
-    function editarVersion(id, fechainicio) {
-        $("#modEditarVersion").modal('show');
-        $('#txtFechainicioActualiza').val(fechainicio);
-        $('#txtIdVersion').val(id);
-    }
-
-    function eliminarVersion(id) {
-        if (confirm("Está Seguro de Eliminar el registro")) {
-            $.ajax({
-                type: "POST",
-                url: "/Version/EliminarVersion",
-                contentType: "application/json; charset=utf-8",
-                data: "{'id': '" + id + "'}",
-                dataType: "json",
-                complete: function (result) {
-                    alert("Registro Guardado Correctamente");
-                    window.location.href = "@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })";
-                }
-            });
-        }
-    }
-
-    function detalleVersion(id, idMalla)
-    {
-        //alert(id);;
-        //DetalleVersion
-        window.location.href = "/Version/DetalleVersion/?IdVersion=" + id + "&idMalla=" + idMalla;
-    }
-
-</script>
-}
