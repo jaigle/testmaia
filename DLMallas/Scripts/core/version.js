@@ -52,22 +52,23 @@
     }
 
     p.guardar_version_click = function () {
-
         var fecha = $('#txtFechainicio').val();
-        //var actionData = "{'fechainicio': '" + fecha + "','idmalla': '" + @Model.ObtenerMalla[0].Id + "'}";
+        var actionData = { fechainicio: fecha, idmalla: $("#id_malla_hidden").val() };
 
-        if (fecha == "") {
+        if (fecha === "") {
             alert("Debe Ingresar una Fecha");
         } else {
             $.ajax({
                 type: "POST",
                 url: "/Version/GuardarVersion",
-                contentType: "application/json; charset=utf-8",
                 data: actionData,
-                dataType: "json",
-                complete: function (result) {
+                traditional: true,
+                complete: function(result) {
                     alert("Registro Guardado Correctamente");
-                    //window.location.href = "@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })";
+                    window.location.href = "/Version/Index/" + $("#id_malla_hidden").val();
+                },
+                error: function(xhr, status, error) {
+                    alert("Ha ocurrido un error al intentar guardar el registro. Error:"+error);
                 }
             });
         }
@@ -78,7 +79,7 @@
         var fecha = $('#txtFechainicioActualiza').val();
         var actionData = "{'id':'" + id + "' ,'fechainicio': '" + fecha + "'}";
 
-        if (fecha == "") {
+        if (fecha === "") {
             alert("Debe Ingresar una Fecha");
         } else {
             $.ajax({
@@ -87,9 +88,9 @@
                 contentType: "application/json; charset=utf-8",
                 data: actionData,
                 dataType: "json",
-                complete: function (result) {
+                complete: function () {
                     alert("Registro Guardado Correctamente");
-                    //window.location.href = "@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })";
+                    window.location.href = "/Version/Index/" + $("#id_malla_hidden").val();
                 }
             });
         }
@@ -103,7 +104,7 @@
         $('#txtIdVersion').val(id);
     }
 
-    p.eliminarVersion =  function(id) {
+    p.eliminarVersion = function (id) {
         if (confirm("Está Seguro de Eliminar el registro")) {
             $.ajax({
                 type: "POST",
@@ -111,16 +112,15 @@
                 contentType: "application/json; charset=utf-8",
                 data: "{'id': '" + id + "'}",
                 dataType: "json",
-                complete: function (result) {
+                complete: function () {
                     alert("Registro Guardado Correctamente");
-                    //window.location.href = "@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })";
+                    window.location.href = "/Version/Index/" + $("#id_malla_hidden").val();
                 }
             });
         }
     }
 
-    p.detalleVersion = function(id, idMalla)
-    {
+    p.detalleVersion = function (id, idMalla) {
         //alert(id);;
         //DetalleVersion
         window.location.href = "/Version/DetalleVersion/?IdVersion=" + id + "&idMalla=" + idMalla;

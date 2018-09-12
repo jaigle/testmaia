@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DLMallas.Business;
@@ -24,18 +25,20 @@ namespace DLMallas.Controllers
             return View(model);
         }
 
-        public bool GuardarVersion(string fechainicio, string idmalla)
+        public HttpStatusCodeResult GuardarVersion(string fechainicio, string idmalla)
         {
-            _Version version = new _Version();
-            GuardarVersion guarda = new GuardarVersion();
-            guarda.IdMalla = idmalla;
-            guarda.IdSociedad = Variables.IdSociedad;
-            guarda.FechaInicio = fechainicio;
-            var resp = version.guardarVersion(guarda);
+            var guarda = new GuardarVersion
+            {
+                IdMalla = idmalla,
+                IdSociedad = Variables.IdSociedad,
+                FechaInicio = fechainicio,
+            };
+            
+            var resp = _version.guardarVersion(guarda);
             if (resp)
-                return true;
-            else
-                return false;
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar malla");
         }
 
         public bool ActualizarVersion(string id, string fechainicio)

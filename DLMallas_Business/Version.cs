@@ -70,11 +70,11 @@ namespace DLMallas.Business
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "guardarVersion");
-                ws.AddParameter("IdMalla", model.IdMalla);
-                ws.AddParameter("IdSociedad", model.IdSociedad);
-                ws.AddParameter("FechaInicio", model.FechaInicio);
-                Array obj = ws.Invoke() as Array;
+                //WebService ws = new WebService("GestionMalla", "guardarVersion");
+                //ws.AddParameter("IdMalla", model.IdMalla);
+                //ws.AddParameter("IdSociedad", model.IdSociedad);
+                //ws.AddParameter("FechaInicio", model.FechaInicio);
+                //Array obj = ws.Invoke() as Array;
                 return true;
             }
             catch (Exception e)
