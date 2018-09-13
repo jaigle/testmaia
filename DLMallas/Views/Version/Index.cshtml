@@ -10,29 +10,7 @@
     <input type="hidden" id="id_malla_hidden" value="@Model.ObtenerMalla[0].Id"/>
     <input type="hidden" id="malla_hidden" value="@Model.ObtenerMalla[0].Nombre"/>
     <div id="page-wrapper" class="col-sm-12 col-md-10">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        Información de la Malla
-                    </div>
-                    <div class="panel-body">
-                        <div class="row margin-bottom10">
-                            <div class="col-lg-2 col-md-2 col-sm-2">Nombre:</div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">@Html.DisplayFor(model => model.ObtenerMalla[0].Nombre)</div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">Fecha Creación:</div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">@Html.DisplayFor(model => model.ObtenerMalla[0].FechaCreacion)</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-2">Usuario Creación:</div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">@Html.DisplayFor(model => model.ObtenerMalla[0].UsuarioCreacion)</div>
-                            <div class="col-lg-2 col-md-2 col-sm-2">Estado:</div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">@(Model.ObtenerMalla[0].Activo == "1" ? "Activa" : "Inactiva")</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @Html.Partial("~/Views/Shared/Partials/_InformacionMalla.cshtml", Model)
 
         <div class="row">
             <div class="col-sm-12">
