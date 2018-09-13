@@ -307,7 +307,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#seccion-color-picker').colorpicker();
-
+            $('#edit-seccion-color-picker').colorpicker();
 
             /*acciones de seccion*/
             $("#btnCrearSeccion").click(function () {
@@ -357,21 +357,23 @@
                 var color = $('#txtColorSeccionEdit').val();
                 var actionData = "{'id':'" + id + "','nombre': '" + nombre + "','color': '" + color + "'}";
 
-                //if (nombre == "" || color == "") {
-                //    alert("Debe Ingresar Nombre y Color");
-                // } else {
+                if (nombre == "" || color == "") {
+                    alert("Debe Ingresar Nombre y Color");
+                 } else {
                 $.ajax({
                     type: "POST",
                     url: "/Seccion/ActualizarSeccion",
                     contentType: "application/json; charset=utf-8",
                     data: actionData,
-                    dataType: "json",
                     complete: function (result) {
                         alert("Registro Actualizado Correctamente");
-                        window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
+                        window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id + "&idMalla=" + @Model.ObtenerVersion[0].IdMalla;
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Ha ocurrido un error al intentar guardar el registro.");
                     }
                 });
-                //}
+                }
             });
 
             /*acciones de componente/uc*/
@@ -445,7 +447,7 @@
             $('#txtIdSeccionEdit').val(id);
             $('#txtNombreSeccionEdit').val(nombre);
             $('#txtColorSeccionEdit').val(color);
-            $('#edit-seccion-color-picker').colorpicker();
+            $('#edit-seccion-color-picker').colorpicker('setValue', color);
             $('#favcolorEdit').val(color);
         }
 

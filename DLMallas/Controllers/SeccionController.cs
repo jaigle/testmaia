@@ -35,18 +35,20 @@ namespace DLMallas.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar malla");
         }
 
-        public bool ActualizarSeccion(string id, string nombre, string color)
+        public HttpStatusCodeResult ActualizarSeccion(string id, string nombre, string color)
         {
-            Seccion seccion = new Seccion();
-            ActualizarSeccion model = new ActualizarSeccion();
-            model.Id = id;
-            model.Nombre = nombre;
-            model.Color = color;
-            var resp = seccion.actualizarSeccion(model);
+            var model = new ActualizarSeccion
+            {
+                Id = id,
+                Nombre = nombre,
+                Color = color,
+            };
+
+            var resp = _seccion.actualizarSeccion(model);
             if (resp)
-                return true;
-            else
-                return false;
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar malla");
         }
 
         public HttpStatusCodeResult EliminarSeccion(string Id)
