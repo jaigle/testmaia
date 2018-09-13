@@ -71,6 +71,7 @@ namespace DLMallas.Controllers
             model.ObtenerMalla = _malla.obtenerMalla(IdMalla);
             model.ObtenerListadoSeccion = _seccion.obtenerListadoSeccion(IdVersion);
             model.ObtenerListadoComponente = _componente.obtenerListadoComponente(IdVersion);
+            ViewBag.ActiveLink = "Versiones";
 
             return View(model);
         }

@@ -12,15 +12,8 @@
     }
 </style>
 <div class="main no-margin">
-    <div role="navigation" class="col-md-2 navbar-default sidebar">
-        <div class="sidebar-nav navbar-collapse " aria-expanded="true" style="">
-            <ul id="side-menu" class="nav ">
-                <li><a href="@Url.Action("EditarMalla", "Malla", new { id = @Model.ObtenerMalla[0].Id })">Datos Generales</a></li>
-                <li class="active"><a href="@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })">Versiones</a></li>
-                <li><a href="@Url.Action("Index", "Certificado", new { id = @Model.ObtenerMalla[0].Id })">Certificados</a></li>
-            </ul>
-        </div>
-    </div>
+    @Html.Partial("~/Views/Shared/Partials/SubMenu.cshtml", Model.ObtenerMalla[0].Id)
+
     <div id="page-wrapper" class="col-sm-12 col-md-10">
         <div class="row">
             <div class="col-md-12">
@@ -60,7 +53,7 @@
                         </ul>
                     </div>
                     <div class="panel-body">
-                        
+
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1">
                                 <div class="panel panel-default panel-page-content">
@@ -356,296 +349,296 @@
     </div>
 </div>
 
-    @section Scripts
+@section Scripts
 {
-        <script type="text/javascript">
-            $(document).ready(function () {
-                /*acciones de seccion*/
-                $("#btnCrearSeccion").click(function () {
-                    $('#txtNombreSeccion').val('')
-                    $('#favcolor').val('')
-                    $('#txtColorSeccion').val('');
-                    $("#modCrearSeccion").modal('show');
-                    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*acciones de seccion*/
+            $("#btnCrearSeccion").click(function () {
+                $('#txtNombreSeccion').val('')
+                $('#favcolor').val('')
+                $('#txtColorSeccion').val('');
+                $("#modCrearSeccion").modal('show');
+
+            });
+
+            $('#favcolor').change(function () {
+                $('#txtColorSeccion').val($('#favcolor').val());
+            });
+
+            $("#btnGuardarNuevaSeccion").click(function () {
+                var nombre = $('#txtNombreSeccion').val();
+                var color = $('#txtColorSeccion').val();
+                var idVersion = $('#txtIdVersion').val();
+                var idMalla = $('#txtIdMalla').val();
+                var actionData = "{'idversion': '" + idVersion + "','nombre': '" + nombre + "','color': '" + color + "'}";
+
+                //if (nombre == "" || color == "") {
+                //    alert("Debe Ingresar Nombre y Color");
+                // } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/Seccion/GuardarSeccion",
+                    contentType: "application/json; charset=utf-8",
+                    data: actionData,
+                    dataType: "json",
+                    complete: function (result) {
+                        alert("Registro Guardado Correctamente");
+                        window.location.href = "/Version/DetalleVersion/?IdVersion=" + idVersion + "&idMalla=" + idMalla;
+                        //window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
+                    }
                 });
+                //}
+            });
 
-                $('#favcolor').change(function () {
-                    $('#txtColorSeccion').val($('#favcolor').val());
+            $("#btnActualizarSeccion").click(function () {
+                var id = $('#txtIdSeccionEdit').val();
+                var nombre = $('#txtNombreSeccionEdit').val();
+                var color = $('#txtColorSeccionEdit').val();
+                var actionData = "{'id':'" + id + "','nombre': '" + nombre + "','color': '" + color + "'}";
+
+                //if (nombre == "" || color == "") {
+                //    alert("Debe Ingresar Nombre y Color");
+                // } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/Seccion/ActualizarSeccion",
+                    contentType: "application/json; charset=utf-8",
+                    data: actionData,
+                    dataType: "json",
+                    complete: function (result) {
+                        alert("Registro Actualizado Correctamente");
+                        window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
+                    }
                 });
+                //}
+            });
 
-                $("#btnGuardarNuevaSeccion").click(function () {
-                    var nombre = $('#txtNombreSeccion').val();
-                    var color = $('#txtColorSeccion').val();
-                    var idVersion = $('#txtIdVersion').val();
-                    var idMalla = $('#txtIdMalla').val();
-                    var actionData = "{'idversion': '" + idVersion + "','nombre': '" + nombre + "','color': '" + color + "'}";
+            /*acciones de componente/uc*/
+            $("#btnGuardarNuevoComponente").click(function () {
+                var idseccion = $('#comboSeccion').val();
+                var idmodalidad = $('#comboModalidad').val();
+                var iduc;
 
-                    //if (nombre == "" || color == "") {
-                    //    alert("Debe Ingresar Nombre y Color");
-                   // } else {
-                        $.ajax({
-                            type: "POST",
-                            url: "/Seccion/GuardarSeccion",
-                            contentType: "application/json; charset=utf-8",
-                            data: actionData,
-                            dataType: "json",
-                            complete: function (result) {
-                                alert("Registro Guardado Correctamente");
-                                window.location.href = "/Version/DetalleVersion/?IdVersion=" +idVersion + "&idMalla=" + idMalla;
-                                //window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                            }
-                        });
-                    //}
-                });
-
-                $("#btnActualizarSeccion").click(function () {
-                    var id = $('#txtIdSeccionEdit').val();
-                    var nombre = $('#txtNombreSeccionEdit').val();
-                    var color = $('#txtColorSeccionEdit').val();
-                    var actionData = "{'id':'" + id + "','nombre': '" + nombre + "','color': '" + color + "'}";
-
-                    //if (nombre == "" || color == "") {
-                    //    alert("Debe Ingresar Nombre y Color");
-                   // } else {
-                        $.ajax({
-                            type: "POST",
-                            url: "/Seccion/ActualizarSeccion",
-                            contentType: "application/json; charset=utf-8",
-                            data: actionData,
-                            dataType: "json",
-                            complete: function (result) {
-                                alert("Registro Actualizado Correctamente");
-                                window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                            }
-                        });
-                    //}
-                });
-
-                /*acciones de componente/uc*/
-                $("#btnGuardarNuevoComponente").click(function () {
-                    var idseccion = $('#comboSeccion').val();
-                    var idmodalidad = $('#comboModalidad').val();
-                    var iduc;
-
-                    $('#comboUC option').each(function () {
-                        iduc = this.value;
-                        var actionData = "{'idseccion': '" + idseccion + "', 'idmodalidad': '" + idmodalidad + "', 'iduc': '" + iduc + "'}";
-
-                        $.ajax({
-                            type: "POST",
-                            url: "/Componente/GuardarComponente",
-                            contentType: "application/json; charset=utf-8",
-                            data: actionData,
-                            dataType: "json",
-                            complete: function (result) {
-                                alert("Registro Guardado Correctamente");
-                                window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                            }
-                        });
-                    });
-                });
-
-                $("#btnActualizarComponente").click(function () {
-                    var id = $('#txtIdComponente').val();
-                    var idseccion = $('#comboSeccion').val();
-                    var idmodalidad = $('#comboModalidad').val();
-                    var actionData = "{'id': '" + id + "','idseccion': '" + idseccion + "','idmodalidad': '" + idmodalidad + "'}";
+                $('#comboUC option').each(function () {
+                    iduc = this.value;
+                    var actionData = "{'idseccion': '" + idseccion + "', 'idmodalidad': '" + idmodalidad + "', 'iduc': '" + iduc + "'}";
 
                     $.ajax({
                         type: "POST",
-                        url: "/Componente/ActualizarComponente",
+                        url: "/Componente/GuardarComponente",
                         contentType: "application/json; charset=utf-8",
                         data: actionData,
                         dataType: "json",
                         complete: function (result) {
-                            alert("Registro Actualizado Correctamente");
+                            alert("Registro Guardado Correctamente");
                             window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
                         }
-                    });
-
-                });
-
-                $("#btnGuardarPrerrequisito").click(function () {
-                    var idcomponente = $('#idcomponente').val();
-                    $("input[name='idUnidadesChx[]']:checked").each(function () {
-
-                        var actionData = "{'idcomponente': '" + idcomponente + "','idcomponenteprerrequisito': '" + this.value + "'}";
-                        $.ajax({
-                            type: "POST",
-                            url: "/Componente/GuardarPrerrequisito",
-                            contentType: "application/json; charset=utf-8",
-                            data: actionData,
-                            dataType: "json",
-                            complete: function (result) {
-                                alert("Prerrequisito Guardado Correctamente");
-                                window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                            }
-                        });
-
                     });
                 });
             });
 
-            /*acciones de seccion*/
-            function editarSeccion(id, nombre, color) {
-                $("#modEditarSeccion").modal('show');
-                $('#txtIdSeccionEdit').val(id);
-                $('#txtNombreSeccionEdit').val(nombre);
-                $('#txtColorSeccionEdit').val(color);
-                $('#favcolorEdit').val(color);
-            }
+            $("#btnActualizarComponente").click(function () {
+                var id = $('#txtIdComponente').val();
+                var idseccion = $('#comboSeccion').val();
+                var idmodalidad = $('#comboModalidad').val();
+                var actionData = "{'id': '" + id + "','idseccion': '" + idseccion + "','idmodalidad': '" + idmodalidad + "'}";
 
-            /*function editarSeccion(id, nombre, color) {
-                $("#modEditarVerSeccion").modal('show');
-                $('#txtIdSeccion').val(id);
-                $('#txtNombreSeccion').val(nombre);
-                $('#favcolor').val(color);
-                $('#txtColorSeccion').val(color);
-            }*/
+                $.ajax({
+                    type: "POST",
+                    url: "/Componente/ActualizarComponente",
+                    contentType: "application/json; charset=utf-8",
+                    data: actionData,
+                    dataType: "json",
+                    complete: function (result) {
+                        alert("Registro Actualizado Correctamente");
+                        window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
+                    }
+                });
 
-            function eliminarSeccion(id) {
-                if (confirm("Está Seguro de Eliminar el Registro")) {
+            });
+
+            $("#btnGuardarPrerrequisito").click(function () {
+                var idcomponente = $('#idcomponente').val();
+                $("input[name='idUnidadesChx[]']:checked").each(function () {
+
+                    var actionData = "{'idcomponente': '" + idcomponente + "','idcomponenteprerrequisito': '" + this.value + "'}";
                     $.ajax({
                         type: "POST",
-                        url: "/Seccion/EliminarSeccion",
+                        url: "/Componente/GuardarPrerrequisito",
                         contentType: "application/json; charset=utf-8",
-                        data: "{'id': '" + id + "'}",
+                        data: actionData,
                         dataType: "json",
                         complete: function (result) {
-                            alert("Registro Eliminado Correctamente");
+                            alert("Prerrequisito Guardado Correctamente");
                             window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
                         }
                     });
-                }
-            }
 
-            /*acciones de componente/uc*/
-            function agregarComponente(idversion) {
-                $("#modCrearComponente").modal('show');
-                cargaComboSeccion(idversion);
-                cargaComboUC();
-                cargaComboModalidad();
-            }
+                });
+            });
+        });
 
-            function editarComponente(id, idversion) {
-                var idseccion;
-                var idmodalidadcomponente;
-                var idunidadcurricular;
+        /*acciones de seccion*/
+        function editarSeccion(id, nombre, color) {
+            $("#modEditarSeccion").modal('show');
+            $('#txtIdSeccionEdit').val(id);
+            $('#txtNombreSeccionEdit').val(nombre);
+            $('#txtColorSeccionEdit').val(color);
+            $('#favcolorEdit').val(color);
+        }
 
+        /*function editarSeccion(id, nombre, color) {
+            $("#modEditarVerSeccion").modal('show');
+            $('#txtIdSeccion').val(id);
+            $('#txtNombreSeccion').val(nombre);
+            $('#favcolor').val(color);
+            $('#txtColorSeccion').val(color);
+        }*/
+
+        function eliminarSeccion(id) {
+            if (confirm("Está Seguro de Eliminar el Registro")) {
                 $.ajax({
                     type: "POST",
-                    url: "/Componente/ObtenerComponente",
+                    url: "/Seccion/EliminarSeccion",
                     contentType: "application/json; charset=utf-8",
                     data: "{'id': '" + id + "'}",
                     dataType: "json",
-                    complete: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            idseccion = data[i].IdSeccion;
-                            idmodalidadcomponente = data[i].IdModalidadComponente;
-                            idunidadcurricular = data[i].IdUnidadCurricular;
-
-                            $("#txtIdComponente").val(id);
-                            cargaComboSeccion(idversion);
-                            cargaComboUC();
-                            cargaComboModalidad();
-                        }
-                    },
-                    done: function () {
-                        $("#comboSeccion").val(idseccion);
-                        $("#comboUC").val(idunidadcurricular);
-                        $("#comboUC").attr("disabled", true);
-                        $("#comboModalidad").val(idmodalidadcomponente);
+                    complete: function (result) {
+                        alert("Registro Eliminado Correctamente");
+                        window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
                     }
                 });
             }
+        }
 
-            function eliminarComponente(id) {
-                if (confirm("Está Seguro de Eliminar el Registro")) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/Componente/EliminarComponente",
-                        contentType: "application/json; charset=utf-8",
-                        data: "{'id': '" + id + "'}",
-                        dataType: "json",
-                        complete: function (result) {
-                            alert("Registro Eliminado Correctamente");
-                            window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                        }
+        /*acciones de componente/uc*/
+        function agregarComponente(idversion) {
+            $("#modCrearComponente").modal('show');
+            cargaComboSeccion(idversion);
+            cargaComboUC();
+            cargaComboModalidad();
+        }
+
+        function editarComponente(id, idversion) {
+            var idseccion;
+            var idmodalidadcomponente;
+            var idunidadcurricular;
+
+            $.ajax({
+                type: "POST",
+                url: "/Componente/ObtenerComponente",
+                contentType: "application/json; charset=utf-8",
+                data: "{'id': '" + id + "'}",
+                dataType: "json",
+                complete: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        idseccion = data[i].IdSeccion;
+                        idmodalidadcomponente = data[i].IdModalidadComponente;
+                        idunidadcurricular = data[i].IdUnidadCurricular;
+
+                        $("#txtIdComponente").val(id);
+                        cargaComboSeccion(idversion);
+                        cargaComboUC();
+                        cargaComboModalidad();
+                    }
+                },
+                done: function () {
+                    $("#comboSeccion").val(idseccion);
+                    $("#comboUC").val(idunidadcurricular);
+                    $("#comboUC").attr("disabled", true);
+                    $("#comboModalidad").val(idmodalidadcomponente);
+                }
+            });
+        }
+
+        function eliminarComponente(id) {
+            if (confirm("Está Seguro de Eliminar el Registro")) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Componente/EliminarComponente",
+                    contentType: "application/json; charset=utf-8",
+                    data: "{'id': '" + id + "'}",
+                    dataType: "json",
+                    complete: function (result) {
+                        alert("Registro Eliminado Correctamente");
+                        window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
+                    }
+                });
+            }
+        }
+
+        function cargaComboSeccion(idversion) {
+            $.ajax({
+                type: "POST",
+                url: "/Componente/ObtenerListadoSeccion",
+                contentType: "application/json; charset=utf-8",
+                data: "{'idversion': '" + idversion + "'}",
+                dataType: "json",
+                complete: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var opt = new Option(data[i].Nombre, data[i].Id);
+                        $('#comboSeccion').append(opt);
+                    }
+                }
+            });
+        }
+
+        function cargaComboUC() {
+            $.ajax({
+                type: "POST",
+                url: "/Componente/OtenerListadoCatalogoCurso",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                complete: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var opt = new Option(data[i].Nombre, data[i].Id);
+                        $('#comboUC').append(opt);
+
+                    }
+                },
+                done: function () {
+                    $('#comboUC').multiselect();
+                    $("#comboUC").multiselect().multiselectfilter({
+                        label: "",
+                        placeholder: "Buscar"
                     });
                 }
-            }
+            });
+        }
 
-            function cargaComboSeccion(idversion) {
-                $.ajax({
-                    type: "POST",
-                    url: "/Componente/ObtenerListadoSeccion",
-                    contentType: "application/json; charset=utf-8",
-                    data: "{'idversion': '" + idversion + "'}",
-                    dataType: "json",
-                    complete: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            var opt = new Option(data[i].Nombre, data[i].Id);
-                            $('#comboSeccion').append(opt);
-                        }
+        function cargaComboModalidad() {
+            $.ajax({
+                type: "POST",
+                url: "/Componente/ObtenerListadoModalidadComponente",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                complete: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var opt = new Option(data[i].Nombre, data[i].Id);
+                        $('#comboModalidad').append(opt);
                     }
-                });
-            }
+                }
+            });
+        }
 
-            function cargaComboUC() {
-                $.ajax({
-                    type: "POST",
-                    url: "/Componente/OtenerListadoCatalogoCurso",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    complete: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            var opt = new Option(data[i].Nombre, data[i].Id);
-                            $('#comboUC').append(opt);
+        function seleccionarPrerrequisito(id) {
+            $("#modCrearComponente").modal('show');
+            $("#idcomponente").val(id);
 
-                        }
-                    },
-                    done: function () {
-                        $('#comboUC').multiselect();
-                        $("#comboUC").multiselect().multiselectfilter({
-                            label: "",
-                            placeholder: "Buscar"
-                        });
+            $.ajax({
+                type: "POST",
+                url: "/Componente/ObtenerComponentePrerrequisito",
+                contentType: "application/json; charset=utf-8",
+                data: "{'id': '" + id + "'}",
+                dataType: "json",
+                complete: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        $('#checkboxes').append('<input type="checkbox" name="idUnidadesChx[]" value="' + data[i].Id + '" />');
+                        $('#nombreUnidades').append('<label>' + data[i].UnidadCurricular + '</label>');
                     }
-                });
-            }
-
-            function cargaComboModalidad() {
-                $.ajax({
-                    type: "POST",
-                    url: "/Componente/ObtenerListadoModalidadComponente",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    complete: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            var opt = new Option(data[i].Nombre, data[i].Id);
-                            $('#comboModalidad').append(opt);
-                        }
-                    }
-                });
-            }
-
-            function seleccionarPrerrequisito(id) {
-                $("#modCrearComponente").modal('show');
-                $("#idcomponente").val(id);
-
-                $.ajax({
-                    type: "POST",
-                    url: "/Componente/ObtenerComponentePrerrequisito",
-                    contentType: "application/json; charset=utf-8",
-                    data: "{'id': '" + id + "'}",
-                    dataType: "json",
-                    complete: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            $('#checkboxes').append('<input type="checkbox" name="idUnidadesChx[]" value="' + data[i].Id + '" />');
-                            $('#nombreUnidades').append('<label>' + data[i].UnidadCurricular + '</label>');
-                        }
-                    }
-                });
-            }
-        </script>
-    }
+                }
+            });
+        }
+    </script>
+}
