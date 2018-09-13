@@ -66,15 +66,11 @@ namespace DLMallas.Controllers
 
         public ActionResult DetalleVersion(string IdVersion, string IdMalla) 
         {
-            VersionViewModels model = new VersionViewModels();
-            Seccion seccion = new Seccion();
-            Componente componente = new Componente();
-            Malla malla = new Malla();
-            _Version version = new _Version();
-            model.ObtenerVersion = version.obtenerVersion(IdVersion);
-            model.ObtenerMalla = malla.obtenerMalla(IdMalla);
-            model.ObtenerListadoSeccion = seccion.obtenerListadoSeccion(IdVersion);
-            model.ObtenerListadoComponente = componente.obtenerListadoComponente(IdVersion);
+            var model = new VersionViewModels();
+            model.ObtenerVersion = _version.obtenerVersion(IdVersion);
+            model.ObtenerMalla = _malla.obtenerMalla(IdMalla);
+            model.ObtenerListadoSeccion = _seccion.obtenerListadoSeccion(IdVersion);
+            model.ObtenerListadoComponente = _componente.obtenerListadoComponente(IdVersion);
 
             return View(model);
         }
