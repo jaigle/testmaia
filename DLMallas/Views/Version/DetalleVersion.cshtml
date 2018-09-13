@@ -14,6 +14,7 @@
 <link href="@Url.Content("~/Content/custom/malla.css")" rel="stylesheet">
 <link href="@Url.Content("~/Scripts/plugins/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css")" rel="stylesheet">
 <script src="@Url.Content("~/Scripts/plugins/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js")"></script>
+@*<script src="@Url.Content("~/Scripts/core/detalle-version.js")"></script>*@
 <div class="main no-margin">
     @Html.Partial("~/Views/Shared/Partials/_SubMenu.cshtml", Model.ObtenerMalla[0].Id)
 
@@ -22,7 +23,7 @@
             <div class="col-md-12">
                 <div class="panel with-nav-tabs">
                     @Html.Partial("~/Views/Shared/Partials/_InformacionMalla.cshtml", Model)
-                    
+
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 text-left">
                             Fecha Inicio:
@@ -118,27 +119,27 @@
                                             <tbody>
                                                 @foreach (var item in @Model.ObtenerListadoComponente)
                                                 {
-                                                    <tr>
-                                                        <td class="text-center">
-                                                            <a href="#" onclick="editarComponente('@item.Id','@Model.ObtenerVersion[0].Id')">
-                                                                <span class="glyphicon glyphicon-pencil"></span>
-                                                            </a>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <a href="#" onclick="eliminarComponente('@item.Id')">
-                                                                <span class="glyphicon glyphicon-remove"></span>
-                                                            </a>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <a href="#" onclick="seleccionarPrerrequisito('@item.Id')">
-                                                                <span class="glyphicon glyphicon-menu-hamburger"></span>
-                                                            </a>
-                                                        </td>
-                                                        <td>@Html.DisplayFor(modelItem => item.UnidadCurricular)</td>
-                                                        <td>@Html.DisplayFor(modelItem => item.Modalidad)</td>
-                                                        <td>@Html.DisplayFor(modelItem => item.Seccion)</td>
-                                                        <td class="text-center"><div style="background-color: @item.Color"></div></td>
-                                                    </tr>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <a href="#" onclick="editarComponente('@item.Id','@Model.ObtenerVersion[0].Id')">
+                                                            <span class="glyphicon glyphicon-pencil"></span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a href="#" onclick="eliminarComponente('@item.Id')">
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a href="#" onclick="seleccionarPrerrequisito('@item.Id')">
+                                                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                                                        </a>
+                                                    </td>
+                                                    <td>@Html.DisplayFor(modelItem => item.UnidadCurricular)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.Modalidad)</td>
+                                                    <td>@Html.DisplayFor(modelItem => item.Seccion)</td>
+                                                    <td class="text-center"><div style="background-color: @item.Color"></div></td>
+                                                </tr>
                                                 }
                                             </tbody>
                                         </table>
@@ -325,24 +326,25 @@
                 var color = $('#txtColorSeccion').val();
                 var idVersion = $('#txtIdVersion').val();
                 var idMalla = $('#txtIdMalla').val();
-                var actionData = "{'idversion': '" + idVersion + "','nombre': '" + nombre + "','color': '" + color + "'}";
 
-                //if (nombre == "" || color == "") {
-                //    alert("Debe Ingresar Nombre y Color");
-                // } else {
-                $.ajax({
-                    type: "POST",
-                    url: "/Seccion/GuardarSeccion",
-                    contentType: "application/json; charset=utf-8",
-                    data: actionData,
-                    dataType: "json",
-                    complete: function (result) {
-                        alert("Registro Guardado Correctamente");
-                        window.location.href = "/Version/DetalleVersion/?IdVersion=" + idVersion + "&idMalla=" + idMalla;
-                        //window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                    }
-                });
-                //}
+
+                if (nombre == "" || color == "") {
+                    alert("Debe Ingresar Nombre y Color");
+                } else {
+
+                    var actionData = "{'idversion': '" + idVersion + "','nombre': '" + nombre + "','color': '" + color + "'}";
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Seccion/GuardarSeccion",
+                        contentType: "application/json; charset=utf-8",
+                        data: actionData,
+                        complete: function (result) {
+                            alert("Registro Guardado Correctamente");
+                            window.location.href = "/Version/DetalleVersion/?IdVersion=" + idVersion + "&idMalla=" + idMalla;
+                        }
+                    });
+                }
             });
 
             $("#btnActualizarSeccion").click(function () {
