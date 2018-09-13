@@ -49,14 +49,13 @@ namespace DLMallas.Controllers
                 return false;
         }
 
-        public bool EliminarSeccion(string Id)
+        public HttpStatusCodeResult EliminarSeccion(string Id)
         {
-            Seccion s = new Seccion();
-            var resp = s.eliminarSeccion(Id);
+            var resp = _seccion.eliminarSeccion(Id);
             if (resp)
-                return true;
-            else
-                return false;
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar malla");
         }
     }
 }

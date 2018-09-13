@@ -100,9 +100,9 @@ namespace DLMallas.Business
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "eliminarSeccion");
-                ws.AddParameter("Id", Id);
-                ws.Invoke();
+                //WebService ws = new WebService("GestionMalla", "eliminarSeccion");
+                //ws.AddParameter("Id", Id);
+                //ws.Invoke();
                 return true;
             }
             catch (Exception e)

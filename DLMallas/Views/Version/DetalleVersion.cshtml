@@ -342,6 +342,9 @@
                         complete: function (result) {
                             alert("Registro Guardado Correctamente");
                             window.location.href = "/Version/DetalleVersion/?IdVersion=" + idVersion + "&idMalla=" + idMalla;
+                        },
+                        error: function(xhr, status, error) {
+                            alert("Ha ocurrido un error al intentar guardar el registro.");
                         }
                     });
                 }
@@ -459,10 +462,12 @@
                     url: "/Seccion/EliminarSeccion",
                     contentType: "application/json; charset=utf-8",
                     data: "{'id': '" + id + "'}",
-                    dataType: "json",
                     complete: function (result) {
                         alert("Registro Eliminado Correctamente");
-                        window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
+                        window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id + "&idMalla=" + @Model.ObtenerVersion[0].IdMalla;
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Ha ocurrido un error al intentar eliminar el registro.");
                     }
                 });
             }
