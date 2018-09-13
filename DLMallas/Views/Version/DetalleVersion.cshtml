@@ -119,27 +119,27 @@
                                             <tbody>
                                                 @foreach (var item in @Model.ObtenerListadoComponente)
                                                 {
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <a href="#" onclick="editarComponente('@item.Id','@Model.ObtenerVersion[0].Id')">
-                                                            <span class="glyphicon glyphicon-pencil"></span>
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a href="#" onclick="eliminarComponente('@item.Id')">
-                                                            <span class="glyphicon glyphicon-remove"></span>
-                                                        </a>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <a href="#" onclick="seleccionarPrerrequisito('@item.Id')">
-                                                            <span class="glyphicon glyphicon-menu-hamburger"></span>
-                                                        </a>
-                                                    </td>
-                                                    <td>@Html.DisplayFor(modelItem => item.UnidadCurricular)</td>
-                                                    <td>@Html.DisplayFor(modelItem => item.Modalidad)</td>
-                                                    <td>@Html.DisplayFor(modelItem => item.Seccion)</td>
-                                                    <td class="text-center"><div style="background-color: @item.Color"></div></td>
-                                                </tr>
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <a href="#" onclick="editarComponente('@item.Id','@Model.ObtenerVersion[0].Id')">
+                                                                <span class="glyphicon glyphicon-pencil"></span>
+                                                            </a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a href="#" onclick="eliminarComponente('@item.Id')">
+                                                                <span class="glyphicon glyphicon-remove"></span>
+                                                            </a>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <a href="#" onclick="seleccionarPrerrequisito('@item.Id')">
+                                                                <span class="glyphicon glyphicon-menu-hamburger"></span>
+                                                            </a>
+                                                        </td>
+                                                        <td>@Html.DisplayFor(modelItem => item.UnidadCurricular)</td>
+                                                        <td>@Html.DisplayFor(modelItem => item.Modalidad)</td>
+                                                        <td>@Html.DisplayFor(modelItem => item.Seccion)</td>
+                                                        <td class="text-center"><div style="background-color: @item.Color"></div></td>
+                                                    </tr>
                                                 }
                                             </tbody>
                                         </table>
@@ -154,47 +154,48 @@
                 @Html.Partial("_CrearSeccion")
 
                 <!-- Modal Editar Seccion -->
-                <div class="modal fade" id="modEditarSeccion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">Editar Sección</h4>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" id="txtIdSeccion" />
-                                <input type="hidden" id="txtIdSeccionEdit" />
-                                <input type="hidden" id="txtIdVersion" value="@Html.DisplayFor(model => model.ObtenerVersion[0].Id)" />
-                                <input type="hidden" id="txtIdMalla" value="@Html.DisplayFor(model => model.ObtenerMalla[0].Id)" />
-                                <table>
-                                    <tr>
-                                        <th>Nombre: </th>
-                                        <td>
-                                            <input type="text" id="txtNombreSeccionEdit" class="form-control" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Color: </th>
-                                        <td>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <input type="color" name="favcolorEdit" id="favcolorEdit" />
-                                                </span>
-                                                <input type="text" id="txtColorSeccionEdit" class="form-control" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button class="btn btn_primary" id="btnActualizarSeccion">Guardar</button>
+                @Html.Partial("_EditarSeccion", Model)
+                @*<div class="modal fade" id="modEditarSeccion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">Editar Sección</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" id="txtIdSeccion" />
+                                    <input type="hidden" id="txtIdSeccionEdit" />
+                                    <input type="hidden" id="txtIdVersion" value="@Html.DisplayFor(model => model.ObtenerVersion[0].Id)" />
+                                    <input type="hidden" id="txtIdMalla" value="@Html.DisplayFor(model => model.ObtenerMalla[0].Id)" />
+                                    <table>
+                                        <tr>
+                                            <th>Nombre: </th>
+                                            <td>
+                                                <input type="text" id="txtNombreSeccionEdit" class="form-control" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Color: </th>
+                                            <td>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <input type="color" name="favcolorEdit" id="favcolorEdit" />
+                                                    </span>
+                                                    <input type="text" id="txtColorSeccionEdit" class="form-control" />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    <button class="btn btn_primary" id="btnActualizarSeccion">Guardar</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div>*@
 
                 <!-- Modal agregar Componente -->
                 <div class="modal fade" id="modAgregarComponente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -444,6 +445,7 @@
             $('#txtIdSeccionEdit').val(id);
             $('#txtNombreSeccionEdit').val(nombre);
             $('#txtColorSeccionEdit').val(color);
+            $('#edit-seccion-color-picker').colorpicker();
             $('#favcolorEdit').val(color);
         }
 
