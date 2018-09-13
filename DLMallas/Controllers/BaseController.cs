@@ -12,10 +12,17 @@ namespace DLMallas.Controllers
         public Malla _malla { get; set; }
         public _Version _version { get; set; }
 
+        public Seccion _seccion { get; set; }
+
+        public Componente _componente { get; set; }
+
+
         public BaseController()
         {
             _malla = new Malla();
             _version = new _Version();
+            _seccion = new Seccion();
+            _componente = new Componente();
         }
     }
 }
