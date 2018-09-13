@@ -3,9 +3,11 @@ using DLMallas.Utilidades;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bogus;
 using WSLib;
 
 namespace DLMallas.Business
@@ -17,13 +19,28 @@ namespace DLMallas.Business
             try
             {
                 List<ObtenerListadoSeccion> list = new List<ObtenerListadoSeccion>();
-                WebService ws = new WebService("GestionMalla", "ObtenerListadoSeccion");
-                ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                ws.AddParameter("IdVersion", IdVersion);
-                Array obj = ws.Invoke() as Array;
+                //WebService ws = new WebService("GestionMalla", "ObtenerListadoSeccion");
+                //ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                //ws.AddParameter("IdVersion", IdVersion);
+                //Array obj = ws.Invoke() as Array;
 
-                string json = JsonConvert.SerializeObject(obj);
-                list = JsonConvert.DeserializeObject<List<ObtenerListadoSeccion>>(json);
+                //string json = JsonConvert.SerializeObject(obj);
+                //list = JsonConvert.DeserializeObject<List<ObtenerListadoSeccion>>(json);
+
+                for (int i = 0; i < 20; i++)
+                {
+                    var id = i;
+                    var item = new Faker<ObtenerListadoSeccion>("es")
+                        .StrictMode(true)
+                        .RuleFor(r => r.Id, f => id + 1.ToString())
+                        .RuleFor(r => r.IdSociedad, f => f.Random.Number(1, 30).ToString())
+                        .RuleFor(r => r.IdVersion, f => IdVersion)
+                        .RuleFor(r => r.Nombre, f => f.Name.JobArea())
+                        .RuleFor(r => r.Color, f =>  f.Internet.Color());
+                    list.Add(item);
+                }
+                
+
                 return list;
             }
             catch (Exception e)

@@ -3,9 +3,11 @@ using DLMallas.Utilidades;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bogus;
 using WSLib;
 
 namespace DLMallas.Business
@@ -15,12 +17,36 @@ namespace DLMallas.Business
         public List<ObtenerListadoComponente> obtenerListadoComponente(string IdVersion)
         {
             List<ObtenerListadoComponente> list = new List<ObtenerListadoComponente>();
-            WebService ws = new WebService("GestionMalla", "obtenerListadoComponente");
-            ws.AddParameter("IdVersion", IdVersion);
-            Array obj = ws.Invoke() as Array;
+            //WebService ws = new WebService("GestionMalla", "obtenerListadoComponente");
+            //ws.AddParameter("IdVersion", IdVersion);
+            //Array obj = ws.Invoke() as Array;
 
-            string json = JsonConvert.SerializeObject(obj);
-            list = JsonConvert.DeserializeObject<List<ObtenerListadoComponente>>(json);
+            //string json = JsonConvert.SerializeObject(obj);
+            //list = JsonConvert.DeserializeObject<List<ObtenerListadoComponente>>(json);
+
+
+
+        //public string Id;
+        //public string UnidadCurricular;
+        //public string Modalidad;
+        //public string Seccion;
+        //public string Color;
+
+
+            var modalities = new[] { "Precencial", "eLearning", "Todas" }; 
+
+            for (int i = 0; i < 30; i++)
+            {
+                var id = i;
+                list.Add(new Faker<ObtenerListadoComponente>("es")
+                    .StrictMode(true)
+                    .RuleFor(r => r.Id, f => (id + 1).ToString())
+                    .RuleFor(r => r.UnidadCurricular, f => "UC"+id+1)
+                    .RuleFor(r => r.Modalidad, f => f.PickRandom(modalities))
+                    .RuleFor(r => r.Seccion, f => "Seccion"+id+1)
+                    .RuleFor(r => r.Color, f => f.Internet.Color())
+                );
+            }
             return list;
         }
 

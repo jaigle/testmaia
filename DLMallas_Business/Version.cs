@@ -55,14 +55,23 @@ namespace DLMallas.Business
         public List<ObtenerVersion> obtenerVersion(string Id)
         {
             List<ObtenerVersion> list = new List<ObtenerVersion>();
-            WebService ws = new WebService("GestionMalla", "obtenerVersion");
-            ws.AddParameter("IdSociedad", Variables.IdSociedad);
-            ws.AddParameter("Id", Id);
+            //WebService ws = new WebService("GestionMalla", "obtenerVersion");
+            //ws.AddParameter("IdSociedad", Variables.IdSociedad);
+            //ws.AddParameter("Id", Id);
 
-            Array obj = ws.Invoke() as Array;
+            //Array obj = ws.Invoke() as Array;
 
-            string json = JsonConvert.SerializeObject(obj);
-            list = JsonConvert.DeserializeObject<List<ObtenerVersion>>(json);
+            //string json = JsonConvert.SerializeObject(obj);
+            //list = JsonConvert.DeserializeObject<List<ObtenerVersion>>(json);
+
+            list.Add(new Faker<ObtenerVersion>("es")
+                .StrictMode(true)
+                .RuleFor(r => r.Id, f => Id.ToString())
+                .RuleFor(r => r.IdSociedad, f => f.Random.Number(1, 30).ToString())
+                .RuleFor(r => r.IdMalla, f => f.Random.Number(1, 100).ToString())
+                .RuleFor(r => r.Version, f => f.Random.Number(1, 40).ToString())
+                .RuleFor(r => r.FechaInicio, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
+                .RuleFor(r => r.FechaTermino, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture)));
             return list;
         }
 
