@@ -8,46 +8,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bogus;
+using DLMallas.Business.Extencions;
 using WSLib;
 
 namespace DLMallas.Business
 {
-    public class Componente
+    public class Componente : ServiciosBase
     {
         public List<ObtenerListadoComponente> obtenerListadoComponente(string IdVersion)
         {
-            List<ObtenerListadoComponente> list = new List<ObtenerListadoComponente>();
-            //WebService ws = new WebService("GestionMalla", "obtenerListadoComponente");
-            //ws.AddParameter("IdVersion", IdVersion);
-            //Array obj = ws.Invoke() as Array;
+            var result = new List<ObtenerListadoComponente>();
 
-            //string json = JsonConvert.SerializeObject(obj);
-            //list = JsonConvert.DeserializeObject<List<ObtenerListadoComponente>>(json);
-
-
-
-        //public string Id;
-        //public string UnidadCurricular;
-        //public string Modalidad;
-        //public string Seccion;
-        //public string Color;
-
-
-            var modalities = new[] { "Precencial", "eLearning", "Todas" }; 
-
-            for (int i = 0; i < 30; i++)
+            if (!Offline)
             {
-                var id = i;
-                list.Add(new Faker<ObtenerListadoComponente>("es")
-                    .StrictMode(true)
-                    .RuleFor(r => r.Id, f => (id + 1).ToString())
-                    .RuleFor(r => r.UnidadCurricular, f => "UC"+id+1)
-                    .RuleFor(r => r.Modalidad, f => f.PickRandom(modalities))
-                    .RuleFor(r => r.Seccion, f => "Seccion"+id+1)
-                    .RuleFor(r => r.Color, f => f.Internet.Color())
-                );
+                var ws = new WebService("GestionMalla", "obtenerListadoComponente");
+                ws.AddParameter("IdVersion", IdVersion);
+                Array obj = ws.Invoke() as Array;
+
+                string json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<ObtenerListadoComponente>>(json);
             }
-            return list;
+            else
+            {
+                result.Faker();
+            } 
+           
+            return result;
         }
 
         public List<ObtenerComponente> obtenerComponente(string Id)

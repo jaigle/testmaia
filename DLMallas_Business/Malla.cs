@@ -27,7 +27,7 @@ namespace DLMallas.Business
             }
             else
             {
-                result = result.Faker();
+                result.Faker();
             }
 
             return result;

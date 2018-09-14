@@ -26,7 +26,7 @@ namespace DLMallas.Business
             }
             else
             {
-                result = result.Faker();
+               result.Faker();
             }
             
             return result;
@@ -49,7 +49,7 @@ namespace DLMallas.Business
             }
             else
             {
-                result = result.Faker(id);
+                result.Faker(id);
             }
 
 
