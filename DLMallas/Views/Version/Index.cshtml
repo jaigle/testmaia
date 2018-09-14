@@ -45,7 +45,7 @@
                                         <td>
                                             <div class="row text-center">
                                                 <div class="col-lg-3 col-md-3 col-sm-3 text-center">
-                                                    <a href="#" onclick="version.editarVersion('@item.Id', '@item.FechaInicio')" title="Editar Versión">
+                                                    <a href="#" onclick="version.editarVersion('@item.Id', '@item.Vigencia')" title="Editar Versión">
                                                         <span class="glyphicon glyphicon-pencil"></span>
                                                     </a>
                                                 </div>
@@ -66,10 +66,10 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.FechaInicio) - @Html.DisplayFor(modelItem => item.FechaTermino)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.TotalComponente)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Version)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vigencia)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.UC)</td>
+                                        <td>@(item.Estado == "1" ? "Activa" : "No Activa")</td>
                                     </tr>
                                 }
                             </tbody>

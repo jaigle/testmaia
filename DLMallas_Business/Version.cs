@@ -40,14 +40,13 @@ namespace DLMallas.Business
             {
                 var id = i;
                 list.Add(new Faker<ObtenerListadoVersion>("es")
-                    .StrictMode(true)
-                    .RuleFor(r => r.Id, f => (id + 1).ToString())
-                    .RuleFor(r => r.IdSociedad, f => f.Random.Number(1, 30).ToString())
-                    .RuleFor(r => r.IdMalla, f => f.Random.Number(1, 100).ToString())
-                    .RuleFor(r => r.Version, f => f.Random.Number(1, 40).ToString())
-                    .RuleFor(r => r.FechaInicio, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
-                    .RuleFor(r => r.FechaTermino, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
-                    .RuleFor(r => r.TotalComponente, f => f.Random.Number(1, 200).ToString()));
+                    .RuleFor(r => r.Id, f => (id + 1))
+                    .RuleFor(r => r.IdSociedad, f => f.Random.Number(1, 30))
+                    .RuleFor(r => r.Version, f => f.Random.Number(1, 45).ToString())
+                    .RuleFor(r => r.IdMalla, f => f.Random.Number(1, 100))
+                    .RuleFor(r => r.Vigencia, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
+                    .RuleFor(r => r.UC, f => f.Random.Number(1, 40))
+                    .RuleFor(r => r.Estado, f => f.Random.Number(0, 1).ToString()));
             }
             return list;
         }
@@ -86,7 +85,7 @@ namespace DLMallas.Business
                 //Array obj = ws.Invoke() as Array;
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -104,7 +103,7 @@ namespace DLMallas.Business
                 Array obj = ws.Invoke() as Array;
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -120,7 +119,7 @@ namespace DLMallas.Business
                 ws.Invoke();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

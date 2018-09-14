@@ -16,7 +16,7 @@ namespace DLMallas.Controllers
         {
             CertificadoViewModels model = new CertificadoViewModels();
             Malla malla = new Malla();
-            model.ObtenerMalla = malla.obtenerMalla(id);
+            model.ObtenerMalla = malla.ObtenerMalla(id);
             return View(model);
         }
 

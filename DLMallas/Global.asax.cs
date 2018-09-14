@@ -50,7 +50,6 @@ namespace DLMallas
                 else
                 {
                     //String[] result = identity.Name.Split('|');jaigle
-                    var idUsuario = "0";
                     var seguridadSvc = new Seguridad();
                     //seguridadSvc.ActualizarVariablesSistema(cookieSociedad.Value.ToString(), User.Identity.GetUserId().ToString(), idUsuario.ToString());jaigle
                     seguridadSvc.ActualizarVariablesSistemafake("1", "admin", "0");

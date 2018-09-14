@@ -20,7 +20,7 @@ namespace DLMallas.Controllers
             var model = new VersionViewModels();
             
             model.ObtenerListadoVersion = _version.obtenerListadoVersion(id);
-            model.ObtenerMalla = _malla.obtenerMalla(id);
+            model.ObtenerMalla = _malla.ObtenerMalla(id);
             ViewBag.ActiveLink = "Versiones";
             return View(model);
         }
@@ -68,7 +68,7 @@ namespace DLMallas.Controllers
         {
             var model = new VersionViewModels();
             model.ObtenerVersion = _version.obtenerVersion(IdVersion);
-            model.ObtenerMalla = _malla.obtenerMalla(IdMalla);
+            model.ObtenerMalla = _malla.ObtenerMalla(IdMalla);
             model.ObtenerListadoSeccion = _seccion.obtenerListadoSeccion(IdVersion);
             model.ObtenerListadoComponente = _componente.obtenerListadoComponente(IdVersion);
             ViewBag.ActiveLink = "Versiones";

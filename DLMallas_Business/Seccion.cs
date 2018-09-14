@@ -43,7 +43,7 @@ namespace DLMallas.Business
 
                 return list;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -73,7 +73,7 @@ namespace DLMallas.Business
                 //Array obj = ws.Invoke() as Array;
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -90,7 +90,7 @@ namespace DLMallas.Business
                 //Array obj = ws.Invoke() as Array;
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -105,7 +105,7 @@ namespace DLMallas.Business
                 //ws.Invoke();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

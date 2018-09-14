@@ -18,7 +18,7 @@ namespace DLMallas.Controllers
         public ActionResult Index()
         {
             MallaViewModels model = new MallaViewModels();
-            model.ObtenerListadoMalla = _malla.obtenerListadoMalla();
+            model.ObtenerListadoMalla = _malla.ObtenerListadoMalla();
             model.NombrePersonaLogin = Variables.NombrePersona;
             model.FechaHoy = DateTime.Now.ToString("dd/MM/yyyy");
             return View(model);
@@ -27,7 +27,7 @@ namespace DLMallas.Controllers
         public ActionResult EditarMalla(string id)
         {
             var model = new MallaViewModels();
-            model.ObtenerMalla = _malla.obtenerMalla(id);
+            model.ObtenerMalla = _malla.ObtenerMalla(id);
             ViewBag.Escuelas = _malla.ObtenerEsceulas().Select(s => new EscuelaViewModels { Id = s.Id, Nombre = s.Nombre }).ToList();
             ViewBag.ActiveLink = "EditarMalla";
             return View(model);
@@ -43,7 +43,7 @@ namespace DLMallas.Controllers
                 Descripcion = desc,
                 Activo = activo
             };
-            var resp = _malla.guardarMalla(model);
+            var resp = _malla.GuardarMalla(model);
             if (resp)
                 return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
 
@@ -61,7 +61,7 @@ namespace DLMallas.Controllers
                 Activo = activo
             };
 
-            var resp = _malla.actualizarMalla(model);
+            var resp = _malla.ActualizarMalla(model);
             if (resp)
                 return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
             else
@@ -72,7 +72,7 @@ namespace DLMallas.Controllers
         {
             try
             {
-                _malla.eliminarMalla(id);
+                _malla.EliminarMalla(id);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
