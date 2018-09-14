@@ -3,86 +3,71 @@ using DLMallas.Utilidades;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bogus;
+using DLMallas.Business.Extencions;
 using WSLib;
 
 namespace DLMallas.Business
 {
-    public class _Version
+    public class _Version : ServiciosBase
     {
-        public List<ObtenerListadoVersion> obtenerListadoVersion(string IdMalla)
+        public List<ObtenerListadoVersion> ObtenerListadoVersion(string idMalla)
         {
-            var list = new List<ObtenerListadoVersion>();
-            //WebService ws = new WebService("GestionMalla", "obtenerListadoVersion");
-            //ws.AddParameter("IdSociedad", Variables.IdSociedad);
-            //ws.AddParameter("IdMalla", IdMalla);
-            //Array obj = ws.Invoke() as Array;
+            var result = new List<ObtenerListadoVersion>();
 
-            //string json = JsonConvert.SerializeObject(obj);
-            //list = JsonConvert.DeserializeObject<List<ObtenerListadoVersion>>(json);
-
-            /*
-             *  public string Id;
-	    public string IdSociedad;
-	    public string IdMalla;
-	    public string Version;
-	    public string FechaInicio;
-	    public string FechaTermino;
-        public string TotalComponente;
-             */
-
-
-            for (int i = 0; i < 50; i++)
+            if (!Offline)
             {
-                var id = i;
-                list.Add(new Faker<ObtenerListadoVersion>("es")
-                    .RuleFor(r => r.Id, f => (id + 1))
-                    .RuleFor(r => r.IdSociedad, f => f.Random.Number(1, 30))
-                    .RuleFor(r => r.Version, f => f.Random.Number(1, 45).ToString())
-                    .RuleFor(r => r.IdMalla, f => f.Random.Number(1, 100))
-                    .RuleFor(r => r.Vigencia, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
-                    .RuleFor(r => r.UC, f => f.Random.Number(1, 40))
-                    .RuleFor(r => r.Estado, f => f.Random.Number(0, 1).ToString()));
+                var ws = new WebService("GestionMalla", "obtenerListadoVersion");
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                ws.AddParameter("IdMalla", idMalla);
+                Array obj = ws.Invoke() as Array;
+
+                string json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<ObtenerListadoVersion>>(json);
             }
-            return list;
+            else
+            {
+                result = result.Faker();
+            }
+            
+            return result;
         }
 
-        public List<ObtenerVersion> obtenerVersion(string Id)
+        public List<ObtenerVersion> ObtenerVersion(string id)
         {
-            List<ObtenerVersion> list = new List<ObtenerVersion>();
-            //WebService ws = new WebService("GestionMalla", "obtenerVersion");
-            //ws.AddParameter("IdSociedad", Variables.IdSociedad);
-            //ws.AddParameter("Id", Id);
+            var result = new List<ObtenerVersion>();
 
-            //Array obj = ws.Invoke() as Array;
+            if (!Offline)
+            {
+                WebService ws = new WebService("GestionMalla", "obtenerVersion");
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                ws.AddParameter("Id", id);
 
-            //string json = JsonConvert.SerializeObject(obj);
-            //list = JsonConvert.DeserializeObject<List<ObtenerVersion>>(json);
+                Array obj = ws.Invoke() as Array;
 
-            list.Add(new Faker<ObtenerVersion>("es")
-                .StrictMode(true)
-                .RuleFor(r => r.Id, f => Id.ToString())
-                .RuleFor(r => r.IdSociedad, f => f.Random.Number(1, 30).ToString())
-                .RuleFor(r => r.IdMalla, f => f.Random.Number(1, 100).ToString())
-                .RuleFor(r => r.Version, f => f.Random.Number(1, 40).ToString())
-                .RuleFor(r => r.FechaInicio, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
-                .RuleFor(r => r.FechaTermino, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture)));
-            return list;
+                string json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<ObtenerVersion>>(json);
+            }
+            else
+            {
+                result = result.Faker(id);
+            }
+
+
+            return result;
         }
 
-        public bool guardarVersion(GuardarVersion model)
+        public bool GuardarVersion(GuardarVersion model)
         {
             try
             {
-                //WebService ws = new WebService("GestionMalla", "guardarVersion");
-                //ws.AddParameter("IdMalla", model.IdMalla);
-                //ws.AddParameter("IdSociedad", model.IdSociedad);
-                //ws.AddParameter("FechaInicio", model.FechaInicio);
-                //Array obj = ws.Invoke() as Array;
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "guardarVersion");
+                    ws.AddParameter("IdMalla", model.IdMalla);
+                    ws.AddParameter("IdSociedad", model.IdSociedad);
+                    ws.AddParameter("FechaInicio", model.FechaInicio);
+                    ws.Invoke();
+                }
                 return true;
             }
             catch (Exception)
@@ -92,15 +77,19 @@ namespace DLMallas.Business
            
         }
 
-        public bool actualizarVersion(ActualizarVersion model)
+        public bool ActualizarVersion(ActualizarVersion model)
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "actualizarVersion");
-                ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                ws.AddParameter("Id", model.Id);
-                ws.AddParameter("FechaInicio", model.FechaInicio);
-                Array obj = ws.Invoke() as Array;
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "actualizarVersion");
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("Id", model.Id);
+                    ws.AddParameter("FechaInicio", model.FechaInicio);
+                    ws.Invoke();
+                }
+
                 return true;
             }
             catch (Exception)
@@ -110,13 +99,17 @@ namespace DLMallas.Business
             
         }
 
-        public bool eliminarVersion(string Id)
+        public bool EliminarVersion(string id)
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "eliminarVersion");
-                ws.AddParameter("Id", Id);
-                ws.Invoke();
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "eliminarVersion");
+                    ws.AddParameter("Id", id);
+                    ws.Invoke();
+                }
+
                 return true;
             }
             catch (Exception)

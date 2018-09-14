@@ -19,7 +19,7 @@ namespace DLMallas.Controllers
         {
             var model = new VersionViewModels();
             
-            model.ObtenerListadoVersion = _version.obtenerListadoVersion(id);
+            model.ObtenerListadoVersion = _version.ObtenerListadoVersion(id);
             model.ObtenerMalla = _malla.ObtenerMalla(id);
             ViewBag.ActiveLink = "Versiones";
             return View(model);
@@ -34,7 +34,7 @@ namespace DLMallas.Controllers
                 FechaInicio = fechainicio,
             };
             
-            var resp = _version.guardarVersion(guarda);
+            var resp = _version.GuardarVersion(guarda);
             if (resp)
                 return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
 
@@ -47,7 +47,7 @@ namespace DLMallas.Controllers
             ActualizarVersion up = new ActualizarVersion();
             up.Id = id;
             up.FechaInicio = fechainicio;
-            var resp = version.actualizarVersion(up);
+            var resp = version.ActualizarVersion(up);
             if (resp)
                 return true;
             else
@@ -57,7 +57,7 @@ namespace DLMallas.Controllers
         public bool EliminarVersion(string Id)
         {
             _Version version = new _Version();
-            var resp = version.eliminarVersion(Id);
+            var resp = version.EliminarVersion(Id);
             if (resp)
                 return true;
             else
@@ -67,7 +67,7 @@ namespace DLMallas.Controllers
         public ActionResult DetalleVersion(string IdVersion, string IdMalla) 
         {
             var model = new VersionViewModels();
-            model.ObtenerVersion = _version.obtenerVersion(IdVersion);
+            model.ObtenerVersion = _version.ObtenerVersion(IdVersion);
             model.ObtenerMalla = _malla.ObtenerMalla(IdMalla);
             model.ObtenerListadoSeccion = _seccion.obtenerListadoSeccion(IdVersion);
             model.ObtenerListadoComponente = _componente.obtenerListadoComponente(IdVersion);
