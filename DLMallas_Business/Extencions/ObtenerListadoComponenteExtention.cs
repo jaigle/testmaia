@@ -18,7 +18,7 @@ namespace DLMallas.Business.Extencions
                 .RuleFor(r => r.Modalidad, f => f.PickRandom(modalities))
                 .RuleFor(r => r.Seccion, f => "Seccion"+id+1)
                 .RuleFor(r => r.Color, f => f.Internet.Color())
-                .RuleFor(r => r.Prerrequisitos, f => f.Internet.Color())
+                .RuleFor(r => r.Prerrequisitos, f => f.PickRandom(0, 1, 2, 3, 4, 5).CodeGenerate())
                 .RuleFor(r => r.Seleccionado, f => f.PickRandom(true,false));
         }
         
@@ -30,6 +30,23 @@ namespace DLMallas.Business.Extencions
             }
 
             return list;
+        }
+
+        private static string CodeGenerate(this int length)
+        {
+            var result = string.Empty;
+
+            if (length != 0)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    result += "CU000" + i + 1 +",";
+                }
+
+                result = result.Substring(0, result.Length - 1);
+            }
+
+            return result;
         }
     }
 }

@@ -92,18 +92,20 @@
                             <div class="tab-pane fade" id="tab2">
                                 <div class="panel panel-default panel-page-content">
                                     <div class="panel-heading">
-                                        <table style="width: 100%">
-                                            <tr>
-                                                <td class="text-left">Unidades Curriculares</td>
-                                                <td class="text-right">
-                                                    <a href="#" style="color: white"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Ver Diagrama</a>
-                                                    <a class="btn btn-primary btn-sm pull-right " href="#" style="color: white"
-                                                       onclick="agregarComponente('@Model.ObtenerVersion[0].Id')">
-                                                        <span class="fa fa-plus"></span> Crear Nueva Unidad Curricular
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-3 pull-left text-left margin-bottom10">
+                                                Unidades Curriculares
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-4 pull-right text-left">
+                                                <a class="btn btn-primary btn-sm pull-right" href="#" style="color: white"
+                                                   onclick="agregarComponente('@Model.ObtenerVersion[0].Id')">
+                                                    <span class="fa fa-plus"></span> Crear Nueva Unidad Curricular
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 pull-right text-left margin-bottom10">
+                                                <a href="#" style="color: white"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Ver Diagrama</a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="panel-body">
                                         <table class="table table-condensed table-bordered table-hover tabla-resultados">
@@ -113,7 +115,7 @@
                                                     <th>Unidad Curricular</th>
                                                     <th>Modalidad</th>
                                                     <th>Sección</th>
-                                                    <th>Color</th>
+                                                    <th>Prerrequisitos</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -132,13 +134,20 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <a href="#" onclick="seleccionarPrerrequisito('@item.Id')">
-                                                                <span class="glyphicon glyphicon-menu-hamburger"></span>
+                                                                <span class="glyphicon glyphicon-list"></span>
                                                             </a>
                                                         </td>
                                                         <td>@Html.DisplayFor(modelItem => item.UnidadCurricular)</td>
                                                         <td>@Html.DisplayFor(modelItem => item.Modalidad)</td>
-                                                        <td>@Html.DisplayFor(modelItem => item.Seccion)</td>
-                                                        <td class="text-center"><div style="background-color: @item.Color"></div></td>
+                                                        <td>
+                                                            <div class="col-lg-10 col-md-10 col-sm-10">
+                                                                @Html.DisplayFor(modelItem => item.Seccion)
+                                                            </div>
+                                                            <div class="col-lg-1 col-md-1 col-sm-1 pull-right" style="background-color: @item.Color; width: 10px; height: 10px;">
+
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">@Html.DisplayFor(modelItem => item.Prerrequisitos)</td>
                                                     </tr>
                                                 }
                                             </tbody>
@@ -318,20 +327,20 @@
 
                 if (nombre == "" || color == "") {
                     alert("Debe Ingresar Nombre y Color");
-                 } else {
-                $.ajax({
-                    type: "POST",
-                    url: "/Seccion/ActualizarSeccion",
-                    contentType: "application/json; charset=utf-8",
-                    data: actionData,
-                    complete: function (result) {
-                        alert("Registro Actualizado Correctamente");
-                        window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id + "&idMalla=" + @Model.ObtenerVersion[0].IdMalla;
-                    },
-                    error: function(xhr, status, error) {
-                        alert("Ha ocurrido un error al intentar guardar el registro.");
-                    }
-                });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Seccion/ActualizarSeccion",
+                        contentType: "application/json; charset=utf-8",
+                        data: actionData,
+                        complete: function (result) {
+                            alert("Registro Actualizado Correctamente");
+                            window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id + "&idMalla=" + @Model.ObtenerVersion[0].IdMalla;
+                        },
+                        error: function(xhr, status, error) {
+                            alert("Ha ocurrido un error al intentar guardar el registro.");
+                        }
+                    });
                 }
             });
 
