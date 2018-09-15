@@ -2375,6 +2375,7 @@
     <Content Include="Views\Shared\Partials\_InformacionMalla.cshtml" />
     <Content Include="Views\Version\_CrearSeccion.cshtml" />
     <Content Include="Views\Version\_EditarSeccion.cshtml" />
+    <Content Include="Views\Version\_CrearComponente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

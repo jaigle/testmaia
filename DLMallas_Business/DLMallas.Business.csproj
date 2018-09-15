@@ -103,6 +103,8 @@
     <Compile Include="Dto\Version\ObtenerListadoVersion.cs" />
     <Compile Include="Dto\Version\ObtenerVersion.cs" />
     <Compile Include="Extencions\ObtenerListadoComponenteExtention.cs" />
+    <Compile Include="Extencions\ObtenerListadoCatalogoCursoExtention.cs" />
+    <Compile Include="Extencions\ObtenerListadoModalidadComponenteExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoVersionExtention.cs" />
     <Compile Include="Extencions\ObtenerVersionExtention.cs" />
     <Compile Include="Extencions\ObtenerMallaExtention.cs" />

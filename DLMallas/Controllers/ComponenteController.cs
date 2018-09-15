@@ -11,31 +11,31 @@ using DLMallas.Business.Dto.Componente;
 
 namespace DLMallas.Controllers
 {
-    public class ComponenteController : Controller
+    public class ComponenteController : BaseController
     {
         public ActionResult Index()
         {
             return View();
         }
 
-        public JsonResult ObtenerListadoSeccion(string idversion) {
-            Seccion s = new Seccion();
-            var a = s.obtenerListadoSeccion(idversion).ToList();
-            return Json(a, JsonRequestBehavior.AllowGet); 
+        public JsonResult ObtenerListadoSeccion(string idversion)
+        {
+            var a = _seccion.obtenerListadoSeccion(idversion).ToList();
+            return Json(a, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult OtenerListadoCatalogoCurso()
         {
             Componente s = new Componente();
-            var b = s.obtenerListadoCatalogoCurso().ToList();
+            var b = _componente.obtenerListadoCatalogoCurso().ToList();
             return Json(b, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ObtenerListadoModalidadComponente()
         {
-            Componente s = new Componente();
-            var c = s.obtenerListadoModalidadComponente().ToList();
-            return Json(c, JsonRequestBehavior.AllowGet);
+
+            var result = _componente.obtenerListadoModalidadComponente().ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ObtenerComponente(string id)
@@ -45,25 +45,27 @@ namespace DLMallas.Controllers
             return Json(get, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ObtenerComponentePrerrequisito(string id) 
+        public JsonResult ObtenerComponentePrerrequisito(string id)
         {
             Componente co = new Componente();
             var get = co.obtenerComponentePrerrequisito(id).ToList();
             return Json(get, JsonRequestBehavior.AllowGet);
         }
 
-        public bool GuardarComponente(string idseccion, string idmodalidad, string iduc)
+        public bool GuardarComponente(string idseccion, string idmodalidad, List<string> iduc)
         {
-            GuardarComponente model = new GuardarComponente();
+            var model = new GuardarComponente();
             model.IdSeccion = idseccion;
             model.IdModalidadComponente = idmodalidad;
-            model.IdUnidadCurricular = iduc;
-            Componente co = new Componente();
-            var resp = co.guardarComponente(model);
-            if (resp)
-                return true;
-            else
-                return false;
+            var resp = true;
+            foreach (var uc in iduc)
+            {
+                model.IdUnidadCurricular = uc;
+                resp = _componente.guardarComponente(model);
+                if (!resp) break;
+            }
+
+            return resp;
         }
 
         public bool ActualizarComponente(string id, string idseccion, string idmodalidad)

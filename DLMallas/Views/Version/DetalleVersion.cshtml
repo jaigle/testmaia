@@ -166,38 +166,7 @@
                 @Html.Partial("_EditarSeccion", Model)
 
                 <!-- Modal agregar Componente -->
-                <div class="modal fade" id="modAgregarComponente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">Agregar Unidad Curricular</h4>
-                            </div>
-                            <div class="modal-body">
-                                <table>
-                                    <tr>
-                                        <th>Sección: </th>
-                                        <td><select id="comboSeccion" class="form-control"></select></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Unidades Curriculares: </th>
-                                        <td><select id="comboUC" multiple="multiple"></select></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Modalidad: </th>
-                                        <td><select id="comboModalidad"></select></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button class="btn btn_primary" id="btnGuardarNuevoComponente">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @Html.Partial("_CrearComponente")
 
                 <!-- Modal Editar Componente -->
                 <div class="modal fade" id="modEditarComponente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -348,24 +317,25 @@
             $("#btnGuardarNuevoComponente").click(function () {
                 var idseccion = $('#comboSeccion').val();
                 var idmodalidad = $('#comboModalidad').val();
-                var iduc;
+                var iduc = $("#comboUC").val()
 
-                $('#comboUC option').each(function () {
-                    iduc = this.value;
-                    var actionData = "{'idseccion': '" + idseccion + "', 'idmodalidad': '" + idmodalidad + "', 'iduc': '" + iduc + "'}";
+                //$('#comboUC option').each(function () {
+                //iduc = this.value;
+                var actionData = {idseccion: idseccion, idmodalidad: idmodalidad, iduc: iduc};
 
-                    $.ajax({
-                        type: "POST",
-                        url: "/Componente/GuardarComponente",
-                        contentType: "application/json; charset=utf-8",
-                        data: actionData,
-                        dataType: "json",
-                        complete: function (result) {
-                            alert("Registro Guardado Correctamente");
-                            window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                        }
-                    });
+                $.ajax({
+                    type: "POST",
+                    url: "/Componente/GuardarComponente",
+                    //contentType: "application/json; charset=utf-8",
+                    data: actionData,
+                    dataType: "json",
+                    traditional: true,
+                    complete: function (result) {
+                        alert("Registro Guardado Correctamente");
+                        window.location.href = "/Version/DetalleVersion?IdVersion="+@Model.ObtenerVersion[0].Id +"&IdMalla=" +@Model.ObtenerVersion[0].IdMalla;
+                    }
                 });
+                //});
             });
 
             $("#btnActualizarComponente").click(function () {
@@ -447,10 +417,10 @@
 
         /*acciones de componente/uc*/
         function agregarComponente(idversion) {
-            $("#modCrearComponente").modal('show');
             cargaComboSeccion(idversion);
             cargaComboUC();
             cargaComboModalidad();
+            $("#modAgregarComponente").modal('show');
         }
 
         function editarComponente(id, idversion) {
@@ -509,8 +479,8 @@
                 data: "{'idversion': '" + idversion + "'}",
                 dataType: "json",
                 complete: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var opt = new Option(data[i].Nombre, data[i].Id);
+                    for (var i = 0; i < data.responseJSON.length; i++) {
+                        var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
                         $('#comboSeccion').append(opt);
                     }
                 }
@@ -524,8 +494,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 complete: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var opt = new Option(data[i].Nombre, data[i].Id);
+                    for (var i = 0; i < data.responseJSON.length; i++) {
+                        var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
                         $('#comboUC').append(opt);
 
                     }
@@ -547,8 +517,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 complete: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var opt = new Option(data[i].Nombre, data[i].Id);
+                    for (var i = 0; i < data.responseJSON.length; i++) {
+                        var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
                         $('#comboModalidad').append(opt);
                     }
                 }
