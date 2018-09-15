@@ -84,8 +84,7 @@ namespace DLMallas.Controllers
 
         public bool EliminarComponente(string id)
         {
-            Componente c = new Componente();
-            var resp = c.eliminarComponente(id);
+            var resp = _componente.eliminarComponente(id);
             if (resp)
                 return true;
             else
