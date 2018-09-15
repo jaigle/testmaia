@@ -106,6 +106,7 @@
     <Compile Include="Extencions\ObtenerListadoCatalogoCursoExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoModalidadComponenteExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoVersionExtention.cs" />
+    <Compile Include="Extencions\ObtenerComponenteExtention.cs" />
     <Compile Include="Extencions\ObtenerVersionExtention.cs" />
     <Compile Include="Extencions\ObtenerMallaExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoMallaExtention.cs" />

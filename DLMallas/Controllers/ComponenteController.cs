@@ -70,12 +70,12 @@ namespace DLMallas.Controllers
 
         public bool ActualizarComponente(string id, string idseccion, string idmodalidad)
         {
-            ActualizarComponente model = new ActualizarComponente();
+            var model = new ActualizarComponente();
             model.Id = id;
             model.IdSeccion = idseccion;
             model.IdModalidadComponente = idmodalidad;
-            Componente co = new Componente();
-            var resp = co.actualizarComponente(model);
+
+            var resp = _componente.actualizarComponente(model);
             if (resp)
                 return true;
             else

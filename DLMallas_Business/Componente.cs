@@ -38,14 +38,22 @@ namespace DLMallas.Business
 
         public List<ObtenerComponente> obtenerComponente(string Id)
         {
-            List<ObtenerComponente> list = new List<ObtenerComponente>();
-            WebService ws = new WebService("GestionMalla", "obtenerComponente");
-            ws.AddParameter("Id", Id);
-            Array obj = ws.Invoke() as Array;
+            var result = new List<ObtenerComponente>();
+            if (!Offline)
+            {
+                WebService ws = new WebService("GestionMalla", "obtenerComponente");
+                ws.AddParameter("Id", Id);
+                Array obj = ws.Invoke() as Array;
 
-            string json = JsonConvert.SerializeObject(obj);
-            list = JsonConvert.DeserializeObject<List<ObtenerComponente>>(json);
-            return list;
+                string json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<ObtenerComponente>>(json);
+            }
+            else
+            {
+                result.Faker(Id);
+            }
+           
+            return result;
         }
 
         public List<ObtenerListadoModalidadComponente> obtenerListadoModalidadComponente()
@@ -125,11 +133,15 @@ namespace DLMallas.Business
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "actualizarComponente");
-                ws.AddParameter("Id", model.Id);
-                ws.AddParameter("IdSeccion", model.IdSeccion);
-                ws.AddParameter("IdModalidadComponente", model.IdModalidadComponente);
-                Array obj = ws.Invoke() as Array;
+                if (!Offline)
+                {
+                    WebService ws = new WebService("GestionMalla", "actualizarComponente");
+                    ws.AddParameter("Id", model.Id);
+                    ws.AddParameter("IdSeccion", model.IdSeccion);
+                    ws.AddParameter("IdModalidadComponente", model.IdModalidadComponente);
+                    Array obj = ws.Invoke() as Array;
+                }
+               
                 return true;
             }
             catch (Exception)

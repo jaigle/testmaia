@@ -123,7 +123,7 @@
                                                 {
                                                     <tr>
                                                         <td class="text-center">
-                                                            <a href="#" onclick="editarComponente('@item.Id','@Model.ObtenerVersion[0].Id')">
+                                                            <a href="#" onclick="editarComponente('@item.Id', '@item.UnidadCurricular', '@Model.ObtenerVersion[0].Id')">
                                                                 <span class="glyphicon glyphicon-pencil"></span>
                                                             </a>
                                                         </td>
@@ -168,8 +168,10 @@
                 <!-- Modal agregar Componente -->
                 @Html.Partial("_CrearComponente")
 
-                <!-- Modal Editar Componente -->
-                <div class="modal fade" id="modEditarComponente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <!-- Modal Editar Componente -->
+            @Html.Partial("_EditarComponente")
+
+                @*<div class="modal fade" id="modEditarComponente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -201,7 +203,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
                 <!-- Modal Prerrequisito -->
                 <div class="modal fade" id="modPrerrequisito" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -317,7 +319,7 @@
             $("#btnGuardarNuevoComponente").click(function () {
                 var idseccion = $('#comboSeccion').val();
                 var idmodalidad = $('#comboModalidad').val();
-                var iduc = $("#comboUC").val()
+                var iduc = $("#comboUC").val();
 
                 //$('#comboUC option').each(function () {
                 //iduc = this.value;
@@ -340,8 +342,9 @@
 
             $("#btnActualizarComponente").click(function () {
                 var id = $('#txtIdComponente').val();
-                var idseccion = $('#comboSeccion').val();
-                var idmodalidad = $('#comboModalidad').val();
+                var idseccion = $('#comboSeccionEdit').val();
+                var idmodalidad = $('#comboModalidadEdit').val();
+                //var iduc = $("#comboUC").val();
                 var actionData = "{'id': '" + id + "','idseccion': '" + idseccion + "','idmodalidad': '" + idmodalidad + "'}";
 
                 $.ajax({
@@ -352,7 +355,7 @@
                     dataType: "json",
                     complete: function (result) {
                         alert("Registro Actualizado Correctamente");
-                        window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
+                        window.location.href = "/Version/DetalleVersion?IdVersion="+@Model.ObtenerVersion[0].Id +"&IdMalla=" +@Model.ObtenerVersion[0].IdMalla;
                     }
                 });
 
@@ -423,7 +426,7 @@
             $("#modAgregarComponente").modal('show');
         }
 
-        function editarComponente(id, idversion) {
+        function editarComponente(id, unidadCurricular, idversion) {
             var idseccion;
             var idmodalidadcomponente;
             var idunidadcurricular;
@@ -435,22 +438,23 @@
                 data: "{'id': '" + id + "'}",
                 dataType: "json",
                 complete: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        idseccion = data[i].IdSeccion;
-                        idmodalidadcomponente = data[i].IdModalidadComponente;
-                        idunidadcurricular = data[i].IdUnidadCurricular;
+                    for (var i = 0; i < data.responseJSON.length; i++) {
+                        idseccion = data.responseJSON[i].IdSeccion;
+                        idmodalidadcomponente = data.responseJSON[i].IdModalidadComponente;
+                        idunidadcurricular = data.responseJSON[i].IdUnidadCurricular;
 
                         $("#txtIdComponente").val(id);
+                        $("#txtUC").val(unidadCurricular);
                         cargaComboSeccion(idversion);
-                        cargaComboUC();
                         cargaComboModalidad();
+                        $("#comboSeccionEdit").val(idseccion);
+                        $("#comboModalidadEdit").val(idmodalidadcomponente);
+                        $("#modEditarComponente").modal('show');
                     }
                 },
                 done: function () {
-                    $("#comboSeccion").val(idseccion);
-                    $("#comboUC").val(idunidadcurricular);
-                    $("#comboUC").attr("disabled", true);
-                    $("#comboModalidad").val(idmodalidadcomponente);
+                    $("#comboSeccionEdit").val(idseccion);
+                    $("#comboModalidadEdit").val(idmodalidadcomponente);
                 }
             });
         }
@@ -481,7 +485,7 @@
                 complete: function (data) {
                     for (var i = 0; i < data.responseJSON.length; i++) {
                         var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
-                        $('#comboSeccion').append(opt);
+                        $('.comboSeccion').append(opt);
                     }
                 }
             });
@@ -501,11 +505,11 @@
                     }
                 },
                 done: function () {
-                    $('#comboUC').multiselect();
-                    $("#comboUC").multiselect().multiselectfilter({
-                        label: "",
-                        placeholder: "Buscar"
+                    $('#comboUC').multiselect({
+                        enableFiltering: true,
+                        filterPlaceholder: 'Search for something...'
                     });
+                    
                 }
             });
         }
@@ -519,7 +523,7 @@
                 complete: function (data) {
                     for (var i = 0; i < data.responseJSON.length; i++) {
                         var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
-                        $('#comboModalidad').append(opt);
+                        $('.comboModalidad').append(opt);
                     }
                 }
             });
