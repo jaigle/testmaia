@@ -2376,6 +2376,7 @@
     <Content Include="Views\Version\_CrearSeccion.cshtml" />
     <Content Include="Views\Version\_EditarSeccion.cshtml" />
     <Content Include="Views\Version\_CrearComponente.cshtml" />
+    <Content Include="Views\Version\_EditarComponente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
