@@ -12,6 +12,7 @@ namespace DLMallas.Business.Dto.Malla
         public string IdSociedad;
         public string FechaCreacion;
         public string Nombre;
+        public string IdEscuela;
         public string Descripcion;
         public string Activo;
         public string UsuarioCreacion;

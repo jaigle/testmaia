@@ -1,0 +1,10 @@
+﻿@model string
+<div role="navigation" class="col-md-2 navbar-default sidebar">
+    <div class="sidebar-nav navbar-collapse " aria-expanded="true" style="">
+        <ul id="side-menu" class="nav ">
+            <li class="@((ViewBag.ActiveLink == "EditarMalla") ? "active" : "")"><a href="@Url.Action("EditarMalla", "Malla", new { id = @Model })">Datos Generales</a></li>
+            <li class="@((ViewBag.ActiveLink == "Versiones") ? "active" : "")"><a href="@Url.Action("Index", "Version", new { id = @Model})">Versiones</a></li>
+            <li class="@((ViewBag.ActiveLink == "Certificados") ? "active" : "")"><a href="@Url.Action("Index", "Certificado", new { id = @Model })">Certificados</a></li>
+        </ul>
+    </div>
+</div>

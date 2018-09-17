@@ -4,105 +4,137 @@ using DLMallas.Utilidades;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Bogus;
+using DLMallas.Business.Dto;
+using DLMallas.Business.Extencions;
 using WSLib;
 
 namespace DLMallas.Business
 {
-    public class Malla
+    public class Malla : ServiciosBase
     {
-        public List<ObtenerListadoMalla> obtenerListadoMalla()
+        public List<ObtenerListadoMalla> ObtenerListadoMalla()
         {
-            List<ObtenerListadoMalla> lista = new List<ObtenerListadoMalla>();
-            //WebService ws = new WebService("GestionMalla", "obtenerListadoMalla");
-            //ws.AddParameter("IdSociedad", Variables.IdSociedad);
-            //Array obj = ws.Invoke() as Array;
-            //string json = JsonConvert.SerializeObject(obj);
+            var result = new List<ObtenerListadoMalla>();
 
-            //string json = "[{'activo':'1','descripcion':'Esta es una malla creada  coon motivo de probar el desarrollo','fechaCreacion':'2018-07-28 13:49:37.513','id':'2','idSociedad':'1','nombre':'Nueva Malla  para QA','usuarioCreacion':'Administrador DL'}]";
-            //Adicionando elementos a la lista;
-            ObtenerListadoMalla elem1 = new ObtenerListadoMalla {
-                Activo = "1",
-                Descripcion = "Esta es una malla creada  coon motivo de probar el desarrollo",
-                FechaCreacion = "2018-07-28 13:49:37.513",
-                Id = "2",
-                IdSociedad = "1",
-                Nombre = "Nueva Malla para QA",
-                UsuarioCreacion = "Adminsitrador"
-            };
-            lista.Add(elem1); 
-            //lista = JsonConvert.DeserializeObject<List<ObtenerListadoMalla>>(json);
-            return lista;
-        }
-
-        public List<ObtenerMalla> obtenerMalla(string Id)
-        {
-            List<ObtenerMalla> list = new List<ObtenerMalla>();
-            WebService ws = new WebService("GestionMalla", "obtenerMalla");
-            ws.AddParameter("Id", Id);
-            ws.AddParameter("IdSociedad", Variables.IdSociedad);
-            Array obj = ws.Invoke() as Array;
-
-            string json = JsonConvert.SerializeObject(obj);
-            list = JsonConvert.DeserializeObject<List<ObtenerMalla>>(json);
-            return list;
-        }
-
-        public bool guardarMalla(GuardarMalla model)
-        {
-            try
+            if (!Offline)
             {
-                WebService ws = new WebService("GestionMalla", "guardarMalla");
+                WebService ws = new WebService("GestionMalla", "obtenerListadoMalla");
                 ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                ws.AddParameter("Nombre", model.Nombre);
-                ws.AddParameter("Descripcion", model.Descripcion);
-                ws.AddParameter("Activo", model.Activo);
-                ws.AddParameter("UsuarioCreacion", Variables.IdPersona);
-                ws.Invoke();
-                return true;
-
+                Array obj = ws.Invoke() as Array;
+                var json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<ObtenerListadoMalla>>(json);
             }
-            catch (Exception e)
+            else
             {
-                return false;
+                result.Faker();
             }
+
+            return result;
         }
 
-        public bool actualizarMalla(ActualizarMalla model)
+        public List<Escuela> ObtenerEsceulas()
         {
-            try
+            List<Escuela> result = new List<Escuela>();
+
+            for (int i = 0; i < 10; i++)
             {
-                WebService ws = new WebService("GestionMalla", "actualizarMalla");
-                ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                ws.AddParameter("Id", model.Id);
-                ws.AddParameter("Nombre", model.Nombre);
-                ws.AddParameter("Descripcion", model.Descripcion);
-                ws.AddParameter("Activo", model.Activo);
-                ws.Invoke();
-                return true;
+                var id = i;
+                result.Add(new Faker<Escuela>("es")
+                    .RuleFor(r => r.Id, f => (id + 1))
+                    .RuleFor(r => r.Nombre, f => f.Company.CompanyName())
+                );
             }
-            catch (Exception e)
-            {
-                return false;
-            }
+
+            return result;
         }
 
-        public bool eliminarMalla(string Id)
+        public List<ObtenerMalla> ObtenerMalla(string id)
         {
-            try
+            var result = new List<ObtenerMalla>();
+
+            if (!Offline)
             {
-                WebService ws = new WebService("GestionMalla", "eliminarMalla");
+                WebService ws = new WebService("GestionMalla", "obtenerMalla");
+                ws.AddParameter("Id", id);
                 ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                ws.AddParameter("Id", Id);
                 Array obj = ws.Invoke() as Array;
 
                 string json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<ObtenerMalla>>(json);
+            }
+            else
+            {
+                result.Faker(id);
+            }
+
+            return result;
+        }
+
+        public bool GuardarMalla(GuardarMalla model)
+        {
+            try
+            {
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "guardarMalla");
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("Nombre", model.Nombre);
+                    ws.AddParameter("Escuela", model.Escuela);
+                    ws.AddParameter("Descripcion", model.Descripcion);
+                    ws.AddParameter("Activo", model.Activo);
+                    ws.AddParameter("UsuarioCreacion", Variables.IdPersona);
+                    ws.Invoke();
+                }
+
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool ActualizarMalla(ActualizarMalla model)
+        {
+            try
+            {
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "actualizarMalla");
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("Id", model.Id);
+                    ws.AddParameter("Nombre", model.Nombre);
+                    ws.AddParameter("Descripcion", model.Descripcion);
+                    ws.AddParameter("Activo", model.Activo);
+                    ws.Invoke();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool EliminarMalla(string id)
+        {
+            try
+            {
+                if (!Offline)
+                {
+                    WebService ws = new WebService("GestionMalla", "eliminarMalla");
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("Id", id);
+                    Array obj = ws.Invoke() as Array;
+
+                    string json = JsonConvert.SerializeObject(obj);
+                }
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

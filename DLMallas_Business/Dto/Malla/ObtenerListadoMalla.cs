@@ -10,10 +10,14 @@ namespace DLMallas.Business.Dto.Malla
     {
         public string Id;
         public string IdSociedad;
+        public string Escuela;
         public string FechaCreacion;
         public string Nombre;
         public string Descripcion;
         public string Activo;
         public string UsuarioCreacion;
+        public string CantVersiones;
+        public string ItinerariosTotal;
+        public string ItinerariosActivos;
     }
 }

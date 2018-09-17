@@ -1,0 +1,7 @@
+﻿@model List<DLMallas.Models.EscuelaViewModels>
+<option value="0">Sin información</option>
+
+@foreach (var item in Model)
+{
+    <option value="@item.Id">@item.Nombre</option>
+}

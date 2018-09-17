@@ -14,12 +14,6 @@ namespace DLMallas.Business
         {
             return new List<DtoPagina>();
             //var menusvc = new SvcSecurity.SecurityClient();
-            try { 
-               // return menusvc.GetSideMenu(idSociedad, userName, pagina).ToList();
-            }catch(Exception ex){
-                return new List<DtoPagina>();
-            }
-            
         }
         public List<Node<DtoPagina>> ObtenerMenu(string idSociedad, string userName)
         {

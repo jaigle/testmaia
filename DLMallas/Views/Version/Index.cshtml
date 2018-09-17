@@ -3,65 +3,35 @@
     ViewBag.Title = "Versiones";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="@Url.Content("~/Content/custom/malla.css")" rel="stylesheet">
+<script src="~/Scripts/core/version.js"></script>
 <div class="main no-margin">
-    <div role="navigation" class="col-md-2 navbar-default sidebar">
-        <div class="sidebar-nav navbar-collapse " aria-expanded="true" style="">
-            <ul id="side-menu" class="nav ">
-                <li><a href="@Url.Action("EditarMalla", "Malla", new { id = @Model.ObtenerMalla[0].Id })">Datos Generales</a></li>
-                <li class="active"><a href="@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })">Versiones</a></li>
-                <li><a href="@Url.Action("Index", "Certificado", new { id = @Model.ObtenerMalla[0].Id })">Certificados</a></li>
-            </ul>
-        </div>
-    </div>
-
+    @Html.Partial("~/Views/Shared/Partials/_SubMenu.cshtml", Model.ObtenerMalla[0].Id)
+    <input type="hidden" id="id_malla_hidden" value="@Model.ObtenerMalla[0].Id"/>
+    <input type="hidden" id="malla_hidden" value="@Model.ObtenerMalla[0].Nombre"/>
     <div id="page-wrapper" class="col-sm-12 col-md-10">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        Información de la Malla
-                    </div>
-                    <div class="panel-body">
-                        <table style="width: 100%">
-                            <tr>
-                                <td width="15%">Nombre:</td>
-                                <td width="35%">@Html.DisplayFor(model => model.ObtenerMalla[0].Nombre)</td>
-                                <td width="15%">Fecha Creación:</td>
-                                <td width="35%">@Html.DisplayFor(model => model.ObtenerMalla[0].FechaCreacion)</td>
-                            </tr>
-                            <tr>
-                                <td width="15%">Usuario Creación:</td>
-                                <td width="35%">@Html.DisplayFor(model => model.ObtenerMalla[0].UsuarioCreacion)</td>
-                                <td width="15%">Estado:</td>
-                                <td width="35%">@(Model.ObtenerMalla[0].Activo == "1" ? "Activa" : "Inactiva")</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @Html.Partial("~/Views/Shared/Partials/_InformacionMalla.cshtml", Model)
 
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-default panel-page-content">
                     <div class="panel-heading">
-                        <table style="width: 100%">
-                            <tr>
-                                <td class="text-left">Versiones</td>
-                                <td class="text-right">
-                                    <a class="btn btn-primary btn-sm pull-right " href="#" id="btnCrearVersion">
-                                        <span class="fa fa-plus"></span> Crear Nueva Versión
-                                    </a>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 pull-left text-left">
+                                Versiones
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 pull-right text-right">
+                                <a class="btn btn-primary btn-sm pull-right " href="#" id="btnCrearVersion">
+                                    <span class="fa fa-plus"></span> Crear Nueva Versión
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <table id="tblListado" class="table table-condensed table-bordered table-hover tabla-resultados">
                             <thead>
                                 <tr>
-                                    <th class="no-sort" colspan="4"></th>
+                                    <th class="no-sort"></th>
                                     <th>Versión</th>
                                     <th>Vigencia</th>
                                     <th>UC</th>
@@ -72,30 +42,34 @@
                                 @foreach (var item in @Model.ObtenerListadoVersion)
                                 {
                                     <tr>
-                                        <td class="text-center">
-                                            <a href="#" onclick="editarVersion('@item.Id', '@item.FechaInicio')" title="Editar Versión">
-                                                <span class="glyphicon glyphicon-pencil"></span>
-                                            </a>
+                                        <td>
+                                            <div class="row text-center">
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    <a href="#" onclick="version.editarVersion('@item.Id', '@item.Vigencia')" title="Editar Versión">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    <a href="#" onclick="version.eliminarVersion('@item.Id')" title="Eliminar Versión">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    <a href="#" onclick="version.detalleVersion('@item.Id', '@item.IdMalla')" title="Ver Detalle Versión">
+                                                        <span class="glyphicon glyphicon-list"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    <a href="#" title="Ver Diagrama Estructural">
+                                                        <span class="icon icon-diagram viewstruct"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </td>
-                                        <td class="text-center">
-                                            <a href="#" onclick="eliminarVersion('@item.Id')" title="Eliminar Versión">
-                                                <span class="glyphicon glyphicon-remove"></span>
-                                            </a>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="#" onclick="detalleVersion('@item.Id', '@item.IdMalla')" title="Ver Detalle Versión">
-                                                <span class="glyphicon glyphicon-list"></span>
-                                            </a>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="#" title="Ver Diagrama Estructural">
-                                                <span class="icon icon-diagram viewstruct"></span>
-                                            </a>
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.FechaInicio) - @Html.DisplayFor(modelItem => item.FechaTermino)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.TotalComponente)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Version)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vigencia)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.UC)</td>
+                                        <td>@(item.Estado == "1" ? "Activa" : "No Activa")</td>
                                     </tr>
                                 }
                             </tbody>
@@ -105,38 +79,7 @@
             </div>
         </div>
 
-        <!-- Modal Crear version -->
-        <div class="modal fade" id="modCrearVersion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">Crear Versión</h4>
-                    </div>
-                    <div class="modal-body">
-                        <table>
-                            <tr>
-                                <th>Fecha de Inicio de Vigencia de Versión:&nbsp;&nbsp;</th>
-                                <td>
-                                    <div class="input-group date">
-                                        <input type="text" id="txtFechainicio" class="form-control" placeholder="Ingrese Fecha" />
-                                        <div class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn_primary" id="btnGuardarNuevaVersion">Guardar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+@Html.Partial("_CrearVersion")
 
         <!-- Modal editar version -->
         <div class="modal fade" id="modEditarVersion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -174,107 +117,3 @@
 
     </div>
 </div>
-@section Scripts
-{
-<script type="text/javascript">
-    $(document).ready(function () {
-        /* diseño tabla */
-        $('#tblListado').dataTable({
-            responsive: true,
-            "language": {
-                "url": "/Content/DataTables/plugins/spanish.js"
-            }
-        });
-
-        /* datepicker version */
-        $('.date').datepicker({
-            format: "yyyy/mm/dd",
-            weekStart: 1,
-            //startDate: "now",
-            language: "es",
-            autoclose: true
-        });
-
-        /* popup crea version */
-        $("#btnCrearVersion").click(function () {
-            $("#modCrearVersion").modal('show');
-        });
-
-        /* guarda ajax formulario*/
-        $("#btnGuardarNuevaVersion").click(function () {
-
-            var fecha = $('#txtFechainicio').val();
-            var actionData = "{'fechainicio': '" + fecha + "','idmalla': '" + @Model.ObtenerMalla[0].Id + "'}";
-
-            if (fecha == "") {
-                alert("Debe Ingresar una Fecha");
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: "/Version/GuardarVersion",
-                    contentType: "application/json; charset=utf-8",
-                    data: actionData,
-                    dataType: "json",
-                    complete: function (result) {
-                        alert("Registro Guardado Correctamente");
-                        window.location.href = "@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })";
-                    }
-                });
-            }
-        });
-
-        /* actualiza ajax formulario */
-        $("#btnActualizarVersion").click(function () {
-            var id = $('#txtIdVersion').val();
-            var fecha = $('#txtFechainicioActualiza').val();
-            var actionData = "{'id':'" + id + "' ,'fechainicio': '" + fecha + "'}";
-
-            if (fecha == "") {
-                alert("Debe Ingresar una Fecha");
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: "/Version/ActualizarVersion",
-                    contentType: "application/json; charset=utf-8",
-                    data: actionData,
-                    dataType: "json",
-                    complete: function (result) {
-                        alert("Registro Guardado Correctamente");
-                        window.location.href = "@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })";
-                    }
-                });
-            }
-        });
-    });
-
-    function editarVersion(id, fechainicio) {
-        $("#modEditarVersion").modal('show');
-        $('#txtFechainicioActualiza').val(fechainicio);
-        $('#txtIdVersion').val(id);
-    }
-
-    function eliminarVersion(id) {
-        if (confirm("Está Seguro de Eliminar el registro")) {
-            $.ajax({
-                type: "POST",
-                url: "/Version/EliminarVersion",
-                contentType: "application/json; charset=utf-8",
-                data: "{'id': '" + id + "'}",
-                dataType: "json",
-                complete: function (result) {
-                    alert("Registro Guardado Correctamente");
-                    window.location.href = "@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })";
-                }
-            });
-        }
-    }
-
-    function detalleVersion(id, idMalla)
-    {
-        //alert(id);;
-        //DetalleVersion
-        window.location.href = "/Version/DetalleVersion/?IdVersion=" + id + "&idMalla=" + idMalla;
-    }
-
-</script>
-}

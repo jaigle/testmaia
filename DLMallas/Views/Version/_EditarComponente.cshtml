@@ -1,0 +1,43 @@
+﻿<div class="modal fade" id="modEditarComponente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Editar Unidad Curricular</h4>
+            </div>
+            <div class="modal-body">
+                <input id="txtIdComponente" type="hidden" />
+                <div class="row margin-bottom10">
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        Sección:
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <select id="comboSeccionEdit" class="form-control comboSeccion"></select>
+                    </div>
+                </div>
+                <div class="row margin-bottom10">
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        Unidades Curriculares:
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                       <input id="txtUC" readonly="readonly" class="form-control"/>
+                    </div>
+                </div>
+                <div class="row margin-bottom10">
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        Modalidad:
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <select id="comboModalidadEdit" class="form-control comboModalidad"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn_primary" id="btnActualizarComponente">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

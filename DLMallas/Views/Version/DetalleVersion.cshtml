@@ -11,47 +11,28 @@
         background-color: #0099FF;
     }
 </style>
+<link href="@Url.Content("~/Content/custom/malla.css")" rel="stylesheet">
+<link href="@Url.Content("~/Scripts/plugins/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css")" rel="stylesheet">
+<script src="@Url.Content("~/Scripts/plugins/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js")"></script>
+@*<script src="@Url.Content("~/Scripts/core/detalle-version.js")"></script>*@
 <div class="main no-margin">
-    <div role="navigation" class="col-md-2 navbar-default sidebar">
-        <div class="sidebar-nav navbar-collapse " aria-expanded="true" style="">
-            <ul id="side-menu" class="nav ">
-                <li><a href="@Url.Action("EditarMalla", "Malla", new { id = @Model.ObtenerMalla[0].Id })">Datos Generales</a></li>
-                <li class="active"><a href="@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })">Versiones</a></li>
-                <li><a href="@Url.Action("Index", "Certificado", new { id = @Model.ObtenerMalla[0].Id })">Certificados</a></li>
-            </ul>
-        </div>
-    </div>
+    @Html.Partial("~/Views/Shared/Partials/_SubMenu.cshtml", Model.ObtenerMalla[0].Id)
+
     <div id="page-wrapper" class="col-sm-12 col-md-10">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel with-nav-tabs">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            Información de la Malla
+                    @Html.Partial("~/Views/Shared/Partials/_InformacionMalla.cshtml", Model)
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-left">
+                            Fecha Inicio:
                         </div>
-                        <div class="panel-body">
-                            <table style="width: 100%">
-                                <tr>
-                                    <td width="10%">Nombre: </td>
-                                    <td width="40%">@Html.DisplayFor(model => model.ObtenerMalla[0].Nombre)</td>
-                                    <td width="10%">Fecha Creación:</td>
-                                    <td width="40%">@Html.DisplayFor(model => model.ObtenerMalla[0].FechaCreacion)</td>
-                                </tr>
-                                <tr>
-                                    <td width="10%">Usuario Creación:</td>
-                                    <td width="40%">@Html.DisplayFor(model => model.ObtenerMalla[0].UsuarioCreacion)</td>
-                                    <td width="10%">Estado:</td>
-                                    <td width="40%">@(Model.ObtenerMalla[0].Activo == "1" ? "Activa" : "Inactiva")</td>
-                                </tr>
-                            </table>
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-left">
+                            @Html.Display(Model.ObtenerVersion[0].FechaInicio)
                         </div>
                     </div>
-                    <table>
-                        <tr>
-                            <td>Fecha Inicio:</td>
-                            <td>@Html.Display(Model.ObtenerVersion[0].FechaInicio)</td>
-                        </tr>
-                    </table>
+
                     <!--Tabs-->
                     <div class="panel-heading">
                         <ul class="nav nav-tabs">
@@ -60,29 +41,29 @@
                         </ul>
                     </div>
                     <div class="panel-body">
-                        
+
                         <div class="tab-content">
                             <div class="tab-pane fade in active" id="tab1">
                                 <div class="panel panel-default panel-page-content">
                                     <div class="panel-heading">
-                                        <table style="width: 100%">
-                                            <tr>
-                                                <td class="text-left">Secciones</td>
-                                                <td class="text-right">
-                                                    <a class="btn btn-primary btn-sm pull-right " href="#" style="color: white" id="btnCrearSeccion">
-                                                        <span class="fa fa-plus"></span> Crear Nueva Sección @Html.Display(Model.ObtenerVersion[0].Id)
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 pull-left">
+                                                Secciones
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 pull-left">
+                                                <a class="btn btn-primary btn-sm pull-right " href="#" style="color: white" id="btnCrearSeccion">
+                                                    <span class="fa fa-plus"></span> Crear Nueva Sección @Html.Display(Model.ObtenerVersion[0].Id)
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="panel-body">
                                         <table class="table table-condensed table-bordered table-hover tabla-resultados">
                                             <thead>
                                                 <tr>
-                                                    <th class="no-sort text-center" colspan="2"></th>
-                                                    <th>Sección</th>
-                                                    <th>Color</th>
+                                                    <th class="no-sort text-center col-lg-2 col-md-2 col-sm-2" colspan="2"></th>
+                                                    <th class="col-lg-8 col-md-8 col-sm-8">Sección</th>
+                                                    <th class="col-lg-2 col-md-2 col-sm-2">Color</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -100,7 +81,7 @@
                                                             </a>
                                                         </td>
                                                         <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                                                        <td class="text-center"><div style="width: 50px;height 30px;background-color: @item.Color;">&nbsp;</div></td>
+                                                        <td><div class="col-md-4 col-md-offset-4" style="height:20px; background-color: @item.Color;">&nbsp;</div></td>
                                                     </tr>
                                                 }
                                             </tbody>
@@ -111,18 +92,20 @@
                             <div class="tab-pane fade" id="tab2">
                                 <div class="panel panel-default panel-page-content">
                                     <div class="panel-heading">
-                                        <table style="width: 100%">
-                                            <tr>
-                                                <td class="text-left">Unidades Curriculares</td>
-                                                <td class="text-right">
-                                                    <a href="#" style="color: white"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Ver Diagrama</a>
-                                                    <a class="btn btn-primary btn-sm pull-right " href="#" style="color: white"
-                                                       onclick="agregarComponente('@Model.ObtenerVersion[0].Id')">
-                                                        <span class="fa fa-plus"></span> Crear Nueva Unidad Curricular
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-3 pull-left text-left margin-bottom10">
+                                                Unidades Curriculares
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-4 pull-right text-left">
+                                                <a class="btn btn-primary btn-sm pull-right" href="#" style="color: white"
+                                                   onclick="agregarComponente('@Model.ObtenerVersion[0].Id')">
+                                                    <span class="fa fa-plus"></span> Crear Nueva Unidad Curricular
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 pull-right text-left margin-bottom10">
+                                                <a href="#" style="color: white"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Ver Diagrama</a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="panel-body">
                                         <table class="table table-condensed table-bordered table-hover tabla-resultados">
@@ -132,7 +115,7 @@
                                                     <th>Unidad Curricular</th>
                                                     <th>Modalidad</th>
                                                     <th>Sección</th>
-                                                    <th>Color</th>
+                                                    <th>Prerrequisitos</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -140,7 +123,7 @@
                                                 {
                                                     <tr>
                                                         <td class="text-center">
-                                                            <a href="#" onclick="editarComponente('@item.Id','@Model.ObtenerVersion[0].Id')">
+                                                            <a href="#" onclick="editarComponente('@item.Id', '@item.UnidadCurricular', '@Model.ObtenerVersion[0].Id')">
                                                                 <span class="glyphicon glyphicon-pencil"></span>
                                                             </a>
                                                         </td>
@@ -151,13 +134,20 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <a href="#" onclick="seleccionarPrerrequisito('@item.Id')">
-                                                                <span class="glyphicon glyphicon-menu-hamburger"></span>
+                                                                <span class="glyphicon glyphicon-list"></span>
                                                             </a>
                                                         </td>
                                                         <td>@Html.DisplayFor(modelItem => item.UnidadCurricular)</td>
                                                         <td>@Html.DisplayFor(modelItem => item.Modalidad)</td>
-                                                        <td>@Html.DisplayFor(modelItem => item.Seccion)</td>
-                                                        <td class="text-center"><div style="background-color: @item.Color"></div></td>
+                                                        <td>
+                                                            <div class="col-lg-10 col-md-10 col-sm-10">
+                                                                @Html.DisplayFor(modelItem => item.Seccion)
+                                                            </div>
+                                                            <div class="col-lg-1 col-md-1 col-sm-1 pull-right" style="background-color: @item.Color; width: 10px; height: 10px;">
+
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">@Html.DisplayFor(modelItem => item.Prerrequisitos)</td>
                                                     </tr>
                                                 }
                                             </tbody>
@@ -170,123 +160,18 @@
                 </div>
 
                 <!-- Modal Crear Seccion -->
-                <div class="modal fade" id="modCrearSeccion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">Crear Sección</h4>
-                            </div>
-                            <div class="modal-body">
-                                <table>
-                                    <tr>
-                                        <th>Nombre: </th>
-                                        <td>
-                                            <input type="text" id="txtNombreSeccion" class="form-control" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Color:</th>
-                                        <td>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <input type="color" name="favcolor" id="favcolor" value="#ff0000">
-                                                </span>
-                                                <input type="text" id="txtColorSeccion" class="form-control" value="#ff0000" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button class="btn btn_primary" id="btnGuardarNuevaSeccion">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @Html.Partial("_CrearSeccion")
 
                 <!-- Modal Editar Seccion -->
-                <div class="modal fade" id="modEditarSeccion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">Editar Sección</h4>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" id="txtIdSeccion" />
-                                <input type="hidden" id="txtIdSeccionEdit" />
-                                <input type="hidden" id="txtIdVersion" value="@Html.DisplayFor(model => model.ObtenerVersion[0].Id)" />
-                                <input type="hidden" id="txtIdMalla" value="@Html.DisplayFor(model => model.ObtenerMalla[0].Id)" />
-                                <table>
-                                    <tr>
-                                        <th>Nombre: </th>
-                                        <td>
-                                            <input type="text" id="txtNombreSeccionEdit" class="form-control" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Color: </th>
-                                        <td>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <input type="color" name="favcolorEdit" id="favcolorEdit" />
-                                                </span>
-                                                <input type="text" id="txtColorSeccionEdit" class="form-control" />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button class="btn btn_primary" id="btnActualizarSeccion">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @Html.Partial("_EditarSeccion", Model)
 
                 <!-- Modal agregar Componente -->
-                <div class="modal fade" id="modAgregarComponente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">Agregar Unidad Curricular</h4>
-                            </div>
-                            <div class="modal-body">
-                                <table>
-                                    <tr>
-                                        <th>Sección: </th>
-                                        <td><select id="comboSeccion" class="form-control"></select></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Unidades Curriculares: </th>
-                                        <td><select id="comboUC" multiple="multiple"></select></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Modalidad: </th>
-                                        <td><select id="comboModalidad"></select></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button class="btn btn_primary" id="btnGuardarNuevoComponente">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @Html.Partial("_CrearComponente")
 
-                <!-- Modal Editar Componente -->
-                <div class="modal fade" id="modEditarComponente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <!-- Modal Editar Componente -->
+            @Html.Partial("_EditarComponente")
+
+                @*<div class="modal fade" id="modEditarComponente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -318,7 +203,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
                 <!-- Modal Prerrequisito -->
                 <div class="modal fade" id="modPrerrequisito" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -356,296 +241,311 @@
     </div>
 </div>
 
-    @section Scripts
+@section Scripts
 {
-        <script type="text/javascript">
-            $(document).ready(function () {
-                /*acciones de seccion*/
-                $("#btnCrearSeccion").click(function () {
-                    $('#txtNombreSeccion').val('')
-                    $('#favcolor').val('')
-                    $('#txtColorSeccion').val('');
-                    $("#modCrearSeccion").modal('show');
-                    
-                });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#seccion-color-picker').colorpicker();
+            $('#edit-seccion-color-picker').colorpicker();
 
-                $('#favcolor').change(function () {
-                    $('#txtColorSeccion').val($('#favcolor').val());
-                });
+            /*acciones de seccion*/
+            $("#btnCrearSeccion").click(function () {
+                $('#txtNombreSeccion').val('')
+                $('#favcolor').val('')
+                $('#txtColorSeccion').val('');
+                $("#modCrearSeccion").modal('show');
 
-                $("#btnGuardarNuevaSeccion").click(function () {
-                    var nombre = $('#txtNombreSeccion').val();
-                    var color = $('#txtColorSeccion').val();
-                    var idVersion = $('#txtIdVersion').val();
-                    var idMalla = $('#txtIdMalla').val();
+            });
+
+            $('#favcolor').change(function () {
+                $('#txtColorSeccion').val($('#favcolor').val());
+            });
+
+            $("#btnGuardarNuevaSeccion").click(function () {
+                var nombre = $('#txtNombreSeccion').val();
+                var color = $('#txtColorSeccion').val();
+                var idVersion = $('#txtIdVersion').val();
+                var idMalla = $('#txtIdMalla').val();
+
+
+                if (nombre == "" || color == "") {
+                    alert("Debe Ingresar Nombre y Color");
+                } else {
+
                     var actionData = "{'idversion': '" + idVersion + "','nombre': '" + nombre + "','color': '" + color + "'}";
-
-                    //if (nombre == "" || color == "") {
-                    //    alert("Debe Ingresar Nombre y Color");
-                   // } else {
-                        $.ajax({
-                            type: "POST",
-                            url: "/Seccion/GuardarSeccion",
-                            contentType: "application/json; charset=utf-8",
-                            data: actionData,
-                            dataType: "json",
-                            complete: function (result) {
-                                alert("Registro Guardado Correctamente");
-                                window.location.href = "/Version/DetalleVersion/?IdVersion=" +idVersion + "&idMalla=" + idMalla;
-                                //window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                            }
-                        });
-                    //}
-                });
-
-                $("#btnActualizarSeccion").click(function () {
-                    var id = $('#txtIdSeccionEdit').val();
-                    var nombre = $('#txtNombreSeccionEdit').val();
-                    var color = $('#txtColorSeccionEdit').val();
-                    var actionData = "{'id':'" + id + "','nombre': '" + nombre + "','color': '" + color + "'}";
-
-                    //if (nombre == "" || color == "") {
-                    //    alert("Debe Ingresar Nombre y Color");
-                   // } else {
-                        $.ajax({
-                            type: "POST",
-                            url: "/Seccion/ActualizarSeccion",
-                            contentType: "application/json; charset=utf-8",
-                            data: actionData,
-                            dataType: "json",
-                            complete: function (result) {
-                                alert("Registro Actualizado Correctamente");
-                                window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                            }
-                        });
-                    //}
-                });
-
-                /*acciones de componente/uc*/
-                $("#btnGuardarNuevoComponente").click(function () {
-                    var idseccion = $('#comboSeccion').val();
-                    var idmodalidad = $('#comboModalidad').val();
-                    var iduc;
-
-                    $('#comboUC option').each(function () {
-                        iduc = this.value;
-                        var actionData = "{'idseccion': '" + idseccion + "', 'idmodalidad': '" + idmodalidad + "', 'iduc': '" + iduc + "'}";
-
-                        $.ajax({
-                            type: "POST",
-                            url: "/Componente/GuardarComponente",
-                            contentType: "application/json; charset=utf-8",
-                            data: actionData,
-                            dataType: "json",
-                            complete: function (result) {
-                                alert("Registro Guardado Correctamente");
-                                window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                            }
-                        });
-                    });
-                });
-
-                $("#btnActualizarComponente").click(function () {
-                    var id = $('#txtIdComponente').val();
-                    var idseccion = $('#comboSeccion').val();
-                    var idmodalidad = $('#comboModalidad').val();
-                    var actionData = "{'id': '" + id + "','idseccion': '" + idseccion + "','idmodalidad': '" + idmodalidad + "'}";
 
                     $.ajax({
                         type: "POST",
-                        url: "/Componente/ActualizarComponente",
+                        url: "/Seccion/GuardarSeccion",
+                        contentType: "application/json; charset=utf-8",
+                        data: actionData,
+                        complete: function (result) {
+                            alert("Registro Guardado Correctamente");
+                            window.location.href = "/Version/DetalleVersion/?IdVersion=" + idVersion + "&idMalla=" + idMalla;
+                        },
+                        error: function(xhr, status, error) {
+                            alert("Ha ocurrido un error al intentar guardar el registro.");
+                        }
+                    });
+                }
+            });
+
+            $("#btnActualizarSeccion").click(function () {
+                var id = $('#txtIdSeccionEdit').val();
+                var nombre = $('#txtNombreSeccionEdit').val();
+                var color = $('#txtColorSeccionEdit').val();
+                var actionData = "{'id':'" + id + "','nombre': '" + nombre + "','color': '" + color + "'}";
+
+                if (nombre == "" || color == "") {
+                    alert("Debe Ingresar Nombre y Color");
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Seccion/ActualizarSeccion",
+                        contentType: "application/json; charset=utf-8",
+                        data: actionData,
+                        complete: function (result) {
+                            alert("Registro Actualizado Correctamente");
+                            window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id + "&idMalla=" + @Model.ObtenerVersion[0].IdMalla;
+                        },
+                        error: function(xhr, status, error) {
+                            alert("Ha ocurrido un error al intentar guardar el registro.");
+                        }
+                    });
+                }
+            });
+
+            /*acciones de componente/uc*/
+            $("#btnGuardarNuevoComponente").click(function () {
+                var idseccion = $('#comboSeccion').val();
+                var idmodalidad = $('#comboModalidad').val();
+                var iduc = $("#comboUC").val();
+
+                //$('#comboUC option').each(function () {
+                //iduc = this.value;
+                var actionData = {idseccion: idseccion, idmodalidad: idmodalidad, iduc: iduc};
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Componente/GuardarComponente",
+                    //contentType: "application/json; charset=utf-8",
+                    data: actionData,
+                    dataType: "json",
+                    traditional: true,
+                    complete: function (result) {
+                        alert("Registro Guardado Correctamente");
+                        window.location.href = "/Version/DetalleVersion?IdVersion="+@Model.ObtenerVersion[0].Id +"&IdMalla=" +@Model.ObtenerVersion[0].IdMalla;
+                    }
+                });
+                //});
+            });
+
+            $("#btnActualizarComponente").click(function () {
+                var id = $('#txtIdComponente').val();
+                var idseccion = $('#comboSeccionEdit').val();
+                var idmodalidad = $('#comboModalidadEdit').val();
+                //var iduc = $("#comboUC").val();
+                var actionData = "{'id': '" + id + "','idseccion': '" + idseccion + "','idmodalidad': '" + idmodalidad + "'}";
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Componente/ActualizarComponente",
+                    contentType: "application/json; charset=utf-8",
+                    data: actionData,
+                    dataType: "json",
+                    complete: function (result) {
+                        alert("Registro Actualizado Correctamente");
+                        window.location.href = "/Version/DetalleVersion?IdVersion="+@Model.ObtenerVersion[0].Id +"&IdMalla=" +@Model.ObtenerVersion[0].IdMalla;
+                    }
+                });
+
+            });
+
+            $("#btnGuardarPrerrequisito").click(function () {
+                var idcomponente = $('#idcomponente').val();
+                $("input[name='idUnidadesChx[]']:checked").each(function () {
+
+                    var actionData = "{'idcomponente': '" + idcomponente + "','idcomponenteprerrequisito': '" + this.value + "'}";
+                    $.ajax({
+                        type: "POST",
+                        url: "/Componente/GuardarPrerrequisito",
                         contentType: "application/json; charset=utf-8",
                         data: actionData,
                         dataType: "json",
                         complete: function (result) {
-                            alert("Registro Actualizado Correctamente");
+                            alert("Prerrequisito Guardado Correctamente");
                             window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
                         }
                     });
 
-                });
-
-                $("#btnGuardarPrerrequisito").click(function () {
-                    var idcomponente = $('#idcomponente').val();
-                    $("input[name='idUnidadesChx[]']:checked").each(function () {
-
-                        var actionData = "{'idcomponente': '" + idcomponente + "','idcomponenteprerrequisito': '" + this.value + "'}";
-                        $.ajax({
-                            type: "POST",
-                            url: "/Componente/GuardarPrerrequisito",
-                            contentType: "application/json; charset=utf-8",
-                            data: actionData,
-                            dataType: "json",
-                            complete: function (result) {
-                                alert("Prerrequisito Guardado Correctamente");
-                                window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                            }
-                        });
-
-                    });
                 });
             });
+        });
 
-            /*acciones de seccion*/
-            function editarSeccion(id, nombre, color) {
-                $("#modEditarSeccion").modal('show');
-                $('#txtIdSeccionEdit').val(id);
-                $('#txtNombreSeccionEdit').val(nombre);
-                $('#txtColorSeccionEdit').val(color);
-                $('#favcolorEdit').val(color);
-            }
+        /*acciones de seccion*/
+        function editarSeccion(id, nombre, color) {
+            $("#modEditarSeccion").modal('show');
+            $('#txtIdSeccionEdit').val(id);
+            $('#txtNombreSeccionEdit').val(nombre);
+            $('#txtColorSeccionEdit').val(color);
+            $('#edit-seccion-color-picker').colorpicker('setValue', color);
+            $('#favcolorEdit').val(color);
+        }
 
-            /*function editarSeccion(id, nombre, color) {
-                $("#modEditarVerSeccion").modal('show');
-                $('#txtIdSeccion').val(id);
-                $('#txtNombreSeccion').val(nombre);
-                $('#favcolor').val(color);
-                $('#txtColorSeccion').val(color);
-            }*/
+        /*function editarSeccion(id, nombre, color) {
+            $("#modEditarVerSeccion").modal('show');
+            $('#txtIdSeccion').val(id);
+            $('#txtNombreSeccion').val(nombre);
+            $('#favcolor').val(color);
+            $('#txtColorSeccion').val(color);
+        }*/
 
-            function eliminarSeccion(id) {
-                if (confirm("Está Seguro de Eliminar el Registro")) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/Seccion/EliminarSeccion",
-                        contentType: "application/json; charset=utf-8",
-                        data: "{'id': '" + id + "'}",
-                        dataType: "json",
-                        complete: function (result) {
-                            alert("Registro Eliminado Correctamente");
-                            window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                        }
-                    });
-                }
-            }
-
-            /*acciones de componente/uc*/
-            function agregarComponente(idversion) {
-                $("#modCrearComponente").modal('show');
-                cargaComboSeccion(idversion);
-                cargaComboUC();
-                cargaComboModalidad();
-            }
-
-            function editarComponente(id, idversion) {
-                var idseccion;
-                var idmodalidadcomponente;
-                var idunidadcurricular;
-
+        function eliminarSeccion(id) {
+            if (confirm("Está Seguro de Eliminar el Registro")) {
                 $.ajax({
                     type: "POST",
-                    url: "/Componente/ObtenerComponente",
+                    url: "/Seccion/EliminarSeccion",
+                    contentType: "application/json; charset=utf-8",
+                    data: "{'id': '" + id + "'}",
+                    complete: function (result) {
+                        alert("Registro Eliminado Correctamente");
+                        window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id + "&idMalla=" + @Model.ObtenerVersion[0].IdMalla;
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Ha ocurrido un error al intentar eliminar el registro.");
+                    }
+                });
+            }
+        }
+
+        /*acciones de componente/uc*/
+        function agregarComponente(idversion) {
+            cargaComboSeccion(idversion);
+            cargaComboUC();
+            cargaComboModalidad();
+            $("#modAgregarComponente").modal('show');
+        }
+
+        function editarComponente(id, unidadCurricular, idversion) {
+            var idseccion;
+            var idmodalidadcomponente;
+            var idunidadcurricular;
+
+            $.ajax({
+                type: "POST",
+                url: "/Componente/ObtenerComponente",
+                contentType: "application/json; charset=utf-8",
+                data: "{'id': '" + id + "'}",
+                dataType: "json",
+                complete: function (data) {
+                    for (var i = 0; i < data.responseJSON.length; i++) {
+                        idseccion = data.responseJSON[i].IdSeccion;
+                        idmodalidadcomponente = data.responseJSON[i].IdModalidadComponente;
+                        idunidadcurricular = data.responseJSON[i].IdUnidadCurricular;
+
+                        $("#txtIdComponente").val(id);
+                        $("#txtUC").val(unidadCurricular);
+                        cargaComboSeccion(idversion);
+                        cargaComboModalidad();
+                        $("#comboSeccionEdit").val(idseccion);
+                        $("#comboModalidadEdit").val(idmodalidadcomponente);
+                        $("#modEditarComponente").modal('show');
+                    }
+                },
+                done: function () {
+                    $("#comboSeccionEdit").val(idseccion);
+                    $("#comboModalidadEdit").val(idmodalidadcomponente);
+                }
+            });
+        }
+
+        function eliminarComponente(id) {
+            if (confirm("Está Seguro de Eliminar el Registro")) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Componente/EliminarComponente",
                     contentType: "application/json; charset=utf-8",
                     data: "{'id': '" + id + "'}",
                     dataType: "json",
-                    complete: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            idseccion = data[i].IdSeccion;
-                            idmodalidadcomponente = data[i].IdModalidadComponente;
-                            idunidadcurricular = data[i].IdUnidadCurricular;
-
-                            $("#txtIdComponente").val(id);
-                            cargaComboSeccion(idversion);
-                            cargaComboUC();
-                            cargaComboModalidad();
-                        }
-                    },
-                    done: function () {
-                        $("#comboSeccion").val(idseccion);
-                        $("#comboUC").val(idunidadcurricular);
-                        $("#comboUC").attr("disabled", true);
-                        $("#comboModalidad").val(idmodalidadcomponente);
+                    complete: function (result) {
+                        alert("Registro Eliminado Correctamente");
+                        window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
                     }
                 });
             }
+        }
 
-            function eliminarComponente(id) {
-                if (confirm("Está Seguro de Eliminar el Registro")) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/Componente/EliminarComponente",
-                        contentType: "application/json; charset=utf-8",
-                        data: "{'id': '" + id + "'}",
-                        dataType: "json",
-                        complete: function (result) {
-                            alert("Registro Eliminado Correctamente");
-                            window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
-                        }
-                    });
+        function cargaComboSeccion(idversion) {
+            $.ajax({
+                type: "POST",
+                url: "/Componente/ObtenerListadoSeccion",
+                contentType: "application/json; charset=utf-8",
+                data: "{'idversion': '" + idversion + "'}",
+                dataType: "json",
+                complete: function (data) {
+                    for (var i = 0; i < data.responseJSON.length; i++) {
+                        var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
+                        $('.comboSeccion').append(opt);
+                    }
                 }
-            }
+            });
+        }
 
-            function cargaComboSeccion(idversion) {
-                $.ajax({
-                    type: "POST",
-                    url: "/Componente/ObtenerListadoSeccion",
-                    contentType: "application/json; charset=utf-8",
-                    data: "{'idversion': '" + idversion + "'}",
-                    dataType: "json",
-                    complete: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            var opt = new Option(data[i].Nombre, data[i].Id);
-                            $('#comboSeccion').append(opt);
-                        }
+        function cargaComboUC() {
+            $.ajax({
+                type: "POST",
+                url: "/Componente/OtenerListadoCatalogoCurso",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                complete: function (data) {
+                    for (var i = 0; i < data.responseJSON.length; i++) {
+                        var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
+                        $('#comboUC').append(opt);
+
                     }
-                });
-            }
+                },
+                done: function () {
+                    $('#comboUC').multiselect({
+                        enableFiltering: true,
+                        filterPlaceholder: 'Search for something...'
+                    });
+                    
+                }
+            });
+        }
 
-            function cargaComboUC() {
-                $.ajax({
-                    type: "POST",
-                    url: "/Componente/OtenerListadoCatalogoCurso",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    complete: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            var opt = new Option(data[i].Nombre, data[i].Id);
-                            $('#comboUC').append(opt);
-
-                        }
-                    },
-                    done: function () {
-                        $('#comboUC').multiselect();
-                        $("#comboUC").multiselect().multiselectfilter({
-                            label: "",
-                            placeholder: "Buscar"
-                        });
+        function cargaComboModalidad() {
+            $.ajax({
+                type: "POST",
+                url: "/Componente/ObtenerListadoModalidadComponente",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                complete: function (data) {
+                    for (var i = 0; i < data.responseJSON.length; i++) {
+                        var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
+                        $('.comboModalidad').append(opt);
                     }
-                });
-            }
+                }
+            });
+        }
 
-            function cargaComboModalidad() {
-                $.ajax({
-                    type: "POST",
-                    url: "/Componente/ObtenerListadoModalidadComponente",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    complete: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            var opt = new Option(data[i].Nombre, data[i].Id);
-                            $('#comboModalidad').append(opt);
-                        }
+        function seleccionarPrerrequisito(id) {
+            $("#modCrearComponente").modal('show');
+            $("#idcomponente").val(id);
+
+            $.ajax({
+                type: "POST",
+                url: "/Componente/ObtenerComponentePrerrequisito",
+                contentType: "application/json; charset=utf-8",
+                data: "{'id': '" + id + "'}",
+                dataType: "json",
+                complete: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        $('#checkboxes').append('<input type="checkbox" name="idUnidadesChx[]" value="' + data[i].Id + '" />');
+                        $('#nombreUnidades').append('<label>' + data[i].UnidadCurricular + '</label>');
                     }
-                });
-            }
-
-            function seleccionarPrerrequisito(id) {
-                $("#modCrearComponente").modal('show');
-                $("#idcomponente").val(id);
-
-                $.ajax({
-                    type: "POST",
-                    url: "/Componente/ObtenerComponentePrerrequisito",
-                    contentType: "application/json; charset=utf-8",
-                    data: "{'id': '" + id + "'}",
-                    dataType: "json",
-                    complete: function (data) {
-                        for (var i = 0; i < data.length; i++) {
-                            $('#checkboxes').append('<input type="checkbox" name="idUnidadesChx[]" value="' + data[i].Id + '" />');
-                            $('#nombreUnidades').append('<label>' + data[i].UnidadCurricular + '</label>');
-                        }
-                    }
-                });
-            }
-        </script>
-    }
+                }
+            });
+        }
+    </script>
+}

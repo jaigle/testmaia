@@ -3,88 +3,116 @@ using DLMallas.Utilidades;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DLMallas.Business.Extencions;
 using WSLib;
 
 namespace DLMallas.Business
 {
-    public class _Version
+    public class _Version : ServiciosBase
     {
-        public List<ObtenerListadoVersion> obtenerListadoVersion(string IdMalla)
+        public List<ObtenerListadoVersion> ObtenerListadoVersion(string idMalla)
         {
-            List<ObtenerListadoVersion> list = new List<ObtenerListadoVersion>();
-            WebService ws = new WebService("GestionMalla", "obtenerListadoVersion");
-            ws.AddParameter("IdSociedad", Variables.IdSociedad);
-            ws.AddParameter("IdMalla", IdMalla);
-            Array obj = ws.Invoke() as Array;
+            var result = new List<ObtenerListadoVersion>();
 
-            string json = JsonConvert.SerializeObject(obj);
-            list = JsonConvert.DeserializeObject<List<ObtenerListadoVersion>>(json);
-            return list;
+            if (!Offline)
+            {
+                var ws = new WebService("GestionMalla", "obtenerListadoVersion");
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                ws.AddParameter("IdMalla", idMalla);
+                Array obj = ws.Invoke() as Array;
+
+                string json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<ObtenerListadoVersion>>(json);
+            }
+            else
+            {
+               result.Faker();
+            }
+            
+            return result;
         }
 
-        public List<ObtenerVersion> obtenerVersion(string Id)
+        public List<ObtenerVersion> ObtenerVersion(string id)
         {
-            List<ObtenerVersion> list = new List<ObtenerVersion>();
-            WebService ws = new WebService("GestionMalla", "obtenerVersion");
-            ws.AddParameter("IdSociedad", Variables.IdSociedad);
-            ws.AddParameter("Id", Id);
+            var result = new List<ObtenerVersion>();
 
-            Array obj = ws.Invoke() as Array;
+            if (!Offline)
+            {
+                WebService ws = new WebService("GestionMalla", "obtenerVersion");
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                ws.AddParameter("Id", id);
 
-            string json = JsonConvert.SerializeObject(obj);
-            list = JsonConvert.DeserializeObject<List<ObtenerVersion>>(json);
-            return list;
+                Array obj = ws.Invoke() as Array;
+
+                string json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<ObtenerVersion>>(json);
+            }
+            else
+            {
+                result.Faker(id);
+            }
+
+
+            return result;
         }
 
-        public bool guardarVersion(GuardarVersion model)
+        public bool GuardarVersion(GuardarVersion model)
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "guardarVersion");
-                ws.AddParameter("IdMalla", model.IdMalla);
-                ws.AddParameter("IdSociedad", model.IdSociedad);
-                ws.AddParameter("FechaInicio", model.FechaInicio);
-                Array obj = ws.Invoke() as Array;
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "guardarVersion");
+                    ws.AddParameter("IdMalla", model.IdMalla);
+                    ws.AddParameter("IdSociedad", model.IdSociedad);
+                    ws.AddParameter("FechaInicio", model.FechaInicio);
+                    ws.Invoke();
+                }
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
            
         }
 
-        public bool actualizarVersion(ActualizarVersion model)
+        public bool ActualizarVersion(ActualizarVersion model)
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "actualizarVersion");
-                ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                ws.AddParameter("Id", model.Id);
-                ws.AddParameter("FechaInicio", model.FechaInicio);
-                Array obj = ws.Invoke() as Array;
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "actualizarVersion");
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("Id", model.Id);
+                    ws.AddParameter("FechaInicio", model.FechaInicio);
+                    ws.Invoke();
+                }
+
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
             
         }
 
-        public bool eliminarVersion(string Id)
+        public bool EliminarVersion(string id)
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "eliminarVersion");
-                ws.AddParameter("Id", Id);
-                ws.Invoke();
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "eliminarVersion");
+                    ws.AddParameter("Id", id);
+                    ws.Invoke();
+                }
+
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

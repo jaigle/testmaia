@@ -1,0 +1,51 @@
+﻿@model DLMallas.Models.MallaViewModels
+<link href="@Url.Content("~/Content/custom/malla.css")" rel="stylesheet">
+<!-- Modal Crear Malla -->
+<div class="modal fade" id="modCrearMalla" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Crear Malla</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row margin-bottom10">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Usuario Creación:</div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        @Html.DisplayFor(x => x.NombrePersonaLogin)
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">Fecha:</div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">@Html.DisplayFor(x => x.FechaHoy)</div>
+                </div>
+                <div class="row margin-bottom10">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Nombre:</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <input id="txtNombre" class="form-control input-sm" type="text" placeholder="Ingrese Nombre">
+                    </div>
+                </div>
+                <div class="row margin-bottom10">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Escuela:</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <select id="slEscuela" class="form-control input-sm" name="slEscuela"></select>
+                    </div>
+                </div>
+                <div class="row margin-bottom10">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Descripción:</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <textarea id="txtDescripcion" class="form-control" cols="75" placeholder="Ingrese descripción"></textarea>
+                    </div>
+                </div>            
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Activa:</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <input type="checkbox" id="chkActiva" class="checkbox" checked="checked"/>
+                    </div>
+                </div>               
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn_primary" id="btnGuardarNuevaMalla">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

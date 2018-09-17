@@ -22,10 +22,10 @@ namespace DLMallas
                 "~/Scripts/plugins/multiselect/jquery.multiselect.filter.js"
                 ));
 
-            //bundles.Add(new StyleBundle("~/Content/combocss").Include(
-            //    "~/Content/jquery.multiselect.css",
-            //    "~/Content/jquery.multiselect.filter.css",
-            //    "~/Content/plugins/jquery-ui/jquery-ui.css"));
+            bundles.Add(new StyleBundle("~/Content/combocss").Include(
+                "~/Content/jquery.multiselect.css",
+                "~/Content/jquery.multiselect.filter.css",
+                "~/Content/plugins/jquery-ui/jquery-ui.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

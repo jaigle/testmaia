@@ -10,6 +10,7 @@ namespace DLMallas.Business.Dto.Malla
     {
         public string Id;
 		public string Nombre;
+        public string IdEscuela;
         public string Descripcion;
         public string Activo;
     }
