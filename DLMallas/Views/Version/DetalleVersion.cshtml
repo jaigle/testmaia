@@ -251,7 +251,8 @@
                         data: actionData,
                         complete: function(result) {
                             alert("Registro Actualizado Correctamente");
-                            window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id +
+                            window.location.href = "/Version/DetalleVersion/?IdVersion=" +
+                                @Model.ObtenerVersion[0].Id +
                                 "&idMalla=" +
                                 @Model.ObtenerVersion[0].IdMalla;
                         },
@@ -281,7 +282,8 @@
                     traditional: true,
                     complete: function(result) {
                         alert("Registro Guardado Correctamente");
-                        window.location.href = "/Version/DetalleVersion?IdVersion=" + @Model.ObtenerVersion[0].Id +
+                        window.location.href = "/Version/DetalleVersion?IdVersion=" +
+                            @Model.ObtenerVersion[0].Id +
                             "&IdMalla=" +
                             @Model.ObtenerVersion[0].IdMalla;
                     }
@@ -310,7 +312,8 @@
                     dataType: "json",
                     complete: function(result) {
                         alert("Registro Actualizado Correctamente");
-                        window.location.href = "/Version/DetalleVersion?IdVersion=" + @Model.ObtenerVersion[0].Id +
+                        window.location.href = "/Version/DetalleVersion?IdVersion=" +
+                            @Model.ObtenerVersion[0].Id +
                             "&IdMalla=" +
                             @Model.ObtenerVersion[0].IdMalla;
                     }
@@ -319,27 +322,26 @@
             });
 
             $("#btnGuardarPrerrequisito").click(function() {
-                var idcomponente = $('#idcomponente').val();
-                $("input[name='idUnidadesChx[]']:checked").each(function() {
+                var idcomponente = $('#idComponente_Prerrequisito').val();
+                //var idSociedad = $('#idSociedad_Prerrequisito').val();
+                var ids = [];
+                $("input[name='idUnidadesChx']:checked").each(function() {
+                    ids.push(this.value);
+                });
 
-                    var actionData = "{'idcomponente': '" +
-                        idcomponente +
-                        "','idcomponenteprerrequisito': '" +
-                        this.value +
-                        "'}";
-                    $.ajax({
-                        type: "POST",
-                        url: "/Componente/GuardarPrerrequisito",
-                        contentType: "application/json; charset=utf-8",
-                        data: actionData,
-                        dataType: "json",
-                        complete: function(result) {
-                            alert("Prerrequisito Guardado Correctamente");
-                            window.location.href =
-                                "@Url.Action("DetalleVersion", "Version", new {IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla})";
-                        }
-                    });
+                var actionData = {IdComponente:  idcomponente, ListaUC: ids}
 
+                $.ajax({
+                    type: "POST",
+                    url: "/Componente/GuardarPrerrequisito",
+                    traditional: true,
+                    data: actionData,
+                    dataType: "json",
+                    complete: function(result) {
+                        alert("Prerrequisito Guardado Correctamente");
+                        window.location.href =
+                            "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id + "&idMalla=" + @Model.ObtenerVersion[0].IdMalla;
+                    }
                 });
             });
 
@@ -348,7 +350,6 @@
                     var table = $('#tablaPrerrequisitos').DataTable();
                     table.search(this.value).draw();
                 });
-
         });
 
         /*acciones de seccion*/
@@ -370,7 +371,8 @@
                     data: "{'id': '" + id + "'}",
                     complete: function(result) {
                         alert("Registro Eliminado Correctamente");
-                        window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id +
+                        window.location.href = "/Version/DetalleVersion/?IdVersion=" +
+                            @Model.ObtenerVersion[0].Id +
                             "&idMalla=" +
                             @Model.ObtenerVersion[0].IdMalla;
                     },
@@ -421,41 +423,6 @@
                 }
             });
         }
-
-        function editarPrerrequisito(id) {
-            $("#btnGuardarPrerrequisito").modal('show');
-            //var idseccion;
-            //var idmodalidadcomponente;
-            //var idunidadcurricular;
-
-            //$.ajax({
-            //    type: "POST",
-            //    url: "/Componente/ObtenerComponente",
-            //    contentType: "application/json; charset=utf-8",
-            //    data: "{'id': '" + id + "'}",
-            //    dataType: "json",
-            //    complete: function (data) {
-            //        for (var i = 0; i < data.responseJSON.length; i++) {
-            //            idseccion = data.responseJSON[i].IdSeccion;
-            //            idmodalidadcomponente = data.responseJSON[i].IdModalidadComponente;
-            //            idunidadcurricular = data.responseJSON[i].IdUnidadCurricular;
-
-            //            $("#txtIdComponente").val(id);
-            //            $("#txtUC").val(unidadCurricular);
-            //            cargaComboSeccion(idversion);
-            //            cargaComboModalidad();
-            //            $("#comboSeccionEdit").val(idseccion);
-            //            $("#comboModalidadEdit").val(idmodalidadcomponente);
-            //            $("#modEditarComponente").modal('show');
-            //        }
-            //    },
-            //    done: function () {
-            //        $("#comboSeccionEdit").val(idseccion);
-            //        $("#comboModalidadEdit").val(idmodalidadcomponente);
-            //    }
-            //});
-        }
-
 
         function eliminarComponente(id) {
             if (confirm("Está Seguro de Eliminar el Registro")) {
@@ -530,6 +497,8 @@
 
         function seleccionarPrerrequisito(idVersion, idSociedad, idUcActual) {
             var actionData = { idVersion: idVersion, idSociedad: idSociedad, idUcActual: idUcActual }
+            $("#idComponente_Prerrequisito").val(idUcActual);
+            //$("#idSociedad_Prerrequisito").val(idSociedad);
             $.ajax({
                 type: "POST",
                 url: "/Componente/ObtenerComponentePrerrequisito",
