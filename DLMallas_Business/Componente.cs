@@ -194,11 +194,20 @@ namespace DLMallas.Business
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "guardarPrerrequisito");
-                ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                ws.AddParameter("IdComponente", model.IdComponente);
-                ws.AddParameter("IdComponentePrerrequisito", model.IdComponentePrerrequisito);
-                Array obj = ws.Invoke() as Array;
+                if (!Offline)
+                {
+                    WebService ws = new WebService("GestionMalla", "guardarPrerrequisitos");
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("IdComponente", model.IdComponente);
+
+                    foreach (var item in model.IdComponentePrerrequisitos)
+                    {
+                        ws.AddParameter("IdComponentePrerrequisito", item);
+                    }
+                    
+                    Array obj = ws.Invoke() as Array;
+                }
+
                 return true;
             }
             catch (Exception)

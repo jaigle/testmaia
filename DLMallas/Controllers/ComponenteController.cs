@@ -90,13 +90,14 @@ namespace DLMallas.Controllers
                 return false;
         }
 
-        public bool GuardarPrerrequisito(string idcomponente, string idcomponenteprerrequisito)
+        public bool GuardarPrerrequisito(String IdComponente, List<String> ListaUC)
         {
-            GuardarPrerrequisito model = new GuardarPrerrequisito();
-            model.IdComponente = idcomponente;
-            model.IdComponentePrerrequisito = idcomponenteprerrequisito;
-            Componente co = new Componente();
-            var resp = co.guardarPrerrequisito(model);
+            var model = new GuardarPrerrequisito
+            {
+                IdComponente = IdComponente,
+                IdComponentePrerrequisitos = ListaUC
+            };
+            var resp = _componente.guardarPrerrequisito(model);
             if (resp)
                 return true;
             else
