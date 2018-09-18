@@ -2225,15 +2225,6 @@
     <Content Include="Scripts\plugins\morris\morris.js" />
     <Content Include="Scripts\plugins\morris\morris.min.js" />
     <Content Include="Scripts\plugins\morris\raphael.min.js" />
-    <Content Include="Scripts\plugins\multiselect\assets\ba.hashchange.js" />
-    <Content Include="Scripts\plugins\multiselect\assets\prettify.css" />
-    <Content Include="Scripts\plugins\multiselect\assets\prettify.js" />
-    <Content Include="Scripts\plugins\multiselect\assets\style.css" />
-    <Content Include="Scripts\plugins\multiselect\jquery-ui.min.js" />
-    <Content Include="Scripts\plugins\multiselect\jquery.multiselect.filter.js" />
-    <Content Include="Scripts\plugins\multiselect\jquery.multiselect.filter.min.js" />
-    <Content Include="Scripts\plugins\multiselect\jquery.multiselect.js" />
-    <Content Include="Scripts\plugins\multiselect\jquery.multiselect.min.js" />
     <Content Include="Scripts\plugins\Sesion\jquery.session.js" />
     <Content Include="Scripts\plugins\waitingFor\bootstrap-waitingfor.js" />
     <Content Include="Scripts\respond.js" />
@@ -2379,6 +2370,8 @@
     <Content Include="Views\Version\_EditarSeccion.cshtml" />
     <Content Include="Views\Version\_CrearComponente.cshtml" />
     <Content Include="Views\Version\_EditarComponente.cshtml" />
+    <Content Include="Views\Version\_EditarPrerrequisitos.cshtml" />
+    <Content Include="Views\Componente\_Prerrequisitos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

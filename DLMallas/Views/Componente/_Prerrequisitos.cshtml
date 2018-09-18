@@ -1,0 +1,33 @@
+﻿@model List<DLMallas.Business.Dto.Componente.ObtenerListadoComponente>
+<table class="table table-condensed table-bordered table-hover" style="width: 100% !important;" id="tablaPrerrequisitos">
+    <thead>
+    <tr>
+        <th class="no-sort text-center"></th>
+        <th class="col-lg-12 col-md-12 col-sm-12">Unidades Curriculares</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in @Model)
+    {
+        <tr>
+            <td class="text-center">
+                @if (item.Seleccionado)
+                {
+                    <input type="checkbox" class="prerrequisito" checked="checked" value="@item.Id"/>
+                }
+                else
+                {
+                    <input type="checkbox" class="prerrequisito" value="@item.Id"/>
+                }
+
+            </td>
+            <td class="text-center">
+                <div class="col-lg-10 col-md-10 col-sm-10">
+                    @item.UnidadCurricular
+                </div>
+                <div class="pull-right" style="background-color: @item.Color; width: 10px; height: 10px;"></div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

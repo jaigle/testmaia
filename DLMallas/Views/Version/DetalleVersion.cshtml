@@ -92,8 +92,8 @@
                             <div class="tab-pane fade" id="tab2">
                                 <div class="panel panel-default panel-page-content">
                                     <div class="panel-heading">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-3 col-3 pull-left text-left margin-bottom10">
+                                        <div class="row ">
+                                            <div class="col-lg-3 col-md-3 col-3 pull-left text-left margin-bottom10" style="float:none; margin:0 auto;">
                                                 Unidades Curriculares
                                             </div>
                                             <div class="col-lg-4 col-md-4 col-4 pull-right text-left">
@@ -102,7 +102,7 @@
                                                     <span class="fa fa-plus"></span> Crear Nueva Unidad Curricular
                                                 </a>
                                             </div>
-                                            <div class="col-lg-2 col-md-2 col-sm-2 pull-right text-left margin-bottom10">
+                                            <div class="col-lg-2 col-md-2 col-sm-2 pull-right text-left">
                                                 <a href="#" style="color: white"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Ver Diagrama</a>
                                             </div>
                                         </div>
@@ -133,7 +133,7 @@
                                                             </a>
                                                         </td>
                                                         <td class="text-center">
-                                                            <a href="#" onclick="seleccionarPrerrequisito('@item.Id')">
+                                                            <a href="#" onclick="seleccionarPrerrequisito('@Model.ObtenerVersion[0].Id', '@Model.ObtenerVersion[0].IdSociedad','@item.Id')">
                                                                 <span class="glyphicon glyphicon-list"></span>
                                                             </a>
                                                         </td>
@@ -168,73 +168,11 @@
                 <!-- Modal agregar Componente -->
                 @Html.Partial("_CrearComponente")
 
-            <!-- Modal Editar Componente -->
-            @Html.Partial("_EditarComponente")
-
-                @*<div class="modal fade" id="modEditarComponente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">Editar Unidad Curricular</h4>
-                            </div>
-                            <div class="modal-body">
-                                <input id="txtIdComponente" type="hidden" />
-                                <table>
-                                    <tr>
-                                        <th>Sección: </th>
-                                        <td><select id="comboSeccion" class="form-control"></select></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Unidades Curriculares: </th>
-                                        <td><select id="comboUC"></select></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Modalidad: </th>
-                                        <td><select id="comboModalidad"></select></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button class="btn btn_primary" id="btnActualizarComponente">Actualizar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
+                <!-- Modal Editar Componente -->
+                @Html.Partial("_EditarComponente")
 
                 <!-- Modal Prerrequisito -->
-                <div class="modal fade" id="modPrerrequisito" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="myModalLabel">Unidades Curriculares Disponibles</h4>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" id="idcomponente" />
-                                <table>
-                                    <tr>
-                                        <th></th>
-                                        <td>Unidades Curriculares</td>
-                                    </tr>
-                                    <tr>
-                                        <th><div id="checkboxes"></div></th>
-                                        <td><div id="nombreUnidades"></div></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button class="btn btn_primary" id="btnGuardaPrerrequisito">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @Html.Partial("_EditarPrerrequisitos")
 
             </div>
         </div>
@@ -244,12 +182,12 @@
 @section Scripts
 {
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#seccion-color-picker').colorpicker();
             $('#edit-seccion-color-picker').colorpicker();
 
             /*acciones de seccion*/
-            $("#btnCrearSeccion").click(function () {
+            $("#btnCrearSeccion").click(function() {
                 $('#txtNombreSeccion').val('')
                 $('#favcolor').val('')
                 $('#txtColorSeccion').val('');
@@ -257,11 +195,11 @@
 
             });
 
-            $('#favcolor').change(function () {
+            $('#favcolor').change(function() {
                 $('#txtColorSeccion').val($('#favcolor').val());
             });
 
-            $("#btnGuardarNuevaSeccion").click(function () {
+            $("#btnGuardarNuevaSeccion").click(function() {
                 var nombre = $('#txtNombreSeccion').val();
                 var color = $('#txtColorSeccion').val();
                 var idVersion = $('#txtIdVersion').val();
@@ -272,16 +210,23 @@
                     alert("Debe Ingresar Nombre y Color");
                 } else {
 
-                    var actionData = "{'idversion': '" + idVersion + "','nombre': '" + nombre + "','color': '" + color + "'}";
+                    var actionData = "{'idversion': '" +
+                        idVersion +
+                        "','nombre': '" +
+                        nombre +
+                        "','color': '" +
+                        color +
+                        "'}";
 
                     $.ajax({
                         type: "POST",
                         url: "/Seccion/GuardarSeccion",
                         contentType: "application/json; charset=utf-8",
                         data: actionData,
-                        complete: function (result) {
+                        complete: function(result) {
                             alert("Registro Guardado Correctamente");
-                            window.location.href = "/Version/DetalleVersion/?IdVersion=" + idVersion + "&idMalla=" + idMalla;
+                            window.location.href =
+                                "/Version/DetalleVersion/?IdVersion=" + idVersion + "&idMalla=" + idMalla;
                         },
                         error: function(xhr, status, error) {
                             alert("Ha ocurrido un error al intentar guardar el registro.");
@@ -290,7 +235,7 @@
                 }
             });
 
-            $("#btnActualizarSeccion").click(function () {
+            $("#btnActualizarSeccion").click(function() {
                 var id = $('#txtIdSeccionEdit').val();
                 var nombre = $('#txtNombreSeccionEdit').val();
                 var color = $('#txtColorSeccionEdit').val();
@@ -304,9 +249,11 @@
                         url: "/Seccion/ActualizarSeccion",
                         contentType: "application/json; charset=utf-8",
                         data: actionData,
-                        complete: function (result) {
+                        complete: function(result) {
                             alert("Registro Actualizado Correctamente");
-                            window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id + "&idMalla=" + @Model.ObtenerVersion[0].IdMalla;
+                            window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id +
+                                "&idMalla=" +
+                                @Model.ObtenerVersion[0].IdMalla;
                         },
                         error: function(xhr, status, error) {
                             alert("Ha ocurrido un error al intentar guardar el registro.");
@@ -316,14 +263,14 @@
             });
 
             /*acciones de componente/uc*/
-            $("#btnGuardarNuevoComponente").click(function () {
+            $("#btnGuardarNuevoComponente").click(function() {
                 var idseccion = $('#comboSeccion').val();
                 var idmodalidad = $('#comboModalidad').val();
                 var iduc = $("#comboUC").val();
 
                 //$('#comboUC option').each(function () {
                 //iduc = this.value;
-                var actionData = {idseccion: idseccion, idmodalidad: idmodalidad, iduc: iduc};
+                var actionData = { idseccion: idseccion, idmodalidad: idmodalidad, iduc: iduc };
 
                 $.ajax({
                     type: "POST",
@@ -332,20 +279,28 @@
                     data: actionData,
                     dataType: "json",
                     traditional: true,
-                    complete: function (result) {
+                    complete: function(result) {
                         alert("Registro Guardado Correctamente");
-                        window.location.href = "/Version/DetalleVersion?IdVersion="+@Model.ObtenerVersion[0].Id +"&IdMalla=" +@Model.ObtenerVersion[0].IdMalla;
+                        window.location.href = "/Version/DetalleVersion?IdVersion=" + @Model.ObtenerVersion[0].Id +
+                            "&IdMalla=" +
+                            @Model.ObtenerVersion[0].IdMalla;
                     }
                 });
                 //});
             });
 
-            $("#btnActualizarComponente").click(function () {
+            $("#btnActualizarComponente").click(function() {
                 var id = $('#txtIdComponente').val();
                 var idseccion = $('#comboSeccionEdit').val();
                 var idmodalidad = $('#comboModalidadEdit').val();
                 //var iduc = $("#comboUC").val();
-                var actionData = "{'id': '" + id + "','idseccion': '" + idseccion + "','idmodalidad': '" + idmodalidad + "'}";
+                var actionData = "{'id': '" +
+                    id +
+                    "','idseccion': '" +
+                    idseccion +
+                    "','idmodalidad': '" +
+                    idmodalidad +
+                    "'}";
 
                 $.ajax({
                     type: "POST",
@@ -353,33 +308,47 @@
                     contentType: "application/json; charset=utf-8",
                     data: actionData,
                     dataType: "json",
-                    complete: function (result) {
+                    complete: function(result) {
                         alert("Registro Actualizado Correctamente");
-                        window.location.href = "/Version/DetalleVersion?IdVersion="+@Model.ObtenerVersion[0].Id +"&IdMalla=" +@Model.ObtenerVersion[0].IdMalla;
+                        window.location.href = "/Version/DetalleVersion?IdVersion=" + @Model.ObtenerVersion[0].Id +
+                            "&IdMalla=" +
+                            @Model.ObtenerVersion[0].IdMalla;
                     }
                 });
 
             });
 
-            $("#btnGuardarPrerrequisito").click(function () {
+            $("#btnGuardarPrerrequisito").click(function() {
                 var idcomponente = $('#idcomponente').val();
-                $("input[name='idUnidadesChx[]']:checked").each(function () {
+                $("input[name='idUnidadesChx[]']:checked").each(function() {
 
-                    var actionData = "{'idcomponente': '" + idcomponente + "','idcomponenteprerrequisito': '" + this.value + "'}";
+                    var actionData = "{'idcomponente': '" +
+                        idcomponente +
+                        "','idcomponenteprerrequisito': '" +
+                        this.value +
+                        "'}";
                     $.ajax({
                         type: "POST",
                         url: "/Componente/GuardarPrerrequisito",
                         contentType: "application/json; charset=utf-8",
                         data: actionData,
                         dataType: "json",
-                        complete: function (result) {
+                        complete: function(result) {
                             alert("Prerrequisito Guardado Correctamente");
-                            window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
+                            window.location.href =
+                                "@Url.Action("DetalleVersion", "Version", new {IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla})";
                         }
                     });
 
                 });
             });
+
+            $('#txtPrerrequsitesSearch').on('keyup',
+                function() {
+                    var table = $('#tablaPrerrequisitos').DataTable();
+                    table.search(this.value).draw();
+                });
+
         });
 
         /*acciones de seccion*/
@@ -392,14 +361,6 @@
             $('#favcolorEdit').val(color);
         }
 
-        /*function editarSeccion(id, nombre, color) {
-            $("#modEditarVerSeccion").modal('show');
-            $('#txtIdSeccion').val(id);
-            $('#txtNombreSeccion').val(nombre);
-            $('#favcolor').val(color);
-            $('#txtColorSeccion').val(color);
-        }*/
-
         function eliminarSeccion(id) {
             if (confirm("Está Seguro de Eliminar el Registro")) {
                 $.ajax({
@@ -407,9 +368,11 @@
                     url: "/Seccion/EliminarSeccion",
                     contentType: "application/json; charset=utf-8",
                     data: "{'id': '" + id + "'}",
-                    complete: function (result) {
+                    complete: function(result) {
                         alert("Registro Eliminado Correctamente");
-                        window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id + "&idMalla=" + @Model.ObtenerVersion[0].IdMalla;
+                        window.location.href = "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id +
+                            "&idMalla=" +
+                            @Model.ObtenerVersion[0].IdMalla;
                     },
                     error: function(xhr, status, error) {
                         alert("Ha ocurrido un error al intentar eliminar el registro.");
@@ -437,7 +400,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: "{'id': '" + id + "'}",
                 dataType: "json",
-                complete: function (data) {
+                complete: function(data) {
                     for (var i = 0; i < data.responseJSON.length; i++) {
                         idseccion = data.responseJSON[i].IdSeccion;
                         idmodalidadcomponente = data.responseJSON[i].IdModalidadComponente;
@@ -452,12 +415,47 @@
                         $("#modEditarComponente").modal('show');
                     }
                 },
-                done: function () {
+                done: function() {
                     $("#comboSeccionEdit").val(idseccion);
                     $("#comboModalidadEdit").val(idmodalidadcomponente);
                 }
             });
         }
+
+        function editarPrerrequisito(id) {
+            $("#btnGuardarPrerrequisito").modal('show');
+            //var idseccion;
+            //var idmodalidadcomponente;
+            //var idunidadcurricular;
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/Componente/ObtenerComponente",
+            //    contentType: "application/json; charset=utf-8",
+            //    data: "{'id': '" + id + "'}",
+            //    dataType: "json",
+            //    complete: function (data) {
+            //        for (var i = 0; i < data.responseJSON.length; i++) {
+            //            idseccion = data.responseJSON[i].IdSeccion;
+            //            idmodalidadcomponente = data.responseJSON[i].IdModalidadComponente;
+            //            idunidadcurricular = data.responseJSON[i].IdUnidadCurricular;
+
+            //            $("#txtIdComponente").val(id);
+            //            $("#txtUC").val(unidadCurricular);
+            //            cargaComboSeccion(idversion);
+            //            cargaComboModalidad();
+            //            $("#comboSeccionEdit").val(idseccion);
+            //            $("#comboModalidadEdit").val(idmodalidadcomponente);
+            //            $("#modEditarComponente").modal('show');
+            //        }
+            //    },
+            //    done: function () {
+            //        $("#comboSeccionEdit").val(idseccion);
+            //        $("#comboModalidadEdit").val(idmodalidadcomponente);
+            //    }
+            //});
+        }
+
 
         function eliminarComponente(id) {
             if (confirm("Está Seguro de Eliminar el Registro")) {
@@ -467,9 +465,10 @@
                     contentType: "application/json; charset=utf-8",
                     data: "{'id': '" + id + "'}",
                     dataType: "json",
-                    complete: function (result) {
+                    complete: function(result) {
                         alert("Registro Eliminado Correctamente");
-                        window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
+                        window.location.href =
+                            "@Url.Action("DetalleVersion", "Version", new {IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla})";
                     }
                 });
             }
@@ -482,7 +481,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: "{'idversion': '" + idversion + "'}",
                 dataType: "json",
-                complete: function (data) {
+                complete: function(data) {
                     for (var i = 0; i < data.responseJSON.length; i++) {
                         var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
                         $('.comboSeccion').append(opt);
@@ -497,19 +496,19 @@
                 url: "/Componente/OtenerListadoCatalogoCurso",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                complete: function (data) {
+                complete: function(data) {
                     for (var i = 0; i < data.responseJSON.length; i++) {
                         var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
                         $('#comboUC').append(opt);
 
                     }
                 },
-                done: function () {
+                done: function() {
                     $('#comboUC').multiselect({
                         enableFiltering: true,
-                        filterPlaceholder: 'Search for something...'
+                        filterPlaceholder: 'Search for something...',
                     });
-                    
+
                 }
             });
         }
@@ -520,7 +519,7 @@
                 url: "/Componente/ObtenerListadoModalidadComponente",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                complete: function (data) {
+                complete: function(data) {
                     for (var i = 0; i < data.responseJSON.length; i++) {
                         var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
                         $('.comboModalidad').append(opt);
@@ -529,21 +528,26 @@
             });
         }
 
-        function seleccionarPrerrequisito(id) {
-            $("#modCrearComponente").modal('show');
-            $("#idcomponente").val(id);
-
+        function seleccionarPrerrequisito(idVersion, idSociedad, idUcActual) {
+            var actionData = { idVersion: idVersion, idSociedad: idSociedad, idUcActual: idUcActual }
             $.ajax({
                 type: "POST",
                 url: "/Componente/ObtenerComponentePrerrequisito",
-                contentType: "application/json; charset=utf-8",
-                data: "{'id': '" + id + "'}",
-                dataType: "json",
-                complete: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        $('#checkboxes').append('<input type="checkbox" name="idUnidadesChx[]" value="' + data[i].Id + '" />');
-                        $('#nombreUnidades').append('<label>' + data[i].UnidadCurricular + '</label>');
-                    }
+                data: actionData,
+                dataType: "html",
+                traditional: true,
+                complete: function(data) {
+                    $("#prerrequisitoContenido").html(data.responseText);
+                    $("#modPrerrequisito").modal('show');
+                    $('#tablaPrerrequisitos').dataTable({
+                        responsive: true,
+                        "language": {
+                            "url": "/Content/DataTables/plugins/spanish.js"
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    alert("Ha ocurrido un error al intentar devolver los registros.");
                 }
             });
         }
