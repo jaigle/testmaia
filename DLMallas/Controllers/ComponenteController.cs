@@ -45,11 +45,10 @@ namespace DLMallas.Controllers
             return Json(get, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ObtenerComponentePrerrequisito(string id)
+        public PartialViewResult ObtenerComponentePrerrequisito(string idVersion, string idSociedad, string idUcActual)
         {
-            Componente co = new Componente();
-            var get = co.obtenerComponentePrerrequisito(id).ToList();
-            return Json(get, JsonRequestBehavior.AllowGet);
+            var model = _componente.ObtenerListadoPrerrequisitos(idVersion, idSociedad, idUcActual);
+            return PartialView("_Prerrequisitos", model);
         }
 
         public bool GuardarComponente(string idseccion, string idmodalidad, List<string> iduc)
@@ -78,8 +77,8 @@ namespace DLMallas.Controllers
             var resp = _componente.actualizarComponente(model);
             if (resp)
                 return true;
-            else
-                return false;
+
+            return false;
         }
 
         public bool EliminarComponente(string id)
