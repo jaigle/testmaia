@@ -17,14 +17,14 @@ namespace DLMallas
                          ));
 
             bundles.Add(new ScriptBundle("~/bundles/combomultiselect").Include(
-                "~/Scripts/plugins/multiselect/assets/prettify.js",
-                "~/Scripts/plugins/multiselect/jquery.multiselect.js",
-                "~/Scripts/plugins/multiselect/jquery.multiselect.filter.js"
+                "~/Scripts/plugins/multiselect/assets/prettify.js"//,
+                //"~/Scripts/plugins/multiselect/jquery.multiselect.js",
+                //"~/Scripts/plugins/multiselect/jquery.multiselect.filter.js"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/combocss").Include(
-                "~/Content/jquery.multiselect.css",
-                "~/Content/jquery.multiselect.filter.css",
+                //"~/Content/jquery.multiselect.css",
+                //"~/Content/jquery.multiselect.filter.css",
                 "~/Content/plugins/jquery-ui/jquery-ui.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
