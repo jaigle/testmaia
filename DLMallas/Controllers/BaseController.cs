@@ -10,6 +10,7 @@ namespace DLMallas.Controllers
     public class BaseController : Controller
     {
         public Malla _malla { get; set; }
+        public Certificado _certificado { get; set; }
         public _Version _version { get; set; }
 
         public Seccion _seccion { get; set; }
@@ -20,6 +21,7 @@ namespace DLMallas.Controllers
         public BaseController()
         {
             _malla = new Malla();
+            _certificado = new Certificado();
             _version = new _Version();
             _seccion = new Seccion();
             _componente = new Componente();
