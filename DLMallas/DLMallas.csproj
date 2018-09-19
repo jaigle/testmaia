@@ -26,6 +26,7 @@
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <UseGlobalApplicationHostFile />
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1310,6 +1311,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\core\detalle-version.js" />
+    <Content Include="Scripts\core\mallacertificado.js" />
     <Content Include="Scripts\core\version.js" />
     <Content Include="Scripts\core\malla.js" />
     <Content Include="Scripts\funciones-generales.js" />
@@ -2379,6 +2381,7 @@
     <Content Include="Views\Version\_EditarSeccion.cshtml" />
     <Content Include="Views\Version\_CrearComponente.cshtml" />
     <Content Include="Views\Version\_EditarComponente.cshtml" />
+    <Content Include="Views\Certificado\_VistaPrevia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

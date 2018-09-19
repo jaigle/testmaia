@@ -74,6 +74,8 @@
   <ItemGroup>
     <Compile Include="Certificado.cs" />
     <Compile Include="Componente.cs" />
+    <Compile Include="Dto\Certificado\DtoCertificado.cs" />
+    <Compile Include="Dto\Certificado\DtoDetalleMallaCertificado.cs" />
     <Compile Include="Dto\Certificado\GuardarArchivo.cs" />
     <Compile Include="Dto\Componente\ActualizarComponente.cs" />
     <Compile Include="Dto\Componente\GuardarComponente.cs" />
@@ -102,11 +104,13 @@
     <Compile Include="Dto\Version\GuardarVersion.cs" />
     <Compile Include="Dto\Version\ObtenerListadoVersion.cs" />
     <Compile Include="Dto\Version\ObtenerVersion.cs" />
+    <Compile Include="Extencions\DtoCertificadoExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoComponenteExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoCatalogoCursoExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoModalidadComponenteExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoVersionExtention.cs" />
     <Compile Include="Extencions\ObtenerComponenteExtention.cs" />
+    <Compile Include="Extencions\DtoDetalleMallaCertificadoExtention.cs" />
     <Compile Include="Extencions\ObtenerVersionExtention.cs" />
     <Compile Include="Extencions\ObtenerMallaExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoMallaExtention.cs" />

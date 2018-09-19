@@ -33,6 +33,15 @@ namespace DLMallas.Controllers
             return View(model);
         }
 
+        public string getMalla()
+        {
+            int id = (int)Session["idmalla"];
+            var model = new MallaViewModels();
+            model.ObtenerMalla = _malla.ObtenerMalla(id.ToString());
+            var retorno = Utilidades.Acciones.serializarObjeto(model.ObtenerMalla);
+            return retorno;
+        }
+
         //[HttpPost]
         public HttpStatusCodeResult GuardarMalla(string nombre, string escuela, string desc, string activo)
         {

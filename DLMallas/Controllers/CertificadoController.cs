@@ -10,13 +10,23 @@ using System.Web.Mvc;
 
 namespace DLMallas.Controllers
 {
-    public class CertificadoController : Controller
+    [Authorize]
+    public class CertificadoController : BaseController
     {
+        [Authorize]
         public ActionResult Index(string id)
         {
             CertificadoViewModels model = new CertificadoViewModels();
-            Malla malla = new Malla();
-            model.ObtenerMalla = malla.ObtenerMalla(id);
+            model.ObtenerMalla = _malla.ObtenerMalla("1");
+            model.ObtenerCertificado = _certificado.ObtenerCertificado(1.ToString());
+            model.ObtenerDetalleCertificado = _certificado.ObtenerDetalleCertificado("1");
+            return View(model);
+        }
+
+        public ActionResult VistaPrevia(string id)
+        {
+            CertificadoViewModels model = new CertificadoViewModels();
+            model.ObtenerDetalleCertificado = _certificado.ObtenerDetalleCertificado(id);
             return View(model);
         }
 
