@@ -21,6 +21,7 @@ namespace DLMallas.Controllers
             model.ObtenerMalla = _malla.ObtenerMalla(id);
             model.ObtenerCertificado = _certificado.ObtenerCertificado(id);
             model.ObtenerDetalleCertificado = _certificado.ObtenerDetalleCertificado(id);
+            ViewBag.ActiveLink = "Certificados";
             return View(model);
         }
 
