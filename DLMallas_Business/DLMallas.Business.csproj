@@ -118,6 +118,7 @@
     <Compile Include="Dto\DtoPagina.cs" />
     <Compile Include="Dto\DtoPersona.cs" />
     <Compile Include="Dto\DtoValor.cs" />
+    <Compile Include="Dto\Itinerario\DtoItinerario.cs" />
     <Compile Include="Dto\Malla\ActualizarMalla.cs" />
     <Compile Include="Dto\Malla\Escuela.cs" />
     <Compile Include="Dto\Malla\DtoMallaOld.cs" />
@@ -170,6 +171,7 @@
   <ItemGroup>
     <Content Include="log4net.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
