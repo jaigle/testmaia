@@ -25,12 +25,13 @@
             },
             dom: 'Bfrtip',
             buttons: [
-                'excelHtml5',
+                'excelHtml5'
             ]
         });
 
-        setInterval(function() {
-             $(".dt-button, .buttons-excel, .buttons-html5").addClass("btn btn-sm pull-left").html("<span>Exportar a Excel</span>");
+        var interval = setInterval(function() {
+             var button = $(".dt-button, .buttons-excel, .buttons-html5").addClass("btn btn-sm pull-left").html("<span>Exportar a Excel</span>");
+             window.clearInterval(interval);
         }, 100);
         
     };
