@@ -44,8 +44,15 @@ namespace DLMallas
                        "~/Scripts/locales/bootstrap-datepicker.es.js"));
             bundles.Add(new ScriptBundle("~/bundles/dataTables").Include(
                     "~/Scripts/plugins/dataTables/DataTables-1.10.11/media/js/jquery.dataTables.js",
-                    "~/Scripts/plugins/dataTables/DataTables-1.10.11/media/js/dataTables.bootstrap.js"
-                    , "~/Scripts/plugins/dataTables/pqselect.dev.js"
+                    "~/Scripts/plugins/dataTables/DataTables-1.10.11/media/js/dataTables.bootstrap.js",
+                    //"~/Scripts/plugins/dataTables/buttons.flash.min.js",
+                    "~/Scripts/plugins/dataTables/buttons.html5.min.js",
+                    "~/Scripts/plugins/dataTables/buttons.print.min.js",
+                    "~/Scripts/plugins/dataTables/dataTables.buttons.min.js",
+                    "~/Scripts/plugins/dataTables/jszip.min.js",
+                    "~/Scripts/plugins/dataTables/pdfmake.min.js",
+                    "~/Scripts/plugins/dataTables/vfs_fonts.js",
+                    "~/Scripts/plugins/dataTables/pqselect.dev.js"
                       ));
             //bundles.Add(new StyleBundle("~/Content/css").Include(
             //    "~/Content/bootstrap/dist/css/bootstrap.css",

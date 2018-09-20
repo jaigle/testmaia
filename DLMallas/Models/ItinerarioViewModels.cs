@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using DLMallas.Business.Dto.Itinerario;
 
 namespace DLMallas.Models
 {
     public class ItinerariosViewModels
     {
         public string MallaId { get; set; }
-        public List<ItinerarioViewModels> Itinerarios { get; set; }
+        public List<DtoItinerario> Itinerarios { get; set; }
     }
 
     public class ItinerarioViewModels

@@ -17,6 +17,7 @@ namespace DLMallas.Controllers
 
         public Componente _componente { get; set; }
 
+        public Itinerario _Itinerario { get; set; }
 
         public BaseController()
         {
@@ -25,6 +26,7 @@ namespace DLMallas.Controllers
             _version = new _Version();
             _seccion = new Seccion();
             _componente = new Componente();
+            _Itinerario = new Itinerario();
         }
     }
 }

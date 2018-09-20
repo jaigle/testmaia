@@ -30,7 +30,7 @@ namespace DLMallas.Business.Dto.Itinerario
         public string IdPersona { get; set; }
         public string Rut { get; set; }
         public string NombreCompleto { get; set; }
-        public datetime Asignacion { get; set; }
+        public DateTime Asignacion { get; set; }
         public string Avance { get; set; }
     }
 }

@@ -4,7 +4,7 @@
         <ul id="side-menu" class="nav ">
             <li class="@((ViewBag.ActiveLink == "EditarMalla") ? "active" : "")"><a href="@Url.Action("EditarMalla", "Malla", new { id = @Model })">Datos Generales</a></li>
             <li class="@((ViewBag.ActiveLink == "Versiones") ? "active" : "")"><a href="@Url.Action("Index", "Version", new { id = @Model})">Versiones</a></li>
-            <li class="@((ViewBag.ActiveLink == "Versiones") ? "active" : "")"><a href="@Url.Action("Index", "Version", new { id = @Model})">Itinerarios</a></li>
+            <li class="@((ViewBag.ActiveLink == "Itinerario") ? "active" : "")"><a href="@Url.Action("Index", "Itinerario", new { id = @Model})">Itinerarios</a></li>
             <li class="@((ViewBag.ActiveLink == "Certificados") ? "active" : "")"><a href="@Url.Action("Index", "Certificado", new { id = @Model })">Certificados</a></li>
         </ul>
     </div>

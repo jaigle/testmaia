@@ -135,6 +135,7 @@
     <Compile Include="Dto\Version\ObtenerListadoVersion.cs" />
     <Compile Include="Dto\Version\ObtenerVersion.cs" />
     <Compile Include="Extencions\DtoCertificadoExtention.cs" />
+    <Compile Include="Extencions\ObtenerListadoItinerarioMallaExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoComponenteExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoCatalogoCursoExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoModalidadComponenteExtention.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Extencions\ObtenerMallaExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoMallaExtention.cs" />
     <Compile Include="jQueryDataTableParamModel.cs" />
+    <Compile Include="Itinerario.cs" />
     <Compile Include="Malla.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Persona.cs" />

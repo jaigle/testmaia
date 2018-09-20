@@ -12,7 +12,7 @@ namespace DLMallas.Controllers
             var model = new ItinerariosViewModels
             {
                 MallaId = id,
-                Itinerarios = new List<ItinerarioViewModels>()
+                Itinerarios = _Itinerario.ObtenerListadoItinerarioMalla(id)
             };
 
             return View(model);

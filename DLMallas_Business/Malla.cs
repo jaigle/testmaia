@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using Bogus;
 using DLMallas.Business.Dto;
+using DLMallas.Business.Dto.Itinerario;
 using DLMallas.Business.Extencions;
 using WSLib;
 
