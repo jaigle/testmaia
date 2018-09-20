@@ -220,6 +220,7 @@
     <Compile Include="Controllers\CertificadoController.cs" />
     <Compile Include="Controllers\ComponenteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItinerarioController.cs" />
     <Compile Include="Controllers\MallaController.cs" />
     <Compile Include="Controllers\SeccionController.cs" />
     <Compile Include="Controllers\VersionController.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Models\ComponenteViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\EscuelaViewModels.cs" />
+    <Compile Include="Models\ItinerarioViewModels.cs" />
     <Compile Include="Models\MallaViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SeccionViewModels.cs" />
@@ -2375,6 +2377,7 @@
     <Content Include="Views\Certificado\_VistaPrevia.cshtml" />
     <Content Include="Views\Version\_EditarPrerrequisitos.cshtml" />
     <Content Include="Views\Componente\_Prerrequisitos.cshtml" />
+    <Content Include="Views\Itinerario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

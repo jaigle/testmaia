@@ -1,6 +1,6 @@
 ﻿@model DLMallas.Models.CertificadoViewModels
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Certificado";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,16 +10,6 @@
     <input type="hidden" id="id_malla_hidden" value="@Model.ObtenerMalla[0].Id" />
     <input type="hidden" id="malla_hidden" value="@Model.ObtenerMalla[0].Nombre" />
     @Html.Partial("~/Views/Shared/Partials/_SubMenu.cshtml", Model.ObtenerMalla[0].Id)
-    @*<div role="navigation" class="col-md-2 navbar-default sidebar">
-        <div class="sidebar-nav navbar-collapse " aria-expanded="true" style="">
-            <ul id="side-menu" class="nav ">
-                <li><a href="@Url.Action("EditarMalla", "Malla", new { id = @Model.ObtenerMalla[0].Id })">Datos Generales</a></li>
-                <li><a href="@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })">Versiones</a></li>
-                <li class="active"><a href="@Url.Action("Index", "Certificado", new { id = @Model.ObtenerMalla[0].Id })">Certificados</a></li>
-            </ul>
-        </div>
-    </div>*@
-
     <div id="page-wrapper" class="col-sm-12 col-md-10">
         <div class="row">
             <div class="col-sm-12">

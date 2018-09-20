@@ -1,0 +1,61 @@
+﻿@model DLMallas.Models.ItinerariosViewModels
+@{
+    ViewBag.Title = "Itinerario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Content/custom/malla.css")" rel="stylesheet">
+@*<script src="~/Scripts/core/version.js"></script>*@
+<div class="main no-margin">
+    @Html.Partial("~/Views/Shared/Partials/_SubMenu.cshtml", Model.MallaId)
+    <input type="hidden" id="id_malla_hidden" value="@Model.MallaId"/>
+    <div id="page-wrapper" class="col-sm-12 col-md-10">
+       <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default panel-page-content">
+                                        @*<div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 pull-left text-left">
+                                        Versiones
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 pull-right text-right">
+                                        <a class="btn btn-primary btn-sm pull-right " href="#" id="btnCrearVersion">
+                                            <span class="fa fa-plus"></span> Crear Nueva Versión
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>*@
+                    <div class="panel-body">
+                        <table id="tblListado" class="table table-condensed table-bordered table-hover tabla-resultados" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th class="no-sort" style="width: 5%"></th>
+                                    <th style="width: 35%">Nombre</th>
+                                    <th style="width: 20%">Vigencia</th>
+                                    <th style="width: 10%">Inscrip</th>
+                                    <th style="width: 10%">Estado</th>
+                                    <th style="width: 10%">Avan.Uc</th>
+                                    <th style="width: 10%">Avan.Colab</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in @Model.Itinerarios)
+                                {
+                                    <tr>
+                                        <td>
+                                            
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Vigencia)</td>
+                                        <td>@(item.Estado ? "Activa" : "No Activa")</td>
+                                        <td>@Html.DisplayFor(modelItem => item.AvanUc)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.AvanColab)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
