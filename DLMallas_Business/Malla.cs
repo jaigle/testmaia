@@ -39,7 +39,7 @@ namespace DLMallas.Business
         public List<Escuela> ObtenerEsceulas()
         {
             List<Escuela> result = new List<Escuela>();
-           if (Offline)
+           if (!Offline)
             {
                 WebService ws = new WebService("GestionMalla", "obtenerEscuelas");
                 ws.AddParameter("IdSociedad", Variables.IdSociedad);

@@ -9,7 +9,7 @@ namespace DLMallas.Business.Extencions
     {
         public static ObtenerListadoMalla Faker(this ObtenerListadoMalla item, int id)
         {
-            var users = new[] { "jim", "jaigle", "ldtoro" };
+            var users = new[] { "userA", "userB", "userC" };
             return new Faker<ObtenerListadoMalla>("es")
                 .StrictMode(true)
                 .RuleFor(r => r.Id, f => (id + 1).ToString())
