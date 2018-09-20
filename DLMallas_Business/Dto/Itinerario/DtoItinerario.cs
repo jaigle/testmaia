@@ -25,4 +25,12 @@ namespace DLMallas.Business.Dto.Itinerario
         public int Seleccionado { get; set; }
     }
 
+    public class DtoListadoNomina
+    {
+        public string IdPersona { get; set; }
+        public string Rut { get; set; }
+        public string NombreCompleto { get; set; }
+        public datetime Asignacion { get; set; }
+        public string Avance { get; set; }
+    }
 }
