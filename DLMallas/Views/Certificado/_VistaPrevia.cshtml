@@ -12,10 +12,10 @@
                     <div class="certificado malla-curricular">
                         <div class="row">
                             <div class="col-sm-6" id="imgLogoCertificado">
-                                <img src='" + @Html.DisplayFor(modelItem => @Model.ObtenerCertificado.RutaLogo) + "' alt='Logo del Certificado'>
+                                <img src='@Html.DisplayFor(modelItem => @Model.ObtenerCertificado.RutaLogo)' alt='Logo del Certificado'>
                             </div>
                             <div class="col-sm-6 text-right" id="imgImgCertificado">
-                                <img src='" + @Html.DisplayFor(modelItem => @Model.ObtenerCertificado.RutaCertificado) + "' alt='Imagen del Certificado'>
+                                <img src='@Html.DisplayFor(modelItem => @Model.ObtenerCertificado.RutaCertificado)' alt='Imagen del Certificado'>
                             </div>
                         </div>
                         <h1>Certificado</h1>
@@ -34,8 +34,8 @@
                             </div>
                             <div class="form-group">
                                 <p class="form-control-static" id="imgImgFirma"></p>
-                                <img src='" + @Html.DisplayFor(modelItem => @Model.ObtenerCertificado.RutaFirma) + "' alt='Imagen de la Firma'>
-                                <label class="control-label">Firma</label>
+                                <img src='@Html.DisplayFor(modelItem => @Model.ObtenerCertificado.RutaFirma)' alt='Imagen de la Firma'>
+                                <p><label class="control-label">Firma</label></p>
                             </div>
                         </div>
                         <!-- fin cuerpo certificado-->

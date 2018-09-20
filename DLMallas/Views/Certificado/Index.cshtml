@@ -1,6 +1,6 @@
 ﻿@model DLMallas.Models.CertificadoViewModels
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Certificado";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,16 +10,6 @@
     <input type="hidden" id="id_malla_hidden" value="@Model.ObtenerMalla[0].Id" />
     <input type="hidden" id="malla_hidden" value="@Model.ObtenerMalla[0].Nombre" />
     @Html.Partial("~/Views/Shared/Partials/_SubMenu.cshtml", Model.ObtenerMalla[0].Id)
-    @*<div role="navigation" class="col-md-2 navbar-default sidebar">
-        <div class="sidebar-nav navbar-collapse " aria-expanded="true" style="">
-            <ul id="side-menu" class="nav ">
-                <li><a href="@Url.Action("EditarMalla", "Malla", new { id = @Model.ObtenerMalla[0].Id })">Datos Generales</a></li>
-                <li><a href="@Url.Action("Index", "Version", new { id = @Model.ObtenerMalla[0].Id })">Versiones</a></li>
-                <li class="active"><a href="@Url.Action("Index", "Certificado", new { id = @Model.ObtenerMalla[0].Id })">Certificados</a></li>
-            </ul>
-        </div>
-    </div>*@
-
     <div id="page-wrapper" class="col-sm-12 col-md-10">
         <div class="row">
             <div class="col-sm-12">
@@ -112,16 +102,18 @@
                         <div class="row examinar">
                             <label class="col-sm-2"> Logo </label>
                             <div class="col-sm-10 no-padding-left">
-                                <form id="ajaxUploadLogo" action="@Url.Action("guardarLogo", "Certificado")" method="post" enctype="multipart/form-data">
-                                    <div class="col-sm-7 no-padding-left">
+                                <form id="ajaxUploadLogo" action="@Url.Action("guardarLogo", "Certificado",new { idmalla = Model.ObtenerMalla[0].Id.ToString()})" method="post" enctype="multipart/form-data">
+                                @*@using (Ajax.BeginForm("guardarLogo", "Certificado", new AjaxOptions { HttpMethod = "POST", OnSuccess = "Showmessage" }))*@
+                                                            <div class="col-sm-7 no-padding-left">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-picture"></span></span>
-                                            <input type="hidden" id="IdMallactrl" name="IdMallactrl" value="0" />
+                                            <input type = "hidden" id="idmalla" name="idmalla" value="@Model.ObtenerMalla[0].Id" />
                                             <input class="form-control input-sm" id="filelogo" type="file" name="filelogo" accept="image/*" style="height: 25px; padding-bottom: 28px;" />
+                                            <span id="resultlogo" />
                                         </div>
                                     </div>
-                                    <button id="ajaxUploadButtonLogo" type="submit" class="btn btn-default" disabled="disabled">Adjuntar</button>
-                                    <p class="help-block">Ancho máximo de imagen 220px</p>
+                                    <button id = "ajaxUploadButtonLogo" type="submit" class="btn btn-default" disabled="disabled">Adjuntar</button>
+                                    <p class="help-block">Ancho máximo de imagen 220px</p>                               
                                 </form>
                             </div>
                         </div>
@@ -130,15 +122,15 @@
                         <div class="row examinar">
                             <label class="col-sm-2">Imagen Predefinida</label>
                             <div class="col-sm-10 no-padding-left">
-                                <form id="ajaxUploadImg" onsubmit="return validaForm();" action="@Url.Action("guardarImg", "Certificado")" method="post" enctype="multipart/form-data">
+                                <form id = "ajaxUploadImg" onsubmit="return validaForm();" action="@Url.Action("guardarImg", "Certificado")" method="post" enctype="multipart/form-data">
                                     <div class="col-sm-7 no-padding-left">
                                         <div class="input-group">
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-picture"></span></span>
-                                            <input type="hidden" id="IdMallactrl1" name="IdMallactrl1" value="0" />
+                                            <input type = "hidden" id="idmalla" name="idmalla" value="@Model.ObtenerMalla[0].Id" />
                                             <input class="form-control input-sm" id="fileimg" type="file" name="fileimg" accept="image/*" style="height: 25px; padding-bottom: 28px;" />
                                         </div>
                                     </div>
-                                    <button id="ajaxUploadButtonImg" type="submit" class="btn btn-default" disabled="disabled">Adjuntar</button>
+                                    <button id = "ajaxUploadButtonImg" type="submit" class="btn btn-default" disabled="disabled">Adjuntar</button>
                                     <p class="help-block">Ancho máximo de imagen 220px</p>
                                 </form>
                             </div>
@@ -148,12 +140,12 @@
                         <div class="row examinar">
                             <label class="col-sm-2">Firma</label>
                             <div class="col-sm-10 no-padding-left">
-                                <form id="ajaxUploadFirma" action="@Url.Action("guardarFirma", "Certificado")" method="post" enctype="multipart/form-data">
+                                <form id = "ajaxUploadFirma" action="@Url.Action("guardarFirma", "Certificado")" method="post" enctype="multipart/form-data">
                                 @*<form id="ajaxUploadFirma" onsubmit="return validaForm();" action="@Url.Action("uploadFirma", "Mallas")" method="post" enctype="multipart/form-data">*@
                                         <div class="col-sm-7 no-padding-left">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-picture"></span></span>
-                                                <input type="hidden" id="IdMallactrl2" name="IdMallactrl2" value="0" />
+                                                <input type="hidden" id="idmalla" name="idmalla" value="@Model.ObtenerMalla[0].Id" />
                                                 <input class="form-control input-sm" id="filefirma" type="file" name="filefirma" accept="image/*" style="height: 25px; padding-bottom: 28px;" />
                                             </div>
                                         </div>
