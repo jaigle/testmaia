@@ -63,7 +63,6 @@
                 data: actionData,
                 complete: function (result) {
                     alert("Registro Guardado Correctamente");
-                    window.location.href = "/Malla";
                 },
                 error: function(xhr, status, error) {
                     alert("Ha ocurrido un error al intentar guardar el registro.");
