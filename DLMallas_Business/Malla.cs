@@ -22,6 +22,8 @@ namespace DLMallas.Business
             {
                 WebService ws = new WebService("GestionMalla", "obtenerListadoMalla");
                 ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                ws.AddParameter("Nombre", "");
+                ws.AddParameter("Escuela", "");
                 Array obj = ws.Invoke() as Array;
                 var json = JsonConvert.SerializeObject(obj);
                 result = JsonConvert.DeserializeObject<List<ObtenerListadoMalla>>(json);
@@ -37,7 +39,7 @@ namespace DLMallas.Business
         public List<Escuela> ObtenerEsceulas()
         {
             List<Escuela> result = new List<Escuela>();
-           if (!Offline)
+           if (Offline)
             {
                 WebService ws = new WebService("GestionMalla", "obtenerEscuelas");
                 ws.AddParameter("IdSociedad", Variables.IdSociedad);
@@ -94,7 +96,10 @@ namespace DLMallas.Business
                     ws.AddParameter("Descripcion", model.Descripcion);
                     ws.AddParameter("Activo", model.Activo);
                     ws.AddParameter("UsuarioCreacion", Variables.IdPersona);
-                    ws.Invoke();
+                    Array obj = ws.Invoke() as Array;
+
+                    string json = JsonConvert.SerializeObject(obj);
+                    List<DtoResponse> result = JsonConvert.DeserializeObject<List<DtoResponse>>(json);
                 }
 
                 return true;

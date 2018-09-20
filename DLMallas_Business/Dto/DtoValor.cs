@@ -11,4 +11,10 @@ namespace DLMallas.Business.Dto
         public string Valor { get; set; }
 
     }
+
+    public class DtoResponse
+    {
+        public string Resultado { get; set; }
+        public string Mensaje { get; set; }
+    }
 }
