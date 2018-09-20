@@ -36,9 +36,9 @@ namespace DLMallas.Business
                     EncabezadoListaUC = DLMallas.Utilidades.Enumeracion.cntstrMallaCertificadoEncabezadoListaUC,
                     Id = "1",
                     IdSociedad = "1",
-                    RutaCertificado = String.Empty,
-                    RutaFirma = String.Empty,
-                    RutaLogo = String.Empty
+                    RutaCertificado = "/imports/7a3e33c63bd34bdda03d6f588656f7cb.jpg",
+                    RutaFirma = "/imports/8e27427c0a1448f19716eacc5af609d4.jpg",
+                    RutaLogo = "/imports/7a3e33c63bd34bdda03d6f588656f7cb.jpg"
                 };
                 result = obj;
             }
