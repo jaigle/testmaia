@@ -69,49 +69,68 @@ namespace DLMallas.Business
 
         public bool guardarLogo(GuardarArchivo model)
         {
-            try
+            if (!Offline)
             {
-                WebService ws = new WebService("GestionMalla", "guardarLogo");
-                ws.AddParameter("IdMalla", model.IdMalla);
-                ws.AddParameter("RutaLogo", model.Ruta);
-                Array obj = ws.Invoke() as Array;
-                return true;
+                try
+                {
+                    WebService ws = new WebService("GestionMalla", "guardarLogo");
+                    ws.AddParameter("IdMalla", model.IdMalla);
+                    ws.AddParameter("RutaLogo", model.Ruta);
+                    Array obj = ws.Invoke() as Array;
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
-            catch (Exception)
+            else
             {
-                return false;
+                return true;
             }
         }
 
         public bool guardarImg(GuardarArchivo model)
         {
-            try
+            if (!Offline)
             {
-                WebService ws = new WebService("GestionMalla", "guardarImg");
-                ws.AddParameter("IdMalla", model.IdMalla);
-                ws.AddParameter("RutaLogo", model.Ruta);
-                Array obj = ws.Invoke() as Array;
-                return true;
+                try
+                {
+                    WebService ws = new WebService("GestionMalla", "guardarImg");
+                    ws.AddParameter("IdMalla", model.IdMalla);
+                    ws.AddParameter("RutaLogo", model.Ruta);
+                    Array obj = ws.Invoke() as Array;
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
-            catch (Exception)
-            {
-                return false;
+            else {
+                return true;
             }
         }
 
         public bool guardarFirma(GuardarArchivo model)
         {
-            try
+            if (!Offline)
             {
-                WebService ws = new WebService("GestionMalla", "guardarFirma");
-                ws.AddParameter("IdMalla", model.IdMalla);
-                ws.AddParameter("RutaLogo", model.Ruta);
-                Array obj = ws.Invoke() as Array;
-                return true;
+                try
+                {
+                    WebService ws = new WebService("GestionMalla", "guardarFirma");
+                    ws.AddParameter("IdMalla", model.IdMalla);
+                    ws.AddParameter("RutaLogo", model.Ruta);
+                    Array obj = ws.Invoke() as Array;
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
-            catch (Exception)
-            {
-                return false;
+            else {
+                return true;
             }
         }
     }

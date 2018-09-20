@@ -1,4 +1,5 @@
 ﻿using DLMallas.Business;
+using DLMallas.Business.Dto;
 using DLMallas.Business.Dto.Certificado;
 using DLMallas.Models;
 using System;
@@ -17,9 +18,9 @@ namespace DLMallas.Controllers
         public ActionResult Index(string id)
         {
             CertificadoViewModels model = new CertificadoViewModels();
-            model.ObtenerMalla = _malla.ObtenerMalla("1");
+            model.ObtenerMalla = _malla.ObtenerMalla(id);
             model.ObtenerCertificado = _certificado.ObtenerCertificado(1.ToString());
-            model.ObtenerDetalleCertificado = _certificado.ObtenerDetalleCertificado("1");
+            model.ObtenerDetalleCertificado = _certificado.ObtenerDetalleCertificado(id);
             return View(model);
         }
 
@@ -30,8 +31,9 @@ namespace DLMallas.Controllers
             return View(model);
         }
 
-        public bool guardarLogo(HttpPostedFileBase filelogo, string idmalla)
+        public string guardarLogo(HttpPostedFileBase filelogo, string idmalla)
         {
+            var miResultado = new DtoJsonResult();
             string nombrearchivo1 = filelogo.FileName.ToString();
             nombrearchivo1 = Right(nombrearchivo1, 3);
             bool resp;
@@ -50,15 +52,26 @@ namespace DLMallas.Controllers
                     model.Ruta = pathfinal;
                     resp = c.guardarLogo(model);
                     if (resp)
-                        return true;
+                    {
+                        miResultado.exito = true;
+                        return Utilidades.Acciones.serializarObjeto(miResultado);
+                    }                  
                     else
-                        return false;
+                    if (resp)
+                    {
+                        miResultado.exito = false;
+                        return Utilidades.Acciones.serializarObjeto(miResultado);
+                    }
                 }
-                else
-                    return false;
             }
             else
-                return false;
+            {
+
+                miResultado.mensaje = "Extension del archivo invalida";
+                return Utilidades.Acciones.serializarObjeto(miResultado);
+            }
+            miResultado.mensaje = "Se detecto un archivo vacio. Seleccione otro por favor.";
+            return Utilidades.Acciones.serializarObjeto(miResultado);
         }
 
         public bool guardarImg(HttpPostedFileBase fileimg, string idmalla)

@@ -114,6 +114,7 @@
     <Compile Include="Dto\Componente\ObtenerListadoComponente.cs" />
     <Compile Include="Dto\Componente\ObtenerListadoModalidadComponente.cs" />
     <Compile Include="Dto\DtoGenerico.cs" />
+    <Compile Include="Dto\DtoJsonResult.cs" />
     <Compile Include="Dto\DtoPagina.cs" />
     <Compile Include="Dto\DtoPersona.cs" />
     <Compile Include="Dto\DtoValor.cs" />
