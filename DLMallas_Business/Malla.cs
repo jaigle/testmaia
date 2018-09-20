@@ -36,16 +36,25 @@ namespace DLMallas.Business
         public List<Escuela> ObtenerEsceulas()
         {
             List<Escuela> result = new List<Escuela>();
-
-            for (int i = 0; i < 10; i++)
+           if (!Offline)
             {
-                var id = i;
-                result.Add(new Faker<Escuela>("es")
-                    .RuleFor(r => r.Id, f => (id + 1))
-                    .RuleFor(r => r.Nombre, f => f.Company.CompanyName())
-                );
+                WebService ws = new WebService("GestionMalla", "obtenerEscuelas");
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                Array obj = ws.Invoke() as Array;
+                var json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<Escuela>>(json);
             }
-
+            else
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    var id = i;
+                    result.Add(new Faker<Escuela>("es")
+                        .RuleFor(r => r.Id, f => (id + 1))
+                        .RuleFor(r => r.Nombre, f => f.Company.CompanyName())
+                    );
+                }
+            }
             return result;
         }
 
