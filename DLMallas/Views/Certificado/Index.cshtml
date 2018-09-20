@@ -6,10 +6,11 @@
 
 <script src="~/Scripts/core/mallacertificado.js"></script>
 
-<div class="main">
+<div class="main no-margin">
     <input type="hidden" id="id_malla_hidden" value="@Model.ObtenerMalla[0].Id" />
     <input type="hidden" id="malla_hidden" value="@Model.ObtenerMalla[0].Nombre" />
-    <div role="navigation" class="col-md-2 navbar-default sidebar">
+    @Html.Partial("~/Views/Shared/Partials/_SubMenu.cshtml", Model.ObtenerMalla[0].Id)
+    @*<div role="navigation" class="col-md-2 navbar-default sidebar">
         <div class="sidebar-nav navbar-collapse " aria-expanded="true" style="">
             <ul id="side-menu" class="nav ">
                 <li><a href="@Url.Action("EditarMalla", "Malla", new { id = @Model.ObtenerMalla[0].Id })">Datos Generales</a></li>
@@ -17,7 +18,7 @@
                 <li class="active"><a href="@Url.Action("Index", "Certificado", new { id = @Model.ObtenerMalla[0].Id })">Certificados</a></li>
             </ul>
         </div>
-    </div>
+    </div>*@
 
     <div id="page-wrapper" class="col-sm-12 col-md-10">
         <div class="row">

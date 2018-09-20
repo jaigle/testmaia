@@ -17,9 +17,10 @@ namespace DLMallas.Controllers
         public ActionResult Index(string id)
         {
             CertificadoViewModels model = new CertificadoViewModels();
-            model.ObtenerMalla = _malla.ObtenerMalla("1");
-            model.ObtenerCertificado = _certificado.ObtenerCertificado(1.ToString());
-            model.ObtenerDetalleCertificado = _certificado.ObtenerDetalleCertificado("1");
+            model.ObtenerMalla = _malla.ObtenerMalla(id);
+            model.ObtenerCertificado = _certificado.ObtenerCertificado(id);
+            model.ObtenerDetalleCertificado = _certificado.ObtenerDetalleCertificado(id);
+            ViewBag.ActiveLink = "Certificados";
             return View(model);
         }
 
