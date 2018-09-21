@@ -220,6 +220,7 @@
     <Compile Include="Controllers\CertificadoController.cs" />
     <Compile Include="Controllers\ComponenteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AdministracionItinerarioController.cs" />
     <Compile Include="Controllers\ItinerarioController.cs" />
     <Compile Include="Controllers\MallaController.cs" />
     <Compile Include="Controllers\SeccionController.cs" />
@@ -1470,6 +1471,8 @@
     <Content Include="Scripts\plugins\bootstrap-colorpicker\src\js\colorpicker-component.js" />
     <Content Include="Scripts\plugins\bootstrap-colorpicker\src\js\colorpicker-defaults.js" />
     <Content Include="Scripts\plugins\bootstrap-colorpicker\src\js\colorpicker-plugin-wrapper.js" />
+    <Content Include="Scripts\plugins\bootstrap-multiselect\css\bootstrap-multiselect.css" />
+    <Content Include="Scripts\plugins\bootstrap-multiselect\js\bootstrap-multiselect.js" />
     <Content Include="Scripts\plugins\dataTables\DataTables-1.10.11\examples\advanced_init\column_render.html" />
     <Content Include="Scripts\plugins\dataTables\DataTables-1.10.11\examples\advanced_init\complex_header.html" />
     <Content Include="Scripts\plugins\dataTables\DataTables-1.10.11\examples\advanced_init\defaults.html" />
@@ -2350,6 +2353,7 @@
     <Content Include="Scripts\plugins\bootstrap-colorpicker\spec\support\jasmine.json" />
     <Content Include="Scripts\plugins\bootstrap-colorpicker\src\less\colorpicker.less" />
     <Content Include="Scripts\plugins\bootstrap-colorpicker\src\sass\_colorpicker.scss" />
+    <Content Include="Scripts\plugins\bootstrap-multiselect\less\bootstrap-multiselect.less" />
     <None Include="Scripts\_references.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
@@ -2379,6 +2383,7 @@
     <Content Include="Views\Version\_EditarPrerrequisitos.cshtml" />
     <Content Include="Views\Componente\_Prerrequisitos.cshtml" />
     <Content Include="Views\Itinerario\Index.cshtml" />
+    <Content Include="Views\AdministracionItinerario\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -29,7 +29,7 @@ namespace DLMallas.Business.Extencions
         {
             for (int i = 0; i < 100; i++)
             {
-                list.Add(new DtoItinerario().Faker(idMalla));
+                list.Add(new DtoItinerario().Faker((idMalla == "0") ? i.ToString() : idMalla));
             }
 
             return list;
