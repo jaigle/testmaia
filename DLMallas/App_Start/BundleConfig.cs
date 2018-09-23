@@ -43,16 +43,17 @@ namespace DLMallas
                       "~/Scripts/respond.js","~/Scripts/bootstrap-datepicker.js",
                        "~/Scripts/locales/bootstrap-datepicker.es.js"));
             bundles.Add(new ScriptBundle("~/bundles/dataTables").Include(
-                    "~/Scripts/plugins/dataTables/DataTables-1.10.11/media/js/jquery.dataTables.js",
-                    "~/Scripts/plugins/dataTables/DataTables-1.10.11/media/js/dataTables.bootstrap.js",
+                    "~/Scripts/plugins/dataTables/DataTables-1.10.18/js/jquery.dataTables.js",
+                    "~/Scripts/plugins/dataTables/DataTables-1.10.18/js/dataTables.bootstrap.js",
                     //"~/Scripts/plugins/dataTables/buttons.flash.min.js",
-                    "~/Scripts/plugins/dataTables/buttons.html5.min.js",
-                    "~/Scripts/plugins/dataTables/buttons.print.min.js",
-                    "~/Scripts/plugins/dataTables/dataTables.buttons.min.js",
-                    "~/Scripts/plugins/dataTables/jszip.min.js",
-                    "~/Scripts/plugins/dataTables/pdfmake.min.js",
-                    "~/Scripts/plugins/dataTables/vfs_fonts.js",
-                    "~/Scripts/plugins/dataTables/pqselect.dev.js"
+                    "~/Scripts/plugins/dataTables/Buttons-1.5.2/js/buttons.html5.min.js",
+                    "~/Scripts/plugins/dataTables/Buttons-1.5.2/js/buttons.print.min.js",
+                    "~/Scripts/plugins/dataTables/Buttons-1.5.2/js/dataTables.buttons.min.js",
+                    "~/Scripts/plugins/dataTables/JSZip-2.5.0/jszip.min.js",
+                    "~/Scripts/plugins/dataTables/pdfmake-0.1.36/pdfmake.min.js",
+                    "~/Scripts/plugins/dataTables/pdfmake-0.1.36/vfs_fonts.js",
+                    "~/Scripts/plugins/dataTables/AutoFill-2.3.0/js/dataTables.autoFill.min.js"
+                    //"~/Scripts/plugins/dataTables/pqselect.dev.js"
                       ));
             //bundles.Add(new StyleBundle("~/Content/css").Include(
             //    "~/Content/bootstrap/dist/css/bootstrap.css",
