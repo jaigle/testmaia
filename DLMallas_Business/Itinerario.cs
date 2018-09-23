@@ -34,5 +34,29 @@ namespace DLMallas.Business
 
             return result;
         }
+
+        public bool GuardarItinerario(string mallaId, string nombre, string fechaInic, string fechaFin)
+        {
+            try
+            {
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "guardarItinerario");
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("Nombre", nombre);
+                    ws.AddParameter("IdMalla", mallaId);
+                    ws.AddParameter("FechaInicio", fechaInic);
+                    ws.AddParameter("FechaTermino", fechaFin);
+                    ws.Invoke();
+                }
+
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

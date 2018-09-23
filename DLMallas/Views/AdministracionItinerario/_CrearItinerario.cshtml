@@ -1,0 +1,75 @@
+﻿<link href="@Url.Content("~/Content/custom/itinerario.css")" rel="stylesheet">
+<div class="modal fade" id="modCrearItinerario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agreagar un nuevo Itinerario</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row margin-bottom10">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Nombre:</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <input id="txtItinerarioNombre" class="form-control input-sm" type="text" placeholder="Ingrese Nombre">
+                    </div>
+                </div>
+                <div class="row margin-bottom10">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Malla:</div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <input type="hidden" id="itinerarioMallaId"/>
+                        <div class="input-group">
+                            <input type="text" id="txtItinerarioMalla" class="form-control" placeholder="Ingrese Malla" readonly="readonly">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" id="btnSelectMalla" type="button" style="height: 34px;">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-bottom10">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Fecha Inicio:</div>
+                    <div class="input-group col-lg-8 col-md-8 col-sm-8" style="padding-left: 15px;">
+                        <input type="text" id="txtItinerarioFechainicio" class="form-control date" placeholder="Ingrese Fecha"/>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                    </div>
+                </div>            
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">Fecha fin:</div>
+                    <div class="input-group col-lg-8 col-md-8 col-sm-8" style="padding-left: 15px;">
+                        <input type="text" id="txtItinerarioFechaFin" class="form-control date" placeholder="Ingrese Fecha"/>
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                    </div>
+                </div>               
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn_primary" id="btnGuardarNuevoItinerario">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modSelecionarMalla" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Selecionar malla</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row margin-bottom10">
+                    <div class="col-lg-12 col-md-12 col-sm-12" id="contenidoSelecionarMallas"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn_primary" id="btnAceptarSelecionMalla">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
