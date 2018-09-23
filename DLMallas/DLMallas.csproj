@@ -342,6 +342,7 @@
     <Content Include="Content\3169\custom.css" />
     <Content Include="Content\3169\header-clogo.jpg" />
     <Content Include="Content\3169\images\logo.png" />
+    <Content Include="Content\custom\itinerario.css" />
     <Content Include="Content\custom\malla.css" />
     <Content Include="Content\DataTables-1.10.11\examples\advanced_init\column_render.html" />
     <Content Include="Content\DataTables-1.10.11\examples\advanced_init\complex_header.html" />
@@ -1926,6 +1927,7 @@
     <Content Include="Views\Componente\_Prerrequisitos.cshtml" />
     <Content Include="Views\Itinerario\Index.cshtml" />
     <Content Include="Views\AdministracionItinerario\Index.cshtml" />
+    <Content Include="Views\AdministracionItinerario\_CrearItinerario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
