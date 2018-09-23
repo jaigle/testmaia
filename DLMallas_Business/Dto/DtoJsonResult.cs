@@ -20,4 +20,19 @@ namespace DLMallas.Business.Dto
             valor = string.Empty;
         }
     }
+
+    public class DtoOperacionResult
+    {
+        public int errorCode { get; set; }
+        public string mensaje { get; set; }
+        public string resultado { get; set; }
+
+
+        public DtoOperacionResult()
+        {
+            errorCode = 0;
+            mensaje = string.Empty;
+            resultado = string.Empty;
+        }
+    }
 }

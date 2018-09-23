@@ -19,7 +19,8 @@ namespace DLMallas.Business
                 var ws = new WebService("GestionMalla", "obtenerListadoVersion");
                 ws.AddParameter("IdSociedad", Variables.IdSociedad);
                 ws.AddParameter("IdMalla", idMalla);
-                Array obj = ws.Invoke() as Array;
+                Array obj;
+                obj = ws.Invoke() as Array;
 
                 string json = JsonConvert.SerializeObject(obj);
                 result = JsonConvert.DeserializeObject<List<ObtenerListadoVersion>>(json);

@@ -77,7 +77,39 @@ namespace DLMallas.Business
             }
             else
             {
-                result.Faker(id);
+                result = null; //.Faker(id);
+            }
+
+            return result;
+        }
+
+        public DtoOperacionResult ObtenerMallajson(string id)
+        {
+            var result = new DtoOperacionResult();
+
+            if (!Offline)
+            {
+                try
+                {
+                    WebService ws = new WebService("GestionMalla", "obtenerMallaJSON");
+                    ws.AddParameter("Id", id);
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    Array obj = ws.Invoke() as Array;
+
+                    string json = JsonConvert.SerializeObject(obj);
+                    result = JsonConvert.DeserializeObject<DtoOperacionResult>(json);
+                }
+                catch (Exception e)
+                {
+                    result.errorCode = 100;
+                    result.mensaje = e.Message;
+                    return result;
+                }
+               
+            }
+            else
+            {
+                result = null; //.Faker(id);
             }
 
             return result;
@@ -92,10 +124,10 @@ namespace DLMallas.Business
                     var ws = new WebService("GestionMalla", "guardarMalla");
                     ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("Nombre", model.Nombre);
-                    ws.AddParameter("Escuela", model.Escuela);
                     ws.AddParameter("Descripcion", model.Descripcion);
                     ws.AddParameter("Activo", model.Activo);
                     ws.AddParameter("UsuarioCreacion", Variables.IdPersona);
+                    ws.AddParameter("Escuela", model.Escuela);
                     Array obj = ws.Invoke() as Array;
 
                     string json = JsonConvert.SerializeObject(obj);
@@ -123,11 +155,12 @@ namespace DLMallas.Business
                     ws.AddParameter("Nombre", model.Nombre);
                     ws.AddParameter("Descripcion", model.Descripcion);
                     ws.AddParameter("Activo", model.Activo);
+                    ws.AddParameter("Escuela", model.IdEscuela);
                     ws.Invoke();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }

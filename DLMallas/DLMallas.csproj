@@ -2379,6 +2379,7 @@
     <Content Include="Views\Version\_EditarPrerrequisitos.cshtml" />
     <Content Include="Views\Componente\_Prerrequisitos.cshtml" />
     <Content Include="Views\Itinerario\Index.cshtml" />
+    <Content Include="Views\Malla\_Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

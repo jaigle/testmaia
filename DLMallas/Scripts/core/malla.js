@@ -54,7 +54,7 @@
         if (nombre === "" || desc === "") {
             alert("Ingrese todos los campos!");
         } else {
-            var actionData = {nombre: nombre, escuela: escuela, desc: desc, activo: activo};
+            var actionData = {id: id,nombre: nombre, escuela: escuela, desc: desc, activo: activo};
 
             $.ajax({
                 type: "POST",
@@ -85,15 +85,29 @@
 
             $.ajax({
                 type: "POST",
-                url: "/Malla/GuardarMalla",
-                traditional: true,
                 data: actionData,
-            }).done(function () {
-                alert("Registro Guardado Correctamente");
-                window.location.href = "/Malla";
-            }).fail(function() {
-                alert("Ha ocurrido un error al intentar guardar el registro.");
-            });
+                url: "/Malla/GuardarMalla",
+                dataType: 'json',
+                contentType: false,
+                traditional: true,
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.responseText);
+                    } else {
+                        alert(response.responseText);
+                    }
+                },
+                error: function (response) {
+                    alert("error!");  // 
+                }
+
+            })
+            //    .done(function () {
+            //    alert("Registro Guardado Correctamente");
+            //    window.location.href = "/Malla";
+            //}).fail(function() {
+            //    alert("Ha ocurrido un error al intentar guardar el registro.");
+            //});
         }
     }
 

@@ -4,10 +4,12 @@ using System.Net;
 using System.Web.Mvc;
 using DLMallas.Business;
 using DLMallas.Business.Dto.Malla;
+using DLMallas.Business.Dto;
 using DLMallas.Utilidades;
 using DLMallas.Models;
+using Newtonsoft.Json;
 using WebGrease.Css.Ast.Selectors;
-
+using System.Collections.Generic;
 
 namespace DLMallas.Controllers
 {
@@ -26,6 +28,19 @@ namespace DLMallas.Controllers
 
         public ActionResult EditarMalla(string id)
         {
+            //var model = new MallaViewModels();
+            //DtoOperacionResult miMmalla = _malla.ObtenerMallajson(id);
+            //if (miMmalla.errorCode != 0)
+            //{
+            //    //return Json(new { success = false, responseText = miMmalla.mensaje}, JsonRequestBehavior.AllowGet                
+            //    return View("_Error", new HandleErrorInfo(new Exception(miMmalla.mensaje), "Malla", "Index"));
+            //}
+            //else {
+            //    model.ObtenerMalla = JsonConvert.DeserializeObject<List<ObtenerMalla>>(miMmalla.resultado);
+            //    ViewBag.Escuelas = _malla.ObtenerEsceulas().Select(s => new EscuelaViewModels { Id = s.Id, Nombre = s.Nombre }).ToList();
+            //    ViewBag.ActiveLink = "EditarMalla";
+            //    return View(model);
+            //}
             var model = new MallaViewModels();
             model.ObtenerMalla = _malla.ObtenerMalla(id);
             ViewBag.Escuelas = _malla.ObtenerEsceulas().Select(s => new EscuelaViewModels { Id = s.Id, Nombre = s.Nombre }).ToList();

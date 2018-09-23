@@ -16,7 +16,7 @@ namespace DLMallas.Business.Extencions
                 .RuleFor(r => r.Version, f => f.Random.Number(1, 45).ToString())
                 .RuleFor(r => r.IdMalla, f => f.Random.Number(1, 100))
                 .RuleFor(r => r.Vigencia, f => f.Date.Past(1, null).ToString(CultureInfo.InvariantCulture))
-                .RuleFor(r => r.UC, f => f.Random.Number(1, 40))
+                .RuleFor(r => r.Uc, f => f.Random.Number(1, 40))
                 .RuleFor(r => r.Estado, f => f.Random.Number(0, 1).ToString());
         }
         

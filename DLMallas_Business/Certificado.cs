@@ -24,7 +24,7 @@ namespace DLMallas.Business
                 Array obj = ws.Invoke() as Array;
 
                 string json = JsonConvert.SerializeObject(obj);
-                result = JsonConvert.DeserializeObject<DtoCertificado>(json);
+                result = (JsonConvert.DeserializeObject<List<DtoCertificado>>(json)).First();
             }
             else
             {
@@ -51,7 +51,7 @@ namespace DLMallas.Business
 
             if (!Offline)
             {
-                WebService ws = new WebService("GestionMalla", "ObtenerDetalleCertificado");
+                WebService ws = new WebService("GestionMalla", "obtenerMallaCertificadoVistaPrevia");
                 ws.AddParameter("Id", id);
                 ws.AddParameter("IdSociedad", Variables.IdSociedad);
                 Array obj = ws.Invoke() as Array;
@@ -75,11 +75,12 @@ namespace DLMallas.Business
                 {
                     WebService ws = new WebService("GestionMalla", "guardarLogo");
                     ws.AddParameter("IdMalla", model.IdMalla);
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("RutaLogo", model.Ruta);
                     Array obj = ws.Invoke() as Array;
                     return true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return false;
                 }
@@ -98,6 +99,7 @@ namespace DLMallas.Business
                 {
                     WebService ws = new WebService("GestionMalla", "guardarImg");
                     ws.AddParameter("IdMalla", model.IdMalla);
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("RutaLogo", model.Ruta);
                     Array obj = ws.Invoke() as Array;
                     return true;
@@ -120,6 +122,7 @@ namespace DLMallas.Business
                 {
                     WebService ws = new WebService("GestionMalla", "guardarFirma");
                     ws.AddParameter("IdMalla", model.IdMalla);
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("RutaLogo", model.Ruta);
                     Array obj = ws.Invoke() as Array;
                     return true;

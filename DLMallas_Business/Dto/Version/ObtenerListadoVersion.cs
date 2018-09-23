@@ -24,7 +24,7 @@ namespace DLMallas.Business.Dto.Version
         public int IdMalla;
         public string Version;
         public string Vigencia;
-        public int UC;
+        public int Uc;
         public string Estado;
     }
 }
