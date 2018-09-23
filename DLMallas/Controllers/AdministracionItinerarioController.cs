@@ -9,7 +9,12 @@ namespace DLMallas.Controllers
         public ActionResult Index()
         {
             ViewBag.ActiveLink = "Itinerario";
-            var model = _Itinerario.ObtenerListadoItinerarioMalla("0");
+            var model = new ItinerariosViewModels
+            {
+                Itinerarios = _Itinerario.ObtenerListadoItinerarioMalla("0"),
+                MallaId = "0"
+            };
+
             return View(model);
         }
     }
