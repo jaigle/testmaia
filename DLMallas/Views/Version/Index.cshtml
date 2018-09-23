@@ -5,6 +5,7 @@
 }
 <link href="@Url.Content("~/Content/custom/malla.css")" rel="stylesheet">
 <script src="~/Scripts/core/version.js"></script>
+
 <div class="main no-margin">
     @Html.Partial("~/Views/Shared/Partials/_SubMenu.cshtml", Model.ObtenerMalla[0].Id)
     <input type="hidden" id="id_malla_hidden" value="@Model.ObtenerMalla[0].Id"/>
