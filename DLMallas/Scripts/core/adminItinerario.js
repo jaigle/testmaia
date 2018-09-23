@@ -38,6 +38,8 @@
         window.interval = setInterval(self.configuracion_vista, 50);
         $.fn.dataTable.ext.search.push(self.dataTable_ext_search);
         $("#btnCrearItinerario").click(self.crear_itinerario_click);
+        $("#btnSelectMalla").click(self.selecionar_malla_click);
+        $("#btnAceptarSelecionMalla").click(self.aceptar_malla_selecionada);
     };
 
     // Funciones privadas  ======================================================
@@ -74,7 +76,40 @@
     }
 
     p.crear_itinerario_click = function() {
-        $('#modCrearItinerario').modal('show');
+        $.ajax({
+            type: "POST",
+            url: "/AdministracionItinerario/TablaSelecionarMalla",
+            dataType: "html",
+            traditional: true,
+            complete: function(req) {
+                $("#contenidoSelecionarMallas").html(req.responseText);
+                $("#tablaSelecionarMalla").dataTable({
+                    responsive: true,
+                    "language": {
+                        "url": "/Content/DataTables/plugins/spanish.js"
+                    }
+                });
+                $('#modCrearItinerario').modal('show');
+            },
+            error: function(xhr, status, error) {
+                alert("Ha ocurrido un error al intentar devolver los registros.");
+            }
+        });
+    }
+
+    p.selecionar_malla_click = function() {
+        $("#tablaSelecionarMalla_info").parent().removeClass("col-sm-5");
+        $("#tablaSelecionarMalla_paginate").parent().removeClass("col-sm-7").addClass("col-sm-12");
+        $("#tablaSelecionarMalla_info").html("");
+        $('#modSelecionarMalla').modal('show'); 
+    }
+
+    p.aceptar_malla_selecionada = function() {
+        var id = $('input[name=mallaRadioBtn]:checked').val();
+        $("#itinerarioMallaId").val(id);
+        $("#txtItinerarioMalla").val($("#nombreMalla-"+id).val());
+
+        $('#modSelecionarMalla').modal('hide'); 
     }
 
     // Eventos =================================================================

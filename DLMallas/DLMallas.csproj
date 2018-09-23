@@ -1928,6 +1928,7 @@
     <Content Include="Views\Itinerario\Index.cshtml" />
     <Content Include="Views\AdministracionItinerario\Index.cshtml" />
     <Content Include="Views\AdministracionItinerario\_CrearItinerario.cshtml" />
+    <Content Include="Views\AdministracionItinerario\_SelecionarMalla.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,5 +17,11 @@ namespace DLMallas.Controllers
 
             return View(model);
         }
+
+        public PartialViewResult  TablaSelecionarMalla()
+        {
+            var model = _malla.ObtenerListadoMalla();
+            return PartialView("_SelecionarMalla", model);
+        }
     }
 }
