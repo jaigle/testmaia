@@ -10,6 +10,7 @@ namespace DLMallas.Business.Dto.Itinerario
     {
         public string Id { get; set; }
         public string Nombre { get; set; }
+        public string IdMalla { get; set; }
         public string Malla { get; set; }
         public string Vigencia { get; set; }
         public string Inscriptos { get; set; }
@@ -17,6 +18,22 @@ namespace DLMallas.Business.Dto.Itinerario
         public string AvanUC { get; set; }
         public string AvanColab { get; set; }
         public string IdSociedad { get; set; }
+    }
+
+    public class DtoItinerarioEdit
+    {
+        public string Id { get; set; }
+        public string Nombre { get; set; }
+        public string IdSociedad { get; set; }
+        public string IdVersion { get; set; }
+        public string IdMalla { get; set; }
+        public string Malla { get; set; }
+        public string FechaInicio { get; set; }
+        public string FechaTermino { get; set; }
+        public string CantUCTotal { get; set; }
+        public string Activo { get; set; }
+        public string AvanUC { get; set; }
+        public string AvanColab { get; set; }
     }
 
     public class DtoNotificacionItinerario

@@ -1,0 +1,71 @@
+﻿@model DLMallas.Business.Dto.Itinerario.DtoItinerarioEdit
+@{
+    ViewBag.Title = "Editar Itinerario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Content/custom/itinerario.css")" rel="stylesheet">
+<script src="~/Scripts/core/adminItinerario.js"></script>
+<div class="main no-margin">
+
+    @Html.Partial("~/Views/Shared/Partials/_SubMenuItinerario.cshtml", Model.Id)
+
+    <input type="hidden" id="txtId" value=" Model.Id" />
+    <div id="page-wrapper" class="col-sm-12 col-md-10">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default panel-page-content">
+                    <div class="panel-heading">Datos Generales</div>
+                    <div class="panel-body">
+                        <div class="tabla-resultados-no-registros-buscar">
+                            <div class="row margin-bottom10">
+                                <div class="col-lg-3 col-md-3 col-sm-3">Nombre:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <input type="hidden" id="itinerarioIdEditar" value="@Model.Id" />
+                                    <input id="txtItinerarioNombreEditar" class="form-control input-sm" type="text" placeholder="Ingrese Nombre" value="@Model.Nombre">
+                                </div>
+                            </div>
+                            <div class="row margin-bottom10">
+                                <div class="col-lg-3 col-md-3 col-sm-3">Malla:</div>
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <input type="hidden" id="itinerarioMallaIdEditar" value="@Model."/>
+                                    <div class="input-group">
+                                        <input type="text" id="txtItinerarioMallaEditar" value="@Model.Malla" class="form-control" placeholder="Ingrese Malla" readonly="readonly">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default" id="btnSelectMallaEditar" type="button" style="height: 34px;">
+                                                <i class="glyphicon glyphicon-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row margin-bottom10">
+                                <div class="col-lg-3 col-md-3 col-sm-3">Fecha Inicio:</div>
+                                <div class="input-group col-lg-8 col-md-8 col-sm-8" style="padding-left: 15px;">
+                                    <input type="text" id="txtItinerarioFechainicioEditar" value="@Model.FechaInicio" class="form-control date" placeholder="Ingrese Fecha" />
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3">Fecha fin:</div>
+                                <div class="input-group col-lg-8 col-md-8 col-sm-8" style="padding-left: 15px;">
+                                    <input type="text" id="txtItinerarioFechaFinEditar" value="@Model.FechaTermino" class="form-control date" placeholder="Ingrese Fecha" />
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </div>
+                                </div>
+                            </div>       
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="@Url.Action("Index", "AdministracionItinerario")" class="btn btn-default">Volver a Lista</a>
+                        <button class="btn btn_primary" id="btnActualizaItinerario">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_ModalSelecionarMalla")

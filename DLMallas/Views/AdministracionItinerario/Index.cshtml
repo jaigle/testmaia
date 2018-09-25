@@ -6,7 +6,7 @@
 <script src="~/Scripts/plugins/Sesion/jquery.session.js"></script>
 <script src="~/Scripts/jquery.json.js"></script>
 @*<script src="~/Scripts/plugins/dataTables/jquery.dataTables.min.js"></script>
-<script src="~/Scripts/plugins/dataTables/dataTables.fixedHeader.min.js"></script>*@
+    <script src="~/Scripts/plugins/dataTables/dataTables.fixedHeader.min.js"></script>*@
 
 @*<script src="~/Scripts/jquery.json.js"></script>*@
 <script src="~/Scripts/core/adminItinerario.js"></script>
@@ -25,7 +25,7 @@
             <!--datatable-->
             <div id="divListado">
                 <div>
-                    
+
                     <table id="tblItinerarios" class="table table-condensed table-bordered table-hover tabla-resultados">
                         <thead>
                             <tr>
@@ -40,28 +40,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach (var item in @Model.Itinerarios)
-                        {
-                            <tr role="row">
-                                <td>
-                                    <div class="row text-center">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 text-center">
-                                            <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
+                            @foreach (var item in @Model.Itinerarios)
+                            {
+                                <tr role="row">
+                                    <td>
+                                        <div class="col-lg-6 col-md-6 col-sm-6">
+                                            <a href="@Url.Action("EditarItinerario", "AdministracionItinerario", new { id = @item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 text-center">
                                             <a href="#" onclick=""><span class="glyphicon glyphicon-stats"></span></a>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Malla)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Vigencia)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Inscriptos)</td>
-                                <td>@(item.Estado == "1" ? "Activa" : "No Activa")</td>
-                                <td>@Html.DisplayFor(modelItem => item.AvanUC)</td>
-                                <td>@Html.DisplayFor(modelItem => item.AvanColab)</td>
-                            </tr>
-                        }
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Malla)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Vigencia)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Inscriptos)</td>
+                                    <td>@(item.Estado == "1" ? "Activa" : "No Activa")</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AvanUC)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AvanColab)</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

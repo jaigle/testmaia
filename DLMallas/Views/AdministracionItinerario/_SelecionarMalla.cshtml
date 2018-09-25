@@ -1,33 +1,33 @@
 ﻿@model List<DLMallas.Business.Dto.Malla.ObtenerListadoMalla>
 <table class="table table-condensed table-bordered table-hover" style="width: 100% !important;" id="tablaSelecionarMalla">
     <thead>
-    <tr>
-        <th class="no-sort text-center" style="width: 10% !important;"></th>
-        <th style="width: 90% !important;">Unidades Curriculares</th>
-    </tr>
+        <tr>
+            <th class="no-sort text-center" style="width: 10% !important;"></th>
+            <th style="width: 90% !important;">Unidades Curriculares</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in @Model)
-    {
-        <tr>
-            <td class="text-center">
-                <input type="hidden" id="nombreMalla-@item.Id" value="@item.Nombre">
-                @if (ViewBag.Seleccionado == item.Id)
-                {
-                    <input type="radio" name="mallaRadioBtn" checked id="malla-@item.Id" value="@item.Id"/>
-                }
-                else
-                {
-                    <input type="radio" name="mallaRadioBtn" id="malla-@item.Id" value="@item.Id"/>
-                }
-
-            </td>
-            <td class="text-center">
-                <div>
-                    @item.Nombre
-                </div>
-            </td>
-        </tr>
-    }
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <td class="text-center">
+                    <input type="hidden" id="nombreMalla-@item.Id" value="@item.Nombre">
+                    @if (ViewBag.idMalla == item.Id)
+                    {
+                        <input type="radio" name="mallaRadioBtn" checked="checked" id="malla-@item.Id" value="@item.Id" />
+                    }
+                    else
+                    {
+                        <input type="radio" name="mallaRadioBtn"  id="malla-@item.Id" value="@item.Id" />
+                    }
+                    
+                </td>
+                <td class="text-center">
+                    <div>
+                        @item.Nombre
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
