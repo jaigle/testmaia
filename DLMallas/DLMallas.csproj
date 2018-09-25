@@ -236,6 +236,7 @@
     <Compile Include="Models\ItinerarioViewModels.cs" />
     <Compile Include="Models\MallaViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NominaViewModels.cs" />
     <Compile Include="Models\SeccionViewModels.cs" />
     <Compile Include="Models\VersionViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1932,6 +1933,7 @@
     <Content Include="Views\Shared\Partials\_SubMenuItinerario.cshtml" />
     <Content Include="Views\AdministracionItinerario\EditarItinerario.cshtml" />
     <Content Include="Views\AdministracionItinerario\_ModalSelecionarMalla.cshtml" />
+    <Content Include="Views\AdministracionItinerario\Audiencia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

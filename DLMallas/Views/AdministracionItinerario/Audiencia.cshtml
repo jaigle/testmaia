@@ -1,0 +1,86 @@
+﻿@model DLMallas.Models.NominasViewModels
+@{
+    ViewBag.Title = "Audiencia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Content/custom/itinerario.css")" rel="stylesheet">
+<script src="~/Scripts/core/version.js"></script>
+
+<div class="main no-margin">
+    @Html.Partial("~/Views/Shared/Partials/_SubMenuItinerario.cshtml", Model.IdItinerario)
+    <input type="hidden" id="id_itinerario_hidden" value="@Model.IdItinerario" />
+    @*<input type="hidden" id="malla_hidden" value="@Model.ObtenerMalla[0].Nombre"/>*@
+    <div id="page-wrapper" class="col-sm-12 col-md-10">
+        @*@Html.Partial("~/Views/Shared/Partials/_InformacionMalla.cshtml", Model)*@
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default panel-page-content">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 pull-left text-left">
+                                Participantes del itinerario de la malla
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 pull-right text-right">
+                                <a class="btn btn-primary btn-sm pull-right" style="margin-left: 10px;" href="#" id="btnAgregar">
+                                    <span class="fa fa-plus"></span> Agregar
+                                </a>
+                                <a class="btn btn-default btn-sm pull-right" href="#" id="btnImportarParticipantes">
+                                    <span class="fa fa-upload"></span> Importar datos de participantes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table id="tblListadoNomina" class="table table-condensed table-bordered table-hover tabla-resultados">
+                            <thead>
+                            <tr>
+                                <th class="no-sort"></th>
+                                <th>Cédula</th>
+                                <th>Nombre Completo</th>
+                                <th>Asignacion</th>
+                                <th>% Avance</th>
+                                <th>Usuario Asig</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in @Model.ListadoNominaAcademia)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="row text-center">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Cedula)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.NombreCompleto)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Asignacion)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Avance)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.UsuarioAsig)</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 pull-left text-right">
+                                <a class="btn btn-default btn-sm pull-left" style="margin-right: 10px;" href="#" id="btnAgregar">
+                                    Eliminar Todos
+                                </a>
+                                <a class="btn btn-default btn-sm pull-left"  style="margin-right: 10px;"  href="#" id="btnImportarParticipantes">
+                                    Eliminar Selecionados
+                                </a>
+                                <a class="btn btn-default btn-sm pull-left"  style="margin-right: 10px;"  href="#" id="btnImportarParticipantes">
+                                    Desmatriculador Masivo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

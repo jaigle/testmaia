@@ -52,5 +52,16 @@ namespace DLMallas.Controllers
             var model = _itinerario.ObtenerItinerario(id);
             return View(model);
         }
+
+        public ActionResult Audiencia(string id)
+        {
+            var model = new NominasViewModels
+            {
+                IdItinerario = "1",
+                ListadoNominaAcademia = new List<NominaViewModels>()
+            };
+            ViewBag.ActiveLink = "Audiencia";
+            return View(model);
+        }
     }
 }
