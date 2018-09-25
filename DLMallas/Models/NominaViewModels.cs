@@ -7,7 +7,7 @@ namespace DLMallas.Models
     public class NominasViewModels
     {
         public string IdItinerario { get; set; }
-        public List<NominaViewModels>  ListadoNominaAcademia { get; set; }
+        public List<DtoNomina>  ListadoNominaAcademia { get; set; }
     }
 
     public class NominaViewModels

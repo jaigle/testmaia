@@ -57,8 +57,8 @@ namespace DLMallas.Controllers
         {
             var model = new NominasViewModels
             {
-                IdItinerario = "1",
-                ListadoNominaAcademia = new List<NominaViewModels>()
+                IdItinerario = id,
+                ListadoNominaAcademia = _itinerario.ObtenerListadoNomina(id)
             };
             ViewBag.ActiveLink = "Audiencia";
             return View(model);

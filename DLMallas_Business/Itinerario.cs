@@ -105,5 +105,26 @@ namespace DLMallas.Business
                 return false;
             }
         }
+
+        public List<DtoNomina> ObtenerListadoNomina(string id)
+        {
+            var result = new List<DtoNomina>();
+            if (!Offline)
+            {
+                //WebService ws = new WebService("GestionMalla", "obtenerItinerario");
+                //ws.AddParameter("Id", id);
+                //ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                //var obj = ws.Invoke() as object;
+
+                //string json = JsonConvert.SerializeObject(obj);
+                //result = JsonConvert.DeserializeObject<DtoItinerarioEdit>(json);
+            }
+            else
+            {
+                result = new List<DtoNomina>().Faker(id);
+            }
+
+            return result;
+        }
     }
 }

@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="@Url.Content("~/Content/custom/itinerario.css")" rel="stylesheet">
-<script src="~/Scripts/core/version.js"></script>
+<script src="~/Scripts/core/audiencia.js"></script>
 
 <div class="main no-margin">
     @Html.Partial("~/Views/Shared/Partials/_SubMenuItinerario.cshtml", Model.IdItinerario)
@@ -50,7 +50,7 @@
                                     <td>
                                         <div class="row text-center">
                                             <div class="col-lg-3 col-md-3 col-sm-3 text-center">
-
+                                                <input type="checkbox" value="@item.Id" class="chkNomina"/>
                                             </div>
                                         </div>
                                     </td>
