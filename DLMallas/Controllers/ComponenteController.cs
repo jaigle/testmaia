@@ -47,7 +47,7 @@ namespace DLMallas.Controllers
 
         public PartialViewResult ObtenerComponentePrerrequisito(string idVersion, string idSociedad, string idUcActual)
         {
-            var model = _componente.ObtenerListadoPrerrequisitos(idVersion, idSociedad, idUcActual);
+            var model = _componente.ObtenerListadoPrerrequisitos(idVersion, idUcActual);
             return PartialView("_Prerrequisitos", model);
         }
 

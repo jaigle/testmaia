@@ -15,14 +15,17 @@ namespace DLMallas.Business
 {
     public class Componente : ServiciosBase
     {
-        public List<ObtenerListadoComponente> obtenerListadoComponente(string IdVersion)
+        public List<ObtenerListadoComponente> obtenerListadoComponente(string idVersion)
         {
             var result = new List<ObtenerListadoComponente>();
 
             if (!Offline)
             {
                 var ws = new WebService("GestionMalla", "obtenerListadoComponente");
-                ws.AddParameter("IdVersion", IdVersion);
+                ws.AddParameter("IdVersion", idVersion);
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                ws.AddParameter("ParaRequesitos", "0");
+                ws.AddParameter("IdUcActual", "0");
                 Array obj = ws.Invoke() as Array;
 
                 string json = JsonConvert.SerializeObject(obj);
@@ -30,7 +33,7 @@ namespace DLMallas.Business
             }
             else
             {
-                result.Faker();
+                result.Faker(Convert.ToInt32(0), true);
             }
 
             return result;
@@ -43,6 +46,7 @@ namespace DLMallas.Business
             {
                 WebService ws = new WebService("GestionMalla", "obtenerComponente");
                 ws.AddParameter("Id", Id);
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
                 Array obj = ws.Invoke() as Array;
 
                 string json = JsonConvert.SerializeObject(obj);
@@ -63,6 +67,7 @@ namespace DLMallas.Business
             if (!Offline)
             {
                 WebService ws = new WebService("GestionMalla", "obtenerListadoModalidadComponente");
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
                 Array obj = ws.Invoke() as Array;
 
                 string json = JsonConvert.SerializeObject(obj);
@@ -82,6 +87,7 @@ namespace DLMallas.Business
             if (!Offline)
             {
                 var ws = new WebService("GestionMalla", "obtenerListadoCatalogoCurso");
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
                 Array obj = ws.Invoke() as Array;
 
                 string json = JsonConvert.SerializeObject(obj);
@@ -96,7 +102,7 @@ namespace DLMallas.Business
         }
 
         //String IdVersion, String IdSociedad, String ParaRequesitos, String IdUcActual
-        public List<ObtenerListadoComponente> ObtenerListadoPrerrequisitos(string idVersion, string idSociedad, string idUcActual)
+        public List<ObtenerListadoComponente> ObtenerListadoPrerrequisitos(string idVersion, string idUcActual)
         {
             var result = new List<ObtenerListadoComponente>();
 
@@ -104,7 +110,7 @@ namespace DLMallas.Business
             {
                 var ws = new WebService("GestionMalla", "obtenerListadoComponente");
                 ws.AddParameter("IdVersion", idVersion);
-                ws.AddParameter("IdSociedad", idSociedad);
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
                 ws.AddParameter("ParaRequesitos", "1");
                 ws.AddParameter("IdUcActual", idUcActual);
                 Array obj = ws.Invoke() as Array;
@@ -120,19 +126,7 @@ namespace DLMallas.Business
             return result;
         }
 
-        //public List<ObtenerComponentePrerrequisito> obtenerComponentePrerrequisito(string Id)
-        //{
-        //    List<ObtenerComponentePrerrequisito> list = new List<ObtenerComponentePrerrequisito>();
-        //    WebService ws = new WebService("GestionMalla", "obtenerComponentePrerrequisito");
-        //    ws.AddParameter("Id", Id);
-        //    Array obj = ws.Invoke() as Array;
-
-        //    string json = JsonConvert.SerializeObject(obj);
-        //    list = JsonConvert.DeserializeObject<List<ObtenerComponentePrerrequisito>>(json);
-        //    return list;
-        //}
-
-        public bool guardarComponente(GuardarComponente model)
+       public bool guardarComponente(GuardarComponente model)
         {
             try
             {
@@ -164,6 +158,7 @@ namespace DLMallas.Business
                     ws.AddParameter("Id", model.Id);
                     ws.AddParameter("IdSeccion", model.IdSeccion);
                     ws.AddParameter("IdModalidadComponente", model.IdModalidadComponente);
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     Array obj = ws.Invoke() as Array;
                 }
                
@@ -179,9 +174,14 @@ namespace DLMallas.Business
         {
             try
             {
-                WebService ws = new WebService("GestionMalla", "eliminarComponente");
-                ws.AddParameter("Id", Id);
-                Array obj = ws.Invoke() as Array;
+                if (!Offline)
+                {
+                    WebService ws = new WebService("GestionMalla", "eliminarComponente");
+                    ws.AddParameter("Id", Id);
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    Array obj = ws.Invoke() as Array;
+                    return true;
+                }
                 return true;
             }
             catch (Exception)
@@ -199,12 +199,8 @@ namespace DLMallas.Business
                     WebService ws = new WebService("GestionMalla", "guardarPrerrequisitos");
                     ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("IdComponente", model.IdComponente);
-
-                    foreach (var item in model.IdComponentePrerrequisitos)
-                    {
-                        ws.AddParameter("IdComponentePrerrequisito", item);
-                    }
-                    
+                    ws.AddParameter("ListaUC", model.IdComponentePrerrequisitos.Aggregate((a, x) => a + ", " + x));
+                                        
                     Array obj = ws.Invoke() as Array;
                 }
 
