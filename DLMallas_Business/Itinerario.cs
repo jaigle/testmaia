@@ -111,13 +111,13 @@ namespace DLMallas.Business
             var result = new List<DtoNomina>();
             if (!Offline)
             {
-                //WebService ws = new WebService("GestionMalla", "obtenerItinerario");
-                //ws.AddParameter("Id", id);
-                //ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                //var obj = ws.Invoke() as object;
+                WebService ws = new WebService("GestionMalla", "obtenerListadoNomina");
+                ws.AddParameter("IdItinerario", id);
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                var obj = ws.Invoke() as object;
 
-                //string json = JsonConvert.SerializeObject(obj);
-                //result = JsonConvert.DeserializeObject<DtoItinerarioEdit>(json);
+                string json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<DtoNomina>>(json);
             }
             else
             {

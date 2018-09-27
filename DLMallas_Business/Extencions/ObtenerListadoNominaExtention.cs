@@ -14,11 +14,11 @@ namespace DLMallas.Business.Extencions
         {
             return new Faker<DtoNomina>("es")
                 .StrictMode(true)
-                .RuleFor(r => r.Id, f => id.ToString())
-                .RuleFor(r => r.Cedula, f => f.Person.Phone)
+                .RuleFor(r => r.IdPersona, f => id)
+                .RuleFor(r => r.Rut, f => f.Person.Phone)
                 .RuleFor(r => r.NombreCompleto, f => f.Name.FullName())
-                .RuleFor(r => r.Asignacion, f => f.Date.Past(1, null).ToString("dd/MM/yyyy"))
-                .RuleFor(r => r.Avance, f => f.Random.Number(0, 100).ToString() + "%")
+                .RuleFor(r => r.Asignacion, f => f.Date.Timespan())
+                .RuleFor(r => r.Avance, f => f.Random.Number(0, 100))
                 .RuleFor(r => r.UsuarioAsig, f => f.Random.Number(0, 200).ToString());
         }
 
