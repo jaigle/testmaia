@@ -217,9 +217,10 @@
                     alert("Ha ocurrido un error al intentar guardar el registro.");
                 }
             });
-
         }
     }
+
+   
 
     // Eventos =================================================================
 

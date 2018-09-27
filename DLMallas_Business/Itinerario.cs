@@ -59,6 +59,54 @@ namespace DLMallas.Business
             }
         }
 
+        public bool EliminarNominasTodos(string idItinerario)
+        {
+            try
+            {
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "eliminarNominaItinerario");
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("IdItinerario", idItinerario);
+                    ws.AddParameter("Todos", "1");
+                    ws.AddParameter("Lista", "");
+                    ws.Invoke();
+                }
+
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool EliminarNominasSelecionados(string idItinerario, string ids)
+        {
+            try
+            {
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "eliminarNominaItinerario");
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("IdItinerario", idItinerario);
+                    ws.AddParameter("Todos", "0");
+                    ws.AddParameter("Lista", ids);
+                    ws.Invoke();
+                }
+
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+        
         public DtoItinerarioEdit ObtenerItinerario(string id)
         {
             var result = new DtoItinerarioEdit();

@@ -27,7 +27,7 @@ namespace DLMallas.Controllers
             if (resp)
                 return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar malla");
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error");
         }
         
         public HttpStatusCodeResult ActualizarItinerario(string id, string mallaId, string nombre, string fechaInic, string fechaFin)
@@ -36,8 +36,27 @@ namespace DLMallas.Controllers
             if (resp)
                 return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar malla");
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error");
         }
+        public HttpStatusCodeResult EliminarNominaTodos(string idItinerario)
+        {
+            var resp = _itinerario.EliminarNominasTodos(idItinerario);
+            if (resp)
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error");
+        }
+
+        public HttpStatusCodeResult EliminarNominaSelecionados(string idItinerario, string Idslist)
+        {
+            var resp = _itinerario.EliminarNominasSelecionados(idItinerario, Idslist);
+            if (resp)
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error");
+        }
+
+        
 
         public PartialViewResult  TablaSelecionarMalla(string idMalla)
         {
