@@ -1935,6 +1935,8 @@
     <Content Include="Views\AdministracionItinerario\EditarItinerario.cshtml" />
     <Content Include="Views\AdministracionItinerario\_ModalSelecionarMalla.cshtml" />
     <Content Include="Views\AdministracionItinerario\Audiencia.cshtml" />
+    <Content Include="Views\AdministracionItinerario\_AgregarParticipante.cshtml" />
+    <Content Include="Views\AdministracionItinerario\_ResultadoBuscarParticipante.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

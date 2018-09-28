@@ -59,6 +59,29 @@ namespace DLMallas.Business
             }
         }
 
+        public bool GuardarParticipantes(string idItinerario, string participantes)
+        {
+            try
+            {
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "adicionarNominaItinerario");
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("IdItinerario", idItinerario);
+                    ws.AddParameter("Lista", participantes);
+                    ws.AddParameter("Usuario", Variables.Usuario);
+                    ws.Invoke();
+                }
+
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public bool EliminarNominasTodos(string idItinerario)
         {
             try
@@ -170,6 +193,34 @@ namespace DLMallas.Business
             else
             {
                 result = new List<DtoNomina>().Faker(id);
+            }
+
+            return result;
+        }
+
+        public List<DtoNominaAcademia> ObtenerListadoNominAcademia(string cedulaIdent, string apellidoPat, string apellidoMat, string cargo, string sociedadCont, string unidadOrg, string franquicia, string unidadNeg)
+        {
+            var result = new List<DtoNominaAcademia>();
+            if (!Offline)
+            {
+                WebService ws = new WebService("GestionMalla", "buscarColaboradorAcademia");
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                ws.AddParameter("Cedula", cedulaIdent);
+                ws.AddParameter("Paterno", apellidoPat);
+                ws.AddParameter("Materno", apellidoMat);
+                ws.AddParameter("Franquicia", franquicia);
+                ws.AddParameter("SContratante", sociedadCont);
+                ws.AddParameter("UnidadOrganizacional", unidadOrg);
+                ws.AddParameter("Cargo", cargo);
+                ws.AddParameter("UnidadNegocio", unidadNeg);
+                var obj = ws.Invoke() as object;
+
+                string json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<DtoNominaAcademia>>(json);
+            }
+            else
+            {
+                result = new List<DtoNominaAcademia>().Faker();
             }
 
             return result;

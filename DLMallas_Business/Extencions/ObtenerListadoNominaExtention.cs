@@ -31,5 +31,31 @@ namespace DLMallas.Business.Extencions
 
             return list;
         }
+
+
+        public static DtoNominaAcademia Faker(this DtoNominaAcademia item, int id)
+        {
+            return new Faker<DtoNominaAcademia>("es")
+                .StrictMode(true)
+                .RuleFor(r => r.IdPersona, f => id)
+                .RuleFor(r => r.Cedula, f => f.Person.Phone)
+                .RuleFor(r => r.Nombres, f => f.Name.FirstName())
+                .RuleFor(r => r.ApellidoPaterno, f => f.Name.LastName())
+                .RuleFor(r => r.ApellidoMaterno, f => f.Name.LastName())
+                .RuleFor(r => r.FranquiciaSence, f => f.Random.Number(0, 100).ToString())
+                .RuleFor(r => r.SociedadContratante,f =>  "Sociedad "+ f.Random.Number(0, 200).ToString());
+        }
+
+        public static List<DtoNominaAcademia> Faker(this List<DtoNominaAcademia> list, string itinerarioId = "0")
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                list.Add(new DtoNominaAcademia().Faker(i+1));
+            }
+
+            return list;
+        }
     }
+
+    
 }

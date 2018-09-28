@@ -9,10 +9,7 @@
 <div class="main no-margin">
     @Html.Partial("~/Views/Shared/Partials/_SubMenuItinerario.cshtml", Model.IdItinerario)
     <input type="hidden" id="id_itinerario_hidden" value="@Model.IdItinerario" />
-    @*<input type="hidden" id="malla_hidden" value="@Model.ObtenerMalla[0].Nombre"/>*@
     <div id="page-wrapper" class="col-sm-12 col-md-10">
-        @*@Html.Partial("~/Views/Shared/Partials/_InformacionMalla.cshtml", Model)*@
-
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-default panel-page-content">
@@ -22,7 +19,7 @@
                                 Participantes del itinerario de la malla
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 pull-right text-right">
-                                <a class="btn btn-primary btn-sm pull-right" style="margin-left: 10px;" href="#" id="btnAgregar">
+                                <a class="btn btn-primary btn-sm pull-right" style="margin-left: 10px;" href="#" id="btnAgregarParticipante">
                                     <span class="fa fa-plus"></span> Agregar
                                 </a>
                                 <a class="btn btn-default btn-sm pull-right" href="#" id="btnImportarParticipantes">
@@ -84,3 +81,4 @@
         </div>
     </div>
 </div>
+@Html.Partial("_AgregarParticipante");

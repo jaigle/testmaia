@@ -29,6 +29,17 @@ namespace DLMallas.Controllers
 
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error");
         }
+
+        public HttpStatusCodeResult GuardarParticipantes(string idItinerario, string participantes)
+        {
+            var resp = _itinerario.GuardarParticipantes(idItinerario, participantes);
+            if (resp)
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error");
+        }
+
+        
         
         public HttpStatusCodeResult ActualizarItinerario(string id, string mallaId, string nombre, string fechaInic, string fechaFin)
         {
@@ -82,5 +93,12 @@ namespace DLMallas.Controllers
             ViewBag.ActiveLink = "Audiencia";
             return View(model);
         }
+
+        public PartialViewResult  BuscarParticipante(string cedulaIdent, string apellidoPat, string apellidoMat, string cargo, string sociedadCont, string unidadOrg, string franquicia, string unidadNeg)
+        {
+            var model = _itinerario.ObtenerListadoNominAcademia(cedulaIdent, apellidoPat, apellidoMat, cargo, sociedadCont, unidadOrg, franquicia, unidadNeg);
+            return PartialView("_ResultadoBuscarParticipante", model);
+        }
     }
 }
+
