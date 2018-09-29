@@ -1,0 +1,98 @@
+﻿<link href="@Url.Content("~/Content/custom/itinerario.css")" rel="stylesheet">
+<div class="modal fade" id="modAgregarParticipante" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Agreagar Participante</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row margin-bottom10">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        Cedula Identidad
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <input id="txtCedulaIdent" class="form-control input-sm" type="text" placeholder="Cedula Identidad">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        Sociedad Contratante
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <input id="txtSociedadCont" class="form-control input-sm" type="text" placeholder="Sociedad Contratante">
+                    </div>
+                </div>
+                <div class="row margin-bottom10">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        Apellido Paterno
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <input id="txtApellidoPat" class="form-control input-sm" type="text" placeholder="Apellido Paterno">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        Unidad Organizacional
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <input id="txtUnidadOrg" class="form-control input-sm" type="text" placeholder="Unidad Organizacional">
+                    </div>
+                </div>
+                <div class="row margin-bottom10">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        Apellido Materno
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <input id="txtApellidoMat" class="form-control input-sm" type="text" placeholder=" Apellido Materno">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        Cargo
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <input id="txtCargo" class="form-control input-sm" type="text" placeholder="Cargo">
+                    </div>
+                </div>
+                <div class="row margin-bottom10">
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        Franquicia SENCE
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <input id="txtFranquicia" class="form-control input-sm" type="text" placeholder="Franquicia SENCE">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                        Unidad de Negocio
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <input id="txtUnidadNeg" class="form-control input-sm" type="text" placeholder="Unidad de Negocio">
+                    </div>
+                </div>
+                <div class="row margin-bottom10">
+                    <div class="col-lg-2 col-md-2 col-sm-2 pull-right">
+                        <a class="btn btn-primary btn-sm pull-right" style="margin-left: 10px;" href="#" id="btnBuscarParticipante">
+                            <span class="fa fa-search"></span> Buscar
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <table id="tblListadoParticipantes" class="table table-condensed table-bordered table-hover tabla-resultados">
+                            <thead>
+                            <tr>
+                                <th class="no-sort"></th>
+                                <th>Cédula</th>
+                                <th>A. Paterno</th>
+                                <th>A. Materno</th>
+                                <th>Nombre</th>
+                                <th>Franquicia</th>
+                                <th>Sociedad contratante</th>
+                            </tr>
+                            </thead>
+                            <tbody id="contenidoListadoParticipantes"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn_primary" id="btnGuardarParticipante">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

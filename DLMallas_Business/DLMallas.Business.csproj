@@ -125,6 +125,8 @@
     <Compile Include="Dto\Malla\GuardarMalla.cs" />
     <Compile Include="Dto\Malla\ObtenerListadoMalla.cs" />
     <Compile Include="Dto\Malla\ObtenerMalla.cs" />
+    <Compile Include="Dto\Nomina\DtoNominaAcademica.cs" />
+    <Compile Include="Dto\Nomina\DtoNomina.cs" />
     <Compile Include="Dto\Seccion\ActualizarSeccion.cs" />
     <Compile Include="Dto\Seccion\GuardarSeccion.cs" />
     <Compile Include="Dto\Seccion\ObtenerListadoSeccion.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="Dto\Version\ObtenerListadoVersion.cs" />
     <Compile Include="Dto\Version\ObtenerVersion.cs" />
     <Compile Include="Extencions\DtoCertificadoExtention.cs" />
+    <Compile Include="Extencions\ObtenerListadoNominaExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoItinerarioMallaExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoComponenteExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoCatalogoCursoExtention.cs" />

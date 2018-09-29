@@ -9,3 +9,11 @@
 .margin-bottom20 {
     margin-bottom: 20px;
 }
+
+.margin-right10 {
+    margin-right: 10px !important;
+}
+
+.margin-left10 {
+    margin-left: 10px !important;
+}

@@ -1,0 +1,19 @@
+﻿@model List<DLMallas.Business.Dto.DtoNominaAcademia>
+@foreach (var item in @Model)
+{
+    <tr>
+        <td>
+            <div class="row text-center">
+                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                    <input type="checkbox" value="@item.IdPersona" class="chkNominaParticipante"/>
+                </div>
+            </div>
+        </td>
+        <td>@Html.DisplayFor(modelItem => item.Cedula)</td>
+        <td>@Html.DisplayFor(modelItem => item.ApellidoPaterno)</td>
+        <td>@Html.DisplayFor(modelItem => item.ApellidoMaterno)</td>
+        <td>@Html.DisplayFor(modelItem => item.Nombres)</td>
+        <td>@Html.DisplayFor(modelItem => item.FranquiciaSence)</td>
+        <td>@Html.DisplayFor(modelItem => item.SociedadContratante)</td>
+    </tr>
+}

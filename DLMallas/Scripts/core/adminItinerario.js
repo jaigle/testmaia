@@ -8,6 +8,7 @@
         $(document).ready(function () {
             self.initialize(self);
         });
+
     };
 
     var p = AdminItinerario.prototype;
@@ -28,7 +29,7 @@
         });
 
         $('.date').datepicker({
-            format: "yyyy/mm/dd",
+            format: "dd/mm/yyyy",
             weekStart: 1,
             //startDate: "now",
             language: "es",
@@ -41,6 +42,8 @@
         $("#btnSelectMalla").click(self.selecionar_malla_click);
         $("#btnAceptarSelecionMalla").click(self.aceptar_malla_selecionada);
         $("#btnGuardarNuevoItinerario").click(self.aceptar_guardar_itinerario);
+        $("#btnSelectMallaEditar").click(self.selecionar_malla_editar_click);
+        $("#btnActualizaItinerario").click(self.aceptar_actualizar_itinerario);
     };
 
     // Funciones privadas  ======================================================
@@ -105,10 +108,55 @@
         $('#modSelecionarMalla').modal('show');
     }
 
+    p.selecionar_malla_editar_click = function () {
+        $.ajax({
+            type: "POST",
+            url: "/AdministracionItinerario/TablaSelecionarMalla?idMalla=" + $("#itinerarioMallaIdEditar").val(),
+            dataType: "html",
+            traditional: true,
+            complete: function (req) {
+                $("#contenidoSelecionarMallas").html(req.responseText);
+                $("#tablaSelecionarMalla").dataTable({
+                    responsive: true,
+                    "language": {
+                        "url": "/Content/DataTables/plugins/spanish.js"
+                    }
+                });
+                $('#modSelecionarMalla').modal('show');
+                window.intervalSelect = setInterval(self.configuracion_vista, 50);
+
+            },
+            error: function (xhr, status, error) {
+                alert("Ha ocurrido un error al intentar devolver los registros.");
+            }
+        });
+    }
+
+    p.configuracion_vista = function () {
+        $("#tablaSelecionarMalla_info").parent().removeClass("col-sm-5");
+        $("#tablaSelecionarMalla_paginate").parent().removeClass("col-sm-7").addClass("col-sm-12");
+        $("#tablaSelecionarMalla_info").html("");
+        window.clearInterval(window.intervalSelect);
+    };
+
+    p.selecionar_malla_click = function () {
+        $("#tablaSelecionarMalla_info").parent().removeClass("col-sm-5");
+        $("#tablaSelecionarMalla_paginate").parent().removeClass("col-sm-7").addClass("col-sm-12");
+        $("#tablaSelecionarMalla_info").html("");
+        $('#modSelecionarMalla').modal('show');
+    }
+
     p.aceptar_malla_selecionada = function () {
+        var itinerarioId = $("#itinerarioIdEditar").val();
         var id = $('input[name=mallaRadioBtn]:checked').val();
-        $("#itinerarioMallaId").val(id);
-        $("#txtItinerarioMalla").val($("#nombreMalla-" + id).val());
+        if (itinerarioId === undefined) {
+            $("#itinerarioMallaId").val(id);
+            $("#txtItinerarioMalla").val($("#nombreMalla-" + id).val());
+        } else {
+            $("#itinerarioMallaIdEditar").val(id);
+            $("#txtItinerarioMallaEditar").val($("#nombreMalla-" + id).val());
+        }
+
         $('#modSelecionarMalla').modal('hide');
     }
 
@@ -121,11 +169,14 @@
         if (idMalla === "" || nombre === "" || fechaInic === "" || fechaFin === "") {
             alert("Ingrese todos los campos!");
         } else {
+
             var actionData = { mallaId: idMalla, nombre: nombre, fechaInic: fechaInic, fechaFin: fechaFin };
+            var url = "/AdministracionItinerario/GuardarItinerario";
+
 
             $.ajax({
                 type: "POST",
-                url: "/AdministracionItinerario/GuardarItinerario",
+                url: url,
                 traditional: true,
                 data: actionData,
                 complete: function (result) {
@@ -136,8 +187,40 @@
                     alert("Ha ocurrido un error al intentar guardar el registro.");
                 }
             });
+
         }
     }
+
+    p.aceptar_actualizar_itinerario = function () {
+        var idMalla = $("#itinerarioMallaIdEditar").val();
+        var nombre = $("#txtItinerarioNombreEditar").val();
+        var fechaInic = $("#txtItinerarioFechainicioEditar").val();
+        var fechaFin = $("#txtItinerarioFechaFinEditar").val();
+
+        if (idMalla === "" || nombre === "" || fechaInic === "" || fechaFin === "") {
+            alert("Ingrese todos los campos!");
+        } else {
+
+            var id = $("#itinerarioIdEditar").val();
+            var url = "/AdministracionItinerario/ActualizarItinerario";
+            var actionData = { id: id, mallaId: idMalla, nombre: nombre, fechaInic: fechaInic, fechaFin: fechaFin };
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                traditional: true,
+                data: actionData,
+                complete: function (result) {
+                    alert("Registro Guardado Correctamente");
+                },
+                error: function (xhr, status, error) {
+                    alert("Ha ocurrido un error al intentar guardar el registro.");
+                }
+            });
+        }
+    }
+
+   
 
     // Eventos =================================================================
 

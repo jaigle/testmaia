@@ -14,6 +14,10 @@ namespace DLMallas.Models
         public string Id { get; set; }
         public string Nombre { get; set; }
         public string Vigencia { get; set; }
+        public string FechaInicio { get; set; }
+        public string FechaTermino { get; set; }
+        public string MallaId { get; set; }
+        public string Malla { get; set; }
         public int Inscrip { get; set; }
         public bool Estado { get; set; }
         public string AvanUc { get; set; }
