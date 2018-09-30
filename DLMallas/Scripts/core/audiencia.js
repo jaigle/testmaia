@@ -33,6 +33,11 @@
         $("#btnAgregarParticipante").click(self.agregar_participante_click);
         $("#btnBuscarParticipante").click(self.buscar_participante_click);
         $("#btnGuardarParticipante").click(self.guardar_participante_click);
+        $("#btnDesmatriculadoMasivo").click(self.desmatriculador_masivo_click);
+        $("#ajaxUploadExcel").change(self.ajax_upload_excel_change);
+        $("#ajaxUploadExcel").submit(self.form_submit_click);
+        $("#btnDesmatricular").click(self.desmatricular_click);
+        $("#btnImportarParticipantes").click(self.importar_click);
     };
 
     // Funciones privadas  ======================================================
@@ -107,8 +112,8 @@
             txtFranquicia !== "" || txtUnidadNeg !== "") {
 
             var actionData = {
-                cedulaIdent: txtCedulaIdent, 
-                apellidoPat:  txtApellidoPat, 
+                cedulaIdent: txtCedulaIdent,
+                apellidoPat: txtApellidoPat,
                 apellidoMat: txtApellidoMat,
                 cargo: txtCargo,
                 sociedadCont: txtSociedadCont,
@@ -136,7 +141,7 @@
         }
     }
 
-    p.guardar_participante_click = function() {
+    p.guardar_participante_click = function () {
         var ids = [];
 
         $("input.chkNominaParticipante:checked").each(function () {
@@ -149,14 +154,114 @@
             alert("Selecione al menos un participante!");
         } else {
             var actionData = { idItinerario: itinerario, participantes: ids.toString() };
-            
+
             $.ajax({
                 type: "POST",
-                url:  "/AdministracionItinerario/GuardarParticipantes",
+                url: "/AdministracionItinerario/GuardarParticipantes",
                 traditional: true,
                 data: actionData,
                 complete: function (result) {
                     alert("Registro Guardado Correctamente");
+                    window.location.href = "/AdministracionItinerario/Audiencia/" + itinerario;
+                },
+                error: function (xhr, status, error) {
+                    alert("Ha ocurrido un error al intentar guardar el registro.");
+                }
+            });
+
+        }
+    }
+
+    p.desmatriculador_masivo_click = function () {
+        $("#ajaxUploadExcel").resetForm();
+        $("#tblListadoProcesados").dataTable().fnDestroy();
+        $("#contenidoDesm_Import").html("");
+        $("#validos").html("");
+        $("#no_existentes").html("");
+        $("#existente").html("");
+        $("#Desmatricular_ImportarLabel").html("Desmatriculador masivo de Participante");
+        $("#btnDesmatricular").html("Desmatricular");
+        $("#tipoDesmImportar").val("desmatricular");
+        $("#modDesmatricular_Importar").modal("show");
+    }
+
+    p.importar_click = function() {
+        $("#ajaxUploadExcel").resetForm();
+        $("#tblListadoProcesados").dataTable().fnDestroy();
+        $("#contenidoDesm_Import").html("");
+        $("#validos").html("");
+        $("#no_existentes").html("");
+        $("#existente").html("");
+        $("#Desmatricular_ImportarLabel").html("Importar datos de participantes");
+        $("#btnDesmatricular").html("Importar");
+        $("#tipoDesmImportar").val("importar");
+        $("#modDesmatricular_Importar").modal("show");
+    }
+
+    p.ajax_upload_excel_change = function (event) {
+        $("#btnProcesarExcel").prop("disabled", false);
+    }
+
+    p.form_submit_click = function (e) {
+        e.preventDefault();
+
+        var formData = new FormData();
+        //$(this)[0]
+        formData.append("fileExcel", $("#fileExcel")[0].files[0]);
+        formData.append("idItinerario", $("#id_itinerario_hidden").val());
+        formData.append("tipoDesmImportar", $("#tipoDesmImportar").val());
+
+        $.ajax({
+            type: "POST",
+            url: "/AdministracionItinerario/Procesar",
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: "html",
+            beforeSend: function () {
+                waitingDialog.show("Procesando...", { dialogSize: "sm" });
+            },
+            complete: function (result) {
+                $("#ajaxUploadExcel").resetForm();
+                waitingDialog.hide();
+                $("#contenidoDesm_Import").html(result.responseText);
+                $("#tblListadoProcesados").dataTable({
+                    responsive: true,
+                    "language": {
+                        "url": "/Content/DataTables/plugins/spanish.js"
+                    }
+                });
+
+                $("#validos").html($("#hidden_validos").val());
+                $("#no_existentes").html($("#hidden_noEncontrados").val());
+                $("#existente").html($("#hidden_existentes").val());
+                $("#listadoProcesarHidden").val($("#hidden_listaProcesar").val());
+            },
+            error: function (resultado) {
+                waitingDialog.hide();
+                var data = JSON.parse(resultado);
+                $("#ajaxUploadLogo").resetForm();
+                alert("Error al subir archivo: " + data.mensaje);
+            }
+        });
+    }
+
+    p.desmatricular_click = function() {
+        var itinerario = $("#id_itinerario_hidden").val();
+        var lista = $("#listadoProcesarHidden").val();
+        var tipoDesmImportar = $("#tipoDesmImportar").val();
+        if (lista ===  undefined || lista === "") {
+            alert("No tiene valores para ejecutar el proceso");
+        } else {
+            var actionData = { idItinerario: itinerario, tipoDesmImportar: tipoDesmImportar, lista: lista };
+
+            $.ajax({
+                type: "POST",
+                url: "/AdministracionItinerario/EjecutarProcesados",
+                traditional: true,
+                data: actionData,
+                success: function (result) {
+                    alert("Registros Procesados Correctamente");
                     window.location.href = "/AdministracionItinerario/Audiencia/" + itinerario;
                 },
                 error: function (xhr, status, error) {

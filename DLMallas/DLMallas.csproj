@@ -55,6 +55,10 @@
       <Private>True</Private>
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Flurl">
       <HintPath>..\packages\Flurl.1.0.10\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+MonoTouch10\Flurl.dll</HintPath>
     </Reference>
@@ -80,6 +84,7 @@
       <HintPath>..\packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
     <Reference Include="Remotion">
       <HintPath>..\packages\LinqToExcel.1.10.1\lib\Remotion.dll</HintPath>
     </Reference>
@@ -236,6 +241,7 @@
     <Compile Include="Models\ItinerarioViewModels.cs" />
     <Compile Include="Models\MallaViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ProcesadosViewModels.cs" />
     <Compile Include="Models\NominaViewModels.cs" />
     <Compile Include="Models\SeccionViewModels.cs" />
     <Compile Include="Models\VersionViewModels.cs" />
@@ -1307,6 +1313,7 @@
     <Content Include="Content\DataTables-1.10.11\media\images\Sorting icons.psd" />
     <Content Include="Content\DataTables-1.10.11\Readme.md" />
     <Content Include="imports\Formato_Asignacion_Masiva.xlsx" />
+    <Content Include="Content\Formato.xlsx" />
     <None Include="Properties\PublishProfiles\deploy.pubxml" />
     <Content Include="Scripts\accounting.js" />
     <Content Include="Scripts\alertModal.js" />
@@ -1937,6 +1944,8 @@
     <Content Include="Views\AdministracionItinerario\Audiencia.cshtml" />
     <Content Include="Views\AdministracionItinerario\_AgregarParticipante.cshtml" />
     <Content Include="Views\AdministracionItinerario\_ResultadoBuscarParticipante.cshtml" />
+    <Content Include="Views\AdministracionItinerario\_Desmatricular_Importar.cshtml" />
+    <Content Include="Views\AdministracionItinerario\_Porcesados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

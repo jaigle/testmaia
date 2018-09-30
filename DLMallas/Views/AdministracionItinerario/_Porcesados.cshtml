@@ -1,0 +1,13 @@
+﻿@model DLMallas.Models.ProcesadosViewModels
+<input type="hidden" id="hidden_validos" value="@Model.Validos"/>
+<input type="hidden" id="hidden_noEncontrados" value="@Model.NoEncontrados" />
+<input type="hidden" id="hidden_existentes" value="@Model.Existentes" />
+<input type="hidden" id="hidden_listaProcesar" value="@Model.ListaProcesar" />
+@foreach (var item in @Model.Procesados)
+{
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Cedula)</td>
+        <td>@Html.DisplayFor(modelItem => item.NombreCompleto)</td>
+        <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+    </tr>
+}
