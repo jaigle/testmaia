@@ -1,0 +1,78 @@
+﻿@model string
+<link href="@Url.Content("~/Content/custom/itinerario.css")" rel="stylesheet">
+<div class="modal fade" id="modDesmatricular_Importar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="width: 50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="Desmatricular_ImportarLabel">Desmatriculador masivo de PArticipante</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row examinar">
+                    <div class="col-sm-12 no-padding-left">
+                        <div class="col-lg-2" style="padding-top: 8px; padding-right: 2px;">Archivo Excel</div>
+                        <form id="ajaxUploadExcel" action="@Url.Action("Procesar", "AdministracionItinerario", new {idItinerario = Model})" method="post" enctype="multipart/form-data">
+                            <div class="col-lg-5 col-md-5 col-sm-5 no-padding-left no-padding-right">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-file-excel-o"></span></span>
+                                    <input type="hidden" id="tipoDesmImportar" name="tipoDesmImportar" value="desmatricular" />
+                                    <input type="hidden" id="listadoProcesarHidden" name="listadoPRocesarHidden" value="" />
+                                    <input class="form-control input-sm" id="fileExcel" type="file" name="fileExcel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="height: 25px; padding-bottom: 28px;" />
+                                </div>
+                            </div>
+                            <button id="btnProcesarExcel" type="submit" disabled="disabled" class="btn btn-default">Procesar</button>
+                            <a href="~/Content/Formato.xlsx" style="margin-left: 20px;">Formato de plantilla</a>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <table id="tblListadoProcesados" class="table table-condensed table-bordered table-hover tabla-resultados">
+                            <thead>
+                                <tr>
+                                    <th>Cedula</th>
+                                    <th>Nombre</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contenidoDesm_Import"></tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                                <span class="glyphicon glyphicon-ok-sign" style="color: cadetblue;"></span> Validos:
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4" id="validos"></div>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                                <span class="glyphicon glyphicon-question-sign" style="color: gold;"></span> No existentes:
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4" id="no_existentes"></div>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                                <span class="glyphicon glyphicon-minus-sign" style="color: chocolate;"></span> Existente:
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4" id="existente"></div>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <input type="hidden" id="tipo_desm_imp" value="0">
+                <button class="btn btn_primary" id="btnDesmatricular">Desmatricular</button>
+            </div>
+        </div>
+    </div>
+</div>

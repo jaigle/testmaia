@@ -1,9 +1,16 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using DLMallas.Business.Dto.Itinerario;
+using DLMallas.Business.Dto.Nomina;
 using DLMallas.Models;
 using DLMallas.Utilidades;
+using Newtonsoft.Json;
+using OfficeOpenXml;
 
 namespace DLMallas.Controllers
 {
@@ -39,8 +46,8 @@ namespace DLMallas.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error");
         }
 
-        
-        
+
+
         public HttpStatusCodeResult ActualizarItinerario(string id, string mallaId, string nombre, string fechaInic, string fechaFin)
         {
             var resp = _itinerario.ActualizarItinerario(id, mallaId, nombre, fechaInic, fechaFin, "1");
@@ -67,14 +74,48 @@ namespace DLMallas.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error");
         }
 
-        
 
-        public PartialViewResult  TablaSelecionarMalla(string idMalla)
+
+        public PartialViewResult TablaSelecionarMalla(string idMalla)
         {
             ViewBag.idMalla = idMalla;
             var model = _malla.ObtenerListadoMalla();
             return PartialView("_SelecionarMalla", model);
         }
+
+        public PartialViewResult Procesar(HttpPostedFileBase fileExcel, string idItinerario, string tipoDesmImportar)
+        {
+            var model = new ProcesadosViewModels();
+            model.Procesados = new List<DtoProcesados>();
+            using (ExcelPackage package = new ExcelPackage(fileExcel.InputStream))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+                var row = 2;
+                var ruts = new List<string>();
+                while (worksheet.Cells[row, 1].Value != null)
+                {
+                    ruts.Add(worksheet.Cells[row, 1].Value.ToString());
+                    row++;
+                }
+
+                var strRuts = ruts.Aggregate((a, b) => a + ", " + b);
+
+                var importar = (tipoDesmImportar == "importar") ? "1" : "0";
+                model.Procesados = _itinerario.ValidarListadoRut(idItinerario, strRuts, importar);
+            }
+
+            return PartialView("_Porcesados", model);
+        }
+
+        public HttpStatusCodeResult EjecutarProcesados(string idItinerario, string tipoDesmImportar, string lista)
+        {
+            var resp = _itinerario.EjecutarProcesados(idItinerario, tipoDesmImportar, lista);
+            if (resp)
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error");
+        }
+
 
         public ActionResult EditarItinerario(string id)
         {
@@ -94,7 +135,7 @@ namespace DLMallas.Controllers
             return View(model);
         }
 
-        public PartialViewResult  BuscarParticipante(string cedulaIdent, string apellidoPat, string apellidoMat, string cargo, string sociedadCont, string unidadOrg, string franquicia, string unidadNeg)
+        public PartialViewResult BuscarParticipante(string cedulaIdent, string apellidoPat, string apellidoMat, string cargo, string sociedadCont, string unidadOrg, string franquicia, string unidadNeg)
         {
             var model = _itinerario.ObtenerListadoNominAcademia(cedulaIdent, apellidoPat, apellidoMat, cargo, sociedadCont, unidadOrg, franquicia, unidadNeg);
             return PartialView("_ResultadoBuscarParticipante", model);

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DLMallas.Business.Dto;
 using DLMallas.Business.Dto.Itinerario;
+using DLMallas.Business.Dto.Nomina;
 
 namespace DLMallas.Models
 {

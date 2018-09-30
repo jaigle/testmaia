@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Bogus;
 using DLMallas.Business.Dto;
 using DLMallas.Business.Dto.Itinerario;
+using DLMallas.Business.Dto.Nomina;
 using DLMallas.Business.Extencions;
 using WSLib;
 
@@ -128,8 +129,29 @@ namespace DLMallas.Business
             }
         }
 
+        public List<DtoProcesados> ValidarListadoRut(string idItinerario, string lista, string tipoDesmImportar)
+        {
+            var result = new List<DtoProcesados>();
+            if (!Offline)
+            {
+                WebService ws = new WebService("GestionMalla", "validarListadoRut");
+                ws.AddParameter("IdItinerario", idItinerario);
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                ws.AddParameter("Lista", lista);
+                ws.AddParameter("Importar", tipoDesmImportar);
+                Array obj = ws.Invoke() as Array;
 
-        
+                string json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<DtoProcesados>>(json);
+            }
+            else
+            {
+                result.Faker();
+            }
+
+            return result;
+        }
+
         public DtoItinerarioEdit ObtenerItinerario(string id)
         {
             var result = new DtoItinerarioEdit();
@@ -221,6 +243,22 @@ namespace DLMallas.Business
             else
             {
                 result = new List<DtoNominaAcademia>().Faker();
+            }
+
+            return result;
+        }
+
+        public bool EjecutarProcesados(string idItinerario, string tipoDesmImportar, string lista)
+        {
+            bool result = true;
+
+            if (tipoDesmImportar == "importar")
+            {
+                result = GuardarParticipantes(idItinerario, lista);
+            }
+            else
+            {
+                result = EliminarNominasSelecionados(idItinerario, lista);
             }
 
             return result;

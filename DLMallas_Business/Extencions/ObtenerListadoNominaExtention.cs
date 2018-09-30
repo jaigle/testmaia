@@ -5,6 +5,7 @@ using Bogus;
 using DLMallas.Business.Dto;
 using DLMallas.Business.Dto.Componente;
 using DLMallas.Business.Dto.Malla;
+using DLMallas.Business.Dto.Nomina;
 
 namespace DLMallas.Business.Extencions
 {

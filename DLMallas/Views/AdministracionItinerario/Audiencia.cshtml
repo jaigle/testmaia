@@ -70,7 +70,7 @@
                                 <a class="btn btn-default btn-sm pull-left"  style="margin-right: 10px;"  href="#" id="btnNominaEliminarSelecionados">
                                     Eliminar Selecionados
                                 </a>
-                                <a class="btn btn-default btn-sm pull-left"  style="margin-right: 10px;"  href="#" id="btnImportarParticipantes">
+                                <a class="btn btn-default btn-sm pull-left"  style="margin-right: 10px;"  href="#" id="btnDesmatriculadoMasivo">
                                     Desmatriculador Masivo
                                 </a>
                             </div>
@@ -82,3 +82,4 @@
     </div>
 </div>
 @Html.Partial("_AgregarParticipante");
+@Html.Partial("_Desmatricular_Importar", Model.IdItinerario);
