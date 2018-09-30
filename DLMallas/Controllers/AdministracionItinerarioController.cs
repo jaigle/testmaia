@@ -140,6 +140,13 @@ namespace DLMallas.Controllers
             var model = _itinerario.ObtenerListadoNominAcademia(cedulaIdent, apellidoPat, apellidoMat, cargo, sociedadCont, unidadOrg, franquicia, unidadNeg);
             return PartialView("_ResultadoBuscarParticipante", model);
         }
+
+        public ActionResult Informes(string id)
+        {
+            ViewBag.ActiveLink = "Informes";
+            ViewBag.IdItinerario = id;
+            return View();
+        }
     }
 }
 
