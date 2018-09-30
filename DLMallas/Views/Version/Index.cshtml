@@ -70,7 +70,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.Version)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Vigencia)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Uc)</td>
-                                        <td>@(item.Estado == "1" ? "Activa" : "No Activa")</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Estado)</td>
                                     </tr>
                                 }
                             </tbody>

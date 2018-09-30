@@ -166,7 +166,7 @@ namespace DLMallas.Business
             }
         }
 
-        public bool EliminarMalla(string id)
+        public DtoJsonResult EliminarMalla(string id)
         {
             try
             {
@@ -176,16 +176,48 @@ namespace DLMallas.Business
                     ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("Id", id);
                     Array obj = ws.Invoke() as Array;
-
-                    string json = JsonConvert.SerializeObject(obj);
+                    var json = JsonConvert.SerializeObject(obj);
+                    List<DtoOperacionResult> result = new List<DtoOperacionResult>();
+                    result = JsonConvert.DeserializeObject<List<DtoOperacionResult>>(json);
+                    DtoJsonResult resultado = _TransformarMensaje(result[0]);
+                    if (resultado.exito)
+                        return resultado;
+                    throw new Exception(resultado.mensaje);
                 }
-
-                return true;
+                else
+                {
+                    return new DtoJsonResult {
+                           exito = true,
+                           mensaje = "Operacion exitosa"
+                    };
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new Exception("Eliminar Malla: Ocurrió un error al momento de ejecutar la operación. Detalles :" + ex.Message);
             }
+        }
+
+        private DtoJsonResult _TransformarMensaje(Array obj)
+        {
+            DtoJsonResult miResultado = new DtoJsonResult
+            {
+                exito = false,
+                mensaje = "falso mensaje",
+                valor = ""
+            };
+            return miResultado;
+        }
+
+        private DtoJsonResult _TransformarMensaje(DtoOperacionResult obj)
+        {
+            DtoJsonResult miResultado = new DtoJsonResult
+            {
+                exito = (obj.errorCode == 0),
+                mensaje = obj.mensaje,
+                valor = obj.resultado
+            };
+            return miResultado;
         }
     }
 }

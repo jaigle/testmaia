@@ -107,17 +107,15 @@ namespace DLMallas.Controllers
                     try
                     {
                         fileimg.SaveAs(path);
-                        resp = c.guardarImg(model);
-                        if (resp)
+                        miResultado = c.guardarImg(model);
+                        if (miResultado.exito)
                         {
-                            miResultado.exito = true;
                             return Utilidades.Acciones.serializarObjeto(miResultado);
                         }
                         else
-                        if (resp)
                         {
-                            miResultado.exito = false;
-                            return Utilidades.Acciones.serializarObjeto(miResultado);
+                            throw new Exception(miResultado.mensaje);
+                            //return Utilidades.Acciones.serializarObjeto(miResultado);
                         }
                     }
                     catch (Exception e)

@@ -43,8 +43,8 @@ namespace DLMallas.Business
                 {
                     var ws = new WebService("GestionMalla", "guardarItinerario");
                     ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                    ws.AddParameter("Nombre", nombre);
                     ws.AddParameter("IdMalla", mallaId);
+                    ws.AddParameter("Nombre", nombre);
                     ws.AddParameter("FechaInicio", fechaInic);
                     ws.AddParameter("FechaTermino", fechaFin);
                     ws.Invoke();
@@ -53,7 +53,7 @@ namespace DLMallas.Business
                 return true;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }

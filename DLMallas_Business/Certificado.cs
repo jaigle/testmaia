@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DLMallas.Business.Dto;
+using DLMallas.Business.Dto.Malla;
 using DLMallas.Business.Extencions;
 using WSLib;
 
@@ -91,27 +93,51 @@ namespace DLMallas.Business
             }
         }
 
-        public bool guardarImg(GuardarArchivo model)
+        public Dto.DtoJsonResult guardarImg(GuardarArchivo model)
         {
-            if (!Offline)
+            try
             {
-                try
+                if (!Offline)
                 {
+
                     WebService ws = new WebService("GestionMalla", "guardarImg");
                     ws.AddParameter("IdMalla", model.IdMalla);
                     ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("RutaLogo", model.Ruta);
                     Array obj = ws.Invoke() as Array;
-                    return true;
+                    var json = JsonConvert.SerializeObject(obj);
+                    List<DtoOperacionResult> result = new List<DtoOperacionResult>();
+                    result = JsonConvert.DeserializeObject<List<DtoOperacionResult>>(json);
+                    DtoJsonResult resultado = _TransformarMensaje(result[0]);
+                    if (resultado.exito)
+                        return resultado;
+                    throw new Exception(resultado.mensaje);
                 }
-                catch (Exception)
+                else
                 {
-                    return false;
+                    return new DtoJsonResult
+                    {
+                        exito = true,
+                        mensaje = "Operacion exitosa"
+                    };
                 }
             }
-            else {
-                return true;
+            catch (Exception)
+            {
+                throw;
             }
+            
+        }
+
+        private DtoJsonResult _TransformarMensaje(DtoOperacionResult obj)
+        {
+            DtoJsonResult miResultado = new DtoJsonResult
+            {
+                exito = (obj.errorCode == 0),
+                mensaje = obj.mensaje,
+                valor = obj.resultado
+            };
+            return miResultado;
         }
 
         public bool guardarFirma(GuardarArchivo model)

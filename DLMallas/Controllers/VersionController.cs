@@ -18,11 +18,19 @@ namespace DLMallas.Controllers
         public ActionResult Index(string id)
         {
             var model = new VersionViewModels();
-            
-            model.ObtenerListadoVersion = _version.ObtenerListadoVersion(id);
-            model.ObtenerMalla = _malla.ObtenerMalla(id);
-            ViewBag.ActiveLink = "Versiones";
-            return View(model);
+
+            try
+            {
+                model.ObtenerListadoVersion = _version.ObtenerListadoVersion(id);
+                model.ObtenerMalla = _malla.ObtenerMalla(id);
+                ViewBag.ActiveLink = "Versiones";
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando obtener listao de versiones. Detalles: " + ex.Message);
+            }
+
         }
 
         public HttpStatusCodeResult GuardarVersion(string fechainicio, string idmalla)
@@ -38,7 +46,7 @@ namespace DLMallas.Controllers
             if (resp)
                 return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar malla");
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar la versión");
         }
 
         public bool ActualizarVersion(string id, string fechainicio)

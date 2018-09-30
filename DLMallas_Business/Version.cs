@@ -16,14 +16,21 @@ namespace DLMallas.Business
 
             if (!Offline)
             {
-                var ws = new WebService("GestionMalla", "obtenerListadoVersion");
-                ws.AddParameter("IdSociedad", Variables.IdSociedad);
-                ws.AddParameter("IdMalla", idMalla);
-                Array obj;
-                obj = ws.Invoke() as Array;
+                try
+                {
+                    var ws = new WebService("GestionMalla", "getListadoVersion");
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("IdMalla", idMalla);
+                    Array obj = ws.Invoke() as Array;
 
-                string json = JsonConvert.SerializeObject(obj);
-                result = JsonConvert.DeserializeObject<List<ObtenerListadoVersion>>(json);
+                    string json = JsonConvert.SerializeObject(obj);
+                    result = JsonConvert.DeserializeObject<List<ObtenerListadoVersion>>(json);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Ocurrió el siguiente error: " + ex.Message);
+                }
+                
             }
             else
             {
@@ -40,8 +47,8 @@ namespace DLMallas.Business
             if (!Offline)
             {
                 WebService ws = new WebService("GestionMalla", "obtenerVersion");
-                ws.AddParameter("IdSociedad", Variables.IdSociedad);
                 ws.AddParameter("Id", id);
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
 
                 Array obj = ws.Invoke() as Array;
 

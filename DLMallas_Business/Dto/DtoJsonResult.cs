@@ -26,6 +26,7 @@ namespace DLMallas.Business.Dto
         public int errorCode { get; set; }
         public string mensaje { get; set; }
         public string resultado { get; set; }
+        public string resultadojson { get; set; }
 
 
         public DtoOperacionResult()
@@ -33,6 +34,7 @@ namespace DLMallas.Business.Dto
             errorCode = 0;
             mensaje = string.Empty;
             resultado = string.Empty;
+            resultadojson = string.Empty;
         }
     }
 }
