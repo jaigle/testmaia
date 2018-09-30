@@ -147,6 +147,23 @@ namespace DLMallas.Controllers
             ViewBag.IdItinerario = id;
             return View();
         }
+
+        public ActionResult Notificaciones(string id)
+        {
+            ViewBag.ActiveLink = "Notificaciones";
+            ViewBag.IdItinerario = id;
+            var model = _itinerario.ObtenerListadoNotificaciones(id);
+            return View(model);
+        }
+
+        public HttpStatusCodeResult ActualizarNotificaciones(string idItinerario, string lista)
+        {
+            var resp = _itinerario.ActualizarNotificaciones(idItinerario, lista);
+            if (resp)
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error");
+        }
     }
 }
 
