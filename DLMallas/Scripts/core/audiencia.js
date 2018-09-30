@@ -37,6 +37,7 @@
         $("#ajaxUploadExcel").change(self.ajax_upload_excel_change);
         $("#ajaxUploadExcel").submit(self.form_submit_click);
         $("#btnDesmatricular").click(self.desmatricular_click);
+        $("#btnImportarParticipantes").click(self.importar_click);
     };
 
     // Funciones privadas  ======================================================
@@ -178,6 +179,22 @@
         $("#validos").html("");
         $("#no_existentes").html("");
         $("#existente").html("");
+        $("#Desmatricular_ImportarLabel").html("Desmatriculador masivo de Participante");
+        $("#btnDesmatricular").html("Desmatricular");
+        $("#tipoDesmImportar").val("desmatricular");
+        $("#modDesmatricular_Importar").modal("show");
+    }
+
+    p.importar_click = function() {
+        $("#ajaxUploadExcel").resetForm();
+        $("#tblListadoProcesados").dataTable().fnDestroy();
+        $("#contenidoDesm_Import").html("");
+        $("#validos").html("");
+        $("#no_existentes").html("");
+        $("#existente").html("");
+        $("#Desmatricular_ImportarLabel").html("Importar datos de participantes");
+        $("#btnDesmatricular").html("Importar");
+        $("#tipoDesmImportar").val("importar");
         $("#modDesmatricular_Importar").modal("show");
     }
 
