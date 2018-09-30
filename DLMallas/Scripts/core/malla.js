@@ -77,7 +77,7 @@
         var desc = $('#txtDescripcion').val();
         var activo = ($('#chkActiva').is(":checked")) ? "1" : "0";
 
-        if (nombre == "" || desc == "" || escuela == "0") {
+        if (nombre === "" || desc === "" || escuela === "0") {
             alert("Debe Ingresar un Nombre, Descripción y Escuela");
         }
         else {

@@ -47,9 +47,8 @@ namespace DLMallas.Business
             if (!Offline)
             {
                 WebService ws = new WebService("GestionMalla", "obtenerVersion");
-                ws.AddParameter("Id", id);
                 ws.AddParameter("IdSociedad", Variables.IdSociedad);
-
+                ws.AddParameter("Id", id);
                 Array obj = ws.Invoke() as Array;
 
                 string json = JsonConvert.SerializeObject(obj);
