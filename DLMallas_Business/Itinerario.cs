@@ -199,6 +199,49 @@ namespace DLMallas.Business
             }
         }
 
+        public bool ActualizarNotificaciones(string idItinerario, string lista)
+        {
+            try
+            {
+                if (!Offline)
+                {
+                    var ws = new WebService("GestionMalla", "actualizarNotificacionItinerario");
+                    ws.AddParameter("IdItinerario", idItinerario);
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                    ws.AddParameter("Lista", lista);
+                    ws.Invoke();
+                }
+
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public List<DtoNotificacionItinerario> ObtenerListadoNotificaciones(string id)
+        {
+            var result = new List<DtoNotificacionItinerario>();
+            if (!Offline)
+            {
+                WebService ws = new WebService("GestionMalla", "obtenerNotificacionItinerario");
+                ws.AddParameter("IdItinerario", id);
+                ws.AddParameter("IdSociedad", Variables.IdSociedad);
+                var obj = ws.Invoke() as object;
+
+                string json = JsonConvert.SerializeObject(obj);
+                result = JsonConvert.DeserializeObject<List<DtoNotificacionItinerario>>(json);
+            }
+            else
+            {
+                result = new List<DtoNotificacionItinerario>().Faker();
+            }
+
+            return result;
+        }
+
         public List<DtoNomina> ObtenerListadoNomina(string id)
         {
             var result = new List<DtoNomina>();

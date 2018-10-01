@@ -44,6 +44,7 @@
         $("#btnGuardarNuevoItinerario").click(self.aceptar_guardar_itinerario);
         $("#btnSelectMallaEditar").click(self.selecionar_malla_editar_click);
         $("#btnActualizaItinerario").click(self.aceptar_actualizar_itinerario);
+        $("#btnGuardarNotificaciones").click(self.guardar_notificaciones_click);
     };
 
     // Funciones privadas  ======================================================
@@ -220,7 +221,30 @@
         }
     }
 
-   
+    p.guardar_notificaciones_click = function () {
+        var id = $("#id_itinerario_hidden").val();
+        var ids = [];
+
+        $("input.select_notificacion:checked").each(function () {
+            ids.push(this.value);
+        });
+
+        var actionData = { idItinerario: id, lista: ids.toString() };
+
+        $.ajax({
+            type: "POST",
+            url: "/AdministracionItinerario/ActualizarNotificaciones",
+            traditional: true,
+            data: actionData,
+            success: function (result) {
+                alert("Registros actualizados");
+                window.location.href = "/AdministracionItinerario/Notificaciones/" + id;
+            },
+            error: function (xhr, status, error) {
+                alert("Ha ocurrido un error al intentar actualizar los registros.");
+            }
+        });
+    }
 
     // Eventos =================================================================
 

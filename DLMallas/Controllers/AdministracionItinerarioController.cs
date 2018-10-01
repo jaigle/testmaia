@@ -140,6 +140,30 @@ namespace DLMallas.Controllers
             var model = _itinerario.ObtenerListadoNominAcademia(cedulaIdent, apellidoPat, apellidoMat, cargo, sociedadCont, unidadOrg, franquicia, unidadNeg);
             return PartialView("_ResultadoBuscarParticipante", model);
         }
+
+        public ActionResult Informes(string id)
+        {
+            ViewBag.ActiveLink = "Informes";
+            ViewBag.IdItinerario = id;
+            return View();
+        }
+
+        public ActionResult Notificaciones(string id)
+        {
+            ViewBag.ActiveLink = "Notificaciones";
+            ViewBag.IdItinerario = id;
+            var model = _itinerario.ObtenerListadoNotificaciones(id);
+            return View(model);
+        }
+
+        public HttpStatusCodeResult ActualizarNotificaciones(string idItinerario, string lista)
+        {
+            var resp = _itinerario.ActualizarNotificaciones(idItinerario, lista);
+            if (resp)
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error");
+        }
     }
 }
 

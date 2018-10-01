@@ -138,6 +138,7 @@
     <Compile Include="Dto\Version\ObtenerListadoVersion.cs" />
     <Compile Include="Dto\Version\ObtenerVersion.cs" />
     <Compile Include="Extencions\DtoCertificadoExtention.cs" />
+    <Compile Include="Extencions\ObtenerListadoNotificacionesExtention.cs" />
     <Compile Include="Extencions\ProcesarExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoNominaExtention.cs" />
     <Compile Include="Extencions\ObtenerListadoItinerarioMallaExtention.cs" />
