@@ -67,8 +67,8 @@ namespace DLMallas.Business
                 if (!Offline)
                 {
                     var ws = new WebService("GestionMalla", "adicionarNominaItinerario");
-                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("IdItinerario", idItinerario);
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("Lista", participantes);
                     ws.AddParameter("Usuario", Variables.Usuario);
                     ws.Invoke();
@@ -90,8 +90,8 @@ namespace DLMallas.Business
                 if (!Offline)
                 {
                     var ws = new WebService("GestionMalla", "eliminarNominaItinerario");
-                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("IdItinerario", idItinerario);
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("Todos", "1");
                     ws.AddParameter("Lista", "");
                     ws.Invoke();
@@ -113,8 +113,8 @@ namespace DLMallas.Business
                 if (!Offline)
                 {
                     var ws = new WebService("GestionMalla", "eliminarNominaItinerario");
-                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("IdItinerario", idItinerario);
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("Todos", "0");
                     ws.AddParameter("Lista", ids);
                     ws.Invoke();
@@ -134,11 +134,11 @@ namespace DLMallas.Business
             var result = new List<DtoProcesados>();
             if (!Offline)
             {
-                WebService ws = new WebService("GestionMalla", "validarListadoRut");
+                WebService ws = new WebService("GestionMalla", "obtenerlistadoRutrValidados");
                 ws.AddParameter("IdItinerario", idItinerario);
                 ws.AddParameter("IdSociedad", Variables.IdSociedad);
                 ws.AddParameter("Lista", lista);
-                ws.AddParameter("Importar", tipoDesmImportar);
+                ws.AddParameter("Importador", tipoDesmImportar);
                 Array obj = ws.Invoke() as Array;
 
                 string json = JsonConvert.SerializeObject(obj);
@@ -154,7 +154,7 @@ namespace DLMallas.Business
 
         public DtoItinerarioEdit ObtenerItinerario(string id)
         {
-            var result = new DtoItinerarioEdit();
+            var result = new List<DtoItinerarioEdit>();
             if (!Offline)
             {
                 WebService ws = new WebService("GestionMalla", "obtenerItinerario");
@@ -163,14 +163,14 @@ namespace DLMallas.Business
                 var obj = ws.Invoke() as object;
 
                 string json = JsonConvert.SerializeObject(obj);
-                result = JsonConvert.DeserializeObject<DtoItinerarioEdit>(json);
+                result = JsonConvert.DeserializeObject<List<DtoItinerarioEdit>>(json);
             }
             else
             {
-                result = new DtoItinerarioEdit().Faker(Convert.ToInt32(id), "0");
+                result = null; // new List<DtoItinerarioEdit>.Faker(result, "0");
             }
 
-            return result;
+            return result[0];
         }
 
         public bool ActualizarItinerario(string id, string mallaId, string nombre, string fechaInic, string fechaFin, string activo)

@@ -23,8 +23,8 @@ namespace DLMallas.Business.Dto.Itinerario
     public class DtoItinerarioEdit
     {
         public string Id { get; set; }
-        public string Nombre { get; set; }
         public string IdSociedad { get; set; }
+        public string Nombre { get; set; }
         public string IdVersion { get; set; }
         public string IdMalla { get; set; }
         public string Malla { get; set; }

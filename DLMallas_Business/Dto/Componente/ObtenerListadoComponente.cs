@@ -14,6 +14,6 @@ namespace DLMallas.Business.Dto.Componente
         public string Seccion;
         public string Color;
         public string Prerrequisitos;
-        public bool Seleccionado;
+        public string Seleccionado;
     }
 }

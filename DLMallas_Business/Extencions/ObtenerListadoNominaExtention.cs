@@ -18,8 +18,8 @@ namespace DLMallas.Business.Extencions
                 .RuleFor(r => r.IdPersona, f => id)
                 .RuleFor(r => r.Rut, f => f.Person.Phone)
                 .RuleFor(r => r.NombreCompleto, f => f.Name.FullName())
-                .RuleFor(r => r.Asignacion, f => f.Date.Timespan())
-                .RuleFor(r => r.Avance, f => f.Random.Number(0, 100))
+                .RuleFor(r => r.Asignacion, DateTime.Now.ToString())
+                .RuleFor(r => r.Avance, f => f.Random.Number(0, 100).ToString())
                 .RuleFor(r => r.UsuarioAsig, f => f.Random.Number(0, 200).ToString());
         }
 
