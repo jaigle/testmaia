@@ -66,6 +66,7 @@ namespace DLMallas.Business
                     ws.AddParameter("IdMalla", model.IdMalla);
                     ws.AddParameter("IdSociedad", model.IdSociedad);
                     ws.AddParameter("FechaInicio", model.FechaInicio);
+                    ws.AddParameter("Copiar", model.Copiar);
                     ws.Invoke();
                 }
                 return true;
@@ -74,7 +75,6 @@ namespace DLMallas.Business
             {
                 return false;
             }
-           
         }
 
         public bool ActualizarVersion(ActualizarVersion model)

@@ -25,13 +25,14 @@ namespace DLMallas.Controllers
             return View(model);
         }
 
-        public HttpStatusCodeResult GuardarVersion(string fechainicio, string idmalla)
+        public HttpStatusCodeResult GuardarVersion(string fechainicio, string idmalla, bool copiar)
         {
             var guarda = new GuardarVersion
             {
                 IdMalla = idmalla,
                 IdSociedad = Variables.IdSociedad,
                 FechaInicio = fechainicio,
+                Copiar = copiar.ToString()
             };
             
             var resp = _version.GuardarVersion(guarda);

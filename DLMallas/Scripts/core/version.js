@@ -52,7 +52,8 @@
 
     p.guardar_version_click = function () {
         var fecha = $('#txtFechainicio').val();
-        var actionData = { fechainicio: fecha, idmalla: $("#id_malla_hidden").val() };
+        var copiar = $("#copiarVersion").prop("checked");
+        var actionData = { fechainicio: fecha, idmalla: $("#id_malla_hidden").val(), copiar: copiar };
 
         if (fecha === "") {
             alert("Debe Ingresar una Fecha");

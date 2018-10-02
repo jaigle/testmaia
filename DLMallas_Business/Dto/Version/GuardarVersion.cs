@@ -11,5 +11,6 @@ namespace DLMallas.Business.Dto.Version
         public string IdMalla;
         public string IdSociedad;
         public string FechaInicio;
+        public string Copiar;
     }
 }
