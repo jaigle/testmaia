@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Bogus;
 using DLMallas.Business.Dto.Malla;
@@ -15,7 +16,15 @@ namespace DLMallas.Business.Extencions
                 .RuleFor(r => r.IdSociedad, f => f.Random.Number(1, 30))
                 .RuleFor(r => r.Version, f => f.Random.Number(1, 45).ToString())
                 .RuleFor(r => r.IdMalla, f => f.Random.Number(1, 100))
-                .RuleFor(r => r.Vigencia, f =>  f.Date.Past(1, null).ToString("dd/MM/yyyy") +"-" + f.Date.Past(2, null).ToString("dd/MM/yyyy"))
+                .RuleFor(r => r.Vigencia, f =>
+                {
+                    var number = f.Random.Number(1, 40);
+                    var incremento = f.Random.Number(1, 10);
+                    var signo = (number > 20) ? 1 : -1;
+                    var fecha = DateTime.Now;
+                    return fecha.AddMonths(signo * number).ToString("dd/MM/yyyy") + "-" +
+                           fecha.AddMonths(number + incremento).ToString("dd/MM/yyyy");
+                })
                 .RuleFor(r => r.UC, f => f.Random.Number(1, 40))
                 .RuleFor(r => r.Estado, f => f.Random.Number(0, 1).ToString());
         }

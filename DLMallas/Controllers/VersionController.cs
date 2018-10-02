@@ -17,8 +17,11 @@ namespace DLMallas.Controllers
         [Authorize]
         public ActionResult Index(string id)
         {
+            if (id == null || string.IsNullOrEmpty(id))
+                RedirectToAction("Index", "Malla");
+
             var model = new VersionViewModels();
-            
+
             model.ObtenerListadoVersion = _version.ObtenerListadoVersion(id);
             model.ObtenerMalla = _malla.ObtenerMalla(id);
             ViewBag.ActiveLink = "Versiones";
@@ -34,7 +37,7 @@ namespace DLMallas.Controllers
                 FechaInicio = fechainicio,
                 Copiar = copiar.ToString()
             };
-            
+
             var resp = _version.GuardarVersion(guarda);
             if (resp)
                 return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
@@ -65,7 +68,7 @@ namespace DLMallas.Controllers
                 return false;
         }
 
-        public ActionResult DetalleVersion(string IdVersion, string IdMalla) 
+        public ActionResult DetalleVersion(string IdVersion, string IdMalla)
         {
             var model = new VersionViewModels();
             model.ObtenerVersion = _version.ObtenerVersion(IdVersion);
