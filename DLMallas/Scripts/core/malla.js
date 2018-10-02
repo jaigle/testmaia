@@ -104,13 +104,13 @@
             $.ajax({
                 type: "POST",
                 url: "/Malla/EliminarMalla",
-                contentType: "application/json; charset=utf-8",
-                data: "{'id':'" + id + "'}",
-                dataType: "json",
-                success: function (result) {
-                    alert("Registro Eliminado Correctamente");
-                    //window.location.href = "/Malla";
-                }
+                traditional: true,
+                data: {id: id},
+            }).done(function() {
+                alert("Registro Eliminado Correctamente");
+                window.location.href = "/Malla/Index";
+            }).fail(function() {
+                alert("Ha ocurrido un error al intentar eliminar el registro.");
             });
         }
     }
