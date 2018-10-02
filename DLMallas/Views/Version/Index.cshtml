@@ -46,47 +46,29 @@
                                     <tr>
                                         <td>
                                             <div class="row text-center">
-                                                @if (DateTime.Compare(new DateTime(int.Parse(item.Vigencia.Split('-')[0].Split('/')[2]), int.Parse(item.Vigencia.Split('-')[0].Split('/')[1]), int.Parse(item.Vigencia.Split('-')[0].Split('/')[0])), DateTime.Now) > 0)
-                                                {
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 text-center">
-                                                        <a href="#" onclick="version.editarVersion('@item.Id', @item.Vigencia.Split('-')[0])" title="Editar Versión">
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    @if (DateTime.Compare(new DateTime(int.Parse(item.Vigencia.Split('-')[0].Split('/')[2]), int.Parse(item.Vigencia.Split('-')[0].Split('/')[1]), int.Parse(item.Vigencia.Split('-')[0].Split('/')[0])), DateTime.Now) > 0)
+                                                    {
+                                                        <a href="#" onclick="version.editarVersion('@item.Id', '@item.Vigencia.Split('-')[0]')" title="Editar Versión">
                                                             <span class="glyphicon glyphicon-pencil"></span>
                                                         </a>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 text-center">
-                                                        <a href="#" onclick="version.eliminarVersion('@item.Id')" title="Eliminar Versión">
-                                                            <span class="glyphicon glyphicon-remove"></span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 text-center">
-                                                        <a href="#" onclick="version.detalleVersion('@item.Id', '@item.IdMalla')" title="Ver Detalle Versión">
-                                                            <span class="glyphicon glyphicon-list"></span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 text-center">
-                                                        <a href="#" title="Ver Diagrama Estructural">
-                                                            <span class="icon icon-diagram viewstruct"></span>
-                                                        </a>
-                                                    </div>
-                                                }
-                                                else
-                                                {
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
-                                                        <a href="#" onclick="version.eliminarVersion('@item.Id')" title="Eliminar Versión">
-                                                            <span class="glyphicon glyphicon-remove"></span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
-                                                        <a href="#" onclick="version.detalleVersion('@item.Id', '@item.IdMalla')" title="Ver Detalle Versión">
-                                                            <span class="glyphicon glyphicon-list"></span>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-lg-4 col-md-4 col-sm-4 text-center">
-                                                        <a href="#" title="Ver Diagrama Estructural">
-                                                            <span class="icon icon-diagram viewstruct"></span>
-                                                        </a>
-                                                    </div>
-                                                }
+                                                    }
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    <a href="#" onclick="version.eliminarVersion('@item.Id')" title="Eliminar Versión">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    <a href="#" onclick="version.detalleVersion('@item.Id', '@item.IdMalla')" title="Ver Detalle Versión">
+                                                        <span class="glyphicon glyphicon-list"></span>
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-3 text-center">
+                                                    <a href="#" title="Ver Diagrama Estructural">
+                                                        <span class="icon icon-diagram viewstruct"></span>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.Version)</td>
@@ -117,7 +99,7 @@
                     <div class="modal-body">
                         <table>
                             <tr>
-                                <th>Fecha de Inicio de Vigencia de Versión:&nbsp;&nbsp;</th>
+                                <th>Fecha de Inicio de Versión:&nbsp;&nbsp;</th>
                                 <td>
                                     <input type="hidden" id="txtIdVersion" />
                                     <div class="input-group date">
