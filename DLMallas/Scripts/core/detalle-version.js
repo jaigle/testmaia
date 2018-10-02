@@ -57,7 +57,7 @@
             contentType: "application/json; charset=utf-8",
             data: actionData,
             dataType: "json",
-            complete: function(result) {
+            success: function(result) {
                 alert("Registro Guardado Correctamente");
                 window.location.href = "/Version/DetalleVersion/?IdVersion=" + idVersion + "&idMalla=" + idMalla;
                 //window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
@@ -81,7 +81,7 @@
             contentType: "application/json; charset=utf-8",
             data: actionData,
             dataType: "json",
-            complete: function(result) {
+            success: function(result) {
                 alert("Registro Actualizado Correctamente");
                 window.location.href = "@Url.Action("
                 DetalleVersion
@@ -114,7 +114,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: actionData,
                 dataType: "json",
-                complete: function(result) {
+                success: function(result) {
                     alert("Registro Guardado Correctamente");
                     window.location.href = "@Url.Action("
                     DetalleVersion
@@ -138,7 +138,7 @@
             contentType: "application/json; charset=utf-8",
             data: actionData,
             dataType: "json",
-            complete: function(result) {
+            success: function(result) {
                 alert("Registro Actualizado Correctamente");
                 window.location.href = "@Url.Action("
                 DetalleVersion
@@ -165,7 +165,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: actionData,
                 dataType: "json",
-                complete: function(result) {
+                success: function(result) {
                     alert("Prerrequisito Guardado Correctamente");
                     window.location.href = "@Url.Action("
                     DetalleVersion
@@ -198,7 +198,7 @@
             contentType: "application/json; charset=utf-8",
             data: "{'id': '" + id + "'}",
             dataType: "json",
-            complete: function (data) {
+            success: function (data) {
                 for (var i = 0; i < data.length; i++) {
                     idseccion = data[i].IdSeccion;
                     idmodalidadcomponente = data[i].IdModalidadComponente;
@@ -227,7 +227,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: "{'id': '" + id + "'}",
                 dataType: "json",
-                complete: function (result) {
+                success: function (result) {
                     alert("Registro Eliminado Correctamente");
                     window.location.href = "@Url.Action("DetalleVersion", "Version", new { IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla })";
                 }
@@ -242,7 +242,7 @@
             contentType: "application/json; charset=utf-8",
             data: "{'idversion': '" + idversion + "'}",
             dataType: "json",
-            complete: function (data) {
+            success: function (data) {
                 for (var i = 0; i < data.length; i++) {
                     var opt = new Option(data[i].Nombre, data[i].Id);
                     $('#comboSeccion').append(opt);
@@ -257,7 +257,7 @@
             url: "/Componente/OtenerListadoCatalogoCurso",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            complete: function (data) {
+            success: function (data) {
                 for (var i = 0; i < data.length; i++) {
                     var opt = new Option(data[i].Nombre, data[i].Id);
                     $('#comboUC').append(opt);
@@ -280,7 +280,7 @@
             url: "/Componente/ObtenerListadoModalidadComponente",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            complete: function (data) {
+            success: function (data) {
                 for (var i = 0; i < data.length; i++) {
                     var opt = new Option(data[i].Nombre, data[i].Id);
                     $('#comboModalidad').append(opt);
@@ -299,7 +299,7 @@
             contentType: "application/json; charset=utf-8",
             data: "{'id': '" + id + "'}",
             dataType: "json",
-            complete: function (data) {
+            success: function (data) {
                 for (var i = 0; i < data.length; i++) {
                     $('#checkboxes').append('<input type="checkbox" name="idUnidadesChx[]" value="' + data[i].Id + '" />');
                     $('#nombreUnidades').append('<label>' + data[i].UnidadCurricular + '</label>');

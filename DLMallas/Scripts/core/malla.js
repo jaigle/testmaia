@@ -37,7 +37,7 @@
             url: "/Malla/CargarEscuelas",
             contentType: "text/html; charset=utf-8",
             dataType: "html",
-            complete: function (result) {
+            success: function (result) {
                 $('#slEscuela').html(result.responseText);
                 $('#modCrearMalla').modal('show');
             }

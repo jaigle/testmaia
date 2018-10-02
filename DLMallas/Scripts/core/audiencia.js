@@ -53,7 +53,7 @@
                 url: "/AdministracionItinerario/EliminarNominaTodos",
                 traditional: true,
                 data: actionData,
-                complete: function (result) {
+                success: function (result) {
                     alert("Registros eliminados");
                     window.location.href = "/AdministracionItinerario/Audiencia/" + id;
                 },
@@ -81,7 +81,7 @@
                 url: "/AdministracionItinerario/EliminarNominaSelecionados",
                 traditional: true,
                 data: actionData,
-                complete: function (result) {
+                success: function (result) {
                     alert("Registros eliminados");
                     window.location.href = "/AdministracionItinerario/Audiencia/" + id;
                 },
@@ -128,7 +128,7 @@
                 contentType: "text/html; charset=utf-8",
                 data: actionData,
                 dataType: "html",
-                complete: function (result) {
+                success: function (result) {
                     $('#contenidoListadoParticipantes').html(result.responseText);
                     $("#tblListadoParticipantes").dataTable({
                         responsive: true,
@@ -160,7 +160,7 @@
                 url: "/AdministracionItinerario/GuardarParticipantes",
                 traditional: true,
                 data: actionData,
-                complete: function (result) {
+                success: function (result) {
                     alert("Registro Guardado Correctamente");
                     window.location.href = "/AdministracionItinerario/Audiencia/" + itinerario;
                 },
@@ -221,7 +221,7 @@
             beforeSend: function () {
                 waitingDialog.show("Procesando...", { dialogSize: "sm" });
             },
-            complete: function (result) {
+            success: function (result) {
                 $("#ajaxUploadExcel").resetForm();
                 waitingDialog.hide();
                 $("#contenidoDesm_Import").html(result.responseText);

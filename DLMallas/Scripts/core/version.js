@@ -27,7 +27,7 @@
 
         /* datepicker version */
         $('.date').datepicker({
-            format: "yyyy/mm/dd",
+            format: "dd/mm/yyyy",
             weekStart: 1,
             //startDate: "now",
             language: "es",
@@ -62,7 +62,7 @@
                 url: "/Version/GuardarVersion",
                 data: actionData,
                 traditional: true,
-                complete: function(result) {
+                success: function(result) {
                     alert("Registro Guardado Correctamente");
                     window.location.href = "/Version/Index/" + $("#id_malla_hidden").val();
                 },
@@ -87,7 +87,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: actionData,
                 dataType: "json",
-                complete: function () {
+                success: function () {
                     alert("Registro Guardado Correctamente");
                     window.location.href = "/Version/Index/" + $("#id_malla_hidden").val();
                 }
@@ -111,7 +111,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: "{'id': '" + id + "'}",
                 dataType: "json",
-                complete: function () {
+                success: function () {
                     alert("Registro Guardado Correctamente");
                     window.location.href = "/Version/Index/" + $("#id_malla_hidden").val();
                 }
