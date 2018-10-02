@@ -54,14 +54,14 @@
         if (nombre === "" || desc === "") {
             alert("Ingrese todos los campos!");
         } else {
-            var actionData = {nombre: nombre, escuela: escuela, desc: desc, activo: activo};
+            var actionData = {id: id, nombre: nombre, escuela: escuela, desc: desc, activo: activo};
 
             $.ajax({
                 type: "POST",
                 url: "/Malla/ActualizarMalla",
                 traditional: true,
                 data: actionData,
-                complete: function (result) {
+                success: function (result) {
                     alert("Registro Guardado Correctamente");
                 },
                 error: function(xhr, status, error) {
@@ -107,7 +107,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: "{'id':'" + id + "'}",
                 dataType: "json",
-                complete: function (result) {
+                success: function (result) {
                     alert("Registro Eliminado Correctamente");
                     //window.location.href = "/Malla";
                 }
