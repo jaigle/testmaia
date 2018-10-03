@@ -236,7 +236,7 @@ namespace DLMallas.Business
             }
             else
             {
-                result = new List<DtoNotificacionItinerario>().Faker();
+                result = null; // new List<DtoNotificacionItinerario>().Faker();
             }
 
             return result;

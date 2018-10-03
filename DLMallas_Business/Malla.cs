@@ -149,7 +149,7 @@ namespace DLMallas.Business
             {
                 if (!Offline)
                 {
-                    var ws = new WebService("GestionMalla", "guardarMalla");
+                    var ws = new WebService("GestionMalla", "actualizarMalla");
                     ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("Id", model.Id);
                     ws.AddParameter("Nombre", model.Nombre);

@@ -25,7 +25,7 @@ namespace DLMallas.Business.Extencions
                     return fecha.AddMonths(signo * number).ToString("dd/MM/yyyy") + "-" +
                            fecha.AddMonths(number + incremento).ToString("dd/MM/yyyy");
                 })
-                .RuleFor(r => r.UC, f => f.Random.Number(1, 40))
+                .RuleFor(r => r.Uc, f => f.Random.Number(1, 40))
                 .RuleFor(r => r.Estado, f => f.Random.Number(0, 1).ToString());
         }
         

@@ -38,7 +38,7 @@ namespace DLMallas.Controllers
 
         public HttpStatusCodeResult GuardarVersion(string fechainicio, string idmalla, bool copiar)
         {
-            var guarda = new GuardarVersion
+          var guarda = new GuardarVersion
             {
                 IdMalla = idmalla,
                 IdSociedad = Variables.IdSociedad,
