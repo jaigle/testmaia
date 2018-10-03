@@ -74,21 +74,24 @@
                 ids.push(this.value);
             });
 
-            var actionData = { idItinerario: id, Idslist: ids.toString() };
+            if (ids.length !== 0) {
+                var actionData = { idItinerario: id, Idslist: ids.toString() };
 
-            $.ajax({
-                type: "POST",
-                url: "/AdministracionItinerario/EliminarNominaSelecionados",
-                traditional: true,
-                data: actionData,
-                success: function (result) {
-                    alert("Registros eliminados");
-                    window.location.href = "/AdministracionItinerario/Audiencia/" + id;
-                },
-                error: function (xhr, status, error) {
-                    alert("Ha ocurrido un error al intentar eliminar los registros.");
-                }
-            });
+                $.ajax({
+                    type: "POST",
+                    url: "/AdministracionItinerario/EliminarNominaSelecionados",
+                    traditional: true,
+                    data: actionData,
+                    success: function (result) {
+                        alert("Registros eliminados");
+                        window.location.href = "/AdministracionItinerario/Audiencia/" + id;
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Ha ocurrido un error al intentar eliminar los registros.");
+                    }
+                });
+            }
+
         }
     }
 
@@ -224,7 +227,7 @@
             success: function (result) {
                 $("#ajaxUploadExcel").resetForm();
                 waitingDialog.hide();
-                $("#contenidoDesm_Import").html(result.responseText);
+                $("#contenidoDesm_Import").html(result);
                 $("#tblListadoProcesados").dataTable({
                     responsive: true,
                     "language": {

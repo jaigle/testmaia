@@ -38,7 +38,7 @@
             contentType: "text/html; charset=utf-8",
             dataType: "html",
             success: function (result) {
-                $('#slEscuela').html(result.responseText);
+                $('#slEscuela').html(result);
                 $('#modCrearMalla').modal('show');
             }
         });
