@@ -55,7 +55,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.Malla)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Vigencia)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Inscriptos)</td>
-                                    <td>@(item.Estado == "1" ? "Activa" : "No Activa")</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
                                     <td>@Html.DisplayFor(modelItem => item.AvanUC)</td>
                                     <td>@Html.DisplayFor(modelItem => item.AvanColab)</td>
                                 </tr>
