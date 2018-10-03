@@ -87,7 +87,7 @@
                 type: "POST",
                 url: "/Malla/GuardarMalla",
                 traditional: true,
-                data: actionData,
+                data: actionData
             }).done(function () {
                 alert("Registro Guardado Correctamente");
                 window.location.href = "/Malla";

@@ -51,13 +51,14 @@ namespace DLMallas.Controllers
             return PartialView("_Prerrequisitos", model);
         }
 
-        public bool GuardarComponente(string idseccion, string idmodalidad, List<string> iduc)
+        public bool GuardarComponente(string idseccion, string idmodalidad, string iduc)
         {
             var model = new GuardarComponente();
             model.IdSeccion = idseccion;
             model.IdModalidadComponente = idmodalidad;
             var resp = true;
-            foreach (var uc in iduc)
+            var listaIds = iduc.Split(',');
+            foreach (var uc in listaIds)
             {
                 model.IdUnidadCurricular = uc;
                 resp = _componente.guardarComponente(model);
@@ -102,6 +103,12 @@ namespace DLMallas.Controllers
                 return true;
             else
                 return false;
+        }
+
+        public PartialViewResult OtenerContenidoCatalogoCurso()
+        {
+            var model =  _componente.obtenerListadoCatalogoCurso().ToList();
+            return PartialView("~/Views/Version/_ContenidoSelecionarUC.cshtml", model);
         }
     }
 }

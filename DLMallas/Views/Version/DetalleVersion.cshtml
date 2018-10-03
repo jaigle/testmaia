@@ -251,7 +251,7 @@
                         url: "/Seccion/ActualizarSeccion",
                         contentType: "application/json; charset=utf-8",
                         data: actionData,
-                        complete: function(result) {
+                        success: function(result) {
                             alert("Registro Actualizado Correctamente");
                             window.location.href = "/Version/DetalleVersion/?IdVersion=" +
                                 @Model.ObtenerVersion[0].Id +
@@ -269,7 +269,7 @@
             $("#btnGuardarNuevoComponente").click(function() {
                 var idseccion = $('#comboSeccion').val();
                 var idmodalidad = $('#comboModalidad').val();
-                var iduc = $("#comboUC").val();
+                var iduc = $("#listaIds").val();
 
                 //$('#comboUC option').each(function () {
                 //iduc = this.value;
@@ -280,14 +280,16 @@
                     url: "/Componente/GuardarComponente",
                     //contentType: "application/json; charset=utf-8",
                     data: actionData,
-                    dataType: "json",
                     traditional: true,
-                    complete: function(result) {
+                    success: function(result) {
                         alert("Registro Guardado Correctamente");
                         window.location.href = "/Version/DetalleVersion?IdVersion=" +
                             @Model.ObtenerVersion[0].Id +
                             "&IdMalla=" +
                             @Model.ObtenerVersion[0].IdMalla;
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Error.");
                     }
                 });
                 //});
@@ -312,12 +314,15 @@
                     contentType: "application/json; charset=utf-8",
                     data: actionData,
                     dataType: "json",
-                    complete: function(result) {
+                    success: function(result) {
                         alert("Registro Actualizado Correctamente");
                         window.location.href = "/Version/DetalleVersion?IdVersion=" +
                             @Model.ObtenerVersion[0].Id +
                             "&IdMalla=" +
                             @Model.ObtenerVersion[0].IdMalla;
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Error.");
                     }
                 });
 
@@ -339,10 +344,13 @@
                     traditional: true,
                     data: actionData,
                     dataType: "json",
-                    complete: function(result) {
+                    success: function(result) {
                         alert("Prerrequisito Guardado Correctamente");
                         window.location.href =
                             "/Version/DetalleVersion/?IdVersion=" + @Model.ObtenerVersion[0].Id + "&idMalla=" + @Model.ObtenerVersion[0].IdMalla;
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Error.");
                     }
                 });
             });
@@ -352,6 +360,11 @@
                     var table = $('#tablaPrerrequisitos').DataTable();
                     table.search(this.value).draw();
                 });
+
+            $("#btnSearchUC").click(search_UC_click);
+            $("#componentUCSelecionadas").click(search_UC_click);
+            $("#modSelecionarUC").on('hidden.bs.modal', cancelar_selecionarUC_click);
+            $("#btnSelecionarUC").click(aceptar_uc_selecionadas);
         });
 
         /*acciones de seccion*/
@@ -364,6 +377,50 @@
             $('#favcolorEdit').val(color);
         }
 
+        function search_UC_click() {
+            $("#modSelecionarUC").modal("show");
+        }
+
+        function aceptar_uc_selecionadas() {
+            $("#click_select").val("1");
+            $("#modSelecionarUC").modal('hide');
+        }
+
+        function check_change(self) {
+            var listaIds = $("#listaIds");
+            var ids = (listaIds.val().length === 0) ? [] : listaIds.val().split(",");
+            var inputNombres = $("#componentUCSelecionadas");
+            var nombres = (inputNombres.val().length === 0) ? [] : inputNombres.val().split(",");
+            var valor = $(self).val();
+            var valorNombre = $("#nombreUChidden_" + valor).val(); 
+            if (self.checked) {
+                ids.push(valor);
+                nombres.push(valorNombre);
+            } else {
+                for (var i = 0; i < ids.length; i++) {
+                    if (ids[i] === valor) {
+                        ids.splice(i, 1);
+                        nombres.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+
+            listaIds.val(ids.toString());
+            inputNombres.val(nombres.toString());
+        }
+
+        function cancelar_selecionarUC_click() {
+            var select = $("#click_select");
+            if (select.val() !== "1") {
+                $("#listaIds").val("");
+                $("#componentUCSelecionadas").val("");
+                $("input:checked[name=idUnidadesChx]").removeAttr("checked");
+            } else {
+                select.val("");
+            }
+        }
+
         function eliminarSeccion(id) {
             if (confirm("Está Seguro de Eliminar el Registro")) {
                 $.ajax({
@@ -371,7 +428,7 @@
                     url: "/Seccion/EliminarSeccion",
                     contentType: "application/json; charset=utf-8",
                     data: "{'id': '" + id + "'}",
-                    complete: function(result) {
+                    success: function(result) {
                         alert("Registro Eliminado Correctamente");
                         window.location.href = "/Version/DetalleVersion/?IdVersion=" +
                             @Model.ObtenerVersion[0].Id +
@@ -405,10 +462,10 @@
                 data: "{'id': '" + id + "'}",
                 dataType: "json",
                 complete: function(data) {
-                    for (var i = 0; i < data.responseJSON.length; i++) {
-                        idseccion = data.responseJSON[i].IdSeccion;
-                        idmodalidadcomponente = data.responseJSON[i].IdModalidadComponente;
-                        idunidadcurricular = data.responseJSON[i].IdUnidadCurricular;
+                    for (var i = 0; i < data.length; i++) {
+                        idseccion = data[i].IdSeccion;
+                        idmodalidadcomponente = data[i].IdModalidadComponente;
+                        idunidadcurricular = data[i].IdUnidadCurricular;
 
                         $("#txtIdComponente").val(id);
                         $("#txtUC").val(unidadCurricular);
@@ -434,10 +491,13 @@
                     contentType: "application/json; charset=utf-8",
                     data: "{'id': '" + id + "'}",
                     dataType: "json",
-                    complete: function(result) {
+                    success: function() {
                         alert("Registro Eliminado Correctamente");
                         window.location.href =
                             "@Url.Action("DetalleVersion", "Version", new {IdVersion = @Model.ObtenerVersion[0].Id, IdMalla = @Model.ObtenerVersion[0].IdMalla})";
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Error.");
                     }
                 });
             }
@@ -450,11 +510,14 @@
                 contentType: "application/json; charset=utf-8",
                 data: "{'idversion': '" + idversion + "'}",
                 dataType: "json",
-                complete: function(data) {
-                    for (var i = 0; i < data.responseJSON.length; i++) {
-                        var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
+                success: function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var opt = new Option(data[i].Nombre, data[i].Id);
                         $('.comboSeccion').append(opt);
                     }
+                },
+                error: function(xhr, status, error) {
+                    alert("Error.");
                 }
             });
         }
@@ -462,30 +525,20 @@
         function cargaComboUC() {
             $.ajax({
                 type: "POST",
-                url: "/Componente/OtenerListadoCatalogoCurso",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                complete: function(data) {
-                    for (var i = 0; i < data.responseJSON.length; i++) {
-                        var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
-                        $('#comboUC').append(opt);
-                    }
+                url: "/Componente/OtenerContenidoCatalogoCurso",
+                dataType: "html",
+                success: function(data) {
+                    $("#ucContenido").html(data);
 
-                    $('#comboUC').multiselect({
-                        enableFiltering: true,
-                        filterPlaceholder: 'Nombre del elemento...',
-                        buttonWidth: '100%',
-                        includeSelectAllOption: true
+                    $('#tablaUCs').dataTable({
+                        responsive: true,
+                        "language": {
+                            "url": "/Content/DataTables/plugins/spanish.js"
+                        }
                     });
-
-                    $(".multiselect-search").css("height", "40px");
                 },
-                done: function() {
-                    $('#comboUC').multiselect({
-                        enableFiltering: true,
-                        filterPlaceholder: 'Search for something...',
-                    });
-
+                error: function(xhr, status, error) {
+                    alert("Error.");
                 }
             });
         }
@@ -496,11 +549,14 @@
                 url: "/Componente/ObtenerListadoModalidadComponente",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                complete: function(data) {
-                    for (var i = 0; i < data.responseJSON.length; i++) {
-                        var opt = new Option(data.responseJSON[i].Nombre, data.responseJSON[i].Id);
+                success: function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var opt = new Option(data[i].Nombre, data[i].Id);
                         $('.comboModalidad').append(opt);
                     }
+                },
+                error: function(xhr, status, error) {
+                    alert("Error.");
                 }
             });
         }
@@ -515,8 +571,8 @@
                 data: actionData,
                 dataType: "html",
                 traditional: true,
-                complete: function(data) {
-                    $("#prerrequisitoContenido").html(data.responseText);
+                success: function(data) {
+                    $("#prerrequisitoContenido").html(data);
                     $("#modPrerrequisito").modal('show');
                     $('#tablaPrerrequisitos').dataTable({
                         responsive: true,

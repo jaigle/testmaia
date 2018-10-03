@@ -1948,6 +1948,8 @@
     <Content Include="Views\AdministracionItinerario\_Porcesados.cshtml" />
     <Content Include="Views\AdministracionItinerario\Informes.cshtml" />
     <Content Include="Views\AdministracionItinerario\Notificaciones.cshtml" />
+    <Content Include="Views\Version\_ContenidoSelecionarUC.cshtml" />
+    <Content Include="Views\Version\_SelecionarUC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
