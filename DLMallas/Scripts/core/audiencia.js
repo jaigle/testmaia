@@ -53,7 +53,7 @@
                 url: "/AdministracionItinerario/EliminarNominaTodos",
                 traditional: true,
                 data: actionData,
-                complete: function (result) {
+                success: function (result) {
                     alert("Registros eliminados");
                     window.location.href = "/AdministracionItinerario/Audiencia/" + id;
                 },
@@ -81,7 +81,7 @@
                 url: "/AdministracionItinerario/EliminarNominaSelecionados",
                 traditional: true,
                 data: actionData,
-                complete: function (result) {
+                success: function (result) {
                     alert("Registros eliminados");
                     window.location.href = "/AdministracionItinerario/Audiencia/" + id;
                 },
@@ -100,11 +100,11 @@
         var txtCedulaIdent = $("#txtCedulaIdent").val();
         var txtSociedadCont = $("#txtSociedadCont").val();
         var txtApellidoPat = $("#txtApellidoPat").val();
-        var txtApellidoMat = $("txtApellidoMat").val();
-        var txtCargo = $("txtCargo").val();
-        var txtUnidadOrg = $("txtUnidadOrg").val();
-        var txtFranquicia = $("txtFranquicia").val();
-        var txtUnidadNeg = $("txtUnidadNeg").val();
+        var txtApellidoMat = $("#txtApellidoMat").val();
+        var txtCargo = $("#txtCargo").val();
+        var txtUnidadOrg = $("#txtUnidadOrg").val();
+        var txtFranquicia = $("#txtFranquicia").val();
+        var txtUnidadNeg = $("#txtUnidadNeg").val();
 
         if (txtCedulaIdent !== "" || txtSociedadCont !== "" ||
             txtApellidoPat !== "" || txtApellidoMat !== "" ||
@@ -125,10 +125,10 @@
             $.ajax({
                 type: "POST",
                 url: "/AdministracionItinerario/BuscarParticipante",
-                contentType: "text/html; charset=utf-8",
                 data: actionData,
+                traditional: true,
                 dataType: "html",
-                complete: function (result) {
+                success: function (result) {
                     $('#contenidoListadoParticipantes').html(result.responseText);
                     $("#tblListadoParticipantes").dataTable({
                         responsive: true,
@@ -160,7 +160,7 @@
                 url: "/AdministracionItinerario/GuardarParticipantes",
                 traditional: true,
                 data: actionData,
-                complete: function (result) {
+                success: function (result) {
                     alert("Registro Guardado Correctamente");
                     window.location.href = "/AdministracionItinerario/Audiencia/" + itinerario;
                 },
@@ -221,7 +221,7 @@
             beforeSend: function () {
                 waitingDialog.show("Procesando...", { dialogSize: "sm" });
             },
-            complete: function (result) {
+            success: function (result) {
                 $("#ajaxUploadExcel").resetForm();
                 waitingDialog.hide();
                 $("#contenidoDesm_Import").html(result.responseText);

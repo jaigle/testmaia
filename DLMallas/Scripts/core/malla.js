@@ -37,7 +37,7 @@
             url: "/Malla/CargarEscuelas",
             contentType: "text/html; charset=utf-8",
             dataType: "html",
-            complete: function (result) {
+            success: function (result) {
                 $('#slEscuela').html(result.responseText);
                 $('#modCrearMalla').modal('show');
             }
@@ -54,14 +54,14 @@
         if (nombre === "" || desc === "") {
             alert("Ingrese todos los campos!");
         } else {
-            var actionData = {id: id,nombre: nombre, escuela: escuela, desc: desc, activo: activo};
+            var actionData = {id: id, nombre: nombre, escuela: escuela, desc: desc, activo: activo};
 
             $.ajax({
                 type: "POST",
                 url: "/Malla/ActualizarMalla",
                 traditional: true,
                 data: actionData,
-                complete: function (result) {
+                success: function (result) {
                     alert("Registro Guardado Correctamente");
                 },
                 error: function(xhr, status, error) {
@@ -78,7 +78,7 @@
         var activo = ($('#chkActiva').is(":checked")) ? "1" : "0";
 
         if (nombre === "" || desc === "" || escuela === "0") {
-            alert("Debe Ingresar un Nombre, Descripción y Escuela");
+            alert("Debe Ingresar un Nombre, Descripciï¿½n y Escuela");
         }
         else {
             var actionData = {nombre: nombre, escuela: escuela, desc: desc, activo: activo};
@@ -114,17 +114,17 @@
     // Eventos =================================================================
 
     p.eliminaMalla = function (id) {
-        if (confirm("Está seguro de elimina el registro?")) {
+        if (confirm("Estï¿½ seguro de elimina el registro?")) {
             $.ajax({
                 type: "POST",
                 url: "/Malla/EliminarMalla",
-                contentType: "application/json; charset=utf-8",
-                data: "{'id':'" + id + "'}",
-                dataType: "json",
-                complete: function (result) {
-                    alert("Registro Eliminado Correctamente");
-                    //window.location.href = "/Malla";
-                }
+                traditional: true,
+                data: {id: id},
+            }).done(function() {
+                alert("Registro Eliminado Correctamente");
+                window.location.href = "/Malla/Index";
+            }).fail(function() {
+                alert("Ha ocurrido un error al intentar eliminar el registro.");
             });
         }
     }

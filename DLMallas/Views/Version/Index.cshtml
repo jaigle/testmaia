@@ -1,4 +1,5 @@
-﻿@model DLMallas.Models.VersionViewModels
+﻿@using System.Globalization
+@model DLMallas.Models.VersionViewModels
 @{
     ViewBag.Title = "Versiones";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,8 +9,8 @@
 
 <div class="main no-margin">
     @Html.Partial("~/Views/Shared/Partials/_SubMenu.cshtml", Model.ObtenerMalla[0].Id)
-    <input type="hidden" id="id_malla_hidden" value="@Model.ObtenerMalla[0].Id"/>
-    <input type="hidden" id="malla_hidden" value="@Model.ObtenerMalla[0].Nombre"/>
+    <input type="hidden" id="id_malla_hidden" value="@Model.ObtenerMalla[0].Id" />
+    <input type="hidden" id="malla_hidden" value="@Model.ObtenerMalla[0].Nombre" />
     <div id="page-wrapper" class="col-sm-12 col-md-10">
         @Html.Partial("~/Views/Shared/Partials/_InformacionMalla.cshtml", Model)
 
@@ -46,9 +47,12 @@
                                         <td>
                                             <div class="row text-center">
                                                 <div class="col-lg-3 col-md-3 col-sm-3 text-center">
-                                                    <a href="#" onclick="version.editarVersion('@item.Id', '@item.Vigencia')" title="Editar Versión">
-                                                        <span class="glyphicon glyphicon-pencil"></span>
-                                                    </a>
+                                                    @if (DateTime.Compare(new DateTime(int.Parse(item.Vigencia.Split('-')[0].Split('/')[2]), int.Parse(item.Vigencia.Split('-')[0].Split('/')[1]), int.Parse(item.Vigencia.Split('-')[0].Split('/')[0])), DateTime.Now) > 0)
+                                                    {
+                                                        <a href="#" onclick="version.editarVersion('@item.Id', '@item.Vigencia.Split('-')[0]')" title="Editar Versión">
+                                                            <span class="glyphicon glyphicon-pencil"></span>
+                                                        </a>
+                                                    }
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3 text-center">
                                                     <a href="#" onclick="version.eliminarVersion('@item.Id')" title="Eliminar Versión">
@@ -80,7 +84,7 @@
             </div>
         </div>
 
-@Html.Partial("_CrearVersion")
+        @Html.Partial("_CrearVersion")
 
         <!-- Modal editar version -->
         <div class="modal fade" id="modEditarVersion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -95,7 +99,7 @@
                     <div class="modal-body">
                         <table>
                             <tr>
-                                <th>Fecha de Inicio de Vigencia de Versión:&nbsp;&nbsp;</th>
+                                <th>Fecha de Inicio de Versión:&nbsp;&nbsp;</th>
                                 <td>
                                     <input type="hidden" id="txtIdVersion" />
                                     <div class="input-group date">

@@ -92,17 +92,17 @@ namespace DLMallas.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar malla");
         }
 
-        public RedirectToRouteResult EliminarMalla(string id)
+        public HttpStatusCodeResult EliminarMalla(string id)
         {
             try
             {
                 _malla.EliminarMalla(id);
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.OK, "Ok");
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("Error", ex.Message);
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Error intentando guardar malla");
             }
         }
 
