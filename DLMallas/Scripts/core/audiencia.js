@@ -100,11 +100,11 @@
         var txtCedulaIdent = $("#txtCedulaIdent").val();
         var txtSociedadCont = $("#txtSociedadCont").val();
         var txtApellidoPat = $("#txtApellidoPat").val();
-        var txtApellidoMat = $("txtApellidoMat").val();
-        var txtCargo = $("txtCargo").val();
-        var txtUnidadOrg = $("txtUnidadOrg").val();
-        var txtFranquicia = $("txtFranquicia").val();
-        var txtUnidadNeg = $("txtUnidadNeg").val();
+        var txtApellidoMat = $("#txtApellidoMat").val();
+        var txtCargo = $("#txtCargo").val();
+        var txtUnidadOrg = $("#txtUnidadOrg").val();
+        var txtFranquicia = $("#txtFranquicia").val();
+        var txtUnidadNeg = $("#txtUnidadNeg").val();
 
         if (txtCedulaIdent !== "" || txtSociedadCont !== "" ||
             txtApellidoPat !== "" || txtApellidoMat !== "" ||
@@ -125,8 +125,8 @@
             $.ajax({
                 type: "POST",
                 url: "/AdministracionItinerario/BuscarParticipante",
-                contentType: "text/html; charset=utf-8",
                 data: actionData,
+                traditional: true,
                 dataType: "html",
                 success: function (result) {
                     $('#contenidoListadoParticipantes').html(result.responseText);
