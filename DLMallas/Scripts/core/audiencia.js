@@ -227,7 +227,7 @@
             success: function (result) {
                 $("#ajaxUploadExcel").resetForm();
                 waitingDialog.hide();
-                $("#contenidoDesm_Import").html(result.responseText);
+                $("#contenidoDesm_Import").html(result);
                 $("#tblListadoProcesados").dataTable({
                     responsive: true,
                     "language": {
