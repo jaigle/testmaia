@@ -1,0 +1,25 @@
+﻿@model List<DLMallas.Business.Dto.Componente.ObtenerListadoCatalogoCurso>
+<table class="table table-condensed table-bordered table-hover" style="width: 100% !important;" id="tablaUCs">
+    <thead>
+        <tr>
+            <th class="no-sort text-center" style="width: 5% !important;"></th>
+            <th style="width: 95% !important;">Unidades Curriculares</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <td class="text-center">
+                    <input type="checkbox" name="idUnidadesChx" onclick="check_change(this)" value="@item.Id" />
+                    <input type="hidden" id="nombreUChidden_@item.Id" value="@item.Nombre" />
+                </td>
+                <td class="text-center">
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                        @item.Nombre
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -21,7 +21,16 @@
                         Unidades Curriculares:
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-8">
-                        <select id="comboUC" multiple="multiple" class="form-control comboUC"></select>
+                        <input type="hidden" id="listaIds"/>
+                        <input type="hidden" id="listaUCs" />
+                        <div class="input-group">
+                            <input type="text" id="componentUCSelecionadas" class="form-control" placeholder="Ingrese UC" readonly="readonly">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" id="btnSearchUC" type="button" style="height: 34px;">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row margin-bottom10">
@@ -34,9 +43,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-default" id="cancelarModAgregarComponente" data-dismiss="modal">Cancelar</button>
                 <button class="btn btn_primary" id="btnGuardarNuevoComponente">Guardar</button>
             </div>
         </div>
     </div>
 </div>
+@Html.Partial("_SelecionarUC");

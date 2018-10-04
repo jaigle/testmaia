@@ -88,21 +88,13 @@
                 data: actionData,
                 url: "/Malla/GuardarMalla",
                 traditional: true,
-                success: function (response) {
-                    alert("Registro Guardado Correctamente");
-                    window.location.href = "/Malla";
-                },
-                error: function (response) {
-                    alert("error!");  // 
-                }
-
-            })
-            //    .done(function () {
-            //    alert("Registro Guardado Correctamente");
-            //    window.location.href = "/Malla";
-            //}).fail(function() {
-            //    alert("Ha ocurrido un error al intentar guardar el registro.");
-            //});
+                data: actionData
+            }).done(function () {
+                alert("Registro Guardado Correctamente");
+                window.location.href = "/Malla";
+            }).fail(function() {
+                alert("Ha ocurrido un error al intentar guardar el registro.");
+            });
         }
     }
 
