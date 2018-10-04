@@ -56,14 +56,9 @@ namespace DLMallas.Controllers
             var model = new GuardarComponente();
             model.IdSeccion = idseccion;
             model.IdModalidadComponente = idmodalidad;
+            model.ListaCsv = iduc.Aggregate((a, x) => a + ", " + x);
             var resp = true;
-            foreach (var uc in iduc)
-            {
-                model.IdUnidadCurricular = uc;
-                resp = _componente.guardarComponente(model);
-                if (!resp) break;
-            }
-
+            resp = _componente.guardarComponente(model).errorCode == 0;
             return resp;
         }
 

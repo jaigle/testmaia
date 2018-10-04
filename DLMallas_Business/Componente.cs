@@ -1,4 +1,5 @@
 ﻿using DLMallas.Business.Dto.Componente;
+using DLMallas.Business.Dto;
 using DLMallas.Utilidades;
 using Newtonsoft.Json;
 using System;
@@ -126,25 +127,33 @@ namespace DLMallas.Business
             return result;
         }
 
-       public bool guardarComponente(GuardarComponente model)
+       public DtoOperacionResult guardarComponente(GuardarComponente model)
         {
+            List<DtoOperacionResult> myResultado = new List<DtoOperacionResult>();
             try
             {
                 if (!Offline)
                 {
                     WebService ws = new WebService("GestionMalla", "guardarComponente");
-                    ws.AddParameter("IdSociedad", model.IdSociedad);
+                    ws.AddParameter("IdSociedad", Variables.IdSociedad);
                     ws.AddParameter("IdSeccion", model.IdSeccion);
                     ws.AddParameter("IdModalidadComponente", model.IdModalidadComponente);
-                    ws.AddParameter("IdUnidadCurricular", model.IdUnidadCurricular);
+                    ws.AddParameter("Lista", model.ListaCsv);
                     Array obj = ws.Invoke() as Array;
+
+                    string json = JsonConvert.SerializeObject(obj);
+                    myResultado = JsonConvert.DeserializeObject<List<DtoOperacionResult>>(json);
+                    return myResultado.First();
                 }
 
-                return true;
+                return myResultado.First();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                return new DtoOperacionResult {
+                    errorCode = 1,
+                    mensaje = "Error guardando componentes seleccionados. Detalles: " + ex.Message
+                };
             }
         }
 

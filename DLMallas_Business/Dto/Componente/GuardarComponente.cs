@@ -11,6 +11,6 @@ namespace DLMallas.Business.Dto.Componente
         public string IdSociedad;
         public string IdSeccion;
         public string IdModalidadComponente;
-        public string IdUnidadCurricular;
+        public string ListaCsv;
     }
 }

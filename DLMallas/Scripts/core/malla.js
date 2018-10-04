@@ -54,7 +54,7 @@
         if (nombre === "" || desc === "") {
             alert("Ingrese todos los campos!");
         } else {
-            var actionData = {id: id, nombre: nombre, escuela: escuela, desc: desc, activo: activo};
+            var actionData = { id: id, nombre: nombre, escuela: escuela, desc: desc, activo: activo };
 
             $.ajax({
                 type: "POST",
@@ -64,7 +64,7 @@
                 success: function (result) {
                     alert("Registro Guardado Correctamente");
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     alert("Ha ocurrido un error al intentar guardar el registro.");
                 }
             });
@@ -81,21 +81,16 @@
             alert("Debe Ingresar un Nombre, Descripci�n y Escuela");
         }
         else {
-            var actionData = {nombre: nombre, escuela: escuela, desc: desc, activo: activo};
+            var actionData = { nombre: nombre, escuela: escuela, desc: desc, activo: activo };
 
             $.ajax({
                 type: "POST",
                 data: actionData,
                 url: "/Malla/GuardarMalla",
-                dataType: 'json',
-                contentType: false,
                 traditional: true,
                 success: function (response) {
-                    if (response.success) {
-                        alert(response.responseText);
-                    } else {
-                        alert(response.responseText);
-                    }
+                    alert("Registro Guardado Correctamente");
+                    window.location.href = "/Malla";
                 },
                 error: function (response) {
                     alert("error!");  // 
@@ -119,11 +114,11 @@
                 type: "POST",
                 url: "/Malla/EliminarMalla",
                 traditional: true,
-                data: {id: id},
-            }).done(function() {
+                data: { id: id },
+            }).done(function () {
                 alert("Registro Eliminado Correctamente");
                 window.location.href = "/Malla/Index";
-            }).fail(function() {
+            }).fail(function () {
                 alert("Ha ocurrido un error al intentar eliminar el registro.");
             });
         }
