@@ -51,7 +51,7 @@ namespace DLMallas.Controllers
             return PartialView("_Prerrequisitos", model);
         }
 
-        public bool GuardarComponente(string idseccion, string idmodalidad, string iduc)
+        public bool GuardarComponente(string idseccion, string idmodalidad, List<string> iduc)
         {
             var model = new GuardarComponente();
             model.IdSeccion = idseccion;
